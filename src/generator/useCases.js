@@ -1,10 +1,15 @@
 async function requestString(schema){
+    // schema to plain JSON
     const obj = Object.keys(schema).reduce((obj, key) => {
         const { name, type } = schema[key]
-        obj[name] = type.name;
+        obj[name] = type.name || type.constructor.name;
         return obj;
       }, {});
-    return JSON.stringify(obj).replaceAll('"', '')
+    //convert plain JSON and remove quotation marks(")
+    const objString = JSON.stringify(obj, null, 6)
+                          .replaceAll('"', '')
+    // ident last line
+    return objString.substring(0, objString.length - 2) + '\n    }'
 }
 
 module.exports =  async ({ generate, filesystem }) => async () => {
