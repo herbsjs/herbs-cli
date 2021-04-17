@@ -3,9 +3,7 @@ const { usecase, step, Ok, Err } = require('buchu')
 const useCase = () =>
   usecase('Create <%= props.entity %>', {
     // Input/Request metadata and validation 
-    // request: { 
-    //     name: String,
-    //  },
+    request: <%= props.request %>,
 
     // Output/Response metadata
     // response: TodoList,
