@@ -1,0 +1,30 @@
+const { usecase, step, Ok, Err } = require('buchu')
+
+const useCase = () =>
+  usecase('Create <%= props.entity %>', {
+    // Input/Request metadata and validation 
+    // request: { 
+    //     name: String,
+    //  },
+
+    // Output/Response metadata
+    // response: TodoList,
+
+    // Pre-run setup
+    // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+    // Authorization with Audit
+    // authorize: user => (user.canCreateList ? Ok() : Err()),
+
+    //Step description and function
+    // 'create': step(ctx => {
+    //   const list = ctx.list = new TodoList()
+    //   list.id = Math.floor(Math.random() * 100000)
+    //   list.name = ctx.req.name
+
+    //   if (!list.isValid()) return Err(list.errors)
+    //   return Ok() // returning Ok continues to the next step. Err stops the use case execution.
+    // }),
+  })
+
+module.exports.createList = useCase
