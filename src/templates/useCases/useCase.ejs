@@ -1,10 +1,11 @@
 const { usecase, step, Ok, Err } = require('buchu')
+const { <%= props.entity %> } = require('../entities>')
 
 const useCase = () =>
   usecase('Create <%= props.entity %>', {
     // Input/Request metadata and validation 
     request: <%= props.request %>,
-    
+
 
     // Output/Response metadata
     // response: TodoList,
@@ -16,14 +17,12 @@ const useCase = () =>
     // authorize: user => (user.canCreateList ? Ok() : Err()),
 
     //Step description and function
-    // 'create': step(ctx => {
-    //   const list = ctx.list = new TodoList()
-    //   list.id = Math.floor(Math.random() * 100000)
-    //   list.name = ctx.req.name
+    'Check if the <%= props.entity %> is valid': step(ctx => {
+      ctx.<%= props.lowerCaseEntity %> = <%= props.entity %>.fromJSON(<%- props.example %>)
 
-    //   if (!list.isValid()) return Err(list.errors)
-    //   return Ok() // returning Ok continues to the next step. Err stops the use case execution.
-    // }),
+      if (!ctx.<%= props.lowerCaseEntity %>.isValid()) return Err(ctx.<%= props.lowerCaseEntity %>.errors)
+      return Ok() // returning Ok continues to the next step. Err stops the use case execution.
+    }),
   })
 
 module.exports.createList = useCase
