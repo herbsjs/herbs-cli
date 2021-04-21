@@ -12,6 +12,7 @@ module.exports = async ({
                 name, description, author, license
             }
         })
-        await packageManager.add(['buchu', 'gotu'], { force: 'npm'})
+        const packages = ['buchu', 'gotu', 'deepmerge']
+        await packageManager.add(packages, { force: 'npm'})
     }
 

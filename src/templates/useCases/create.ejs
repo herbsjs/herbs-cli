@@ -18,17 +18,17 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
 
     //Step description and function
     'Check if the <%= props.name %> is valid': step(ctx => {
-      ctx.<%= props.name.lowerCase %> = <%= props.name.pascalCase %>.fromJSON(<%- props.example %>)
+      ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(<%- props.example %>)
 
-      if (!ctx.<%= props.name.lowerCase %>.isValid()) return Err(ctx.<%= props.name.lowerCase %>.errors)
+      if (!ctx.<%= props.name.camelCase %>.isValid()) return Err(ctx.<%= props.name.camelCase %>.errors)
       // returning Ok continues to the next step. Err stops the use case execution.
       return Ok() 
     }),
 
     'Save the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
-      return (ctx.ret.<%= props.name.camelCase %> = await <%= props.name.pascalCase %>Repository.insert(ctx.list)) 
+      return (ctx.ret.<%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.insert(ctx.<%= props.name.camelCase %>)) 
     })
   })
 
-module.exports.createList = useCase
+module.exports.create = useCase
