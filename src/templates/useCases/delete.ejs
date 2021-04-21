@@ -1,0 +1,27 @@
+const { usecase, step, Ok, Err } = require('buchu')
+const { <%= props.name.pascalCase %> } = require('../entities>')
+
+const useCase = ({ <%= props.name.camelCase %>Repository }) =>
+  usecase('Delete <%= props.name.pascalCase %>', {
+    // Input/Request metadata and validation 
+    request: {
+      indexer: String
+    },
+
+
+    // Output/Response metadata
+    response: null,
+
+    // Pre-run setup
+    // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+    //Authorization with Audit
+    authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
+
+    'Update the <%= props.name.pascalCase %>': step(async ctx => {
+      await <%= props.name.camelCase %>Repository.delete(ctx.req.indexer)
+      return Ok()
+    })
+  })
+
+module.exports.delete = useCase

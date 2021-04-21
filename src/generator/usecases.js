@@ -1,5 +1,3 @@
-const { objToStr }  = require('./utils')
-
 const defaultValues = {
     String: '\'\'',
     Number: 100,
@@ -7,28 +5,34 @@ const defaultValues = {
     Date: new Date()
 }
 
-const useCases = ['create', 'update']
+const useCases = ['create', 'update', 'delete']
 
-const propGenerator = async (schema) => {
+async function getPropertiesStr(obj, spaces){
+    //convert plain JSON and remove quotation marks(")
+    const str = JSON.stringify(obj, null, spaces)
+    .replaceAll('"', '')
+    .split('\n')
+
+    //remove first and last lines
+    str.shift()
+    str.pop()
+
+    return str.join('\n').trim()
+}
+async function objToStr(schema, proType, spaces) {
+    // schema to plain JSON
+    const obj = Object.keys(schema).reduce((obj, key) => {
+        const { name, type } = schema[key]
+        if(proType === 'request') obj[name] = type.name || type.constructor.name;
+        if(proType === 'example') obj[name] = defaultValues[type.name]
+        return obj;
+    }, {});
+    return getPropertiesStr(obj, spaces)
+}
+async function propGenerator (schema){
     return {
-        request: async () => {
-            // schema to plain JSON
-            const obj = Object.keys(schema).reduce((obj, key) => {
-                const { name, type } = schema[key]
-                obj[name] = type.name || type.constructor.name;
-                return obj;
-            }, {});
-            return objToStr(obj, 6)
-        },
-        example: async () => {
-            // schema to example filled plain JSON
-            const example = Object.keys(schema).reduce((obj, key) => {
-                const { name, type } = schema[key]
-                obj[name] = defaultValues[type.name]
-                return obj;
-            }, {});
-            return objToStr(example, 8)
-        }
+        request: () => objToStr(schema, 'request', 6),
+        example: () => objToStr(schema, 'example', 8)
     }
 }
 
@@ -37,6 +41,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     for(const entity of Object.keys(entities)){
         const { name, schema } = entities[entity].prototype.meta
         const props = await propGenerator(schema)
+   
         for(const action of useCases){
             await generate({
                 template: `usecases/${action}.ejs`,

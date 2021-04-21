@@ -5,7 +5,9 @@ const { <%= props.name.pascalCase %> } = require('../entities>')
 const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Update <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
-    request: <%= props.request %>,
+    request: {
+      Indexer: String,
+    },
 
 
     // Output/Response metadata
@@ -30,7 +32,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
-      return (ctx.ret.<%= props.name.camelCase %> = await <%= props.name.pascalCase %>Repository.update(ctx.<%= props.name.camelCase %>)) 
+      return (ctx.ret = await <%= props.name.camelCase %>Repository.update(ctx.req.indexer, ctx.<%= props.name.camelCase %>)) 
     })
   })
 
