@@ -1,14 +1,14 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.entity %> } = require('../entities>')
+const { <%= props.entity.name.pascalCase %> } = require('../entities>')
 
-const useCase = () =>
-  usecase('Create <%= props.entity %>', {
+const useCase = ({ <%= props.entity.name.lowerCase %>Repository }) =>
+  usecase('Create <%= props.entity.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: <%= props.request %>,
 
 
     // Output/Response metadata
-    // response: TodoList,
+    response: <%= props.entity.name.pascalCase %>,
 
     // Pre-run setup
     // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
@@ -17,11 +17,17 @@ const useCase = () =>
     // authorize: user => (user.canCreateList ? Ok() : Err()),
 
     //Step description and function
-    'Check if the <%= props.entity %> is valid': step(ctx => {
-      ctx.<%= props.lowerCaseEntity %> = <%= props.entity %>.fromJSON(<%- props.example %>)
+    'Check if the <%= props.entity.name %> is valid': step(ctx => {
+      ctx.<%= props.entity.name.lowerCase %> = <%= props.entity.name.pascalCase %>.fromJSON(<%- props.example %>)
 
-      if (!ctx.<%= props.lowerCaseEntity %>.isValid()) return Err(ctx.<%= props.lowerCaseEntity %>.errors)
-      return Ok() // returning Ok continues to the next step. Err stops the use case execution.
+      if (!ctx.<%= props.entity.name.lowerCase %>.isValid()) return Err(ctx.<%= props.entity.name.lowerCase %>.errors)
+      // returning Ok continues to the next step. Err stops the use case execution.
+      return Ok() 
+    }),
+
+    'Save the <%= props.entity.name.pascalCase %>': step(async ctx => {
+      // ctx.ret is the Use Case return
+      return (ctx.ret.<%= props.entity.name.pascalCase %> = await <%= props.entity.name.pascalCase %>Repository.insert(ctx.list)) 
     }),
   })
 
