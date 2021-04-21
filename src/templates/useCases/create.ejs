@@ -5,7 +5,9 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Create <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      <%= props.request %>
+      <%= props.name.camelCase %>: { 
+        <%= props.request %>
+      }
     },
 
 
@@ -20,9 +22,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
 
     //Step description and function
     'Check if the <%= props.name %> is valid': step(ctx => {
-      ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON({
-        <%- props.example %>
-      })
+      ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req.<%= props.name.camelCase %>)
 
       if (!ctx.<%= props.name.camelCase %>.isValid()) return Err(ctx.<%= props.name.camelCase %>.errors)
       // returning Ok continues to the next step. Err stops the use case execution.

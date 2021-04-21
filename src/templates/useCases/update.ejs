@@ -20,7 +20,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
     authorize: user => (user.canUpdate<%= props.name.pascalCase %> ? Ok() : Err()),
 
     //Step description and function
-    'Check if the <%= props.name %> is valid': step(ctx => {
+    'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
       const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findOne(ctx.req.indexer)
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req.<%= props.name.camelCase %> ])
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)
