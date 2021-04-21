@@ -1,34 +1,34 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.entity.name.pascalCase %> } = require('../entities>')
+const { <%= props.name.pascalCase %> } = require('../entities>')
 
-const useCase = ({ <%= props.entity.name.lowerCase %>Repository }) =>
-  usecase('Create <%= props.entity.name.pascalCase %>', {
+const useCase = ({ <%= props.name.camelCase %>Repository }) =>
+  usecase('Create <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: <%= props.request %>,
 
 
     // Output/Response metadata
-    response: <%= props.entity.name.pascalCase %>,
+    response: <%= props.name.pascalCase %>,
 
     // Pre-run setup
     // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
-    // Authorization with Audit
-    // authorize: user => (user.canCreateList ? Ok() : Err()),
+    //Authorization with Audit
+    authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
 
     //Step description and function
-    'Check if the <%= props.entity.name %> is valid': step(ctx => {
-      ctx.<%= props.entity.name.lowerCase %> = <%= props.entity.name.pascalCase %>.fromJSON(<%- props.example %>)
+    'Check if the <%= props.name %> is valid': step(ctx => {
+      ctx.<%= props.name.lowerCase %> = <%= props.name.pascalCase %>.fromJSON(<%- props.example %>)
 
-      if (!ctx.<%= props.entity.name.lowerCase %>.isValid()) return Err(ctx.<%= props.entity.name.lowerCase %>.errors)
+      if (!ctx.<%= props.name.lowerCase %>.isValid()) return Err(ctx.<%= props.name.lowerCase %>.errors)
       // returning Ok continues to the next step. Err stops the use case execution.
       return Ok() 
     }),
 
-    'Save the <%= props.entity.name.pascalCase %>': step(async ctx => {
+    'Save the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
-      return (ctx.ret.<%= props.entity.name.pascalCase %> = await <%= props.entity.name.pascalCase %>Repository.insert(ctx.list)) 
-    }),
+      return (ctx.ret.<%= props.name.camelCase %> = await <%= props.name.pascalCase %>Repository.insert(ctx.list)) 
+    })
   })
 
 module.exports.createList = useCase

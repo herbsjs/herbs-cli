@@ -39,10 +39,11 @@ module.exports =  async ({ generate, filesystem }) => async () => {
             template: 'usecases/useCase.ejs',
             target: `src/domain/useCases/create${name}.js`,
             props: { 
-                entity: { name: { 
+                name: { 
                     pascalCase: name,
                     lowerCase: name.toLowerCase(),
-                    camelCase: `${name[0].toUpperCase()}${name.slice(1)}`}} ,
+                    camelCase: `${name[0].toUpperCase()}${name.slice(1)}`}
+                },
                 request: await props.request(),
                 example: await props.example()
             },

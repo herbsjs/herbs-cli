@@ -1,9 +1,10 @@
 const { entity, field } = require('gotu')
 
-const User = 
-        entity('User', {
+const <%= props.entity.name %> = 
+        entity(<%= props.entity.name %>, {
             nickname: field(String),
             password: field(String)
+            <%= props.entity.fields %>
         })
 
 module.exports = User
