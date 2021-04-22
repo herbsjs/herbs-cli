@@ -1,0 +1,29 @@
+const { usecase, step, Ok, Err } = require('buchu')
+const { <%= props.name.pascalCase %> } = require('../entities>')
+const { <%= props.name.pascalCase %>NotFoundError } = require('../errors/<%= props.name.camelCase %>NorFound')
+
+const useCase = ({ <%= props.name.camelCase %>Repository }) =>
+  usecase('Find one <%= props.name.pascalCase %>', {
+    // Input/Request metadata and validation 
+    request: {
+      Indexer: String,
+    },
+
+    // Output/Response metadata
+    response: <%= props.name.pascalCase %>,
+
+    // Pre-run setup
+    // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+    //Authorization with Audit
+    authorize: user => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
+
+    'Update the <%= props.name.pascalCase %>': step(async ctx => {
+      // ctx.ret is the Use Case return
+      const result = await <%= props.name.camelCase %>Repository.findOne(ctx.req.indexer) 
+      if(!result) return <%= props.name.pascalCase %>NotFoundError(`<%= props.name.pascalCase %> entity not found by indexer: ${ctx.req.indexer}`)
+      return (ctx.ret = <%= props.name.pascalCase %>.fromJSON(result))
+    })
+  })
+
+module.exports.update = useCase

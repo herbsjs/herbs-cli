@@ -1,5 +1,4 @@
-const useCases = ['create', 'update', 'delete']
-
+const useCases = ['create', 'update', 'delete', 'findOne']
 
 async function generateRequest (schema){
     // schema to plain JSON
