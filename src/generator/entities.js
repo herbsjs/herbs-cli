@@ -1,28 +1,31 @@
-module.exports = async ({ generate, options } ) => async () => {
+const { toLowCamelCase, requiresToString } = require('./utils')
 
-    const entities = [
-        {
-            name: "User",
-            fields: `nickname: field(String),
+let entities = [
+    {
+        name: "User",
+        fields: `nickname: field(String),
             password: field(String)`
-        }
-    ]
+    }
+]
+module.exports = async ({ generate, options } ) => async () => {
     if (options.entities){
         // TODO: BUILD CUSTOM ENTITIES
     }
-    const requires = await entities.reduce(async (requires, entity) => {
-        const camelCaseEntityName = `${entity.name[0].toLowerCase()}${entity.name.slice(1)}`
+    const requires = {}
+    await Promise.all(entities.map(async entity => {
+        const nameInCC = toLowCamelCase(entity.name)
+        
         await generate({
-            template: `entities/${camelCaseEntityName}.ejs`,
-            target: `src/domain/entities/${camelCaseEntityName}.js`,
+            template: `entities/${nameInCC}.ejs`,
+            target: `src/domain/entities/${nameInCC}.js`,
             props: entity
         })
-        return `${entity.name}: require('./${camelCaseEntityName}.js'),
-        ${requires}` 
-    },'')
+        requires[entity.name] = `require('./${nameInCC}.js')` 
+    }))
+
     await generate({
         template: 'entities/index.ejs',
         target: `src/domain/entities/index.js`,
-        props: { requires }
+        props: { requires: requiresToString(requires) }
     })
 }

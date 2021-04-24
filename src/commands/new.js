@@ -6,6 +6,7 @@ const cmd = {
     const generate = await generator(toolbox)
     await generate.packageJson()
     await generate.entities()
+    await generate.errors()
     await generate.useCases()
   }
 }

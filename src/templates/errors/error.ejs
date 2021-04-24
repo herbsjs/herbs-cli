@@ -1,0 +1,10 @@
+const { Err } = require('buchu')
+// const { logger } = require('../../libs/logger')
+
+function <%= props.name %>Error (message, stackTrace) {
+// logger.error(message, new Error(stackTrace)) 
+  return Err({ code: '<%= props.code %>', stackTrace })
+}
+
+module.exports = <%= props.name %>Error
+module.exports.<%= props.name %> = <%= props.name %>Error

@@ -1,24 +1,35 @@
-module.exports = async ({ generate, options } ) => async () => {
+const { toLowCamelCase, requiresToString } = require('./utils')
 
-    const entities = ["User"]
+const errorCodes = {
+    "NotFound": "NOT_FOUND",
+    "NotValid": "NOT_VALID"
+}
+let entities = ["User"]
+
+module.exports = async ({ generate, options } ) => async () => {
     if (options.entities){
         // TODO: BUILD CUSTOM ENTITIES
     }
+    const requires = {}
+    for(const entity of entities){
+        const name = toLowCamelCase(entity)
 
-    const requires = await entities.reduce(async (requires, entity) => {
-        const camelCaseEntityName = `${entity.name[0].toLowerCase()}${entity.name.slice(1)}`
-        await generate({
-            template: `entities/${camelCaseEntityName}.ejs`,
-            target: `src/domain/entities/${camelCaseEntityName}.js`,
-            props: entity
-        })
-        return `${entity.name}: require('./${camelCaseEntityName}.js'),
-        ${requires}` 
-    },'')
-    
+        for (const error of Object.keys(errorCodes)) {
+            const code = `${name.toUpperCase()}_${errorCodes[error]}`
+            const errorName = `${name}${error}`
+            requires[name] = { ...requires[name], [`${toLowCamelCase(error)}`]: `require('./${errorName}.js')` }
+
+            await generate({
+                template: `errors/error.ejs`,
+                target: `src/domain/errors/${errorName}.js`,
+                props: { name: errorName, code }
+            })
+        }
+    }
+
     await generate({
-        template: 'entities/index.ejs',
-        target: `src/domain/entities/index.js`,
-        props: { requires }
+        template: 'errors/index.ejs',
+        target: `src/domain/errors/index.js`,
+        props: { requires: requiresToString(requires) }
     })
 }
