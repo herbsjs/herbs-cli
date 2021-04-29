@@ -1,5 +1,5 @@
 const useCases = ['create', 'update', 'delete', 'findOne']
-const { toLowCamelCase, requiresToString } = require('../utils')
+const { toLowCamelCase, objToString } = require('../utils')
 
 async function generateRequest (schema){
     // schema to plain JSON
@@ -49,7 +49,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     await generate({
         template: 'domain/usecases/index.ejs',
         target: `src/domain/useCases/index.js`,
-        props: { requires: requiresToString(requires) }
+        props: { requires: objToString(requires) }
     })
 }
 

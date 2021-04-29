@@ -1,9 +1,11 @@
 const { usecase2mutation } = require('herbs2gql')
 const defaultResolver = require('./defaultResolver')
 
-/* Add more use cases here */
-const usecases = <%- props.usecases %>
+function factory (usecases) {
+    const mutations usecases.map(usecase => usecase2mutation(usecase, defaultResolver(usecase)))
+    /* Custom Mutations */
+    // mutations.push(require('./custom/createItem'))    
+    return mutations
+}
 
-const mutations = usecases.map(usecase => usecase2mutation(usecase, defaultResolver(usecase)))
-
-module.exports = mutations
+module.exports = factory

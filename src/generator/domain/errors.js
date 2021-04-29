@@ -1,4 +1,4 @@
-const { toLowCamelCase, requiresToString } = require('../utils')
+const { toLowCamelCase, objToString } = require('../utils')
 
 const errorCodes = {
     "NotFound": "NOT_FOUND",
@@ -30,6 +30,6 @@ module.exports = async ({ generate, options } ) => async () => {
     await generate({
         template: 'domain/errors/index.ejs',
         target: `src/domain/errors/index.js`,
-        props: { requires: requiresToString(requires) }
+        props: { requires: objToString(requires) }
     })
 }

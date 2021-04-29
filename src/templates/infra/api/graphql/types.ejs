@@ -1,8 +1,5 @@
 const { entity2type } = require('herbs2gql')
-
-const entities = [
-  <%- props.entities %>
-]
+const entitiesObj = require('../../../domain/entities')
 
 const defaultSchema = [`
   type Query {
@@ -14,6 +11,7 @@ const defaultSchema = [`
   }`]
 
 let types = [defaultSchema]
-types = types.concat(entities.map(entity => [entity2type(entity)]))
+const entities = Object.keys(entitiesObj).map(entity => [entity2type(entities[entity])])
+types = types.concat(entities)
 
 module.exports = types

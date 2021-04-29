@@ -1,14 +1,11 @@
 const { usecase2query } = require('herbs2gql')
 const defaultResolver = require('./defaultResolver')
 
-const usecases = [
-    <%- props.usecases %>
-    /* Add more use cases here */
-]
+function factory (usecases) {
+    const queries = usecases.map(usecase => usecase2query(usecase, defaultResolver(usecase)))
+    /* Custom Mutations */
+    // queries.push(require('./custom/getItem'))  
+    return queries  
+}
 
-const queries = usecases.map(usecase => usecase2query(usecase, defaultResolver(usecase)))
-
-/* Custom Queries */
-// queries.push(require('./custom/getItem'))
-
-module.exports = queries
+module.exports = factory

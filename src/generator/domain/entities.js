@@ -1,4 +1,4 @@
-const { toLowCamelCase, requiresToString } = require('../utils')
+const { toLowCamelCase, objToString } = require('../utils')
 
 let entities = [
     {
@@ -26,6 +26,6 @@ module.exports = async ({ generate, options } ) => async () => {
     await generate({
         template: 'domain/entities/index.ejs',
         target: `src/domain/entities/index.js`,
-        props: { requires: requiresToString(requires) }
+        props: { requires: objToString(requires) }
     })
 }
