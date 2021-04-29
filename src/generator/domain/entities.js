@@ -1,4 +1,4 @@
-const { toLowCamelCase, requiresToString } = require('./utils')
+const { toLowCamelCase, requiresToString } = require('../utils')
 
 let entities = [
     {
@@ -16,7 +16,7 @@ module.exports = async ({ generate, options } ) => async () => {
         const nameInCC = toLowCamelCase(entity.name)
         
         await generate({
-            template: `entities/${nameInCC}.ejs`,
+            template: `domain/entities/${nameInCC}.ejs`,
             target: `src/domain/entities/${nameInCC}.js`,
             props: entity
         })
@@ -24,7 +24,7 @@ module.exports = async ({ generate, options } ) => async () => {
     }))
 
     await generate({
-        template: 'entities/index.ejs',
+        template: 'domain/entities/index.ejs',
         target: `src/domain/entities/index.js`,
         props: { requires: requiresToString(requires) }
     })

@@ -8,6 +8,7 @@ const cmd = {
     await generate.entities()
     await generate.errors()
     await generate.useCases()
+    await generate.graphql()
   }
 }
 

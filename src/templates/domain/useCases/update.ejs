@@ -1,6 +1,6 @@
 const merge = require('deepmerge')
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.name.pascalCase %> } = require('../entities>')
+const { <%= props.name.pascalCase %> } = require('../entities')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Update <%= props.name.pascalCase %>', {
@@ -20,7 +20,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
     authorize: user => (user.canUpdate<%= props.name.pascalCase %> ? Ok() : Err()),
 
     //Step description and function
-    'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
+    'Check if the <%= props.name.pascalCase %> is valid': step(async ctx => {
       const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findOne(ctx.req.indexer)
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req.<%= props.name.camelCase %> ])
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)

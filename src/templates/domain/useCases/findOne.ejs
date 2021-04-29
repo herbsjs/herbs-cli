@@ -1,6 +1,6 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.name.pascalCase %> } = require('../entities>')
-const { <%= props.name.pascalCase %>NotFoundError } = require('../errors/<%= props.name.camelCase %>NorFound')
+const { <%= props.name.pascalCase %> } = require('../entities')
+const { <%= props.name.pascalCase %>NotFoundError } = require('../errors/<%= props.name.camelCase %>NotFound')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Find one <%= props.name.pascalCase %>', {

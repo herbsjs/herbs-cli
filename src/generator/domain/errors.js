@@ -1,4 +1,4 @@
-const { toLowCamelCase, requiresToString } = require('./utils')
+const { toLowCamelCase, requiresToString } = require('../utils')
 
 const errorCodes = {
     "NotFound": "NOT_FOUND",
@@ -20,7 +20,7 @@ module.exports = async ({ generate, options } ) => async () => {
             requires[name] = { ...requires[name], [`${toLowCamelCase(error)}`]: `require('./${errorName}.js')` }
 
             await generate({
-                template: `errors/error.ejs`,
+                template: `domain/errors/error.ejs`,
                 target: `src/domain/errors/${errorName}.js`,
                 props: { name: errorName, code }
             })
@@ -28,7 +28,7 @@ module.exports = async ({ generate, options } ) => async () => {
     }
 
     await generate({
-        template: 'errors/index.ejs',
+        template: 'domain/errors/index.ejs',
         target: `src/domain/errors/index.js`,
         props: { requires: requiresToString(requires) }
     })

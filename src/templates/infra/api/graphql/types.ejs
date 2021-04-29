@@ -1,0 +1,19 @@
+const { entity2type } = require('herbs2gql')
+
+const entities = [
+  <%- props.entities %>
+]
+
+const defaultSchema = [`
+  type Query {
+    _: Boolean
+  }
+
+  type Mutation {
+    _: Boolean
+  }`]
+
+let types = [defaultSchema]
+types = types.concat(entities.map(entity => [entity2type(entity)]))
+
+module.exports = types

@@ -5,8 +5,9 @@ module.exports = async ({
     parameters: { options } }) => {
         return {
             packageJson: await require('./packagejson')({ generate, packageManager }),
-            entities: await require('./entities')({ generate, options }),
-            errors: await require('./errors')({ generate, options }),
-            useCases: await require('./useCases')({ generate, filesystem  })
+            entities: await require('./domain/entities')({ generate, options }),
+            errors: await require('./domain/errors')({ generate, options }),
+            useCases: await require('./domain/useCases')({ generate, filesystem  }),
+            graphql: await require('./infra/graphql')({ generate, filesystem  })
         }
 }

@@ -1,6 +1,6 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.name.pascalCase %> } = require('../entities>')
-const { <%= props.name.pascalCase %>NotValidError } = require('../errors>')
+const { <%= props.name.pascalCase %> } = require('../entities')
+const { <%= props.name.pascalCase %>NotValidError } = require('../errors')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Create <%= props.name.pascalCase %>', {

@@ -1,0 +1,9 @@
+const { usecase2mutation } = require('herbs2gql')
+const defaultResolver = require('./defaultResolver')
+
+/* Add more use cases here */
+const usecases = <%- props.usecases %>
+
+const mutations = usecases.map(usecase => usecase2mutation(usecase, defaultResolver(usecase)))
+
+module.exports = mutations
