@@ -27,9 +27,8 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     
     for(const entity of Object.keys(entities)){
         const { name, schema } = entities[entity].prototype.meta
-
         for(const action of useCases){
-            const nameInCC = toLowCamelCase(name)
+            // const nameInCC = toLowCamelCase(name)
             const useCaseName = `${action}${name}`
             await generate({
                 template: `domain/usecases/${action}.ejs`,
@@ -37,12 +36,13 @@ module.exports =  async ({ generate, filesystem }) => async () => {
                 props: { 
                     name: { 
                         pascalCase: name,
-                        camelCase: nameInCC
+                        camelCase: toLowCamelCase(name)
                     },
                     request: await generateRequest(schema)
                 }
             })
-            requires[nameInCC] = { ...requires[nameInCC], [`${action}`]: `require('./${useCaseName}.js')` }
+            // requires[nameInCC] = { ...requires[nameInCC], [`${action}`]: `require('./${useCaseName}.js')` }
+            requires[useCaseName] = `require('./${useCaseName}.js')` 
         }
     }
     

@@ -1,16 +1,14 @@
 const { arrayToStringList } = require('../utils')
 
 module.exports =  async ({ generate, filesystem }) => async () => {
-    const useCases = require(`${filesystem.cwd()}/src/domain/usecases`)
     const queries = []
     const mutations = []
-    for(const entity of Object.keys(useCases)){
-        for(const action of Object.keys(useCases[entity])){
-            if(['create', 'update', 'delete'].includes(action))
-                mutations.push(`require('../../domain/usecases').${entity}.${action}`)
-            else
-                queries.push(`require('../../domain/usecases').${entity}.${action}`)
-        }
+    const useCases = require(`${filesystem.cwd()}/src/domain/usecases`)
+    for(const usecase of Object.keys(useCases)){
+        if([`create`, 'update', 'delete'].some(action => usecase.includes(action)))
+            mutations.push(`usecases.${usecase}(repositories)`)
+        else
+            queries.push(`usecases.${usecase}(repositories)`)
     }
 
     await generate({
@@ -26,7 +24,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     await generate({
         template: 'infra/api/graphql/index.ejs',
         target: `src/infra/api/index.js`,
-        props: { queries: arrayToStringList(queries, 8), mutations: arrayToStringList(mutations, 8) }
+        props: { queries: arrayToStringList(queries, 6), mutations: arrayToStringList(mutations, 6) }
     })
 }
 

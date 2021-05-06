@@ -2,17 +2,19 @@ const { gql } = require('apollo-server-express')
 const types = require('./types')
 const queries = require('./queries')
 const mutations = require('./mutations')
+const repositories = require('../../repositories')
+const usecases = require('../../usecases')
 
-const usecases = {
-    queries: [
+// TODO: rename this "UC"
+const UCqueries = [
 <%- props.queries %>
-    ],
-    mutations: [
+]
+const UCmutations = [
 <%- props.mutations %>
-    ]
-}
+]
 
-const graphQLDef = [].concat(types, queries.factory(usecases.queries), mutations.factory(usecases.mutations))
+
+const graphQLDef = [].concat(types, queries.factory(UCqueries), mutations.factory(UCmutations))
 
 /* Type Defs (Schemas) */
 const typeDefs = graphQLDef.map(i => gql(i[0]))
