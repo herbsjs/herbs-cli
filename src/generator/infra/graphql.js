@@ -1,22 +1,17 @@
-const { toLowCamelCase, arrayToString } = require('../utils')
+const { arrayToStringList } = require('../utils')
 
-const props = {
-    mutations: (useCases) => {
-        const requires = []
-
-        for(const entity of Object.keys(useCases))
-            for(const action of Object.keys(useCases[entity])){ 
-                const lowAction = toLowCamelCase(action)
-                // const lowEntity = toLowCamelCase(action)
-                requires.push(`
-                require('../../../domain/usecase/${lowAction}').${lowAction}()`)
-            }
-
-        return arrayToString(requires)
-    }
-}
 module.exports =  async ({ generate, filesystem }) => async () => {
     const useCases = require(`${filesystem.cwd()}/src/domain/usecases`)
+    const queries = []
+    const mutations = []
+    for(const entity of Object.keys(useCases)){
+        for(const action of Object.keys(useCases[entity])){
+            if(['create', 'update', 'delete'].includes(action))
+                mutations.push(`require('../../domain/usecases').${entity}.${action}`)
+            else
+                queries.push(`require('../../domain/usecases').${entity}.${action}`)
+        }
+    }
 
     await generate({
         template: 'infra/api/graphql/mutations.ejs',
@@ -27,10 +22,11 @@ module.exports =  async ({ generate, filesystem }) => async () => {
         template: 'infra/api/graphql/types.ejs',
         target: `src/infra/api/types.js`
     })
-
+    
     await generate({
         template: 'infra/api/graphql/index.ejs',
-        target: `src/infra/api/index.js`
+        target: `src/infra/api/index.js`,
+        props: { queries: arrayToStringList(queries, 8), mutations: arrayToStringList(mutations, 8) }
     })
 }
 

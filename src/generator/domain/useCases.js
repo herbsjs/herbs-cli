@@ -45,7 +45,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
             requires[nameInCC] = { ...requires[nameInCC], [`${action}`]: `require('./${useCaseName}.js')` }
         }
     }
-
+    
     await generate({
         template: 'domain/usecases/index.ejs',
         target: `src/domain/useCases/index.js`,

@@ -3,8 +3,16 @@ const types = require('./types')
 const queries = require('./queries')
 const mutations = require('./mutations')
 
-let graphQLDef = []
-graphQLDef = graphQLDef.concat(types, queries, mutations)
+const usecases = {
+    queries: [
+<%- props.queries %>
+    ],
+    mutations: [
+<%- props.mutations %>
+    ]
+}
+
+const graphQLDef = [].concat(types, queries.factory(usecases.queries), mutations.factory(usecases.mutations))
 
 /* Type Defs (Schemas) */
 const typeDefs = graphQLDef.map(i => gql(i[0]))
