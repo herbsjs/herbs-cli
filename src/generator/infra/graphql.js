@@ -17,6 +17,11 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     })
 
     await generate({
+        template: 'infra/api/graphql/queries.ejs',
+        target: `src/infra/api/queries.js`,
+    })
+
+    await generate({
         template: 'infra/api/graphql/types.ejs',
         target: `src/infra/api/types.js`
     })
