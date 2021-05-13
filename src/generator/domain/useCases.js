@@ -11,8 +11,8 @@ async function generateRequest (schema){
 
     //convert plain JSON and remove quotation marks(")
     const str = JSON.stringify(obj, null, 8)
-    .replaceAll('"', '')
-    .split('\n')
+        .replace(/"/g, '')
+        .split('\n')
 
     //remove first and last lines
     str.shift()
