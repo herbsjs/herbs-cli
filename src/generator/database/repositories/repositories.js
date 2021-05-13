@@ -7,7 +7,6 @@ module.exports =  async ({ generate, options, filesystem }) => async () => {
         await generate({
             template: `data/database/database.ejs`,
             target: `src/data/database/database.js`,
-            props: { }
         })        
 
         for(const entity of Object.keys(entities)){
