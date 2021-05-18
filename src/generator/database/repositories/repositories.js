@@ -9,6 +9,11 @@ module.exports =  async ({ generate, options, filesystem }) => async () => {
             target: `src/data/database/database.js`,
         })        
 
+        await generate({
+            template: `data/repository/baseRepository.ejs`,
+            target: `src/data/repositories/repository.js`
+        })
+
         for(const entity of Object.keys(entities)){
             const { name } = entities[entity].prototype.meta
 

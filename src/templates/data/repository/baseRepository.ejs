@@ -1,0 +1,71 @@
+module.exports = class Repository {
+    constructor(options){
+        this.table = options.table
+        this.collection = options.mongo.collection(this.table)
+    }
+
+    async find(filter){
+        return await this.collection
+            .find(filter)
+            .toArray()
+    }
+
+    async find(filter, project){
+        return await this.collection
+            .find(filter)
+            .project(project)
+            .toArray()
+    }
+
+    async findById(id){
+        if(!id) return {}
+
+        return await this.collection
+            .findOne({ _id: id })
+    }
+
+    async findPaginated(options = { skip, limit, sort, query }){
+        options.limit = options.limit || 0
+        options.skip  = options.skip  || 0
+        options.sort  = options.sort  || {}
+        options.query = options.query || {}
+
+        return await this.collection
+            .find(options.query)
+            .limit(options.limit)
+            .skip(options.skip)
+            .sort(options.sort)
+            .toArray()
+    }
+
+    async insert(entity){
+        return await this.collection
+            .insertOne(entity)
+    }
+
+    async insertMany(arrayEntity){
+        return await this.collection
+            .insertMany(arrayEntity)
+    }
+
+    async update(filter, updateDocument){
+        return await this.collection
+            .updateOne(filter, updateDocument)
+    }
+
+    async updateMany(filter, updateDocument){
+        return await this.collection
+            .updateMany(filter, updateDocument)
+    }
+
+    async delete(filter){
+        return await this.collection
+            .deleteOne(filter)
+    }
+    
+    //TO DO: FindOne(filter, project)
+    //TO DO: Update(id, entity)
+    //TO DO: Replace(id, entity)
+    //TO DO: Aggregate
+    //TO DO: Watch
+}
