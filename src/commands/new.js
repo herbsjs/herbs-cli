@@ -7,6 +7,7 @@ const cmd = {
     await generate.packageJson()
     await generate.entities()
     await generate.errors()
+    await generate.repositories(),
     await generate.useCases()
     await generate.graphql()
   }
