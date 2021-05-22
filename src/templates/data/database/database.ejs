@@ -1,0 +1,15 @@
+const { MongoClient } = require('mongodb')
+
+let instanceDB = null;
+
+module.exports = async (connection, databasename) => {
+    if (instanceDB) {
+        return new Promise((resolve) => resolve(db))
+    }
+    const client = await new MongoClient(connection, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).connect()
+    instanceDB = client.db(databasename)
+    return instanceDB
+}

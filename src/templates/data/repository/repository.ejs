@@ -1,0 +1,46 @@
+const Repository = require('./repository')
+
+module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
+    constructor(collection, instance){
+        super({ 
+            table: collection,  
+            mongo: instance  
+        })
+    }
+
+    async find(filter){
+        return await super.find(filter);
+    }
+
+    async find(filter, project){
+        return await super.find(filter, project);
+    }
+
+    async findById(id){
+        return await super.findById(id);
+    }
+
+    async findPaginated(options = { skip, limit, sort, query }){
+        return await super.findPaginated(options);
+    }
+
+    async insert(entity){
+        return await super.insert(entity)
+    }
+
+    async insertMany(entities){
+        return await super.insertMany(entities);
+    }
+
+    async update(filter, updatedDocument){
+        return await super.update(filter, updatedDocument);
+    }
+
+    async updateMany(filter, updatedDocument){
+        return await super.updateMany(filter, updatedDocument)
+    }
+
+    async delete(filter){
+        return await super.delete(filter);
+    }
+}
