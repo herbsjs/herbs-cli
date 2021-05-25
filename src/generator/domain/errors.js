@@ -1,31 +1,31 @@
 const { toLowCamelCase, objToString } = require('../utils')
 
 const errorCodes = {
-    "NotFound": "NOT_FOUND",
-    "NotValid": "NOT_VALID"
+    NotFound: {
+        code: "NOT_FOUND",
+        msg: "is not found"
+    },
+    NotValid: {
+        code: "NOT_VALID",
+        msg: "is not valid"
+    }
 }
-let entities = ["User"]
 
-module.exports = async ({ generate, options } ) => async () => {
-    if (options.entities){
-        // TODO: BUILD CUSTOM ENTITIES
-    }
+module.exports = async ({ generate } ) => async () => {
     const requires = {}
-    for(const entity of entities){
-        const name = toLowCamelCase(entity)
-
-        for (const error of Object.keys(errorCodes)) {
-            const code = `${name.toUpperCase()}_${errorCodes[error]}`
-            const errorName = `${name}${error}`
-            requires[name] = { ...requires[name], [`${toLowCamelCase(error)}`]: `require('./${errorName}.js')` }
-
-            await generate({
-                template: `domain/errors/error.ejs`,
-                target: `src/domain/errors/${errorName}.js`,
-                props: { name: errorName, code }
-            })
-        }
+    for (const error of Object.keys(errorCodes)) {
+        await generate({
+            template: `domain/errors/error.ejs`,
+            target: `src/domain/errors/${toLowCamelCase(error)}.js`,
+            props: { 
+                name: error,
+                code: errorCodes[error].code,
+                defaultMsg: errorCodes[error].msg
+            }
+        })
+        requires[`${error}Error`] = `require('./${toLowCamelCase(error)}.js')`
     }
+
 
     await generate({
         template: 'domain/errors/index.ejs',

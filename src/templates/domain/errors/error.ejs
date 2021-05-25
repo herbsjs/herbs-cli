@@ -1,10 +1,16 @@
 const { Err } = require('buchu')
 // const { logger } = require('../../libs/logger')
 
-function <%= props.name %>Error (message, stackTrace) {
-// logger.error(message, new Error(stackTrace)) 
-  return Err({ code: '<%= props.code %>', stackTrace })
+const defaultMsg  = (entityName) => `${entityName} <%= props.defaultMsg %>`
+
+function <%= props.name %>Error (entityName, message = null, stackTrace) {
+  // logger.error(message, new Error(stackTrace)) 
+  return Err({ 
+    code: `${entityName}_<%= props.code %>`.toUpperCase(),
+    message: message || defaultMsg(entityName), 
+    stackTrace 
+  })
 }
 
 module.exports = <%= props.name %>Error
-module.exports.<%= props.name %> = <%= props.name %>Error
+module.exports.<%= props.name %>Error = <%= props.name %>Error
