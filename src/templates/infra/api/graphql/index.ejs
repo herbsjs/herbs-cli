@@ -4,6 +4,7 @@ const queries = require('./queries')
 const mutations = require('./mutations')
 const repositories = require('../../repositories')
 const usecases = require('../../usecases')
+const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
 // TODO: rename this "UC"
 const UCqueries = [
@@ -22,4 +23,14 @@ const typeDefs = graphQLDef.map(i => gql(i[0]))
 /* Resolvers */
 const resolvers = graphQLDef.map(i => i[1]).filter(i => i !== undefined)
 
-module.exports = [typeDefs, resolvers]
+
+module.exports = (app, config) => {
+    const schema = makeExecutableSchema({ typeDefs, resolvers })
+    addSchemaLevelResolveFunction(schema, () => {})
+    return new ApolloServer({
+        introspection: true,
+        playground: !config.isProd,
+        debug: !config.isProd,
+        schema: schema,
+    }).applyMiddleware({ app, path: config.api.graphql.rootPath })
+}

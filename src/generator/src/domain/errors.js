@@ -1,4 +1,4 @@
-const { toLowCamelCase, objToString } = require('../utils')
+const { toLowCamelCase, objToString } = require('../../utils')
 
 const errorCodes = {
     NotFound: {

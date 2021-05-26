@@ -1,4 +1,4 @@
-const { UserInputError, ForbiddenError } = require('apollo-server-express')
+const { ForbiddenError } = require('apollo-server-express')
 
 function args2request(args, useCase) {
     const params = {}
@@ -9,7 +9,7 @@ function args2request(args, useCase) {
 
 function defaultResolver(usecase) {
 
-    return async function resolver(parent, args, context, info) {
+    return async function resolver(_, args, context) {
 
         /* Authorization */
         const hasAccess = usecase.authorize(context.user)
@@ -28,7 +28,7 @@ function defaultResolver(usecase) {
         console.info(usecase.auditTrail)
 
         /* Response */
-        if (response.isErr) throw new UserInputError(null, { invalidArgs: response.err })
+        if (response.isErr) return new ApolloError(response.err.message, response.err.code, response.err.stackTrace)
         return response.ok
     }
 }

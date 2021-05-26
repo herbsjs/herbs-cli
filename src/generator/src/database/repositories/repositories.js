@@ -1,9 +1,9 @@
-const { toLowCamelCase } = require('../../utils')
+const { toLowCamelCase } = require('../../../utils')
 
 module.exports =  async ({ generate, options, filesystem }) => async () => {
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
-    if(options.repository === 'mongo'){
+    if(options.mongo){
         await generate({
             template: `data/database/database.ejs`,
             target: `src/data/database/database.js`,

@@ -14,9 +14,16 @@ module.exports = async ({
             name, description, author, license
         }
     })
-    const packages = ['buchu', 'gotu', 'deepmerge']
+    const packages = [
+        'buchu',
+        'gotu',
+        'deepmerge',
+        'apollo-server-express',
+        'apollo-server',
+        'sugar-env',
+        'dotenv']
 
-    if(options.repository === 'mongo') 
+    if(options.mongo) 
         packages.push('mongodb')
 
     await packageManager.add(packages, { force: 'npm'})

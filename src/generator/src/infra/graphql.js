@@ -1,4 +1,4 @@
-const { arrayToStringList } = require('../utils')
+const { arrayToStringList } = require('../../utils')
 
 module.exports =  async ({ generate, filesystem }) => async () => {
     const queries = []
@@ -13,22 +13,27 @@ module.exports =  async ({ generate, filesystem }) => async () => {
 
     await generate({
         template: 'infra/api/graphql/mutations.ejs',
-        target: `src/infra/api/mutations.js`,
+        target: `src/infra/api/graphql/mutations.js`,
     })
 
     await generate({
         template: 'infra/api/graphql/queries.ejs',
-        target: `src/infra/api/queries.js`,
+        target: `src/infra/api/graphql/queries.js`,
     })
 
     await generate({
         template: 'infra/api/graphql/types.ejs',
-        target: `src/infra/api/types.js`
+        target: `src/infra/api/graphql/types.js`
+    })
+
+    await generate({
+        template: 'infra/api/graphql/defaultResolver.ejs',
+        target: `src/infra/api/graphql/defaultResolver.js`
     })
     
     await generate({
         template: 'infra/api/graphql/index.ejs',
-        target: `src/infra/api/index.js`,
+        target: `src/infra/api/graphql/index.js`,
         props: { queries: arrayToStringList(queries, 6), mutations: arrayToStringList(mutations, 6) }
     })
 }

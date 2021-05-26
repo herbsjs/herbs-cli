@@ -10,6 +10,9 @@ const cmd = {
     await generate.repositories(),
     await generate.useCases()
     await generate.graphql()
+    await generate.rest()
+    await generate.server()
+    await generate.index()
   }
 }
 

@@ -1,5 +1,5 @@
 const useCases = ['create', 'update', 'delete', 'findOne']
-const { toLowCamelCase, objToString } = require('../utils')
+const { toLowCamelCase, objToString } = require('../../utils')
 
 async function generateRequest (schema){
     // schema to plain JSON
