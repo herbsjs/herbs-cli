@@ -1,9 +1,13 @@
 const env = require('sugar-env')
 require('dotenv').config()
 
+const GRAPHQL = 'GRAPHQL_'
+const API = 'API_'
+
 module.exports = {
-  isProd: env.is('production'),
-  graphql: require('./api'),
-  rest: require('./api'),
-  mongodb: require('./mongodb')
+  port: env.get(`${API}PORT`, 3000),
+  host: env.get([`${API}HOST`, `${API}BIND_ADDR`], '0.0.0.0'),
+  graphql: {
+    rootPath: env.get([`${GRAPHQL}ROOT_PATH`, `${GRAPHQL}PATH`, `${GRAPHQL}ROOT`], '/graphql')
+  }
 }
