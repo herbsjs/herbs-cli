@@ -3,6 +3,7 @@ const { objToString } = require('../../utils')
 module.exports =  async ({ generate, options }) => async () => {
     const requires = { 
         isProd: `env.is('production')`,
+        api: `require('./api')`
     }
 
     await generate({

@@ -1,4 +1,5 @@
 module.exports = async ({ 
+    print,
     generate, 
     packageManager, 
     options, 
@@ -23,11 +24,20 @@ module.exports = async ({
         'apollo-server-express',
         'apollo-server',
         'sugar-env',
-        'dotenv']
+        'dotenv',
+        'graphql-tools']
 
     if(options.mongo) 
         packages.push('mongodb')
-
-    await packageManager.add(packages, { force: 'npm'})
+    
+    let opt = { force: 'npm'}
+    if(options.yarn) {
+        if(packageManager.hasYarn())
+            opt = { force: 'yarn'}
+        else {
+            print.warn('You don\'t have yarn installed')
+        }
+    }
+    await packageManager.add(packages, opt)
 }
 

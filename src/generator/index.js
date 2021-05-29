@@ -1,11 +1,12 @@
 const ignore = () => {}
 module.exports = async ({ 
     template: { generate },
+    print,
     packageManager,
     filesystem,
     parameters: { options } }) => {
         return {
-            packageJson: await require('./packagejson')({ generate, packageManager, options }),
+            packageJson: await require('./packagejson')({ generate, packageManager, options, print }),
             entities: await require('./src/domain/entities')({ generate, options }),
             errors: await require('./src/domain/errors')({ generate, options }),
             repositories: await require('./src/database/repositories/repositories')({ generate, options, filesystem }),

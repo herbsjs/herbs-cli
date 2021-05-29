@@ -26,7 +26,8 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     const requires = {}
     
     for(const entity of Object.keys(entities)){
-        const { name, schema } = entities[entity].prototype.meta
+        if(entity.includes('Input')) continue
+        const { name } = entities[entity].prototype.meta
         for(const action of useCases){
             // const nameInCC = toLowCamelCase(name)
             const useCaseName = `${action}${name}`
@@ -41,7 +42,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
                     request: name
                 }
             })
-            requires[useCaseName] = `require('./${useCaseName}.js')` 
+            requires[useCaseName] = `require('./${useCaseName}')` 
         }
     }
     

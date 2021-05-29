@@ -20,7 +20,8 @@ module.exports = async ({ generate, options } ) => async () => {
             target: `src/domain/entities/${nameInCC}.js`,
             props: entity
         })
-        requires[entity.name] = `require('./${nameInCC}.js')` 
+        requires[entity.name] = `require('./${nameInCC}.js').${entity.name}` 
+        requires[`${entity.name}Input`] = `require('./${nameInCC}.js').${entity.name}Input` 
     }))
 
     await generate({

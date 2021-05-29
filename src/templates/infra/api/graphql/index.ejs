@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express')
+const { makeExecutableSchema } = require('graphql-tools')
 const types = require('./types')
 const queries = require('./queries')
 const mutations = require('./mutations')

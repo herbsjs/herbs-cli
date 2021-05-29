@@ -5,4 +5,9 @@ const <%= props.name %> =
             <%= props.fields %>
          })
 
-module.exports = <%= props.name %>
+const <%= props.name %>Input = 
+         entity('<%= props.name %>Input',{
+             <%= props.fields %>
+          })
+
+module.exports = { <%= props.name %>, <%= props.name %>Input }
