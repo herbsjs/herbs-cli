@@ -6,7 +6,8 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Update <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      Indexer: String,
+      indexer: String,
+      <%= props.name.camelCase %>: <%= props.name.pascalCase %>
     },
 
 

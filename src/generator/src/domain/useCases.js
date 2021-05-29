@@ -38,10 +38,9 @@ module.exports =  async ({ generate, filesystem }) => async () => {
                         pascalCase: name,
                         camelCase: toLowCamelCase(name)
                     },
-                    request: await generateRequest(schema)
+                    request: name
                 }
             })
-            // requires[nameInCC] = { ...requires[nameInCC], [`${action}`]: `require('./${useCaseName}.js')` }
             requires[useCaseName] = `require('./${useCaseName}.js')` 
         }
     }

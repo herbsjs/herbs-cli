@@ -2,8 +2,8 @@ const { gql } = require('apollo-server-express')
 const types = require('./types')
 const queries = require('./queries')
 const mutations = require('./mutations')
-const repositories = require('../../repositories')
-const usecases = require('../../usecases')
+const repositories = require('../../../data/repositories')
+const usecases = require('../../../domain/usecases')
 const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
 // TODO: rename this "UC"

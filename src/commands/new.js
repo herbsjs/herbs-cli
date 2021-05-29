@@ -11,6 +11,7 @@ const cmd = {
     await generate.useCases()
     await generate.graphql()
     await generate.rest()
+    await generate.config()
     await generate.server()
     await generate.index()
   }
