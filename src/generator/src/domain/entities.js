@@ -13,8 +13,8 @@ function generateEntities(from, to, level = './') {
       fs.copyFileSync(path.join(from, element), path.join(to, element));
       const splittedElement = element.split('.')
       const ext = splittedElement.pop()
-      const entityName = startCase(splittedElement.shift())
       if (ext === 'js') {
+        const entityName = startCase(splittedElement.shift())
         const entity = require(`${to}/${element}`)[entityName]
         requires[entity.name] = `require('${level}${element}').${entityName}`
         // todo: must to be dynamic
