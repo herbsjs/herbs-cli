@@ -15,6 +15,7 @@ function generateEntities(from, to, level = './') {
       const ext = splittedElement.pop()
       if (ext === 'js') {
         const entityName = startCase(splittedElement.shift())
+
         const entity = require(`${to}/${element}`)[entityName]
         requires[entity.name] = `require('${level}${element}').${entityName}`
         // todo: must to be dynamic

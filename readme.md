@@ -2,24 +2,20 @@
 
 A CLI for herbs.
 
-## Customizing your CLI
+## Getting started
 
-Check out the documentation at https://github.com/infinitered/gluegun/tree/master/docs.
+`git clone https://github.com/italojs/herbs-cli-alpha`
+`cd herbs-cli-alpha`
+`npm link`
 
-## Publishing to NPM
+### Generating default project
 
-To package your CLI up for NPM, do this:
+it will generate an simple user CRUD into currently directory
+`mkdir my-project && cd !$`
+`herbs new --graphql --mongo`
+or
+`herbs new --graphql --mongo --yarn`
+### Generating CRUD to my own entities
 
-```shell
-$ npm login
-$ npm whoami
-$ npm lint
-$ npm test
-(if typescript, run `npm run build` here)
-$ npm publish
-```
-
-# License
-
-MIT - see LICENSE
-
+`herbs new --graphql --mongo --yarn --entities <path-where-is-your-entities>`
+`herbs new --graphql --mongo --yarn --entities ../herbs-cli-alpha/example/my-custom-entities`
