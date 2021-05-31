@@ -1,4 +1,5 @@
-const { toLowCamelCase, objToString } = require('../../../utils')
+const { objToString } = require('../../../utils')
+const camelCase = require('lodash.camelcase')
 
 module.exports =  async ({ generate, options, filesystem }) => async () => {
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
@@ -16,7 +17,7 @@ module.exports =  async ({ generate, options, filesystem }) => async () => {
 
         for(const entity of Object.keys(entities)){
             const { name } = entities[entity].prototype.meta
-            lowCCName = toLowCamelCase(name)
+            lowCCName = camelCase(name)
 
             await generate({
                 template: `data/repository/mongo/repository.ejs`,

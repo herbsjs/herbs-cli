@@ -24,7 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "gluegun": "latest",
-    "gotu": "^1.0.15"
+    "gotu": "^1.0.15",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.startcase": "^4.4.0"
   },
   "devDependencies": {
     "jest": "^24.1.0",

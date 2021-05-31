@@ -1,4 +1,6 @@
-const { toLowCamelCase, objToString } = require('../../utils')
+const { objToString } = require('../../utils')
+const camelCase = require('lodash.camelcase')
+
 
 const errorCodes = {
     NotFound: {
@@ -16,14 +18,14 @@ module.exports = async ({ generate } ) => async () => {
     for (const error of Object.keys(errorCodes)) {
         await generate({
             template: `domain/errors/error.ejs`,
-            target: `src/domain/errors/${toLowCamelCase(error)}.js`,
+            target: `src/domain/errors/${camelCase(error)}.js`,
             props: { 
                 name: error,
                 code: errorCodes[error].code,
                 defaultMsg: errorCodes[error].msg
             }
         })
-        requires[`${error}Error`] = `require('./${toLowCamelCase(error)}.js')`
+        requires[`${error}Error`] = `require('./${camelCase(error)}.js')`
     }
 
 

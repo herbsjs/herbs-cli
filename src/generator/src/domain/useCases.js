@@ -1,5 +1,6 @@
 const useCases = ['create', 'update', 'delete', 'findOne']
-const { toLowCamelCase, objToString } = require('../../utils')
+const { objToString } = require('../../utils')
+const camelCase = require('lodash.camelcase')
 
 async function generateRequest (schema){
     // schema to plain JSON
@@ -29,7 +30,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
         if(entity.includes('Input')) continue
         const { name } = entities[entity].prototype.meta
         for(const action of useCases){
-            // const nameInCC = toLowCamelCase(name)
+            // const nameInCC = camelCase(name)
             const useCaseName = `${action}${name}`
             await generate({
                 template: `domain/usecases/${action}.ejs`,
@@ -37,7 +38,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
                 props: { 
                     name: { 
                         pascalCase: name,
-                        camelCase: toLowCamelCase(name)
+                        camelCase: camelCase(name)
                     },
                     request: name
                 }
