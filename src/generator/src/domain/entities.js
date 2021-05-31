@@ -17,6 +17,8 @@ function generateEntities(from, to, level = './') {
       if (ext === 'js') {
         const entity = require(`${to}/${element}`)[entityName]
         requires[entity.name] = `require('${level}${element}').${entityName}`
+        // todo: must to be dynamic
+        requires[`${entity.name}Input`] = `require('${level}${element}').${entityName}Input`
       }
     }
     else{
@@ -27,29 +29,17 @@ function generateEntities(from, to, level = './') {
   return requires
 }
 
-// const generateEntities = (dir) => {
-//   const requires = {}
-//   const files = filesystem.list(dir)
-
-//   Promise.all(files.map((file) => {
-//     filesystem.copy(`${dir}/${file}`, `${filesystem.cwd()}/src/domain/entities/${file}`)
-//     const isJS = file.split('.')[-1].includes('js')
-//     if (isJS) {
-//       const entity = require(`${filesystem.cwd()}/src/domain/entities/${file}`)
-//       requires[entity.name] = `require('./${file}')`
-//     }
-//   }))
-
-//   return requires
-// }
-
 module.exports = async ({ generate, options }) => async () => {
   let requires = {}
   if (options.entities && options.entities !== true) {
-    console.log(options.entities)
     requires = await generateEntities(options.entities, `${filesystem.cwd()}/src/domain/entities`)
   } else {
-    requires = await generateEntities(join(__dirname, '../../templates/domain/entities'))
+    await generate({
+      template: 'domain/entities/user.ejs',
+      target: 'src/domain/entities/user.js',
+    })
+    requires['user'] = `require('./user.js').User`
+    requires['userInput'] = `require('./user.js').UserInput`
   }
 
   await generate({
