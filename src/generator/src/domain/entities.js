@@ -14,8 +14,6 @@ function generateEntities(from, to, level = './') {
       const splittedElement = element.split('.')
       const ext = splittedElement.pop()
       if (ext === 'js') {
-        const entityName = startCase(splittedElement.shift())
-
         const entity = require(`${to}/${element}`)
         requires[entity.name] = `require('${level}${element}')`
       }
@@ -28,10 +26,10 @@ function generateEntities(from, to, level = './') {
   return requires
 }
 
-module.exports = async ({ generate, options }) => async () => {
+module.exports = async ({ generate, options: { entities = ''} }) => async () => {
   let requires = {}
-  if (options.entities && options.entities !== true) {
-    requires = await generateEntities(options.entities, `${filesystem.cwd()}/src/domain/entities`)
+  if (entities && entities !== true) {
+    requires = await generateEntities(entities, `${filesystem.cwd()}/src/domain/entities`)
   } else {
     await generate({
       template: 'domain/entities/user.ejs',

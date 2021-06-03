@@ -19,18 +19,19 @@ async function generateRepositories(generate, entities, db) {
                 table: `${lowCCName}s`
             }
         })
-        requires[name] = `require('./${lowCCName}Repository.js')` 
+        requires[name] = `new (require('./${lowCCName}Repository.js'))(conn)` 
     }
     return requires
 }
 
-module.exports =  async ({ generate, options, filesystem }) => async () => {
+module.exports =  async ({ generate, options: { mongo = false, postgres = false}, filesystem }) => async () => {
     let requires = {}
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
-    if(options.mongo){
+    if(mongo){
+        // todo: separete it from repositories
         await generate({
             template: `data/database/mongo/database.ejs`,
-            target: `src/data/database/database.js`,
+            target: `src/data/database/index.js`,
         })        
 
         await generate({
@@ -40,10 +41,10 @@ module.exports =  async ({ generate, options, filesystem }) => async () => {
 
         requires = Object.assign(requires, await generateRepositories(generate, entities, 'mongo'))
     }
-    if(options.postgres) {
+    if(postgres) {
         await generate({
             template: `data/database/postgres/database.ejs`,
-            target: `src/data/database/database.js`,
+            target: `src/data/database/index.js`,
         })  
         requires = Object.assign(requires, await generateRepositories(generate, entities, 'postgres'))
     }

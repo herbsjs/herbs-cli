@@ -16,7 +16,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository = null }) =>
     // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     //Authorization with Audit
-    authorize: user => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
+    // authorize: user => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return

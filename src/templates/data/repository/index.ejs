@@ -1,1 +1,4 @@
-module.exports = <%- props.requires %>
+function factory(conn) {
+    return <%- props.requires %>
+}
+module.exports = factory

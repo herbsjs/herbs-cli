@@ -17,7 +17,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
     // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     //Authorization with Audit
-    authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
+    // authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
 
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {

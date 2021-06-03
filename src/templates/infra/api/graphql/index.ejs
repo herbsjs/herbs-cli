@@ -4,32 +4,40 @@ const types = require('./types')
 const inputs = require('./inputs')
 const queries = require('./queries')
 const mutations = require('./mutations')
-const repositories = require('../../../data/repositories')
+const repositoriesFactory = require('../../../data/repositories')
 const usecases = require('../../../domain/usecases')
+const db = require('../../../data/database')
 const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
-// TODO: rename this "UC"
-const UCqueries = []
-const UCmutations = []
 
-for(const obj of usecases){
-    if(obj.tags.type === 'query')
-        UCqueries.push(obj.usecase(repositories))
-    else
-        UCmutations.push(obj.usecase(repositories))
+function generateSchema(config) {
+    // TODO: rename this "UC"
+    const UCqueries = []
+    const UCmutations = []
+
+    const conn = db.factory(config) 
+    const repositories = repositoriesFactory(conn)
+    for(const obj of usecases){
+        if(obj.tags.type === 'query')
+            UCqueries.push(obj.usecase(repositories))
+        else
+            UCmutations.push(obj.usecase(repositories))
+    }
+
+    const graphQLDef = [].concat(types, inputs, queries.factory(UCqueries), mutations.factory(UCmutations))
+
+    /* Type Defs (Schemas) */
+    const typeDefs = graphQLDef.map(i => gql(i[0]))
+
+    /* Resolvers */
+    const resolvers = graphQLDef.map(i => i[1]).filter(i => i !== undefined)
+
+    return { typeDefs, resolvers }
 }
-
-const graphQLDef = [].concat(types, inputs, queries.factory(UCqueries), mutations.factory(UCmutations))
-
-/* Type Defs (Schemas) */
-const typeDefs = graphQLDef.map(i => gql(i[0]))
-
-/* Resolvers */
-const resolvers = graphQLDef.map(i => i[1]).filter(i => i !== undefined)
 
 
 module.exports = (app, config) => {
-    const schema = makeExecutableSchema({ typeDefs, resolvers })
+    const schema = makeExecutableSchema(generateSchema(config))
     addSchemaLevelResolveFunction(schema, () => {})
     return new ApolloServer({
         introspection: true,

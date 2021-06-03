@@ -15,7 +15,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
     // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     //Authorization with Audit
-    authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
+    // authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       await <%= props.name.camelCase %>Repository.delete(ctx.req.indexer)

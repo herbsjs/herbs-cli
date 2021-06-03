@@ -18,8 +18,9 @@ module.exports = (app, config) => {
     app.use(routes)
 
     const promises = usecases.map(uc => {
-        uc.usecase = uc.usecase({})
-        return uc
+        const clonedUC = { ...uc}
+        clonedUC.usecase = clonedUC.usecase({})
+        return clonedUC
     })
     Promise.all(promises).then(usecases => {
         const shelf = renderShelfHTML(usecases)
