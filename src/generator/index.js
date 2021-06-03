@@ -11,7 +11,7 @@ module.exports = async ({
             errors: await require('./src/domain/errors')({ generate, options }),
             repositories: await require('./src/database/repositories/repositories')({ generate, options, filesystem }),
             useCases: await require('./src/domain/useCases')({ generate, filesystem  }),
-            graphql: options.graphql ? await require('./src/infra/graphql')({ generate, filesystem  }) : ignore,
+            graphql: options.graphql ? await require('./src/infra/graphql')({ generate  }) : ignore,
             rest: await require('./src/infra/rest')({ generate  }),
             server: await require('./src/infra/server')({ generate  }),
             config: await require('./src/config')({ generate, options  }),

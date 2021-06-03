@@ -6,10 +6,4 @@ const User =
             password: field(String)
          })
 
-const UserInput = 
-         entity('UserInput',{
-             nickname: field(String),
-             password: field(String)
-          })
-
-module.exports = { User, UserInput }
+module.exports = User

@@ -6,7 +6,6 @@ async function generateRepositories(generate, entities, db) {
 
     for(const entity of Object.keys(entities)){
         const { name } = entities[entity].prototype.meta
-        if (name.includes('Input')) continue
         lowCCName = camelCase(name)
 
         await generate({

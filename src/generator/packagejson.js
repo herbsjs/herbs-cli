@@ -26,6 +26,7 @@ module.exports = async ({
         'sugar-env',
         'dotenv',
         'herbsshelf',
+        'herbs2rest',
         'graphql-tools']
 
     if(options.mongo) 

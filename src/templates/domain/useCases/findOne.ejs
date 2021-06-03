@@ -1,8 +1,8 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.name.pascalCase %> } = require('../entities')
-const { NotFoundError } = require('../errors')
+const { <%= props.name.pascalCase %> } = require('../../entities')
+const { NotFoundError } = require('../../errors')
 
-const useCase = ({ <%= props.name.camelCase %>Repository }) =>
+const useCase = ({ <%= props.name.camelCase %>Repository = null }) =>
   usecase('Find one <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {

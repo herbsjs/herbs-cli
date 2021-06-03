@@ -6,10 +6,5 @@ const Profile =
             password: field(String)
          })
 
-const ProfileInput = 
-         entity('ProfileInput',{
-             nickname: field(String),
-            password: field(String)
-          })
 
-module.exports = { Profile, ProfileInput }
+module.exports = Profile

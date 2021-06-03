@@ -1,6 +1,6 @@
 const { usecase, step, Ok, Err } = require('buchu')
-const { <%= props.name.pascalCase %> } = require('../entities')
-const { <%= props.name.pascalCase %>NotValidError } = require('../errors')
+const { <%= props.name.pascalCase %> } = require('../../entities')
+const { <%= props.name.pascalCase %>NotValidError } = require('../../errors')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) =>
   usecase('Create <%= props.name.pascalCase %>', {
@@ -20,7 +20,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
     authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
 
     //Step description and function
-    'Check if the <%= props.name %> is valid': step(ctx => {
+    'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req.<%= props.name.camelCase %>)
 
       if (!ctx.<%= props.name.camelCase %>.isValid()) 

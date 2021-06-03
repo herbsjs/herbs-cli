@@ -9,12 +9,15 @@ const usecases = require('../../../domain/usecases')
 const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
 // TODO: rename this "UC"
-const UCqueries = [
-<%- props.queries %>
-]
-const UCmutations = [
-<%- props.mutations %>
-]
+const UCqueries = []
+const UCmutations = []
+
+for(const obj of usecases){
+    if(obj.tags.type === 'query')
+        UCqueries.push(obj.usecase(repositories))
+    else
+        UCmutations.push(obj.usecase(repositories))
+}
 
 const graphQLDef = [].concat(types, inputs, queries.factory(UCqueries), mutations.factory(UCmutations))
 

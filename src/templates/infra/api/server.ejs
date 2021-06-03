@@ -1,20 +1,12 @@
 const express = require('express')
 const graphql = require('./graphql')
 const rest = require('./rest')
-const usecases = require('../../domain/usecases')
-const renderShelfHTML = require('herbsshelf')
 
 async function start (config) {
   const app = express()
 
-  rest(app)
+  rest(app, config)
   graphql(app, config)
-
-  // const ucs = []
-  // Object.keys(usecases).forEach(_uc => {
-  //   ucs.push({ usecase: usecases[_uc]({}), tags: { group: '' }})
-  // })
-  // renderShelfHTML(ucs)
 
   return app.listen(
     { port: config.api.port },

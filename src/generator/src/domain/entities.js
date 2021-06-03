@@ -16,10 +16,8 @@ function generateEntities(from, to, level = './') {
       if (ext === 'js') {
         const entityName = startCase(splittedElement.shift())
 
-        const entity = require(`${to}/${element}`)[entityName]
-        requires[entity.name] = `require('${level}${element}').${entityName}`
-        // todo: must to be dynamic
-        requires[`${entity.name}Input`] = `require('${level}${element}').${entityName}Input`
+        const entity = require(`${to}/${element}`)
+        requires[entity.name] = `require('${level}${element}')`
       }
     }
     else{
@@ -39,8 +37,7 @@ module.exports = async ({ generate, options }) => async () => {
       template: 'domain/entities/user.ejs',
       target: 'src/domain/entities/user.js',
     })
-    requires['user'] = `require('./user.js').User`
-    requires['userInput'] = `require('./user.js').UserInput`
+    requires['user'] = `require('./user.js')`
   }
 
   await generate({
