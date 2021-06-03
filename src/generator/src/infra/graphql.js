@@ -27,6 +27,11 @@ module.exports =  async ({ generate, filesystem }) => async () => {
     })
 
     await generate({
+        template: 'infra/api/graphql/inputs.ejs',
+        target: `src/infra/api/graphql/inputs.js`
+    })
+
+    await generate({
         template: 'infra/api/graphql/defaultResolver.ejs',
         target: `src/infra/api/graphql/defaultResolver.js`
     })

@@ -1,11 +1,9 @@
 const server = require('./infra/api/server')
-// const { logger }  = require('./libs/logger')
 const config = require('./config')
 
 server.start(config).catch((err) => {
   console.error('----- Fatal error -----')
   console.error(err)
-  // logger.error('Unhandled error', err)
   // eslint-disable-next-line no-undef
   process.exit(1)
 })

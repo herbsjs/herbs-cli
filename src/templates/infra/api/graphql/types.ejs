@@ -1,11 +1,6 @@
 const { entity2type } = require('herbs2gql')
 const entities = require('../../../domain/entities')
 
-const converto2Type = (entity) => {
-  let type = entity2type(entities[entity])
-  if(type.includes('Input')) type = type.replace('type', 'input')
-  return [type]
-}
 const defaultSchema = [`
   type Query {
     _: Boolean
@@ -15,10 +10,8 @@ const defaultSchema = [`
     _: Boolean
   }`]
 
-Object.keys(entities).map(entity => [entity2type(entities[entity])])
-
 const types = [defaultSchema].concat(Object
                                 .keys(entities)
-                                .map(converto2Type))
+                                .map(entity => [entity2type(entities[entity])]))
 
 module.exports = types

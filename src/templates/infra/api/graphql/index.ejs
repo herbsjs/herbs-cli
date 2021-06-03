@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
 const types = require('./types')
+const inputs = require('./inputs')
 const queries = require('./queries')
 const mutations = require('./mutations')
 const repositories = require('../../../data/repositories')
@@ -15,8 +16,7 @@ const UCmutations = [
 <%- props.mutations %>
 ]
 
-
-const graphQLDef = [].concat(types, queries.factory(UCqueries), mutations.factory(UCmutations))
+const graphQLDef = [].concat(types, inputs, queries.factory(UCqueries), mutations.factory(UCmutations))
 
 /* Type Defs (Schemas) */
 const typeDefs = graphQLDef.map(i => gql(i[0]))

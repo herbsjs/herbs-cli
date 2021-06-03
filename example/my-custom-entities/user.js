@@ -9,7 +9,7 @@ const User =
 const UserInput = 
          entity('UserInput',{
              nickname: field(String),
-            password: field(String)
+             password: field(String)
           })
 
 module.exports = { User, UserInput }

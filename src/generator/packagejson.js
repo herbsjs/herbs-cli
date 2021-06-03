@@ -25,10 +25,13 @@ module.exports = async ({
         'apollo-server',
         'sugar-env',
         'dotenv',
+        'herbsshelf',
         'graphql-tools']
 
     if(options.mongo) 
         packages.push('mongodb')
+    if(options.postgres)
+        packages.push('herbs2knex')
     
     let opt = { force: 'npm'}
     if(options.yarn) {
