@@ -4,8 +4,8 @@ const cmd = {
   alias: ['n'],
   run: async toolbox => {
     const generate = await generator(toolbox)
-    Object.keys(layer => {
-      generate[layer]()
+    Object.keys(generate).forEach(async layer => {
+      await generate[layer]()
     })
   }
 }
