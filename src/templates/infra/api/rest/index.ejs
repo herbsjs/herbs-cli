@@ -5,6 +5,14 @@ const express = require('express')
 const renderShelfHTML = require('herbsshelf')
 const usecases = require('../../../domain/usecases')
 
+function prepareUsecases(usecases){
+    return Promise.all(usecases.map(uc => {
+        const clonedUC = { ...uc}
+        clonedUC.usecase = clonedUC.usecase({})()
+        return clonedUC
+    }))
+}
+
 const controllers = []
 
 module.exports = (app, config) => {
@@ -17,12 +25,7 @@ module.exports = (app, config) => {
     generateRoutes(controllers, routes, verbose)
     app.use(routes)
 
-    const promises = usecases.map(uc => {
-        const clonedUC = { ...uc}
-        clonedUC.usecase = clonedUC.usecase({})
-        return clonedUC
-    })
-    Promise.all(promises).then(usecases => {
+    prepareUsecases(usecases).then(async usecases => {
         const shelf = renderShelfHTML(usecases)
         app.get('/herbsshelf', (_, res) => {
             res.setHeader('Content-Type', 'text/html')

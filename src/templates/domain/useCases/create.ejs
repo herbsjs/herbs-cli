@@ -2,11 +2,11 @@ const { usecase, step, Ok, Err } = require('buchu')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 const { <%= props.name.pascalCase %>NotValidError } = require('../../errors')
 
-const useCase = ({ <%= props.name.camelCase %>Repository }) =>
+const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
   usecase('Create <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      <%= props.name.camelCase %>: <%= props.request %>
+        <%= props.request %>
     },
 
 
@@ -18,10 +18,11 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) =>
 
     //Authorization with Audit
     // authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
+    authorize: user => Ok(),
 
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
-      ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req.<%= props.name.camelCase %>)
+      ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req)
 
       if (!ctx.<%= props.name.camelCase %>.isValid()) 
         return <%= props.name.pascalCase %>NotValidError('The <%= props.name.pascalCase %> entity is invalid', ctx.<%= props.name.camelCase %>.errors)
