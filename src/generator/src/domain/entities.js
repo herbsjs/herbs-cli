@@ -1,5 +1,4 @@
 const { objToString } = require('../../utils')
-const startCase = require('lodash.startcase');
 const { filesystem } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
@@ -29,7 +28,7 @@ function generateEntities(from, to, level = './') {
 module.exports = async ({ generate, options: { entities = ''} }) => async () => {
   let requires = {}
   if (entities && entities !== true) {
-    requires = await generateEntities(entities, `${filesystem.cwd()}/src/domain/entities`)
+    requires =  generateEntities(entities, `${filesystem.cwd()}/src/domain/entities`)
   } else {
     await generate({
       template: 'domain/entities/user.ejs',
