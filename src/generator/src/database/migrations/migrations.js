@@ -16,6 +16,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
         const { name, schema } = entities[entity].prototype.meta
         Object.keys(schema).forEach(prop => {
             const { name, type }  = schema[prop]
+            if(name === 'id') return
             columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
         })
         const migrationName = new Date().toISOString().replace(/\D/g,'').substring(0,14);
