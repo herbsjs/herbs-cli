@@ -19,3 +19,7 @@ or
 
 `herbs new --graphql --mongo --yarn --entities <path-where-is-your-entities>`
 `herbs new --graphql --mongo --yarn --entities ../herbs-cli-alpha/example/my-custom-entities`
+
+### Custom project name and licence
+
+`herbs new --name my-project --description "bla bla bla" --author italojs --licence BSD --graphql --postgres --yarn --entities ../herbs-cli-alpha/example/my-custom-entities`
