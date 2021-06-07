@@ -26,6 +26,7 @@ async function generateRepositories(generate, entities, db) {
 
 module.exports =  async ({ generate, options: { mongo = false, postgres = false}, filesystem }) => async () => {
     let requires = {}
+    console.log(`${filesystem.cwd()}/src/domain/entities`)
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
     if(mongo){
         await generate({
