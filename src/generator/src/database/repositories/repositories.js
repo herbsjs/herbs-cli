@@ -10,7 +10,7 @@ async function generateRepositories(generate, entities, db) {
 
         await generate({
             template: `data/repository/${db}/repository.ejs`,
-            target: `src/data/repositories/${lowCCName}Repository.js`,
+            target: `src/infra/data/repositories/${lowCCName}Repository.js`,
             props: { 
                 name: { 
                     pascalCase: name,
@@ -31,7 +31,7 @@ module.exports =  async ({ generate, options: { mongo = false, postgres = false}
     if(mongo){
         await generate({
             template: `data/repository/mongo/baseRepository.ejs`,
-            target: `src/data/repositories/baseRepository.js`
+            target: `src/infra/data/repositories/baseRepository.js`
         })
 
         requires = Object.assign(requires, await generateRepositories(generate, entities, 'mongo'))
@@ -41,7 +41,7 @@ module.exports =  async ({ generate, options: { mongo = false, postgres = false}
     }
     await generate({
         template: 'data/repository/index.ejs',
-        target: `src/data/repositories/index.js`,
+        target: `src/infra/data/repositories/index.js`,
         props: { requires: objToString(requires) }
     })
 }

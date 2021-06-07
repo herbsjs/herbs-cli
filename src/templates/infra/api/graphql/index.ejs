@@ -4,9 +4,9 @@ const types = require('./types')
 const inputs = require('./inputs')
 const queries = require('./queries')
 const mutations = require('./mutations')
-const repositoriesFactory = require('../../../data/repositories')
+const repositoriesFactory = require('../../../infra/data/repositories')
 const usecases = require('../../../domain/usecases')
-const db = require('../../../data/database')
+const db = require('../../../infra/data/database')
 const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
 

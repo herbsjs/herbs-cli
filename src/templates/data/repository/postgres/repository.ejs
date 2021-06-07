@@ -1,5 +1,5 @@
 const { Repository } = require("herbs2knex")
-const { <%= props.name.pascalCase %> } = require('../../domain/entities')
+const { <%= props.name.pascalCase %> } = require('../../../domain/entities')
 
 module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
     constructor(connection) {

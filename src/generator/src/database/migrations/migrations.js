@@ -21,7 +21,7 @@ module.exports =  async ({ generate, filesystem }) => async () => {
         const migrationName = new Date().toISOString().replace(/\D/g,'').substring(0,14);
         await generate({
             template: `data/database/postgres/migration.ejs`,
-            target: `src/data/database/migrations/${migrationName}_${camelCase(name)}s.js`,
+            target: `src/infra/data/database/migrations/${migrationName}_${camelCase(name)}s.js`,
             props: { table: `${camelCase(name)}s`, columns: columns.join('\n')}
         })  
     }

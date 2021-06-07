@@ -3,10 +3,9 @@ const cmd = {
   name: 'new',
   alias: ['n'],
   run: async toolbox => {
-    const generate = await generator(toolbox)
-    Object.keys(generate).forEach(async layer => {
-      await generate[layer]()
-    })
+    const generators = await generator(toolbox)
+    const layers = Object.keys(generators)
+    for(const layer of layers) await generators[layer]()
   }
 }
 
