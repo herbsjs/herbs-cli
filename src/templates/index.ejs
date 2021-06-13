@@ -4,6 +4,5 @@ const config = require('./config')
 server.start(config).catch((err) => {
   console.error('----- Fatal error -----')
   console.error(err)
-  // eslint-disable-next-line no-undef
   process.exit(1)
 })

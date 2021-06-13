@@ -1,7 +1,7 @@
 const { usecase, step, Ok, Err } = require('buchu')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 
-const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
+const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Delete <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -16,7 +16,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
 
     //Authorization with Audit
     // authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(),
+    authorize: user => Ok(user),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       await <%= props.name.camelCase %>Repository.delete(ctx.req.indexer)

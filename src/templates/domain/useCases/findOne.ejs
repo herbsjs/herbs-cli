@@ -2,7 +2,7 @@ const { usecase, step, Ok, Err } = require('buchu')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 const { NotFoundError } = require('../../errors')
 
-const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
+const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Find one <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -17,7 +17,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
 
     //Authorization with Audit
     // authorize: user => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(),
+    authorize: user => Ok(user),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return

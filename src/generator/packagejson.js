@@ -37,7 +37,8 @@ module.exports = async ({
         'dotenv',
         'herbsshelf',
         'herbs2rest',
-        'graphql-tools']
+        'graphql-tools',
+        'nodemon']
 
     if(mongo) 
         packages.push('mongodb')

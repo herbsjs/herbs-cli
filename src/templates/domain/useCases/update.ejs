@@ -2,7 +2,7 @@ const merge = require('deepmerge')
 const { usecase, step, Ok, Err } = require('buchu')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 
-const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
+const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Update <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -19,7 +19,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository = null }) => () =>
 
     //Authorization with Audit
     // authorize: user => (user.canUpdate<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(),
+    authorize: user => Ok(user),
 
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(async ctx => {

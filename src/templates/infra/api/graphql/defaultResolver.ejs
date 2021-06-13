@@ -15,7 +15,6 @@ function defaultResolver(usecase) {
         /* Authorization */
         const hasAccess = await uc.authorize(context.user)
         if (!hasAccess) {
-            // eslint-disable-next-line no-console
             console.info(uc.auditTrail)
             throw new ForbiddenError()
         }
@@ -25,7 +24,6 @@ function defaultResolver(usecase) {
         const response = await uc.run(request)
 
         /* Audit */
-        // eslint-disable-next-line no-console
         console.info(uc.auditTrail)
 
         /* Response */

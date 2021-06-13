@@ -2,9 +2,9 @@
     "name": "<%= props.name %>",
     "version": "1.0.0",
     "description": "<%= props.description %>",
-    "main": "",
+    "main": "src/index.js",
     "scripts": {
-      "start": "node src/index.js",
+      "start": "nodemon src/index.js",
       "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
       "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
       <%- props.migration %>
@@ -14,4 +14,4 @@
     "license": "<%= props.license %>",
     "dependencies": {
     }
-  }
+}
