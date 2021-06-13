@@ -2,6 +2,7 @@ const { entity, field } = require('gotu')
 
 const User =
         entity('User', {
+          id: field(String),
           nickname: field(String),
           password: field(String)
         })

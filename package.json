@@ -9,7 +9,7 @@
   "scripts": {
     "format": "prettier --write **/*.{js,json} && standard --fix",
     "lint": "standard",
-    "test": "jest",
+    "test": "mocha __tests__ --timeout 30000",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage"
@@ -29,20 +29,19 @@
     "lodash.startcase": "^4.4.0"
   },
   "devDependencies": {
-    "jest": "^24.1.0",
     "prettier": "^1.12.1",
-    "standard": "^12.0.1"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ]
+    "standard": "^12.0.1",
+    "mocha": "^9.0.0",
+    "chai": "^4.3.4"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "standard": {
+    "env": [
+      "it",
+      "describe"
+    ]
   }
 }
