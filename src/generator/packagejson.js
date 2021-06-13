@@ -25,11 +25,18 @@ module.exports = async ({
             name, description, author, license, migration
         }
     })
+    let opt = { force: 'npm'}
+    if(yarn) {
+        if(packageManager.hasYarn())
+            opt = { force: 'yarn'}
+        else {
+            print.warn('You don\'t have yarn installed')
+        }
+    }
+    await packageManager.add(['buchu', 'gotu', 'deepmerge'], opt)
+
     const packages = [
-        'buchu',
-        'gotu',
         'herbs2gql',
-        'deepmerge',
         'graphql',
         'apollo-server-express',
         'apollo-server',
@@ -46,15 +53,5 @@ module.exports = async ({
         packages.push('herbs2knex')
         packages.push('pg')
     }
-    
-    let opt = { force: 'npm'}
-    if(yarn) {
-        if(packageManager.hasYarn())
-            opt = { force: 'yarn'}
-        else {
-            print.warn('You don\'t have yarn installed')
-        }
-    }
-    await packageManager.add(packages, opt)
 }
 

@@ -22,7 +22,7 @@ async function generateRequest (schema){
     return str.join('\n').trim()
 }
 
-module.exports =  async ({ generate, filesystem }) => async () => {
+module.exports =  async ({ generate, filesystem, options }) => async () => {
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
     const requires = []
     

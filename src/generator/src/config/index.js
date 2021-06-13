@@ -1,6 +1,6 @@
 const { objToString } = require('../../utils')
 
-module.exports =  async ({ generate, options: { mongo = false, postgres = false} }) => async () => {
+module.exports =  async ({ generate, options}) => async () => {
     const requires = { 
         isProd: `env.is('production')`,
         api: `require('./api')`
@@ -11,15 +11,15 @@ module.exports =  async ({ generate, options: { mongo = false, postgres = false}
         target: `src/config/api.js`,
     })
 
-    if(mongo){
+    if(options.mongo){
         await generate({
             template: 'config/mongo.ejs',
             target: `src/config/mongo.js`,
-            props: { dbName: 'TODOmUDAR'}
+            props: { dbName: options.name }
         })
         requires['database'] = `require('./mongo')` 
     }
-    if(postgres){
+    if(options.postgres){
         await generate({
             template: 'config/postgres.ejs',
             target: `src/config/postgres.js`,
