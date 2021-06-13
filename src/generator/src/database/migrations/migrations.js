@@ -9,6 +9,7 @@ function type2Str(type) {
     if(_type instanceof Date) return 'timestamps'
 }
 module.exports =  async ({ generate, filesystem, options }) => async () => {
+    console.log(options)
     const entities = require(`${filesystem.cwd()}/src/domain/entities`)
     
     for(const entity of Object.keys(entities)){
@@ -28,6 +29,7 @@ module.exports =  async ({ generate, filesystem, options }) => async () => {
     }
     await generate({
         template: `knexFile.ejs`,
-        target: `knexFile.js`
+        target: `knexFile.js`,
+        props: { dbName: options.name}
     })  
 }

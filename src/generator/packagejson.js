@@ -12,7 +12,8 @@ module.exports = async ({
         yarn = false
     }
 }) => async () => { 
-    let migration = postgres ? `"knex:make": "npx knex --knexfile knexfile.js migrate:make",
+    let migration = postgres ? `,
+      "knex:make": "npx knex --knexfile knexfile.js migrate:make",
       "knex:migrate": "npx knex --knexfile knexfile.js migrate:latest",
       "knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback",
       "knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make",
@@ -25,10 +26,10 @@ module.exports = async ({
             name, description, author, license, migration
         }
     })
-    let opt = { force: 'npm'}
+    const opt = { force: 'npm'}
     if(yarn) {
         if(packageManager.hasYarn())
-            opt = { force: 'yarn'}
+            opt.force = 'yarn'
         else {
             print.warn('You don\'t have yarn installed')
         }
@@ -53,5 +54,8 @@ module.exports = async ({
         packages.push('herbs2knex')
         packages.push('pg')
     }
+    opt.dryRun = true
+    await packageManager.add(['buchu', 'gotu', 'deepmerge'], opt)
+
 }
 

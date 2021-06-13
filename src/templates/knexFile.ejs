@@ -2,7 +2,7 @@ module.exports = {
     development: {
       client: 'postgresql',
       connection: {
-        database: 'todolist_on_herbs_db',
+        database: '<%- props.dbName %>',
         user: 'postgres',
         password: 'postgres',
         host: 'localhost',
