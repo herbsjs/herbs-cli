@@ -15,33 +15,32 @@ function prepareUsecases(usecases){
     }))
 }
 
-function prepareRoutes(config){
-    const conn = db.factory(config) 
-    const repositories = repositoriesFactory(conn)
+async function prepareRoutes(config){
+    const conn = await db.factory(config) 
+    const repositories = await repositoriesFactory(conn)
 
     const routes = <%- props.routes %>
     
     return routes
 }
 
-module.exports = (app, config) => {
+module.exports = async (app, config) => {
     app.use(json({limit: '50mb'}))
     app.use(cors())
 
     const router = new express.Router()
 
     const verbose = !config.isProd
-    const routes = prepareRoutes(config)
+    const routes = await prepareRoutes(config)
     generateRoutes(routes, router, verbose)
     app.use(router)
 
-    prepareUsecases(usecases).then(async usecases => {
-        const shelf = renderShelfHTML(usecases)
-        app.get('/herbsshelf', (_, res) => {
-            res.setHeader('Content-Type', 'text/html')
-            res.write(shelf)
-            res.end()
-        })
-    })
+    const ucs = await prepareUsecases(usecases)
 
+    const shelf = renderShelfHTML(ucs)
+    app.get('/herbsshelf', (_, res) => {
+        res.setHeader('Content-Type', 'text/html')
+        res.write(shelf)
+        res.end()
+    })
 }

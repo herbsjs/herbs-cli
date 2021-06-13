@@ -19,7 +19,7 @@ async function generateRepositories (generate, entities, db) {
         table: `${lowCCName}s`
       }
     })
-    requires[`${lowCCName}Repository`] = `new (require('./${lowCCName}Repository.js'))(conn)`
+    requires[`${lowCCName}Repository`] = `await new (require('./${lowCCName}Repository.js'))(conn)`
   }
   return requires
 }

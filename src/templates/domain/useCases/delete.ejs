@@ -11,15 +11,12 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     // Output/Response metadata
     response: Boolean,
 
-    // Pre-run setup
-    // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
-
     //Authorization with Audit
     // authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
     authorize: user => Ok(user),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
-      await <%= props.name.camelCase %>Repository.delete(ctx.req.id)
+      await <%= props.name.camelCase %>Repository.deleteByID(ctx.req.id)
       return Ok()
     })
   })

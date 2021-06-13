@@ -5,8 +5,8 @@ const rest = require('./rest')
 async function start (config) {
   const app = express()
 
-  rest(app, config)
-  graphql(app, config)
+  await rest(app, config)
+  await graphql(app, config)
 
   return app.listen(
     { port: config.api.port },

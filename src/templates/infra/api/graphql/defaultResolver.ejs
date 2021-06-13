@@ -8,6 +8,10 @@ function args2request(args, useCase) {
     return params
 }
 
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
 function defaultResolver(usecase) {
 
     return async function resolver(_, args, context) {
@@ -28,7 +32,7 @@ function defaultResolver(usecase) {
 
         /* Response */
         if (response.isErr) return new ApolloError(response.err.message, response.err.code, response.err.stackTrace)
-        return response.ok
+        return isEmpty(response.ok) ? true : response.ok
     }
 }
 

@@ -13,9 +13,6 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     // Output/Response metadata
     response: <%= props.name.pascalCase %>,
 
-    // Pre-run setup
-    // setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
-
     //Authorization with Audit
     // authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
     authorize: user => Ok(user),

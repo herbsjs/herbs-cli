@@ -6,6 +6,7 @@ async function generateRequest (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
+    if ( name === 'id') return obj
     obj[name] = type.name || type.constructor.name
     return obj
   }, {})

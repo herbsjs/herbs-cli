@@ -1,7 +1,6 @@
 module.exports = class Repository {
-    constructor(options){
-        this.table = options.table
-        this.collection = options.mongo.collection(this.table)
+    constructor({ collection, mongo }){
+        this.collection = mongo.collection(collection)
     }
 
     async find(filter){
@@ -39,8 +38,9 @@ module.exports = class Repository {
     }
 
     async insert(entity){
-        return await this.collection
+        const { ops } = await this.collection
             .insertOne(entity)
+        return { id: ops[0]._id, ...ops[0] }
     }
 
     async insertMany(arrayEntity){
@@ -58,9 +58,9 @@ module.exports = class Repository {
             .updateMany(filter, updateDocument)
     }
 
-    async delete(filter){
+    async deleteByID(id){
         return await this.collection
-            .deleteOne(filter)
+            .deleteOne({ _id: String(id)})
     }
     
     //TO DO: FindOne(filter, project)

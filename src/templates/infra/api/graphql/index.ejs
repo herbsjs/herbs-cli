@@ -10,13 +10,13 @@ const db = require('../../../infra/data/database')
 const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
 
 
-function generateSchema(config) {
+async function generateSchema(config) {
     // TODO: rename this "UC"
     const UCqueries = []
     const UCmutations = []
 
-    const conn = db.factory(config) 
-    const repositories = repositoriesFactory(conn)
+    const conn = await db.factory(config) 
+    const repositories = await repositoriesFactory(conn)
     for(const obj of usecases){
         if(obj.tags.type === 'query')
             UCqueries.push(obj.usecase(repositories))
@@ -36,8 +36,8 @@ function generateSchema(config) {
 }
 
 
-module.exports = (app, config) => {
-    const schema = makeExecutableSchema(generateSchema(config))
+module.exports = async (app, config) => {
+    const schema = makeExecutableSchema(await generateSchema(config))
     addSchemaLevelResolveFunction(schema, () => {})
     return new ApolloServer({
         introspection: true,

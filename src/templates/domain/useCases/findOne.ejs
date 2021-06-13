@@ -18,7 +18,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
-      const result = await <%= props.name.camelCase %>Repository.findByID(ctx.req.id) 
+      const [result] = await <%= props.name.camelCase %>Repository.findByID(ctx.req.id) 
       if(!result) return NotFoundError('<%= props.name.pascalCase %>', `<%= props.name.pascalCase %> entity not found by id: ${ctx.req.id}`)
       return (ctx.ret = <%= props.name.pascalCase %>.fromJSON(result))
     })

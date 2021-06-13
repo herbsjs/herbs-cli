@@ -19,9 +19,8 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
 
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(async ctx => {
-      const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findOne(ctx.req.id)
+      const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findByID(ctx.req.id)
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req ])
-      delete new<%= props.name.pascalCase %>.id
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)
 
       if (!ctx.<%= props.name.camelCase %>.isValid()) return NotValidError('<%= props.name.camelCase %>', null, ctx.<%= props.name.camelCase %>.errors)
@@ -31,7 +30,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
-      return (ctx.ret = await <%= props.name.camelCase %>Repository.update(ctx.req.id, ctx.<%= props.name.camelCase %>)) 
+      return (ctx.ret = await <%= props.name.camelCase %>Repository.update(ctx.<%= props.name.camelCase %>)) 
     })
   })
 
