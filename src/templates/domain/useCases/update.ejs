@@ -19,7 +19,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
 
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(async ctx => {
-      const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findByID(ctx.req.id)
+      const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id))
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req ])
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)
 

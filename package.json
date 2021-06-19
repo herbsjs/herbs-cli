@@ -25,6 +25,7 @@
   "dependencies": {
     "gluegun": "latest",
     "gotu": "^1.0.15",
+    "inquirer": "^8.1.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.startcase": "^4.4.0"
   },

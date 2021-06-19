@@ -16,7 +16,7 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     authorize: user => Ok(user),
 
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
-      await <%= props.name.camelCase %>Repository.deleteByID(ctx.req.id)
+      await <%= props.name.camelCase %>Repository.deleteByID(parseInt(ctx.req.id))
       return Ok()
     })
   })
