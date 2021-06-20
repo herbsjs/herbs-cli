@@ -2,6 +2,10 @@ const generator = require('../generator')
 const fs = require('fs')
 const inquirer = require('inquirer')
 
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
 const questions = [
   {
     type: 'input',
@@ -82,22 +86,20 @@ const cmd = {
   name: 'new',
   alias: ['n'],
   run: async toolbox => {
-    if(!toolbox.parameters.options){
-      const answers = await inquirer.prompt(questions)
-  
-      toolbox.parameters.options = answers
-      toolbox.parameters.options.postgres = answers.database === 'postgres'
-      toolbox.parameters.options.mongo = answers.database === 'mongo'
-      toolbox.parameters.options.entities = answers.entities === 'optional' ? '' : answers.entities  
+    let { options } = toolbox.parameters
+    if(isEmpty(options)){
+      options = await inquirer.prompt(questions)
+      postgres = options.database === 'postgres'
+      mongo = options.database === 'mongo'
+      entities = options.entities === 'optional' ? '' : answers.entities  
     }
 
-    const dir = `${toolbox.filesystem.cwd()}/${toolbox.parameters.options.name}`
+    const dir = `${toolbox.filesystem.cwd()}/${options.name}`
   
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir)
-    }
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir)
     process.chdir(dir)
-    
+
+    toolbox.parameters.options = options
     const generators = await generator(toolbox)
     const layers = Object.keys(generators)
     for (const layer of layers) await generators[layer]()
