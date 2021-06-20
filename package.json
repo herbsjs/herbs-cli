@@ -1,6 +1,6 @@
 {
   "name": "@italojs/herbs-cli-alpha",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "herbs CLI",
   "bin": {
     "herbs": "bin/herbs"
