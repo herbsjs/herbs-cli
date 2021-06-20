@@ -2,7 +2,6 @@
   "name": "@italojs/herbs-cli",
   "version": "0.0.1",
   "description": "herbs CLI",
-  "private": true,
   "bin": {
     "herbs": "bin/herbs"
   },
