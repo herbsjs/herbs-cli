@@ -1,5 +1,5 @@
 {
-  "name": "herbs",
+  "name": "@italojs/herbs-cli",
   "version": "0.0.1",
   "description": "herbs CLI",
   "private": true,
@@ -10,7 +10,7 @@
     "format": "prettier --write **/*.{js,json} && standard --fix",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "test": "mocha __tests__ --timeout 30000",
+    "test": "mocha __tests__ --timeout 90000",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage"

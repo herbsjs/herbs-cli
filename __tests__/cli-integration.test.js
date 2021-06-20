@@ -37,22 +37,22 @@ describe('generates package.json', () => {
     await cli(`new --name ${projectName} --postgres`)
 
     const knex = filesystem.read(`${projectName}/knexFile.js`)
-    expect(knex).toContain(`database: '${projectName}'`)
+    expect(knex).contains(`database: '${projectName}'`)
 
     const pkg = filesystem.read(`${projectName}/package.json`)
-    expect(pkg).toContain(
+    expect(pkg).contains(
       `"knex:make": "npx knex --knexfile knexfile.js migrate:make"`
     )
-    expect(pkg).toContain(
+    expect(pkg).contains(
       `"knex:migrate": "npx knex --knexfile knexfile.js migrate:latest"`
     )
-    expect(pkg).toContain(
+    expect(pkg).contains(
       `"knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback"`
     )
-    expect(pkg).toContain(
+    expect(pkg).contains(
       `"knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make"`
     )
-    expect(pkg).toContain(
+    expect(pkg).contains(
       `"knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"`
     )
   })
