@@ -1,12 +1,13 @@
 const merge = require('deepmerge')
-const { usecase, step, Ok, Err } = require('buchu')
+const { usecase, step, Ok } = require('buchu')
 const { <%= props.name.pascalCase %> } = require('../../entities')
+const { NotValidError } = require('../../errors')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Update <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-        id: String,
+        id: Number,
         <%= props.request %>
     },
 
