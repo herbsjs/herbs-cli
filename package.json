@@ -9,6 +9,7 @@
   "scripts": {
     "format": "prettier --write **/*.{js,json} && standard --fix",
     "lint": "standard",
+    "lint:fix": "standard --fix",
     "test": "mocha __tests__ --timeout 30000",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
