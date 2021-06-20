@@ -89,9 +89,9 @@ const cmd = {
     let { options } = toolbox.parameters
     if(isEmpty(options)){
       options = await inquirer.prompt(questions)
-      postgres = options.database === 'postgres'
-      mongo = options.database === 'mongo'
-      entities = options.entities === 'optional' ? '' : answers.entities  
+      options.postgres = options.database === 'postgres'
+      options.mongo = options.database === 'mongo'
+      options.entities = options.entities === 'optional' ? '' : answers.entities  
     }
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`
