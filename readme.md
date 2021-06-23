@@ -1,13 +1,14 @@
 # herbs CLI
 
 A CLI for generate an complete web backend project based on clean architecture.
-
 ## Getting start
 
-`npm i -g herbs-cli`
+`npm i -g https://github.com/italojs/herbs-cli-alpha`
 `herbs new`
 ![](./docs/gif.gif)
 
+
+## Generating the project based on your entities
 
 ## Development
 

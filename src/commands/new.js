@@ -91,7 +91,7 @@ const cmd = {
       options = await inquirer.prompt(questions)
       options.postgres = options.database === 'postgres'
       options.mongo = options.database === 'mongo'
-      options.entities = options.entities === 'optional' ? '' : answers.entities  
+      options.entities = options.entities === 'optional' ? '' : options.entities  
     }
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`
