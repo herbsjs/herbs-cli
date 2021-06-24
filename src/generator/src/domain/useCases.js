@@ -33,8 +33,8 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
       // const nameInCC = camelCase(name)
       const useCaseName = `${action}${name}`
       await generate({
-        template: `domain/usecases/${action}.ejs`,
-        target: `src/domain/useCases/${camelCase(name)}/${useCaseName}.js`,
+        template: `domain/useCases/${action}.ejs`,
+        target: `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`,
         props: {
           name: {
             pascalCase: name,
@@ -50,8 +50,8 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
   }
 
   await generate({
-    template: 'domain/usecases/index.ejs',
-    target: `src/domain/useCases/index.js`,
+    template: 'domain/useCases/index.ejs',
+    target: `src/domain/usecases/index.js`,
     props: { requires: objToString(requires) }
   })
 }
