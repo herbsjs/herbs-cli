@@ -32,7 +32,7 @@ module.exports = async ({ generate, options }) => async () => {
       template: 'domain/entities/user.ejs',
       target: 'src/domain/entities/user.js'
     })
-    requires['User'] = `require('./User.js')`
+    requires['User'] = `require('./user.js')`
   }
 
   await generate({

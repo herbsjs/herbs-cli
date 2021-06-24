@@ -1,13 +1,13 @@
 const express = require('express')
-const graphql = require('./graphql')
-const rest = require('./rest')
+<% if(props.graphql) {%>const graphql = require('./graphql')<% }%>
+<% if(props.rest) {%>const rest = require('./rest')<% }%>
 
 async function start (config) {
   const app = express()
 
-  await rest(app, config)
-  await graphql(app, config)
-
+  <% if(props.rest) {%>await rest(app, config)<% }%>
+  <% if(props.graphql) {%>await graphql(app, config)<% }%>
+ 
   return app.listen(
     { port: config.api.port },
     () => console.log(`🚀 Server UP and 🌪️ Spinning on port ${config.api.port}`))
