@@ -4,7 +4,8 @@
     "description": "<%= props.description %>",
     "main": "src/index.js",
     "scripts": {
-      "start": "nodemon src/index.js",
+      "start": "node src/index.js",
+      "start:dev": "nodemon src/index.js",
       "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
       "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix"<%- props.migration %>
     },
