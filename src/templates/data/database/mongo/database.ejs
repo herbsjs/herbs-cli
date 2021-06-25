@@ -5,7 +5,7 @@ let dbInstance = null;
 module.exports = {
     factory: async (config) => {
         if (dbInstance) {
-            return new Promise((resolve) => resolve(db))
+            return new Promise((resolve) => resolve(dbInstance))
         }
         const client = await new MongoClient(config.database.connstr, {
             useNewUrlParser: true,

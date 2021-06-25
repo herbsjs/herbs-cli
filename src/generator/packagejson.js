@@ -1,29 +1,28 @@
 const { exec } = require('child_process')
-function childProcess (process) {
+function childProcess (process, print) {
   return new Promise((resolve, reject) => {
-    const cp = exec(process, function (error, stdout, stderr) {
-      if (error) {
-        console.log(error.stack)
-        console.log('Error code: ' + error.code)
-        console.log('Signal received: ' + error.signal)
+    print.info('[INFO] Installing dependencies...')
+    print.info(`> ${process}`)
+    const cp = exec(process)
 
-        reject(error.stack)
-      }
-      console.log('Child Process STDOUT: ' + stdout)
-      console.log('Child Process STDERR: ' + stderr)
+    cp.stdout.on('data', (data) => {
+      console.log(data.toString())
+    })
+
+    cp.on('exit', () => {
       resolve()
     })
 
-    cp.on('exit', function (code) {
-      resolve()
+    cp.on('error', (error) => {
+      reject(error)
     })
   })
 }
 
-async function installPkgs (useYarn, pkgs) {
+async function installPkgs (useYarn, pkgs, print) {
   useYarn
-    ? await childProcess(`yarn add ${pkgs.join([' '])}`)
-    : await childProcess(`npm install ${pkgs.join([' '])}`)
+    ? await childProcess(`yarn add ${pkgs.join([' '])}`, print)
+    : await childProcess(`npm install ${pkgs.join([' '])}`, print)
 }
 
 module.exports = async ({
@@ -36,7 +35,8 @@ module.exports = async ({
     mongo = false,
     postgres = false,
     yarn = false
-  }
+  },
+  print
 }) => async () => {
   let migration = postgres ? `,
       "knex:make": "npx knex --knexfile knexfile.js migrate:make",
@@ -53,7 +53,7 @@ module.exports = async ({
     }
   })
 
-  await installPkgs(yarn, ['buchu', 'gotu', 'deepmerge'])
+  await installPkgs(yarn, ['buchu', 'gotu', 'deepmerge'], print)
 
   const packages = [
     'herbs2gql',
@@ -72,5 +72,5 @@ module.exports = async ({
     packages.push('herbs2knex')
     packages.push('pg')
   }
-  await installPkgs(yarn, packages)
+  await installPkgs(yarn, packages, print)
 }

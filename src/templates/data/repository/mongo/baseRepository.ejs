@@ -4,13 +4,13 @@ module.exports = class Repository {
     }
 
     async find(filter){
-        return await this.collection
+        return this.collection
             .find(filter)
             .toArray()
     }
 
     async find(filter, project){
-        return await this.collection
+        return this.collection
             .find(filter)
             .project(project)
             .toArray()
@@ -19,23 +19,18 @@ module.exports = class Repository {
     async findByID(id){
         if(!id) return {}
 
-        return await this.collection
+        return this.collection
             .findOne({ _id: id })
     }
 
-    async findPaginated(options = { skip, limit, sort, query }){
-        options.limit = options.limit || 0
-        options.skip  = options.skip  || 0
-        options.sort  = options.sort  || {}
-        options.query = options.query || {}
-
+    async findPaginated ({ skip = 0, limit = 0, sort = {}, query = {} }) {
         return await this.collection
-            .find(options.query)
-            .limit(options.limit)
-            .skip(options.skip)
-            .sort(options.sort)
-            .toArray()
-    }
+          .find(query)
+          .limit(limit)
+          .skip(skip)
+          .sort(sort)
+          .toArray()
+      }
 
     async insert(entity){
         const { ops } = await this.collection
@@ -44,22 +39,22 @@ module.exports = class Repository {
     }
 
     async insertMany(arrayEntity){
-        return await this.collection
+        return this.collection
             .insertMany(arrayEntity)
     }
 
     async update(filter, updateDocument){
-        return await this.collection
+        return this.collection
             .updateOne(filter, updateDocument)
     }
 
     async updateMany(filter, updateDocument){
-        return await this.collection
+        return this.collection
             .updateMany(filter, updateDocument)
     }
 
     async deleteByID(id){
-        return await this.collection
+        return this.collection
             .deleteOne({ _id: String(id)})
     }
     
