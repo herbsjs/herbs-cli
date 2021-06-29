@@ -53,7 +53,7 @@ module.exports = async ({
     }
   })
 
-  await installPkgs(yarn, ['buchu', 'gotu', 'deepmerge'], print)
+  await installPkgs(yarn, ['@herbsjs/herbs', 'deepmerge'], print)
 
   const packages = [
     'herbs2gql',

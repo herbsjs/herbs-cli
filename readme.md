@@ -1,8 +1,10 @@
 # herbs CLI
 
 A CLI that generates a complete clean architecture web backend project.
+
 ## Installing and commands
-`npm i -g https://github.com/italojs/herbs-cli-alpha`
+
+`npm i -g @herbsjs/herbs-cli`
 
 `herbs new`
 
@@ -74,14 +76,9 @@ Specify your entities folder path? (optional) | If you have [Gotu](https://githu
  
 
 
-## Development
+### Contribute
+Come with us to make an awesome *suma2text*.
 
-If you want to contribute with this project feel invited to join
+Now, if you do not have the technical knowledge and also have intended to help us, do not feel shy, [click here](https://github.com/herbsjs/herbs-cli/issues) to open an issue and collaborate their ideas, the contribution may be a criticism or a compliment (why not?)
 
-`git clone https://github.com/italojs/herbs-cli-alpha`
-
-`cd herbs-cli-alpha`
-
-`npm link`
-
-`herbs new`
+If you would like to help contribute to this repository, please see [CONTRIBUTING](https://github.com/herbsjs/herbs-cli/blob/master/.github/CONTRIBUTING.md)

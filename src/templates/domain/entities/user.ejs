@@ -1,4 +1,4 @@
-const { entity, field } = require('gotu')
+const { entity, field } = require('@herbsjs/herbs')
 
 const User =
         entity('User', {
