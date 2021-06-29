@@ -4,9 +4,15 @@ A CLI that generates a complete clean architecture web backend project.
 
 ## Installing and commands
 
-`npm i -g @herbsjs/herbs-cli`
+To install herbs-cli: 
+```
+npm i -g @herbsjs/herbs-cli 
+```
 
-`herbs new`
+Then run: 
+```
+herbs new 
+```
 
 ![](./docs/ex2.png)
 
