@@ -7,3 +7,5 @@ dist
 build
 .vscode
 ./lab
+.editorconfig
+.prettierrc
