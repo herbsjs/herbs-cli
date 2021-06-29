@@ -56,20 +56,20 @@ module.exports = async ({
   await installPkgs(yarn, ['@herbsjs/herbs', 'deepmerge'], print)
 
   const packages = [
-    'herbs2gql',
+    '@herbs/herbs2gql',
     'graphql',
     'apollo-server-express',
     'apollo-server',
     'sugar-env',
     'dotenv',
-    'herbsshelf',
-    'herbs2rest',
+    '@herbs/herbsshelf',
+    '@herbs/herbs2rest',
     'graphql-tools',
     'nodemon']
 
   if (mongo) { packages.push('mongodb') }
   if (postgres) {
-    packages.push('herbs2knex')
+    packages.push('@herbs/herbs2knex')
     packages.push('pg')
   }
   await installPkgs(yarn, packages, print)
