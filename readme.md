@@ -83,7 +83,7 @@ Specify your entities folder path? (optional) | If you have [Gotu](https://githu
 
 
 ### Contribute
-Come with us to make an awesome *suma2text*.
+Come with us to make an awesome *herbs-cli*.
 
 Now, if you do not have the technical knowledge and also have intended to help us, do not feel shy, [click here](https://github.com/herbsjs/herbs-cli/issues) to open an issue and collaborate their ideas, the contribution may be a criticism or a compliment (why not?)
 
