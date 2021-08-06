@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/herbsjs/herbs-cli/compare/v1.0.3...v1.0.4) (2021-08-06)
+
+
+### Bug Fixes
+
+* set version fixed into thrid part dependencies ([43952be](https://github.com/herbsjs/herbs-cli/commit/43952bece6ddec62c26a99963747750d13fe727e))
+
 ## [1.0.3](https://github.com/herbsjs/herbs-cli/compare/v1.0.2...v1.0.3) (2021-08-06)
 
 
