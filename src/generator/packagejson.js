@@ -57,14 +57,14 @@ module.exports = async ({
 
   const packages = [
     '@herbsjs/herbs2gql',
-    'graphql',
-    'apollo-server-express 2.25.2',
-    'apollo-server 2.25.2',
-    'sugar-env',
-    'dotenv',
+    'graphql@15.5.1',
+    'apollo-server-express@2.25.2',
+    'apollo-server@2.25.2',
+    'sugar-env@1.5.14',
+    'dotenv@10.0.0',
     '@herbsjs/herbsshelf',
     '@herbsjs/herbs2rest',
-    'graphql-tools',
+    'graphql-tools@8.1.0',
     'nodemon']
 
   if (mongo) { packages.push('mongodb') }
