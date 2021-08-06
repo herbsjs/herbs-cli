@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/herbsjs/herbs-cli/compare/v1.0.2...v1.0.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* fix herbsshelf import ([c85beff](https://github.com/herbsjs/herbs-cli/commit/c85beff4eb6c79323728c27f40bdb7e25cc2675e))
+
 ## [1.0.2](https://github.com/herbsjs/herbs-cli/compare/v1.0.1...v1.0.2) (2021-08-06)
 
 
