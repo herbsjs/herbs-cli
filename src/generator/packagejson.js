@@ -58,8 +58,8 @@ module.exports = async ({
   const packages = [
     '@herbsjs/herbs2gql',
     'graphql',
-    'apollo-server-express',
-    'apollo-server',
+    'apollo-server-express 2.25.2',
+    'apollo-server 2.25.2',
     'sugar-env',
     'dotenv',
     '@herbsjs/herbsshelf',
