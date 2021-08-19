@@ -38,16 +38,18 @@ module.exports = async ({
   },
   print
 }) => async () => {
-  let migration = postgres ? `,
+  const migration = postgres
+    ? `,
       "knex:make": "npx knex --knexfile knexfile.js migrate:make",
       "knex:migrate": "npx knex --knexfile knexfile.js migrate:latest",
       "knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback",
       "knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make",
-      "knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"` : ''
+      "knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"`
+    : ''
 
   await generate({
     template: 'package.json.ejs',
-    target: `package.json`,
+    target: 'package.json',
     props: {
       name, description, author, license, migration
     }
