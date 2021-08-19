@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/herbsjs/herbs-cli/compare/v1.0.4...v1.0.5) (2021-08-19)
+
+
+### Bug Fixes
+
+* **eslint:** fix eslint requirement ([c902e07](https://github.com/herbsjs/herbs-cli/commit/c902e071c58c05bbfa9e18a8b0d7654bd3a56dcc)), closes [#17](https://github.com/herbsjs/herbs-cli/issues/17)
+* **lint:** fix lint configuration ([5b1a7a2](https://github.com/herbsjs/herbs-cli/commit/5b1a7a292c951a324a691e44265dc9129a730914)), closes [#17](https://github.com/herbsjs/herbs-cli/issues/17)
+
 ## [1.0.4](https://github.com/herbsjs/herbs-cli/compare/v1.0.3...v1.0.4) (2021-08-06)
 
 
