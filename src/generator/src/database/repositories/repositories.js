@@ -29,8 +29,8 @@ module.exports = async ({ generate, options, filesystem }) => async () => {
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
   if (options.mongo) {
     await generate({
-      template: `data/repository/mongo/baseRepository.ejs`,
-      target: `src/infra/data/repositories/baseRepository.js`
+      template: 'data/repository/mongo/baseRepository.ejs',
+      target: 'src/infra/data/repositories/baseRepository.js'
     })
 
     requires = Object.assign(requires, await generateRepositories(generate, entities, 'mongo'))
@@ -40,7 +40,7 @@ module.exports = async ({ generate, options, filesystem }) => async () => {
   }
   await generate({
     template: 'data/repository/index.ejs',
-    target: `src/infra/data/repositories/index.js`,
+    target: 'src/infra/data/repositories/index.js',
     props: { requires: objToString(requires) }
   })
 }

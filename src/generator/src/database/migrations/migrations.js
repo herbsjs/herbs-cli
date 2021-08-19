@@ -21,14 +21,14 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
     })
     const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
     await generate({
-      template: `data/database/postgres/migration.ejs`,
+      template: 'data/database/postgres/migration.ejs',
       target: `src/infra/data/database/migrations/${migrationName}_${camelCase(name)}s.js`,
       props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
     })
   }
   await generate({
-    template: `knexFile.ejs`,
-    target: `knexFile.js`,
+    template: 'knexFile.ejs',
+    target: 'knexFile.js',
     props: { dbName: options.name }
   })
 }
