@@ -43,7 +43,7 @@ herbs new
     │       └── user
     │           ├── createUser.js
     │           ├── deleteUser.js
-    │           ├── findOneUser.js
+    │           ├── getByIdUser.js
     │           └── updateUser.js
     ├── index.js
     └── infra
