@@ -1,4 +1,4 @@
-const useCases = ['create', 'update', 'delete', 'findOne']
+const useCases = ['create', 'update', 'delete', 'getById']
 const { objToString } = require('../../utils')
 const camelCase = require('lodash.camelcase')
 
@@ -43,15 +43,15 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
           request: await generateRequest(schema)
         }
       })
-      let type = `mutation`
-      if (useCaseName.includes('find')) { type = `query` }
+      let type = 'mutation'
+      if (useCaseName.includes('find')) { type = 'query' }
       requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
     }
   }
 
   await generate({
     template: 'domain/useCases/index.ejs',
-    target: `src/domain/usecases/index.js`,
+    target: 'src/domain/usecases/index.js',
     props: { requires: objToString(requires) }
   })
 }

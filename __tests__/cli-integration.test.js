@@ -23,9 +23,9 @@ describe('generates package.json', () => {
     const pkg = filesystem.read(`${projectName}/package.json`)
 
     expect(pkg).contains(`"name": "${projectName}"`)
-    expect(pkg).contains(`"description": "testing the herbs CLI"`)
-    expect(pkg).contains(`"author": "herbs"`)
-    expect(pkg).contains(`"license": "MIT"`)
+    expect(pkg).contains('"description": "testing the herbs CLI"')
+    expect(pkg).contains('"author": "herbs"')
+    expect(pkg).contains('"license": "MIT"')
   })
 
   it('must to use yarn', async () => {
@@ -41,19 +41,19 @@ describe('generates package.json', () => {
 
     const pkg = filesystem.read(`${projectName}/package.json`)
     expect(pkg).contains(
-      `"knex:make": "npx knex --knexfile knexfile.js migrate:make"`
+      '"knex:make": "npx knex --knexfile knexfile.js migrate:make"'
     )
     expect(pkg).contains(
-      `"knex:migrate": "npx knex --knexfile knexfile.js migrate:latest"`
+      '"knex:migrate": "npx knex --knexfile knexfile.js migrate:latest"'
     )
     expect(pkg).contains(
-      `"knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback"`
+      '"knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback"'
     )
     expect(pkg).contains(
-      `"knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make"`
+      '"knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make"'
     )
     expect(pkg).contains(
-      `"knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"`
+      '"knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"'
     )
   })
 })

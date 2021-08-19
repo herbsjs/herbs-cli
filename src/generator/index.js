@@ -4,7 +4,8 @@ module.exports = async ({
   print,
   packageManager,
   filesystem,
-  parameters: { options } }) => {
+  parameters: { options }
+}) => {
   const infra = options.graphql || options.rest
   return {
     packageJson: await require('./packagejson')({ generate, packageManager, options, print }),

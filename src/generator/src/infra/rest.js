@@ -21,17 +21,17 @@ module.exports = async ({ generate, filesystem }) => async () => {
     for (const obj of ucByTag[tag]) {
       const ucDescription = obj.usecase({})().description
       const entityName = tag.slice(0, -1)
-      if (ucDescription.includes('Create')) route['post'] = requireRoute('create', entityName)
-      if (ucDescription.includes('Find')) route['getById'] = requireRoute('getById', entityName, true)
-      if (ucDescription.includes('Update')) route['put'] = requireRoute('update', entityName)
-      if (ucDescription.includes('Delete')) route['delete'] = requireRoute('delete', entityName)
+      if (ucDescription.includes('Create')) route.post = requireRoute('create', entityName)
+      if (ucDescription.includes('Find')) route.getById = requireRoute('getById', entityName, true)
+      if (ucDescription.includes('Update')) route.put = requireRoute('update', entityName)
+      if (ucDescription.includes('Delete')) route.delete = requireRoute('delete', entityName)
     }
     routes.push(route)
   }
 
   await generate({
     template: 'infra/api/rest/index.ejs',
-    target: `src/infra/api/rest/index.js`,
+    target: 'src/infra/api/rest/index.js',
     props: { routes: objToString(routes) }
   })
 }

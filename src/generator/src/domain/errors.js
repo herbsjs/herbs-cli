@@ -16,7 +16,7 @@ module.exports = async ({ generate }) => async () => {
   const requires = {}
   for (const error of Object.keys(errorCodes)) {
     await generate({
-      template: `domain/errors/error.ejs`,
+      template: 'domain/errors/error.ejs',
       target: `src/domain/errors/${camelCase(error)}.js`,
       props: {
         name: error,
@@ -29,7 +29,7 @@ module.exports = async ({ generate }) => async () => {
 
   await generate({
     template: 'domain/errors/index.ejs',
-    target: `src/domain/errors/index.js`,
+    target: 'src/domain/errors/index.js',
     props: { requires: objToString(requires) }
   })
 }
