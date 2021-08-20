@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/herbsjs/herbs-cli/compare/v1.0.5...v1.0.6) (2021-08-20)
+
+
+### Bug Fixes
+
+* **routes missing:** fixed routes missing ([c723ae9](https://github.com/herbsjs/herbs-cli/commit/c723ae9f32dad03134c48a635e961706a333168e)), closes [#16](https://github.com/herbsjs/herbs-cli/issues/16)
+
 ## [1.0.5](https://github.com/herbsjs/herbs-cli/compare/v1.0.4...v1.0.5) (2021-08-19)
 
 
