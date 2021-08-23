@@ -43,11 +43,9 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
           request: await generateRequest(schema)
         }
       })
-      
+
       let type = 'create'
-      if (useCaseName.includes('getById')) { type = 'read' }
-      else if (useCaseName.includes('update')) { type = 'update' }
-      else if (useCaseName.includes('delete')) { type = 'delete' }
+      if (useCaseName.includes('getById')) { type = 'read' } else if (useCaseName.includes('update')) { type = 'update' } else if (useCaseName.includes('delete')) { type = 'delete' }
 
       requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
     }
