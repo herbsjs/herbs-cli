@@ -1,35 +1,35 @@
-const { objToString } = require('../../utils')
+const { objToString } = require('../../../utils')
 
-module.exports = async ({ generate, options }) => async () => {
+module.exports = async ({ template: { generate }, parameters: { options } }) => async () => {
   const requires = {
     isProd: 'env.is(\'production\')',
     api: 'require(\'./api\')'
   }
 
   await generate({
-    template: 'config/api.ejs',
-    target: 'src/config/api.js'
+    template: 'infra/config/api.ejs',
+    target: 'src/infra/config/api.js'
   })
 
   if (options.mongo) {
     await generate({
-      template: 'config/mongo.ejs',
-      target: 'src/config/mongo.js',
+      template: 'infra/config/mongo.ejs',
+      target: 'src/infra/config/mongo.js',
       props: { dbName: options.name }
     })
     requires.database = 'require(\'./mongo\')'
   }
   if (options.postgres) {
     await generate({
-      template: 'config/postgres.ejs',
+      template: 'infra/config/postgres.ejs',
       target: 'src/config/postgres.js'
     })
     requires.database = 'require(\'./postgres\')'
   }
 
   await generate({
-    template: 'config/index.ejs',
-    target: 'src/config/index.js',
+    template: 'infra/config/index.ejs',
+    target: 'src/infra/config/index.js',
     props: { requires: objToString(requires) }
   })
 }

@@ -1,4 +1,4 @@
-module.exports = async ({ generate, options: { mongo = false, postgres = false } }) => async () => {
+module.exports = async ({ template: { generate }, parameters: { options: { mongo = false, postgres = false } }}) => async () => {
   if (mongo) {
     await generate({
       template: 'data/database/mongo/database.ejs',

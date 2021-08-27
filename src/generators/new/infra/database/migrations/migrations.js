@@ -8,7 +8,7 @@ function type2Str (Type) {
   if (_type instanceof Boolean) return 'boolean'
   if (_type instanceof Date) return 'timestamps'
 }
-module.exports = async ({ generate, filesystem, options }) => async () => {
+module.exports = async ({ template: { generate }, filesystem, parameters: { options } }) => async () => {
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
   for (const entity of Object.keys(entities)) {

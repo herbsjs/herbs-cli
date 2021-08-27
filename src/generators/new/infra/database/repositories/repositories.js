@@ -1,4 +1,4 @@
-const { objToString } = require('../../../utils')
+const { objToString } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 
 async function generateRepositories (generate, entities, db) {
@@ -24,7 +24,7 @@ async function generateRepositories (generate, entities, db) {
   return requires
 }
 
-module.exports = async ({ generate, options, filesystem }) => async () => {
+module.exports = async ({ template: { generate }, parameters: { options }, filesystem }) => async () => {
   let requires = {}
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
   if (options.mongo) {

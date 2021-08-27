@@ -23,7 +23,7 @@ function generateEntities (from, to, level = './') {
   return requires
 }
 
-module.exports = async ({ generate, options }) => async () => {
+module.exports = async ({ template: { generate }, parameters: { options } }) => async () => {
   let requires = {}
   if (options.entities && options.entities !== true) {
     requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)

@@ -3,7 +3,7 @@ const { objToString } = require('../../utils')
 
 const requireRoute = (type, entityName, useId = false) => `{ usecase: require('../../../domain/usecases/${camelCase(entityName)}/${type}${entityName}')(repositories)${useId ? ', id: \'id\'' : ''}}`
 
-module.exports = async ({ generate, filesystem }) => async () => {
+module.exports = async ({ template: { generate }, filesystem }) => async () => {
   // TODO: add condition if route
   const usecases = require(`${filesystem.cwd()}/src/domain/usecases`)
 
