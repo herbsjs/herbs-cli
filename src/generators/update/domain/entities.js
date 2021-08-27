@@ -3,23 +3,23 @@ const { filesystem } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
 
-function generateEntities (entitiesPath, level = './') {
+function updateEntities (entitiesPath, level = './') {
   let requires = {}
   fs.readdirSync(entitiesPath).forEach(element => {
     const elementPath = path.join(entitiesPath, element)
     const splittedFileName = element.split('.')
 
     const isFile = fs.lstatSync(elementPath).isFile()
-    if(!isFile){
-      const result = generateEntities(elementPath, `${level}${element}/`)
+    if (!isFile) {
+      const result = updateEntities(elementPath, `${level}${element}/`)
       requires = Object.assign(requires, result)
       return
     }
 
     // Can I require it?
-    if (isFile
-      && splittedFileName.pop() === 'js'
-      && splittedFileName[0] !== 'index') {
+    if (isFile &&
+      splittedFileName.pop() === 'js' &&
+      splittedFileName[0] !== 'index') {
       const entity = require(`${entitiesPath}/${element}`)
       requires[entity.name] = `require('${level}${element}')`
     }
@@ -27,8 +27,8 @@ function generateEntities (entitiesPath, level = './') {
   return requires
 }
 
-module.exports = async ({ template: { generate }}) => async () => {
-  const requires = generateEntities(`${filesystem.cwd()}/src/domain/entities`)
+module.exports = async ({ template: { generate } }) => async () => {
+  const requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
 
   await generate({
     template: 'domain/entities/index.ejs',

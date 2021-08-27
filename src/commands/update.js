@@ -6,8 +6,7 @@ const cmd = {
   alias: ['u'],
   run: async toolbox => {
     const generators = (await generator(toolbox)).update
-    for (const layer of Object.keys(generators)) 
-      await generators[layer]()
+    for (const layer of Object.keys(generators)) { await generators[layer]() }
   }
 }
 

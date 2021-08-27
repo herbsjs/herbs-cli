@@ -1,4 +1,4 @@
-module.exports = async ({ template: { generate }}) => async () => {
+module.exports = async ({ template: { generate } }) => async () => {
   await generate({
     template: 'infra/api/graphql/mutations.ejs',
     target: 'src/infra/api/graphql/mutations.js'

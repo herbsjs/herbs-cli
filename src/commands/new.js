@@ -102,8 +102,7 @@ const cmd = {
 
     toolbox.parameters.options = options
     const generators = (await generator(toolbox)).new
-    for (const layer of Object.keys(generators)) 
-      await generators[layer]()
+    for (const layer of Object.keys(generators)) { await generators[layer]() }
   }
 }
 

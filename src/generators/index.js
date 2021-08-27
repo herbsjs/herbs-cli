@@ -18,7 +18,7 @@ module.exports = async (tools) => {
       index: await require('./new/index')(tools)
     },
     update: {
-      entities: await require('./update/domain/entities')(tools),
+      entities: await require('./update/domain/entities')(tools)
     }
   }
 }
