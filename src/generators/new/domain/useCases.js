@@ -1,6 +1,7 @@
 const useCases = ['create', 'update', 'delete', 'getById']
 const { objToString } = require('../../utils')
 const camelCase = require('lodash.camelcase')
+const fs = require('fs')
 
 async function generateRequest (schema) {
   // schema to plain JSON
@@ -30,11 +31,13 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
   for (const entity of Object.keys(entities)) {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
-      // const nameInCC = camelCase(name)
+      const ucPath = `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
+      if(fs.lstatSync(ucPath).isFile()) continue
+  
       const useCaseName = `${action}${name}`
       await generate({
         template: `domain/useCases/${action}.ejs`,
-        target: `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`,
+        target: ucPath,
         props: {
           name: {
             pascalCase: name,
