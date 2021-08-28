@@ -45,8 +45,8 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
       })
 
       let type = 'read'
-      for (const t of ['create', 'update', 'delete']){
-        if(useCaseName.includes(t)) type = t 
+      for (const t of ['create', 'update', 'delete']) {
+        if (useCaseName.includes(t)) type = t
       }
 
       requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
