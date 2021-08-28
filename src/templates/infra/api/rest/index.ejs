@@ -21,6 +21,24 @@ const newRoute = (usecase, useId) => {
     if(useId) route.id = 'id'
     return route
 }
+const mapUcToHTTPVerb = {
+    create: {
+        route: 'post',
+        useId: false
+    },
+    update: {
+        route: 'put',
+        useId: false
+    },
+    delete: {
+        route: 'delete',
+        useId: false
+    },
+    find: {
+        route: 'getById',
+        useId: false
+    },
+}
 
 async function prepareRoutes(config){
     const conn = await db.factory(config) 
@@ -40,11 +58,10 @@ async function prepareRoutes(config){
         for (const obj of ucByGroup[group]) {
             const uc = obj.usecase(repositories)
             const ucDescription = uc().description.toLowerCase()
-
-            if (ucDescription.includes('create')) route.post = newRoute(uc)
-            else if (ucDescription.includes('update')) route.put = newRoute(uc)
-            else if (ucDescription.includes('delete')) route.delete = newRoute(uc)
-            else if (ucDescription.includes('find')) route.getById = newRoute(uc, true)
+            
+            for(const ucType of Object.keys(mapUcToHTTPVerb))
+                if (ucDescription.includes(ucType)) 
+                    route[mapUcToHTTPVerb[ucType].route] = newRoute(uc, mapUcToHTTPVerb[ucType].useId)
         }
         return route
     })
