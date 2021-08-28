@@ -14,7 +14,7 @@
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage",
     "semantic-release": "semantic-release",
-    "commit": "cz"
+    "commit": "npm run lint && cz"
   },
   "files": [
     "src",

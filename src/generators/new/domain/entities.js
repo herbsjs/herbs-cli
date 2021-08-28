@@ -50,20 +50,16 @@ function updateEntities (entitiesPath, level = './') {
 module.exports = async ({ template: { generate }, parameters: { options } }, isUpdate) => async () => {
   let requires = {}
 
-  if(isUpdate){
-    requires = updateEntities('./src/domain/entities')
-  }else{
-    if (options.entities && options.entities !== true) {
-      requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)
-    } else {
-      await generate({
-        template: 'domain/entities/user.ejs',
-        target: 'src/domain/entities/user.js'
-      })
-      requires.User = 'require(\'./user.js\')'
-    }  
+  if (isUpdate) requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
+  else if (options.entities && options.entities !== true) requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)
+  else {
+    await generate({
+      template: 'domain/entities/user.ejs',
+      target: 'src/domain/entities/user.js'
+    })
+    requires.User = 'require(\'./user.js\')'
   }
-  
+
   await generate({
     template: 'domain/entities/index.ejs',
     target: 'src/domain/entities/index.js',

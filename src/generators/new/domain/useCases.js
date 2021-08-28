@@ -31,10 +31,11 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
   for (const entity of Object.keys(entities)) {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
-      const ucPath = `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
-      if(fs.lstatSync(ucPath).isFile()) continue
-  
       const useCaseName = `${action}${name}`
+      const ucPath = `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
+
+      if (fs.existsSync(`${filesystem.cwd()}/${ucPath}`)) continue
+
       await generate({
         template: `domain/useCases/${action}.ejs`,
         target: ucPath,
