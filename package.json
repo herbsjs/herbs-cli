@@ -28,6 +28,7 @@
     "-": "0.0.1",
     "@herbsjs/herbs": "^1.2.0",
     "D": "^1.0.0",
+    "glob": "^7.1.7",
     "gluegun": "^4.6.1",
     "inquirer": "^8.1.1",
     "lodash.camelcase": "^4.3.0",

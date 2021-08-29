@@ -32,9 +32,13 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
       const useCaseName = `${action}${name}`
-      const ucPath = `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
 
-      if (fs.existsSync(`${filesystem.cwd()}/${ucPath}`)) continue
+      let type = 'mutation'
+      if (useCaseName.includes('find')) { type = 'query' }
+      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
+
+      if (fs.existsSync(ucPath)) continue
 
       await generate({
         template: `domain/useCases/${action}.ejs`,
@@ -47,9 +51,6 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
           request: await generateRequest(schema)
         }
       })
-      let type = 'mutation'
-      if (useCaseName.includes('find')) { type = 'query' }
-      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
     }
   }
 

@@ -22,7 +22,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
   if (options.postgres) {
     await generate({
       template: 'infra/config/postgres.ejs',
-      target: 'src/config/postgres.js'
+      target: 'src/infra/config/postgres.js'
     })
     requires.database = 'require(\'./postgres\')'
   }
