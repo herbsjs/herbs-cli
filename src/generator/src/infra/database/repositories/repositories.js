@@ -1,4 +1,4 @@
-const { objToString } = require('../../../utils')
+const { objToString } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 
 async function generateRepositories (generate, entities, db) {

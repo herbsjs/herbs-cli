@@ -43,8 +43,12 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
           request: await generateRequest(schema)
         }
       })
-      let type = 'mutation'
-      if (useCaseName.includes('find')) { type = 'query' }
+
+      let type = 'read'
+      for (const t of ['create', 'update', 'delete']) {
+        if (useCaseName.includes(t)) type = t
+      }
+
       requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
     }
   }
