@@ -25,13 +25,22 @@ async function generateRepositories (generate, filesystem, db) {
         table: `${lowCCName}s`
       }
     })
-    
   }
   return requires
 }
 
-module.exports = async ({ template: { generate }, parameters: { options }, filesystem }) => async () => {
+async function updateRepositories (generate, filesystem) {
+  let db = 'postgres'
+  const mongoPath = '/src/infra/data/repositories/baseRepository.js'
+  if (fs.existsSync(`${filesystem.cwd()}${mongoPath}`)) db = 'mongo'
+
+  return generateRepositories(generate, filesystem, db)
+}
+
+module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
   let requires = {}
+
+  if (isUpdate) requires = await updateRepositories(generate, filesystem)
   if (options.mongo) {
     await generate({
       template: 'data/repository/mongo/baseRepository.ejs',

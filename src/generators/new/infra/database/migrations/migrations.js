@@ -17,14 +17,14 @@ module.exports = async ({ template: { generate }, filesystem, parameters: { opti
   for (const entity of Object.keys(entities)) {
     const { name, schema } = entities[entity].prototype.meta
     if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) continue
-    
+
     const columns = []
     Object.keys(schema).forEach(prop => {
       const { name, type } = schema[prop]
       if (name === 'id') return
       columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
     })
-    
+
     const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
     await generate({
       template: 'data/database/postgres/migration.ejs',

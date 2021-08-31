@@ -1,7 +1,11 @@
+const fs = require('fs')
 const ignore = () => {}
+
 module.exports = async (tools) => {
   const options = tools.parameters.options
   const infra = options.graphql || options.rest
+  const updateMigration = fs.existsSync(`${tools.filesystem.cwd()}/src/infra/data/database/migrations`)
+
   return {
     new: {
       packageJson: await require('./new/packagejson')(tools),
@@ -19,7 +23,9 @@ module.exports = async (tools) => {
     },
     update: {
       entities: await require('./new/domain/entities')(tools, true),
-      useCases: await require('./new/domain/useCases')(tools, true)
+      useCases: await require('./new/domain/useCases')(tools, true),
+      migrations: updateMigration ? await require('./new/infra/database/migrations/migrations')(tools) : ignore,
+      repositories: await require('./new/infra/database/repositories/repositories')(tools, true)
     }
   }
 }
