@@ -34,9 +34,12 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       const useCaseName = `${action}${name}`
       const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
 
-      let type = 'mutation'
-      if (useCaseName.includes('find')) { type = 'query' }
-      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
+      let type = 'read'
+      for (const t of ['create', 'update', 'delete']) {
+        if (useCaseName.includes(t)) type = t
+      }
+
+      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
 
       if (fs.existsSync(ucPath)) continue
 

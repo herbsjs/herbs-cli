@@ -69,7 +69,9 @@ module.exports = async ({
     '@herbsjs/herbsshelf',
     '@herbsjs/herbs2rest',
     'graphql-tools@8.1.0',
-    'nodemon']
+    'nodemon',
+    'lodash.camelcase'
+  ]
 
   if (mongo) { packages.push('mongodb') }
   if (postgres) {

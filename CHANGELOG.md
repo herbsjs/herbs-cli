@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/herbsjs/herbs-cli/compare/v1.0.6...v1.0.7) (2021-08-31)
+
+
+### Bug Fixes
+
+* change usecase groups ([863fe06](https://github.com/herbsjs/herbs-cli/commit/863fe06d53c65b8c0cbe079e2108f7cf5a194352)), closes [#11](https://github.com/herbsjs/herbs-cli/issues/11)
+* genereting routes dynamically ([e0e95fd](https://github.com/herbsjs/herbs-cli/commit/e0e95fdfc99c59bdad9aa5e5e1b90068396dd39e)), closes [#11](https://github.com/herbsjs/herbs-cli/issues/11)
+* lint ([384b729](https://github.com/herbsjs/herbs-cli/commit/384b729638a61708a1ff9cc3e8ef1e5beb6a6ff4)), closes [#11](https://github.com/herbsjs/herbs-cli/issues/11)
+
 ## [1.0.6](https://github.com/herbsjs/herbs-cli/compare/v1.0.5...v1.0.6) (2021-08-20)
 
 
