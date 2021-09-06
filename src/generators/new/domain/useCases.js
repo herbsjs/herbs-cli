@@ -39,7 +39,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
         if (useCaseName.includes(t)) type = t
       }
 
-      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
+      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
 
       if (fs.existsSync(ucPath)) continue
 

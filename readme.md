@@ -1,8 +1,8 @@
 # herbs CLI
 
-A CLI that generates a complete clean architecture web backend project.
+A CLI that generates a complete clean architecture CRUD backend project.
 
-## Installing and commands
+## Installing and generating a CRUD project
 
 To install herbs-cli: 
 ```
@@ -80,7 +80,9 @@ Generate rest layer? | Description | Y | n |
 What database do you want to use? | Use arrow keys to choose your Database. | -- | -- |
 Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty | ./example/my-custom-entities/ |
  
+## Update
 
+If you need add some new entity after had generate the project, just add it into entity folder and type into terminal `herbs update`, so the herbs-cli will generate all the usecases, repositories and others necessary layers for this entity.
 
 ### Contribute
 Come with us to make an awesome *herbs-cli*.
