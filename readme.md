@@ -1,6 +1,6 @@
 # herbs CLI
 
-A CLI that generates a complete clean architecture CRUD backend project.
+CLI helps speed up your development cycle with HerbsJS by generating use cases and infrastructure layers (REST, GraphQL, Repositories, etc) based in your entities.
 
 ## Installing and generating a CRUD project
 
