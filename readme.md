@@ -1,6 +1,6 @@
 # herbs CLI
 
-CLI helps speed up your development cycle with HerbsJS by generating use cases and infrastructure layers (REST, GraphQL, Repositories, etc) based in your entities.
+CLI helps speed up your development cycle with HerbsJS by generating use cases and infrastructure layers (REST, GraphQL, Repositories, etc) based on your entities.
 
 ## Installing and generating a CRUD project
 
@@ -85,7 +85,7 @@ Specify your entities folder path? (optional) | If you have [Gotu](https://githu
  
 ### herbs update
 
-Generate all necessary layers(graphql, rest, repository, etc) based in your new entity added into entities folder
+Generate all necessary layers(graphql, rest, repository, etc) based on your new entity added into entities folder
 
 After had created a new entity into entities folder, type in your terminal:
 > herbs update
