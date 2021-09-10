@@ -17,9 +17,7 @@ herbs new
 ![](./docs/ex2.png)
 
 ![](./docs/gif.gif)
-
 ## Default generated project structure
-
 ```
 .
 ├── node_modules
@@ -66,9 +64,14 @@ herbs new
                 ├── index.js
                 └── userRepository.js
 ```
+## commands
 
-## Options
-## Options
+### herbs new
+
+Generate a new project based on your entities(or not)
+
+> herbs new
+#### Options:
 | Question | Description | Default value | e.g |
 |--|--|--|--|
 | Project name? | This is the Project Name that will be used int the project folder name and package.json. | herbs-project | my-project
@@ -80,9 +83,12 @@ Generate rest layer? | Description | Y | n |
 What database do you want to use? | Use arrow keys to choose your Database. | -- | -- |
 Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty | ./example/my-custom-entities/ |
  
-## Update
+### herbs update
 
-If you need add some new entity after had generate the project, just add it into entity folder and type into terminal `herbs update`, so the herbs-cli will generate all the usecases, repositories and others necessary layers for this entity.
+Generate all necessary layers(graphql, rest, repository, etc) based in your new entity added into entities folder
+
+After had created a new entity into entities folder, type in your terminal:
+> herbs update
 
 ### Contribute
 Come with us to make an awesome *herbs-cli*.
