@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/herbsjs/herbs-cli/compare/v1.0.7...v1.1.0) (2021-09-10)
+
+
+### Features
+
+* **update:** added update command ([62b5fa2](https://github.com/herbsjs/herbs-cli/commit/62b5fa2e2a84996d4dbfe0542f277ddeb83c88d4))
+* updating usecases ([14c7ce8](https://github.com/herbsjs/herbs-cli/commit/14c7ce889dbfcc482f2678decaa807ea04aac3ff))
+
 ## [1.0.7](https://github.com/herbsjs/herbs-cli/compare/v1.0.6...v1.0.7) (2021-08-31)
 
 
