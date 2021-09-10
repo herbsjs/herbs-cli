@@ -1,4 +1,4 @@
-const generator = require('../generator')
+const generator = require('../generators')
 const fs = require('fs')
 const inquirer = require('inquirer')
 
@@ -101,9 +101,9 @@ const cmd = {
     process.chdir(dir)
 
     toolbox.parameters.options = options
-    const generators = await generator(toolbox)
-    const layers = Object.keys(generators)
-    for (const layer of layers) await generators[layer]()
+    const generators = (await generator(toolbox)).new
+    for (const layer of Object.keys(generators)) { await generators[layer]() }
+    toolbox.print.success('Project generated! 🤩')
   }
 }
 

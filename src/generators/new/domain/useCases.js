@@ -1,6 +1,7 @@
 const useCases = ['create', 'update', 'delete', 'getById']
 const { objToString } = require('../../utils')
 const camelCase = require('lodash.camelcase')
+const fs = require('fs')
 
 async function generateRequest (schema) {
   // schema to plain JSON
@@ -23,18 +24,28 @@ async function generateRequest (schema) {
   return str.join('\n').trim()
 }
 
-module.exports = async ({ generate, filesystem, options }) => async () => {
+module.exports = async ({ template: { generate }, filesystem }) => async () => {
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
   const requires = []
 
   for (const entity of Object.keys(entities)) {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
-      // const nameInCC = camelCase(name)
       const useCaseName = `${action}${name}`
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
+
+      let type = 'read'
+      for (const t of ['create', 'update', 'delete']) {
+        if (useCaseName.includes(t)) type = t
+      }
+
+      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
+
+      if (fs.existsSync(ucPath)) continue
+
       await generate({
         template: `domain/useCases/${action}.ejs`,
-        target: `src/domain/usecases/${camelCase(name)}/${useCaseName}.js`,
+        target: ucPath,
         props: {
           name: {
             pascalCase: name,
@@ -43,13 +54,6 @@ module.exports = async ({ generate, filesystem, options }) => async () => {
           request: await generateRequest(schema)
         }
       })
-
-      let type = 'read'
-      for (const t of ['create', 'update', 'delete']) {
-        if (useCaseName.includes(t)) type = t
-      }
-
-      requires.push(`{ usecase: require('./${camelCase(name)}/${useCaseName}'), tags: { group: '${name}s', type: '${type}'} }`)
     }
   }
 

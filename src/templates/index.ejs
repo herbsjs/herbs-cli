@@ -1,5 +1,5 @@
 const server = require('./infra/api/server')
-const config = require('./config')
+const config = require('./infra/config')
 
 server.start(config).catch((err) => {
   console.error('----- Fatal error -----')

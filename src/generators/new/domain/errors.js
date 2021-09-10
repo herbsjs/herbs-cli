@@ -12,7 +12,7 @@ const errorCodes = {
   }
 }
 
-module.exports = async ({ generate }) => async () => {
+module.exports = async ({ template: { generate } }) => async () => {
   const requires = {}
   for (const error of Object.keys(errorCodes)) {
     await generate({

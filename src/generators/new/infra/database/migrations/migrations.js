@@ -1,5 +1,6 @@
 
 const camelCase = require('lodash.camelcase')
+const glob = require('glob')
 
 function type2Str (Type) {
   const _type = new Type()
@@ -8,24 +9,30 @@ function type2Str (Type) {
   if (_type instanceof Boolean) return 'boolean'
   if (_type instanceof Date) return 'timestamps'
 }
-module.exports = async ({ generate, filesystem, options }) => async () => {
+
+module.exports = async ({ template: { generate }, filesystem, parameters: { options } }) => async () => {
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
+  const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`
 
   for (const entity of Object.keys(entities)) {
-    const columns = []
     const { name, schema } = entities[entity].prototype.meta
+    if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) continue
+
+    const columns = []
     Object.keys(schema).forEach(prop => {
       const { name, type } = schema[prop]
       if (name === 'id') return
       columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
     })
+
     const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
     await generate({
       template: 'data/database/postgres/migration.ejs',
-      target: `src/infra/data/database/migrations/${migrationName}_${camelCase(name)}s.js`,
+      target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
       props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
     })
   }
+  if (!glob.sync(migrationsPath).length) return
   await generate({
     template: 'knexFile.ejs',
     target: 'knexFile.js',
