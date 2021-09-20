@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/herbsjs/herbs-cli/compare/v1.1.0...v1.1.1) (2021-09-20)
+
+
+### Bug Fixes
+
+* adjust for installation of specific dependencies based on project setup ([ff359d4](https://github.com/herbsjs/herbs-cli/commit/ff359d4e8f7d41c14c682531ba778c6cd80d66f7)), closes [#29](https://github.com/herbsjs/herbs-cli/issues/29)
+* adjustment of the installation of infra dependencies in the project setup ([5c56785](https://github.com/herbsjs/herbs-cli/commit/5c567850bf80db74f317857d4fa5e8e99d2a21a3))
+
 # [1.1.0](https://github.com/herbsjs/herbs-cli/compare/v1.0.7...v1.1.0) (2021-09-10)
 
 ### Features
