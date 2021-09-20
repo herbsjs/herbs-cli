@@ -35,7 +35,9 @@ module.exports = async ({
       license = 'MIT',
       mongo = false,
       postgres = false,
-      yarn = false
+      yarn = false,
+      graphql = false,
+      rest = false
     }
   },
   print
@@ -61,22 +63,24 @@ module.exports = async ({
 
   const packages = [
     '@herbsjs/herbs2gql',
-    'graphql@15.5.1',
-    'apollo-server-express@2.25.2',
-    'apollo-server@2.25.2',
     'sugar-env@1.5.14',
     'dotenv@10.0.0',
     '@herbsjs/herbsshelf',
-    '@herbsjs/herbs2rest',
-    'graphql-tools@8.1.0',
     'nodemon',
-    'lodash.camelcase'
+    'lodash.camelcase',
+    'apollo-server-express@2.25.2'
   ]
 
   if (mongo) { packages.push('mongodb') }
   if (postgres) {
     packages.push('@herbsjs/herbs2knex')
     packages.push('pg')
+  }
+  if (rest) { packages.push('@herbsjs/herbs2rest') }
+  if (graphql) {
+    packages.push('graphql@15.5.1')
+    packages.push('apollo-server@2.25.2')
+    packages.push('graphql-tools@8.1.0')
   }
   await installPkgs(yarn, packages, print)
 }
