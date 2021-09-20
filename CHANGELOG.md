@@ -1,13 +1,11 @@
 # [1.1.0](https://github.com/herbsjs/herbs-cli/compare/v1.0.7...v1.1.0) (2021-09-10)
 
-
 ### Features
 
 * **update:** added update command ([62b5fa2](https://github.com/herbsjs/herbs-cli/commit/62b5fa2e2a84996d4dbfe0542f277ddeb83c88d4))
 * updating usecases ([14c7ce8](https://github.com/herbsjs/herbs-cli/commit/14c7ce889dbfcc482f2678decaa807ea04aac3ff))
 
 ## [1.0.7](https://github.com/herbsjs/herbs-cli/compare/v1.0.6...v1.0.7) (2021-08-31)
-
 
 ### Bug Fixes
 
@@ -17,13 +15,11 @@
 
 ## [1.0.6](https://github.com/herbsjs/herbs-cli/compare/v1.0.5...v1.0.6) (2021-08-20)
 
-
 ### Bug Fixes
 
 * **routes missing:** fixed routes missing ([c723ae9](https://github.com/herbsjs/herbs-cli/commit/c723ae9f32dad03134c48a635e961706a333168e)), closes [#16](https://github.com/herbsjs/herbs-cli/issues/16)
 
 ## [1.0.5](https://github.com/herbsjs/herbs-cli/compare/v1.0.4...v1.0.5) (2021-08-19)
-
 
 ### Bug Fixes
 
@@ -32,13 +28,11 @@
 
 ## [1.0.4](https://github.com/herbsjs/herbs-cli/compare/v1.0.3...v1.0.4) (2021-08-06)
 
-
 ### Bug Fixes
 
 * set version fixed into thrid part dependencies ([43952be](https://github.com/herbsjs/herbs-cli/commit/43952bece6ddec62c26a99963747750d13fe727e))
 
 ## [1.0.3](https://github.com/herbsjs/herbs-cli/compare/v1.0.2...v1.0.3) (2021-08-06)
-
 
 ### Bug Fixes
 
@@ -46,13 +40,11 @@
 
 ## [1.0.2](https://github.com/herbsjs/herbs-cli/compare/v1.0.1...v1.0.2) (2021-08-06)
 
-
 ### Bug Fixes
 
 * fix herbs dependencies ([d5fd5a6](https://github.com/herbsjs/herbs-cli/commit/d5fd5a6b6a592c260a5b577937f4434112c3e0bf))
 
 ## [1.0.1](https://github.com/herbsjs/herbs-cli/compare/v1.0.0...v1.0.1) (2021-06-29)
-
 
 ### Bug Fixes
 
@@ -60,7 +52,6 @@
 
 # 1.0.0 (2021-06-29)
 
-
-### Features
+## Features
 
 * add semantic-release ([c9208cc](https://github.com/herbsjs/herbs-cli/commit/c9208cc0419d2d636205c5ac97858af9bfbf47b6))
