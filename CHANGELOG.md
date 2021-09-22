@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/herbsjs/herbs-cli/compare/v1.1.1...v1.1.2) (2021-09-22)
+
+
+### Bug Fixes
+
+* change the keyword herb to herbs in the package.json file ([b7fc4fc](https://github.com/herbsjs/herbs-cli/commit/b7fc4fc88e621a7dc3acfc0d504880a15b34cbac))
+* disable introspection when is production ([5fa88f0](https://github.com/herbsjs/herbs-cli/commit/5fa88f0dac155d5b5c6b5a39ba3a495caacdba1d))
+
 ## [1.1.1](https://github.com/herbsjs/herbs-cli/compare/v1.1.0...v1.1.1) (2021-09-20)
 
 
