@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/herbsjs/herbs-cli/compare/v1.1.3...v1.2.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* change name of step in getbyid ([81e99b1](https://github.com/herbsjs/herbs-cli/commit/81e99b1aae330d8bb3fff10d22d1d86fccf574f5))
+
+
+### Features
+
+* add tests for default usecases ([4c9f17f](https://github.com/herbsjs/herbs-cli/commit/4c9f17f4f79c424198bb8f7eafd387ebc7ab0d65))
+
 ## [1.1.3](https://github.com/herbsjs/herbs-cli/compare/v1.1.2...v1.1.3) (2021-09-23)
 
 

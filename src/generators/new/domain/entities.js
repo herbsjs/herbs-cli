@@ -51,8 +51,9 @@ module.exports = async ({ template: { generate }, parameters: { options } }, isU
   let requires = {}
 
   if (isUpdate) requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
-  else if (options.entities && options.entities !== true) requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)
-  else {
+  else if (options.entities && options.entities !== true) {
+    requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)
+  } else {
     await generate({
       template: 'domain/entities/user.ejs',
       target: 'src/domain/entities/user.js'

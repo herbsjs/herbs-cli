@@ -1,0 +1,56 @@
+const update<%= props.name.pascalCase %> = require('./update<%= props.name.pascalCase %>')
+const assert = require('assert')
+const <%= props.name.pascalCase %> = require('../../entities/<%= props.name.pascalCase %>')
+
+
+describe('Update <%= props.name.pascalCase %>', () => {
+  function aUser({ hasAccess }) {
+    return { hasAccess }
+  }
+
+  describe('Valid <%= props.name.pascalCase %>', () => {
+
+    it('should update <%= props.name.pascalCase %> if is valid', async () => {
+      // Given
+      const retInjection = <%= props.name.pascalCase %>.fromJSON('{ "id": 5, "nickname": "herbsUser", "password": "V&eryStr0ngP@$$"}')
+      const injection = {
+        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
+          async findByID(id) { return ([retInjection]) }
+          async update(id) { return true }
+        })
+      }
+      const user = aUser({ hasAccess: true })
+      /*{ <%= props.request %> }*/
+      const req = {  id: 5, nickname: 'herbsUser', password: 'V&eryStr0ngP@$$'}
+
+      // When
+      const uc = update<%= props.name.pascalCase %>(injection)()
+      await uc.authorize(<%= props.name.camelCase %>)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isOk)      
+
+    })
+  })
+
+  describe('Invalid <%= props.name.pascalCase %>', () => {
+
+    it('should not update invalid <%= props.name.pascalCase %>', async () => {
+      // Given
+      const injection = {}
+      const user = aUser({ hasAccess: true })
+      /*{ <%= props.request %> }*/
+      const req = {  nickname: 'herbsUser', password: 96587422 }
+
+      // When
+      const uc = update<%= props.name.pascalCase %>(injection)()
+      await uc.authorize(<%= props.name.camelCase %>)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isErr)
+      assert.deepStrictEqual(ret.err, {request :[{password:[{wrongType:"String"}]}]})
+    })
+  })
+})
