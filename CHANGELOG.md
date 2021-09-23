@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/herbsjs/herbs-cli/compare/v1.1.2...v1.1.3) (2021-09-23)
+
+
+### Bug Fixes
+
+* **package.json generator:** fixed the knexFile.js name on package.json generator ([e6197e5](https://github.com/herbsjs/herbs-cli/commit/e6197e57ef9c3eb98bb785e2b624082b080ddd0a))
+
 ## [1.1.2](https://github.com/herbsjs/herbs-cli/compare/v1.1.1...v1.1.2) (2021-09-22)
 
 
