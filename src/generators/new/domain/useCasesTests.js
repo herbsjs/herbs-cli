@@ -1,9 +1,8 @@
 const useCases = ['create', 'update', 'delete', 'getById']
-const { objToString } = require('../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
-async function generateRequest(schema) {
+async function generateRequest (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
