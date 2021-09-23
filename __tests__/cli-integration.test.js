@@ -5,7 +5,7 @@ const { expect } = require('chai')
 
 const src = filesystem.path(__dirname, '..')
 
-const cli = async cmd =>
+const cli = async (cmd) =>
   system.run('node ' + filesystem.path(src, 'bin', 'herbs') + ` ${cmd}`)
 
 const projectName = 'herbs-lab'

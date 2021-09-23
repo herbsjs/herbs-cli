@@ -4,21 +4,25 @@ CLI helps speed up your development cycle with HerbsJS by generating use cases a
 
 ## Installing and generating a CRUD project
 
-To install herbs-cli: 
-```
+To install herbs-cli:
+
+```bash
 npm i -g @herbsjs/herbs-cli 
 ```
 
-Then run: 
-```
+Then run:
+
+```bash
 herbs new 
 ```
 
-![](./docs/ex2.png)
+![project-setup](./docs/ex2.png)
 
-![](./docs/gif.gif)
+![project-structure](./docs/gif.gif)
+
 ## Default generated project structure
-```
+
+```bash
 .
 ├── node_modules
 ├── package-lock.json
@@ -64,6 +68,7 @@ herbs new
                 ├── index.js
                 └── userRepository.js
 ```
+
 ## commands
 
 ### herbs new
@@ -71,7 +76,9 @@ herbs new
 Generate a new project based on your entities(or not)
 
 > herbs new
-#### Options:
+
+#### Options
+
 | Question | Description | Default value | e.g |
 |--|--|--|--|
 | Project name? | This is the Project Name that will be used int the project folder name and package.json. | herbs-project | my-project
@@ -82,7 +89,7 @@ Generate graphql layer? | This will generate a graphql layer for your domain. | 
 Generate rest layer? | Description | Y | n |
 What database do you want to use? | Use arrow keys to choose your Database. | -- | -- |
 Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty | ./example/my-custom-entities/ |
- 
+
 ### herbs update
 
 Generate all necessary layers(graphql, rest, repository, etc) based on your new entity added into entities folder
@@ -91,6 +98,7 @@ After had created a new entity into entities folder, type in your terminal:
 > herbs update
 
 ### Contribute
+
 Come with us to make an awesome *herbs-cli*.
 
 Now, if you do not have the technical knowledge and also have intended to help us, do not feel shy, [click here](https://github.com/herbsjs/herbs-cli/issues) to open an issue and collaborate their ideas, the contribution may be a criticism or a compliment (why not?)
