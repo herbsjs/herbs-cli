@@ -1,6 +1,5 @@
-const { usecase, step, Ok } = require('@herbsjs/herbs')
+const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
 const { <%= props.name.pascalCase %> } = require('../../entities')
-const { NotFoundError } = require('../../errors')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Find one <%= props.name.pascalCase %>', {
@@ -19,7 +18,10 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     'Update the <%= props.name.pascalCase %>': step(async ctx => {
       // ctx.ret is the Use Case return
       const [result] = await <%= props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id)) 
-      if(!result) return NotFoundError('<%= props.name.pascalCase %>', `<%= props.name.pascalCase %> entity not found by id: ${ctx.req.id}`)
+      if(!result) return Err.notFound({ 
+        message: `<%= props.name.pascalCase %> entity not found by id: ${ctx.req.id}`,
+        payload: { entity: '<%= props.name.pascalCase %>' }
+      })
       return (ctx.ret = <%= props.name.pascalCase %>.fromJSON(result))
     })
   })

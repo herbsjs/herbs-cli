@@ -10,7 +10,6 @@ module.exports = async ({
   return {
     packageJson: await require('./packagejson')({ generate, packageManager, options, print }),
     entities: await require('./src/domain/entities')({ generate, options }),
-    errors: await require('./src/domain/errors')({ generate, options }),
     connection: await require('./src/infra/database/connection')({ generate, options }),
     repositories: await require('./src/infra/database/repositories/repositories')({ generate, options, filesystem }),
     migrations: options.postgres ? await require('./src/infra/database/migrations/migrations')({ generate, filesystem, options }) : ignore,
