@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/herbsjs/herbs-cli/compare/v1.2.0...v1.3.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* fixed entity import in getById and update tests ([1dd347f](https://github.com/herbsjs/herbs-cli/commit/1dd347f181d95e1584fda9aa6e21db739092c4e8))
+
+
+### Features
+
+* add new buchu errors ([b76722d](https://github.com/herbsjs/herbs-cli/commit/b76722dbc00ddcf7560044263cd78479eb1d1445))
+
 # [1.2.0](https://github.com/herbsjs/herbs-cli/compare/v1.1.3...v1.2.0) (2021-09-23)
 
 
