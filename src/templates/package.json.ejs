@@ -7,7 +7,8 @@
       "start": "node src/index.js",
       "start:dev": "nodemon src/index.js",
       "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
-      "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix"<%- props.migration %>
+      "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix"<%- props.migration %>,
+      "test": "mocha --timeout 999999 --colors --recursive src/**/*.test.js"
     },
     "keywords": ["herb"],
     "author": "<%= props.author %>",

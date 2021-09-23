@@ -15,6 +15,7 @@ module.exports = async ({
     repositories: await require('./src/infra/database/repositories/repositories')({ generate, options, filesystem }),
     migrations: options.postgres ? await require('./src/infra/database/migrations/migrations')({ generate, filesystem, options }) : ignore,
     useCases: await require('./src/domain/useCases')({ generate, filesystem }),
+    useCasesTests: (options.entities === '') ? await require('./src/domain/useCasesTests')({ generate, filesystem }) : ignore,
     graphql: options.graphql ? await require('./src/infra/api/graphql')({ generate }) : ignore,
     rest: options.rest ? await require('./src/infra/api/rest')({ generate, filesystem }) : ignore,
     config: infra ? await require('./src/config')({ generate, options }) : ignore,

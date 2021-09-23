@@ -70,6 +70,7 @@ module.exports = async ({
     '@herbsjs/herbs2rest',
     'graphql-tools@8.1.0',
     'nodemon',
+    'mocha',
     'lodash.camelcase'
   ]
 
