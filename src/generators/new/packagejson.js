@@ -73,6 +73,7 @@ module.exports =
         'sugar-env@1.5.14',
         'dotenv@10.0.0',
         'nodemon',
+        'mocha',
         'lodash.camelcase'
       ]
 

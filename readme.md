@@ -44,9 +44,13 @@ herbs new
     │       ├── index.js
     │       └── user
     │           ├── createUser.js
+    │           ├── createUser.test.js
     │           ├── deleteUser.js
+    │           ├── deleteUser.test.js    
     │           ├── getByIdUser.js
+    │           ├── getByIdUser.test.js    
     │           └── updateUser.js
+    │           └── updateUser.test.js    
     ├── index.js
     └── infra
         ├── api
