@@ -1,6 +1,6 @@
 const getById<%= props.name.pascalCase %> = require('./getById<%= props.name.pascalCase %>')
 const assert = require('assert')
-const <%= props.name.pascalCase %> = require('../../entities/<%= props.name.pascalCase %>')
+const { <%= props.name.pascalCase %> } = require('../../entities')
 
 describe('Find one <%= props.name.pascalCase %>', () => {
   function aUser({ hasAccess }) {
