@@ -10,7 +10,6 @@ module.exports = async (tools) => {
     new: {
       packageJson: await require('./new/packagejson')(tools),
       entities: await require('./new/domain/entities')(tools),
-      errors: await require('./new/domain/errors')(tools),
       connection: await require('./new/infra/database/connection')(tools),
       repositories: await require('./new/infra/database/repositories/repositories')(tools),
       migrations: options.postgres ? await require('./new/infra/database/migrations/migrations')(tools) : ignore,
