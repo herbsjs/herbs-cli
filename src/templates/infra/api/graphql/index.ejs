@@ -40,7 +40,7 @@ module.exports = async (app, config) => {
     const schema = makeExecutableSchema(await generateSchema(config))
     addSchemaLevelResolveFunction(schema, () => {})
     return new ApolloServer({
-        introspection: true,
+        introspection: !config.isProd,
         playground: !config.isProd,
         debug: !config.isProd,
         schema: schema,
