@@ -41,19 +41,19 @@ describe('generates package.json', () => {
 
     const pkg = filesystem.read(`${projectName}/package.json`)
     expect(pkg).contains(
-      '"knex:make": "npx knex --knexfile knexfile.js migrate:make"'
+      '"knex:make": "npx knex --knexfile knexFile.js migrate:make"'
     )
     expect(pkg).contains(
-      '"knex:migrate": "npx knex --knexfile knexfile.js migrate:latest"'
+      '"knex:migrate": "npx knex --knexfile knexFile.js migrate:latest"'
     )
     expect(pkg).contains(
-      '"knex:rollback": "npx knex --knexfile knexfile.js migrate:rollback"'
+      '"knex:rollback": "npx knex --knexfile knexFile.js migrate:rollback"'
     )
     expect(pkg).contains(
-      '"knex:makeSeeds": "npx knex --knexfile knexfile.js seed:make"'
+      '"knex:makeSeeds": "npx knex --knexfile knexFile.js seed:make"'
     )
     expect(pkg).contains(
-      '"knex:runSeeds": "npx knex --knexfile knexfile.js seed:run"'
+      '"knex:runSeeds": "npx knex --knexfile knexFile.js seed:run"'
     )
   })
 })
