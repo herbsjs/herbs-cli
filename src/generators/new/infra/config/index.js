@@ -27,6 +27,14 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
     requires.database = 'require(\'./postgres\')'
   }
 
+  if (options.sqlserver) {
+    await generate({
+      template: 'infra/config/sqlserver.ejs',
+      target: 'src/infra/config/sqlserver.js'
+    })
+    requires.database = 'require(\'./sqlserver\')'
+  }
+
   await generate({
     template: 'infra/config/index.ejs',
     target: 'src/infra/config/index.js',

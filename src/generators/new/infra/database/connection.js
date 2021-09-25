@@ -1,13 +1,24 @@
-module.exports = async ({ template: { generate }, parameters: { options: { mongo = false, postgres = false } } }) => async () => {
+module.exports = async ({
+  template: {
+    generate
+  },
+  parameters: {
+    options: {
+      mongo = false,
+      postgres = false,
+      sqlserver = false
+    }
+  }
+}) => async () => {
   if (mongo) {
     await generate({
       template: 'data/database/mongo/database.ejs',
       target: 'src/infra/data/database/index.js'
     })
   }
-  if (postgres) {
+  if (postgres || sqlserver) {
     await generate({
-      template: 'data/database/postgres/database.ejs',
+      template: 'data/database/sql/database.ejs',
       target: 'src/infra/data/database/index.js'
     })
   }

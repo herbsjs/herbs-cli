@@ -29,8 +29,7 @@ async function generateRepositories (generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories (generate, filesystem) {
-  let db = 'postgres'
+async function updateRepositories (generate, filesystem, db) {
   const mongoPath = '/src/infra/data/repositories/baseRepository.js'
   if (fs.existsSync(`${filesystem.cwd()}${mongoPath}`)) db = 'mongo'
 
@@ -40,7 +39,11 @@ async function updateRepositories (generate, filesystem) {
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
   let requires = {}
 
-  if (isUpdate) requires = await updateRepositories(generate, filesystem)
+  let db
+  if (options.postgres) db = 'postgres'
+  else if (options.sqlserver) db = 'sqlserver'
+
+  if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
   if (options.mongo) {
     await generate({
       template: 'data/repository/mongo/baseRepository.ejs',
@@ -49,9 +52,14 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
 
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'mongo'))
   }
+
   if (options.postgres) {
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'postgres'))
   }
+  if (options.sqlserver) {
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'sqlserver'))
+  }
+
   await generate({
     template: 'data/repository/index.ejs',
     target: 'src/infra/data/repositories/index.js',

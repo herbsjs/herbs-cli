@@ -36,6 +36,7 @@ module.exports =
         license = 'MIT',
         mongo = false,
         postgres = false,
+        sqlserver = false,
         yarn = false,
         graphql = false,
         rest = false
@@ -44,7 +45,7 @@ module.exports =
     print
   }) =>
     async () => {
-      const migration = postgres
+      const migration = (postgres || sqlserver)
         ? `,
       "knex:make": "npx knex --knexfile knexFile.js migrate:make",
       "knex:migrate": "npx knex --knexfile knexFile.js migrate:latest",
@@ -84,6 +85,11 @@ module.exports =
       if (postgres) {
         packages.push('@herbsjs/herbs2knex')
         packages.push('pg')
+      }
+
+      if (sqlserver) {
+        packages.push('@herbsjs/herbs2knex')
+        packages.push('tedious')
       }
 
       if (rest) {

@@ -57,7 +57,7 @@ const questions = [
     type: 'list',
     name: 'database',
     message: 'What database do you want to use?',
-    choices: ['Mongo', 'Postgres'],
+    choices: ['Mongo', 'Postgres', 'SQLServer'],
     filter (val) {
       return val.toLowerCase()
     }
@@ -92,6 +92,7 @@ const cmd = {
       options = await inquirer.prompt(questions)
       options.postgres = options.database === 'postgres'
       options.mongo = options.database === 'mongo'
+      options.sqlserver = options.database === 'sqlserver'
       options.entities = options.entities === 'optional' ? '' : options.entities
     }
 
