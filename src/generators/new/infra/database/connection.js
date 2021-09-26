@@ -16,9 +16,15 @@ module.exports = async ({
       target: 'src/infra/data/database/index.js'
     })
   }
-  if (postgres || sqlserver) {
+  if (postgres) {
     await generate({
-      template: 'data/database/sql/database.ejs',
+      template: 'data/database/postgres/database.ejs',
+      target: 'src/infra/data/database/index.js'
+    })
+  }
+  if (sqlserver) {
+    await generate({
+      template: 'data/database/sqlserver/database.ejs',
       target: 'src/infra/data/database/index.js'
     })
   }

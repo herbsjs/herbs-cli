@@ -41,7 +41,7 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
 
   let db
   if (options.postgres) db = 'postgres'
-  else if (options.sqlserver) db = 'sqlserver'
+  if (options.sqlserver) db = 'sqlserver'
 
   if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
   if (options.mongo) {

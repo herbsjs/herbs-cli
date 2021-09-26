@@ -4,8 +4,12 @@ module.exports = {
       connection: {
         database: '<%- props.dbName %>',
         user: 'sa',
-        password: 'p@ssword',
-        server: 'localhost',
+        password: 'password',
+        server: '127.0.0.1',
+        port: 1433,
+        options: {
+          trustServerCertificate: true
+        }
       },
       pool: {
         min: 2,

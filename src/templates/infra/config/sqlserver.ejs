@@ -3,9 +3,13 @@ require('dotenv').config()
 module.exports = {
   client: 'mssql',
   connection: {
-    host: '127.0.0.1',
+    server: '127.0.0.1',
+    port: 1433,
     user: 'sa',
     password: 'password',
-    database: 'herbs-project'
+    database: '<%- props.dbName %>',
+    options: {
+      trustServerCertificate: true
+    }
   }
 }

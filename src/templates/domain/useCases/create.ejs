@@ -18,7 +18,8 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     //Step description and function
     'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req)
-
+      ctx.<%= props.name.camelCase %>.id = Math.floor(Math.random() * 100000)
+      
       if (!ctx.<%= props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
           message: 'The <%= props.name.pascalCase %> entity is invalid', 

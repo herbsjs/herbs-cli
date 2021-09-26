@@ -25,19 +25,25 @@ module.exports = async ({ template: { generate }, filesystem, parameters: { opti
       columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
     })
 
+    let templateMigration
+    if (options.postgres) templateMigration = 'data/database/postgres/migration.ejs'
+    if (options.sqlserver) templateMigration = 'data/database/sqlserver/migration.ejs'
+
     const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
     await generate({
-      template: 'data/database/sql/migration.ejs',
+      template: templateMigration,
       target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
       props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
     })
   }
+
   if (!glob.sync(migrationsPath).length) return
-  let template
-  if (options.postgres) template = 'knexFileToPostgres.ejs'
-  if (options.sqlserver) template = 'knexFileToSqlServer.ejs'
+
+  let templateKnexfile
+  if (options.postgres) templateKnexfile = 'knexFileToPostgres.ejs'
+  if (options.sqlserver) templateKnexfile = 'knexFileToSqlServer.ejs'
   await generate({
-    template: template,
+    template: templateKnexfile,
     target: 'knexFile.js',
     props: { dbName: options.name }
   })

@@ -63,15 +63,6 @@ const questions = [
     }
   },
   {
-    type: 'list',
-    name: 'database',
-    message: 'What package manager do you want to use?',
-    choices: ['Postgres', 'Mongo'],
-    filter (val) {
-      return val.toLowerCase()
-    }
-  },
-  {
     type: 'input',
     name: 'entities',
     message: 'Specify your entities folder path?',
