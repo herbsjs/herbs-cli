@@ -29,8 +29,7 @@ async function generateRepositories (generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories (generate, filesystem) {
-  let db = 'postgres'
+async function updateRepositories (generate, filesystem, db) {
   const mongoPath = '/src/infra/data/repositories/baseRepository.js'
   if (fs.existsSync(`${filesystem.cwd()}${mongoPath}`)) db = 'mongo'
 
@@ -39,22 +38,20 @@ async function updateRepositories (generate, filesystem) {
 
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
   let requires = {}
-
-  if (isUpdate) requires = await updateRepositories(generate, filesystem)
-  if (options.mongo) {
+  for (const db of ['postgres', 'sqlserver', 'mongo']) {
+    if (!options[db]) continue
+    if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
+    if (db === 'mongo') {
+      await generate({
+        template: 'data/repository/mongo/baseRepository.ejs',
+        target: 'src/infra/data/repositories/baseRepository.js'
+      })
+    }
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
     await generate({
-      template: 'data/repository/mongo/baseRepository.ejs',
-      target: 'src/infra/data/repositories/baseRepository.js'
+      template: 'data/repository/index.ejs',
+      target: 'src/infra/data/repositories/index.js',
+      props: { requires: objToString(requires) }
     })
-
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'mongo'))
   }
-  if (options.postgres) {
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'postgres'))
-  }
-  await generate({
-    template: 'data/repository/index.ejs',
-    target: 'src/infra/data/repositories/index.js',
-    props: { requires: objToString(requires) }
-  })
 }

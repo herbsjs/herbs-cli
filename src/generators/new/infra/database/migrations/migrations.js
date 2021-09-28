@@ -24,18 +24,22 @@ module.exports = async ({ template: { generate }, filesystem, parameters: { opti
       if (name === 'id') return
       columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
     })
+    for (const db of ['postgres', 'sqlserver']) {
+      if (!options[db]) continue
+      const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
+      await generate({
+        template: `data/database/${db.toLowerCase()}/migration.ejs`,
+        target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
+        props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
+      })
 
-    const migrationName = new Date().toISOString().replace(/\D/g, '').substring(0, 14)
-    await generate({
-      template: 'data/database/postgres/migration.ejs',
-      target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
-      props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
-    })
+      if (!glob.sync(migrationsPath).length) return
+
+      await generate({
+        template: `knexFileTo${camelCase(db)}.ejs`,
+        target: 'knexFile.js',
+        props: { dbName: options.name }
+      })
+    }
   }
-  if (!glob.sync(migrationsPath).length) return
-  await generate({
-    template: 'knexFile.ejs',
-    target: 'knexFile.js',
-    props: { dbName: options.name }
-  })
 }
