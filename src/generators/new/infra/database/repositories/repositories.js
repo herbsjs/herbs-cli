@@ -38,31 +38,20 @@ async function updateRepositories (generate, filesystem, db) {
 
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
   let requires = {}
-
-  let db
-  if (options.postgres) db = 'postgres'
-  if (options.sqlserver) db = 'sqlserver'
-
-  if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
-  if (options.mongo) {
+  for (const db of ['postgres', 'sqlserver', 'mongo']) {
+    if (!options[db]) continue
+    if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
+    if (db === 'mongo') {
+      await generate({
+        template: 'data/repository/mongo/baseRepository.ejs',
+        target: 'src/infra/data/repositories/baseRepository.js'
+      })
+    }
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
     await generate({
-      template: 'data/repository/mongo/baseRepository.ejs',
-      target: 'src/infra/data/repositories/baseRepository.js'
+      template: 'data/repository/index.ejs',
+      target: 'src/infra/data/repositories/index.js',
+      props: { requires: objToString(requires) }
     })
-
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'mongo'))
   }
-
-  if (options.postgres) {
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'postgres'))
-  }
-  if (options.sqlserver) {
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'sqlserver'))
-  }
-
-  await generate({
-    template: 'data/repository/index.ejs',
-    target: 'src/infra/data/repositories/index.js',
-    props: { requires: objToString(requires) }
-  })
 }
