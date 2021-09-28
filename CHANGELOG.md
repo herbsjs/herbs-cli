@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/herbsjs/herbs-cli/compare/v1.3.1...v1.4.0) (2021-09-28)
+
+
+### Features
+
+* implementation of support for data layer generation with persistence in SQL Server database ([dbdf67e](https://github.com/herbsjs/herbs-cli/commit/dbdf67e22b205cc96d5b853f4ebc75e926a7d657)), closes [#27](https://github.com/herbsjs/herbs-cli/issues/27)
+* include SQL Server support option ([f75da71](https://github.com/herbsjs/herbs-cli/commit/f75da71b1c83a67a3bbb5516b62f64711d4249a0)), closes [#27](https://github.com/herbsjs/herbs-cli/issues/27)
+
 ## [1.3.1](https://github.com/herbsjs/herbs-cli/compare/v1.3.0...v1.3.1) (2021-09-27)
 
 
