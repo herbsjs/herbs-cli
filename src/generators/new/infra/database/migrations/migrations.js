@@ -36,7 +36,7 @@ module.exports = async ({ template: { generate }, filesystem, parameters: { opti
       if (!glob.sync(migrationsPath).length) return
 
       await generate({
-        template: `knexFileTo${camelCase(db)}.ejs`,
+        template: `knexFileTo${db.toLowerCase()}.ejs`,
         target: 'knexFile.js',
         props: { dbName: options.name }
       })
