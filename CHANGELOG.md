@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/herbsjs/herbs-cli/compare/v1.4.0...v1.4.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* error on generate knexfile template on linux (case-sensitive) ([37ba7da](https://github.com/herbsjs/herbs-cli/commit/37ba7da0045847029ebb8676bcce2c005c3b1696)), closes [#48](https://github.com/herbsjs/herbs-cli/issues/48)
+
 # [1.4.0](https://github.com/herbsjs/herbs-cli/compare/v1.3.1...v1.4.0) (2021-09-28)
 
 
