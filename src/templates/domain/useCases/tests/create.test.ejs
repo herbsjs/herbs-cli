@@ -3,7 +3,7 @@ const assert = require('assert')
 
 
 describe('Create <%= props.name.pascalCase %>', () => {
-  const authorizedUser = aUser
+  const authorizedUser = { hasAccess: true }
 
   describe('Valid <%= props.name.pascalCase %>', () => {
 
@@ -44,7 +44,6 @@ describe('Create <%= props.name.pascalCase %>', () => {
 
       // Then
       assert.ok(ret.isErr)
-      assert.deepStrictEqual(ret.err, {request :[{password:[{wrongType:"String"}]}]})
     })
   })
 })

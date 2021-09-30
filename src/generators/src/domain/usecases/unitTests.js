@@ -3,17 +3,44 @@ const camelCase = require('lodash.camelcase')
 const { objToString } = require('../../../utils')
 const fs = require('fs')
 
-const useCaseRequests = {
+function invertObjValues(obj){
+  for(const key of Object.keys(obj)){
+    switch (typeof obj[key]) {
+      case 'String':
+        obj[key] = 123 
+        break;
+      case 'Number':
+      case 'Boolean':
+        obj[key] = '123'
+        break;
+      default:
+        obj[key] = true
+    }
+  }
+  return obj
+}
+
+const validUseCaseRequests = {
   create: (obj) => {
-    delete obj.id 
+    delete obj.id
     return obj
   },
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  getById: (obj) => { return { id: obj.id} }
+  getById: (obj) => { return { id: obj.id } }
+}
+const invalidUseCaseRequests = {
+  create: (obj) => {
+    delete obj.id
+    obj = invertObjValues(obj)
+    return obj
+  },
+  update: (obj) => invertObjValues(obj),
+  delete: () => { return { id: null } },
+  getById: () => { return { id: null } }
 }
 
-const useCases = Object.keys(useCaseRequests)
+const useCases = Object.keys(validUseCaseRequests)
 
 const value4type = {
   String: 'string',
@@ -22,12 +49,13 @@ const value4type = {
   Array: []
 }
 
-function generateRequestObject(scheema, action, valid){
+function generateRequestObject (scheema, action, validReq) {
   const obj = {}
-  for(const key of Object.keys(scheema)){
-      obj[key] = value4type[scheema[key].type.name] 
+  for (const key of Object.keys(scheema)) {
+    obj[key] = value4type[scheema[key].type.name]
   }
-  return useCaseRequests[action](obj)
+  if(validReq) return validUseCaseRequests[action](obj)
+  return invalidUseCaseRequests[action](obj)
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {

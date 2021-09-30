@@ -3,7 +3,7 @@ const assert = require('assert')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 
 describe('Find one <%= props.name.pascalCase %>', () => {
-  const authorizedUser = { hasAccess = true }
+  const authorizedUser = { hasAccess: true }
 
   describe('Valid <%= props.name.pascalCase %>', () => {
 
