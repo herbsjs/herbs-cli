@@ -3,9 +3,7 @@ const assert = require('assert')
 
 
 describe('Create <%= props.name.pascalCase %>', () => {
-  function aUser({ hasAccess }) {
-    return { hasAccess }
-  }
+  const authorizedUser = aUser
 
   describe('Valid <%= props.name.pascalCase %>', () => {
 
@@ -16,13 +14,12 @@ describe('Create <%= props.name.pascalCase %>', () => {
           async insert(<%= props.name.camelCase %>) { return (<%= props.name.camelCase %>) }
         })
       }
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = {  nickname: 'herbsUser', password: 'V&eryStr0ngP@$$'}
+
+      const req = <%= props.request.valid %>
 
       // When
       const uc = create<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
@@ -37,13 +34,12 @@ describe('Create <%= props.name.pascalCase %>', () => {
     it('should not create invalid <%= props.name.pascalCase %>', async () => {
       // Given
       const injection = {}
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req =  {  nickname: 'herbsUser', password: 96587422 }
+
+      const req = <%= props.request.invalid %>
 
       // When
       const uc = create<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then

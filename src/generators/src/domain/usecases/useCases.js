@@ -1,9 +1,9 @@
 const useCases = ['create', 'update', 'delete', 'getById']
-const { objToString } = require('../../utils')
+const { objToString } = require('../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
-async function generateRequest (schema) {
+async function generateRequestScheema (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
@@ -51,7 +51,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             pascalCase: name,
             camelCase: camelCase(name)
           },
-          request: await generateRequest(schema)
+          request: await generateRequestScheema(schema)
         }
       })
     }
