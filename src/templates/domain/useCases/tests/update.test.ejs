@@ -10,7 +10,7 @@ describe('Update <%= props.name.pascalCase %>', () => {
 
     it('should update <%= props.name.pascalCase %> if is valid', async () => {
       // Given
-      const retInjection = <%= props.name.pascalCase %>.fromJSON('{ "id": 5, "nickname": "herbsUser", "password": "V&eryStr0ngP@$$"}')
+      const retInjection = <%= props.name.pascalCase %>.fromJSON(<%= props.mock %>)
       const injection = {
         <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
           async findByID(id) { return ([retInjection]) }
@@ -18,7 +18,7 @@ describe('Update <%= props.name.pascalCase %>', () => {
         })
       }
 
-      const req = <%= props.request.valid %>
+      const req = <%- props.request.valid %>
 
       // When
       const uc = update<%= props.name.pascalCase %>(injection)()
@@ -36,7 +36,7 @@ describe('Update <%= props.name.pascalCase %>', () => {
     it('should not update invalid <%= props.name.pascalCase %>', async () => {
       // Given
       const injection = {}
-      const req = <%= props.request.invalid %>
+      const req = <%- props.request.invalid %>
 
       // When
       const uc = update<%= props.name.pascalCase %>(injection)()

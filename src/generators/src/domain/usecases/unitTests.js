@@ -3,16 +3,16 @@ const camelCase = require('lodash.camelcase')
 const { objToString } = require('../../../utils')
 const fs = require('fs')
 
-function invertObjValues(obj){
-  for(const key of Object.keys(obj)){
+function invertObjValues (obj) {
+  for (const key of Object.keys(obj)) {
     switch (typeof obj[key]) {
       case 'String':
-        obj[key] = 123 
-        break;
+        obj[key] = 123
+        break
       case 'Number':
       case 'Boolean':
         obj[key] = '123'
-        break;
+        break
       default:
         obj[key] = true
     }
@@ -43,18 +43,23 @@ const invalidUseCaseRequests = {
 const useCases = Object.keys(validUseCaseRequests)
 
 const value4type = {
-  String: 'string',
+  String: "'string'",
   Number: 99,
   Boolean: true,
   Array: []
 }
 
-function generateRequestObject (scheema, action, validReq) {
+function generateMockObj(scheema){
   const obj = {}
   for (const key of Object.keys(scheema)) {
     obj[key] = value4type[scheema[key].type.name]
   }
-  if(validReq) return validUseCaseRequests[action](obj)
+  return obj
+}
+
+function generateRequestObject (scheema, action, validReq) {
+  const obj = generateMockObj(scheema)
+  if (validReq) return validUseCaseRequests[action](obj)
   return invalidUseCaseRequests[action](obj)
 }
 
@@ -80,7 +85,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
           request: {
             valid: objToString(generateRequestObject(schema, action, true)),
             invalid: objToString(generateRequestObject(schema, action, false))
-          }
+          },
+          mock: objToString(generateRequestObject(schema, action)),
         }
       })
     }

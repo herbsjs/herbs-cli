@@ -15,7 +15,7 @@ describe('Create <%= props.name.pascalCase %>', () => {
         })
       }
 
-      const req = <%= props.request.valid %>
+      const req = <%- props.request.valid %>
 
       // When
       const uc = create<%= props.name.pascalCase %>(injection)()
@@ -35,7 +35,7 @@ describe('Create <%= props.name.pascalCase %>', () => {
       // Given
       const injection = {}
 
-      const req = <%= props.request.invalid %>
+      const req = <%- props.request.invalid %>
 
       // When
       const uc = create<%= props.name.pascalCase %>(injection)()
