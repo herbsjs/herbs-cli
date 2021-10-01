@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/herbsjs/herbs-cli/compare/v1.4.2...v1.4.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* generating repositories of new entities with the update command ([8f82f54](https://github.com/herbsjs/herbs-cli/commit/8f82f54266cf521543d33a07b20ebb085212cd7a)), closes [#50](https://github.com/herbsjs/herbs-cli/issues/50)
+
 ## [1.4.2](https://github.com/herbsjs/herbs-cli/compare/v1.4.1...v1.4.2) (2021-10-01)
 
 
