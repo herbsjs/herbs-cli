@@ -1,7 +1,7 @@
 const { objToString } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
-async function generateRepositories (generate, filesystem, db) {
+async function generateRepositories(generate, filesystem, db) {
   const requires = {}
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
@@ -29,18 +29,26 @@ async function generateRepositories (generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories (generate, filesystem, db) {
-  const mongoPath = '/src/infra/data/repositories/baseRepository.js'
-  if (fs.existsSync(`${filesystem.cwd()}${mongoPath}`)) db = 'mongo'
+async function updateRepositories(generate, filesystem) {
+  const paths = {
+    mongo: '/src/infra/data/repositories/baseRepository.js',
+    sqlserver: '/src/infra/config/sqlserver.js',
+    postgres: '/src/infra/config/postgres.js'
+  }
+
+  const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
 
   return generateRepositories(generate, filesystem, db)
 }
 
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
   let requires = {}
+
+  if (isUpdate) requires = await updateRepositories(generate, filesystem)
+
   for (const db of ['postgres', 'sqlserver', 'mongo']) {
     if (!options[db]) continue
-    if (isUpdate) requires = await updateRepositories(generate, filesystem, db)
+
     if (db === 'mongo') {
       await generate({
         template: 'data/repository/mongo/baseRepository.ejs',
