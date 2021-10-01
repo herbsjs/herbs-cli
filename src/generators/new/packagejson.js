@@ -90,8 +90,8 @@ module.exports =
     ]
 
     for (const key of Object.keys(options)) {
-      if (key && options[key]) { 
-        packages = packages.concat(optionalPackages[key]) 
+      if (key && options[key]) {
+        packages = packages.concat(optionalPackages[key])
       }
     }
 
