@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/herbsjs/herbs-cli/compare/v1.4.1...v1.4.2) (2021-10-01)
+
+
+### Bug Fixes
+
+* fixed the knexFile.js generation on linux file system ([9dc13e6](https://github.com/herbsjs/herbs-cli/commit/9dc13e6d58d1203af187a6c5e921e13bc63b38f7))
+
 ## [1.4.1](https://github.com/herbsjs/herbs-cli/compare/v1.4.0...v1.4.1) (2021-09-29)
 
 
