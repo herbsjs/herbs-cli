@@ -1,3 +1,11 @@
+## [1.4.4](https://github.com/herbsjs/herbs-cli/compare/v1.4.3...v1.4.4) (2021-10-04)
+
+
+### Bug Fixes
+
+* package.json generation using initial project setup options ([50056d6](https://github.com/herbsjs/herbs-cli/commit/50056d64ae726ab8c87ba416971f3e2c8a8847fa)), closes [#54](https://github.com/herbsjs/herbs-cli/issues/54)
+* package.json generation using initial project setup options ([6e66a47](https://github.com/herbsjs/herbs-cli/commit/6e66a47a8e5b21fb8060734274db5d717612de35)), closes [#54](https://github.com/herbsjs/herbs-cli/issues/54)
+
 ## [1.4.3](https://github.com/herbsjs/herbs-cli/compare/v1.4.2...v1.4.3) (2021-10-01)
 
 
