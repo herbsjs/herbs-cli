@@ -72,7 +72,7 @@ module.exports =
       template: 'package.json.ejs',
       target: 'package.json',
       props: {
-        options,
+        ...options,
         migration
       }
     })
