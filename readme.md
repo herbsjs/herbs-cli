@@ -24,14 +24,9 @@ herbs new
 
 ```bash
 .
-├── node_modules
 ├── package-lock.json
 ├── package.json
 └── src
-    ├── config
-    │   ├── api.js
-    │   ├── index.js
-    │   └── mongo.js
     ├── domain
     │   ├── entities
     │   │   ├── index.js
@@ -40,13 +35,13 @@ herbs new
     │       ├── index.js
     │       └── user
     │           ├── createUser.js
-    │           ├── createUser.test.js
     │           ├── deleteUser.js
-    │           ├── deleteUser.test.js    
     │           ├── getByIdUser.js
-    │           ├── getByIdUser.test.js    
-    │           └── updateUser.js
-    │           └── updateUser.test.js    
+    │           ├── updateUser.js
+    │           ├── createUser.test.js
+    │           ├── deleteUser.test.js
+    │           ├── getByIdUser.test.js
+    │           └── updateUser.test.js
     ├── index.js
     └── infra
         ├── api
@@ -60,11 +55,16 @@ herbs new
         │   ├── rest
         │   │   └── index.js
         │   └── server.js
+        ├── config
+        │   ├── api.js
+        │   ├── index.js
+        │   └── postgres.js
         └── data
             ├── database
-            │   └── index.js
+            │   ├── index.js
+            │   └── migrations
+            │       └── 20211005010714_users.js
             └── repositories
-                ├── baseRepository.js
                 ├── index.js
                 └── userRepository.js
 ```
