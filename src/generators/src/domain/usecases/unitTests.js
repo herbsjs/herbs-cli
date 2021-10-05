@@ -49,7 +49,7 @@ const value4type = {
   Array: []
 }
 
-function generateMockObj(scheema){
+function generateMockObj (scheema) {
   const obj = {}
   for (const key of Object.keys(scheema)) {
     obj[key] = value4type[scheema[key].type.name]
@@ -86,7 +86,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             valid: objToString(generateRequestObject(schema, action, true)),
             invalid: objToString(generateRequestObject(schema, action, false))
           },
-          mock: objToString(generateRequestObject(schema, action)),
+          mock: objToString(generateRequestObject(schema, action))
         }
       })
     }

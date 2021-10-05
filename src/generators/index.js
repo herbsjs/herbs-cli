@@ -14,7 +14,7 @@ module.exports = async (tools) => {
       repositories: await require('./src/infra/database/repositories/repositories')(tools),
       migrations: options.postgres ? await require('./src/infra/database/migrations/migrations')(tools) : ignore,
       useCases: await require('./src/domain/usecases/useCases')(tools),
-      useCasesTests: (options.entities === '') ? await require('./src/domain/usecases/unitTests')(tools) : ignore,
+      useCasesTests: await require('./src/domain/usecases/unitTests')(tools),
       graphql: options.graphql ? await require('./src/infra/graphql')(tools) : ignore,
       rest: options.rest ? await require('./src/infra/rest')(tools) : ignore,
       config: infra ? await require('./src/infra/config')(tools) : ignore,

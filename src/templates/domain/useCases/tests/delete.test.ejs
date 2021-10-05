@@ -27,21 +27,4 @@ describe('Delete <%= props.name.pascalCase %>', () => {
 
     })
   })
-
-  describe('Invalid <%= props.name.pascalCase %>', () => {
-
-    it('should not delete invalid <%= props.name.pascalCase %>', async () => {
-      // Given
-      const injection = {}
-      const req = <%- props.request.invalid %>
-
-      // When
-      const uc = delete<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(authorizedUser)
-      const ret = await uc.run(req)
-
-      // Then
-      assert.ok(ret.isErr)
-    })
-  })
 })

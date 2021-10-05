@@ -35,7 +35,11 @@ describe('Find one <%= props.name.pascalCase %>', () => {
 
     it('should not return if input is invalid', async () => {
       // Given
-      const injection = {}
+      const injection = {
+        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
+          async  findByID(id) { return ([]) }
+        })
+      }
 
       const req = <%- props.request.invalid %>
 
