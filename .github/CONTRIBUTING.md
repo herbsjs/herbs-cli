@@ -3,6 +3,11 @@
 :wave: Hi there!
 We're thrilled that you'd like to contribute to this project. Your help is essential for keeping it great.
 
+# Don't know what you can do for the CLI?
+> If you already know what to contribute, skip this session
+
+You could to check our issues board into our [issue board](https://github.com/herbsjs/herbs-cli/projects/1). There you can find a issue list labeled with effort and priority, the higher the card is the most important issue to be solved at the moment. Just send a comment to check if you can implements the feature/fix and starting code :)
+
 ## Submitting a pull request
 
 [Pull Requests][pulls] are used for adding new playbooks, roles, and documents to the repository, or editing the existing ones.
