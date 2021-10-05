@@ -1,0 +1,15 @@
+require('dotenv').config()
+
+module.exports = {
+  client: 'mssql',
+  connection: {
+    server: '127.0.0.1',
+    port: 1433,
+    user: 'sa',
+    password: 'password',
+    database: '<%- props.dbName %>',
+    options: {
+      trustServerCertificate: true
+    }
+  }
+}

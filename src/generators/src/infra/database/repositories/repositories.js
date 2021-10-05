@@ -1,7 +1,7 @@
 const { objToString } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
-async function generateRepositories (generate, filesystem, db) {
+async function generateRepositories(generate, filesystem, db) {
   const requires = {}
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
@@ -29,10 +29,14 @@ async function generateRepositories (generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories (generate, filesystem) {
-  let db = 'postgres'
-  const mongoPath = '/src/infra/data/repositories/baseRepository.js'
-  if (fs.existsSync(`${filesystem.cwd()}${mongoPath}`)) db = 'mongo'
+async function updateRepositories(generate, filesystem) {
+  const paths = {
+    mongo: '/src/infra/data/repositories/baseRepository.js',
+    sqlserver: '/src/infra/config/sqlserver.js',
+    postgres: '/src/infra/config/postgres.js'
+  }
+
+  const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
 
   return generateRepositories(generate, filesystem, db)
 }
@@ -41,20 +45,21 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
   let requires = {}
 
   if (isUpdate) requires = await updateRepositories(generate, filesystem)
-  if (options.mongo) {
-    await generate({
-      template: 'data/repository/mongo/baseRepository.ejs',
-      target: 'src/infra/data/repositories/baseRepository.js'
-    })
 
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'mongo'))
+  for (const db of ['postgres', 'sqlserver', 'mongo']) {
+    if (!options[db]) continue
+
+    if (db === 'mongo') {
+      await generate({
+        template: 'data/repository/mongo/baseRepository.ejs',
+        target: 'src/infra/data/repositories/baseRepository.js'
+      })
+    }
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
+    await generate({
+      template: 'data/repository/index.ejs',
+      target: 'src/infra/data/repositories/index.js',
+      props: { requires: objToString(requires) }
+    })
   }
-  if (options.postgres) {
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, 'postgres'))
-  }
-  await generate({
-    template: 'data/repository/index.ejs',
-    target: 'src/infra/data/repositories/index.js',
-    props: { requires: objToString(requires) }
-  })
 }

@@ -1,3 +1,47 @@
+## [1.4.4](https://github.com/herbsjs/herbs-cli/compare/v1.4.3...v1.4.4) (2021-10-04)
+
+
+### Bug Fixes
+
+* package.json generation using initial project setup options ([50056d6](https://github.com/herbsjs/herbs-cli/commit/50056d64ae726ab8c87ba416971f3e2c8a8847fa)), closes [#54](https://github.com/herbsjs/herbs-cli/issues/54)
+* package.json generation using initial project setup options ([6e66a47](https://github.com/herbsjs/herbs-cli/commit/6e66a47a8e5b21fb8060734274db5d717612de35)), closes [#54](https://github.com/herbsjs/herbs-cli/issues/54)
+
+## [1.4.3](https://github.com/herbsjs/herbs-cli/compare/v1.4.2...v1.4.3) (2021-10-01)
+
+
+### Bug Fixes
+
+* generating repositories of new entities with the update command ([8f82f54](https://github.com/herbsjs/herbs-cli/commit/8f82f54266cf521543d33a07b20ebb085212cd7a)), closes [#50](https://github.com/herbsjs/herbs-cli/issues/50)
+
+## [1.4.2](https://github.com/herbsjs/herbs-cli/compare/v1.4.1...v1.4.2) (2021-10-01)
+
+
+### Bug Fixes
+
+* fixed the knexFile.js generation on linux file system ([9dc13e6](https://github.com/herbsjs/herbs-cli/commit/9dc13e6d58d1203af187a6c5e921e13bc63b38f7))
+
+## [1.4.1](https://github.com/herbsjs/herbs-cli/compare/v1.4.0...v1.4.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* error on generate knexfile template on linux (case-sensitive) ([37ba7da](https://github.com/herbsjs/herbs-cli/commit/37ba7da0045847029ebb8676bcce2c005c3b1696)), closes [#48](https://github.com/herbsjs/herbs-cli/issues/48)
+
+# [1.4.0](https://github.com/herbsjs/herbs-cli/compare/v1.3.1...v1.4.0) (2021-09-28)
+
+
+### Features
+
+* implementation of support for data layer generation with persistence in SQL Server database ([dbdf67e](https://github.com/herbsjs/herbs-cli/commit/dbdf67e22b205cc96d5b853f4ebc75e926a7d657)), closes [#27](https://github.com/herbsjs/herbs-cli/issues/27)
+* include SQL Server support option ([f75da71](https://github.com/herbsjs/herbs-cli/commit/f75da71b1c83a67a3bbb5516b62f64711d4249a0)), closes [#27](https://github.com/herbsjs/herbs-cli/issues/27)
+
+## [1.3.1](https://github.com/herbsjs/herbs-cli/compare/v1.3.0...v1.3.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* add eslint to code ([1151fa6](https://github.com/herbsjs/herbs-cli/commit/1151fa6d4e2f62eeaa1cec643d67396acaeabe58))
+
 # [1.3.0](https://github.com/herbsjs/herbs-cli/compare/v1.2.0...v1.3.0) (2021-09-23)
 
 

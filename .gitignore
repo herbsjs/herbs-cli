@@ -10,3 +10,4 @@ build
 .editorconfig
 .prettierrc
 herbs-project
+.idea

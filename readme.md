@@ -88,7 +88,7 @@ Generate a new project based on your entities(or not)
 | Generate graphql layer?                       | This will generate a graphql layer for your domain.                                                                            | Y                              | n                             |
 | Generate rest layer?                          | Description                                                                                                                    | Y                              | n                             |
 | What database do you want to use?             | Use arrow keys to choose your Database.                                                                                        | --                             | --                            |
-| Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example/my-custom-entities/ |
+| Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example-entities/ |
 
 ### herbs update
 

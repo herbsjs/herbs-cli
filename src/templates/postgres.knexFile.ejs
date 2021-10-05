@@ -5,12 +5,8 @@ module.exports = {
         database: '<%- props.dbName %>',
         user: 'postgres',
         password: 'postgres',
-        host: 'localhost',
+        host: '127.0.0.1',
         port: 5432
-      },
-      pool: {
-        min: 2,
-        max: 10
       },
       migrations: {
         directory: './src/infra/data/database/migrations',
@@ -19,6 +15,5 @@ module.exports = {
     },
     staging: {},
     production: {}
-  
+
   }
-  
