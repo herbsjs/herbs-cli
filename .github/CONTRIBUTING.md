@@ -49,7 +49,7 @@ All the Herbs organization libraries uses [seemantic release](https://www.npmjs.
 - Generate changelog
 - Control version
 - Publish to npm via github actions
-Please use `mpm run commit` for commit .
+Please use `npm run commit` for commit .
 
 
 ## Resources
