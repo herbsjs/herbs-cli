@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/herbsjs/herbs-cli/compare/v1.4.4...v1.5.0) (2021-10-07)
+
+
+### Features
+
+* this change allows a usecase to be available or not on graphql ([38563a7](https://github.com/herbsjs/herbs-cli/commit/38563a7e0cd2fb4dfda9a3b9c066cd8dbcc262cb))
+
 ## [1.4.4](https://github.com/herbsjs/herbs-cli/compare/v1.4.3...v1.4.4) (2021-10-04)
 
 
