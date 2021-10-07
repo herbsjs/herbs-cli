@@ -18,6 +18,8 @@ async function generateSchema(config) {
     const conn = await db.factory(config) 
     const repositories = await repositoriesFactory(conn)
     for(const obj of usecases){
+        if(!obj.tags.type) continue
+        
         if(obj.tags.type === 'read')
             UCqueries.push(obj.usecase(repositories))
         else
@@ -34,7 +36,6 @@ async function generateSchema(config) {
 
     return { typeDefs, resolvers }
 }
-
 
 module.exports = async (app, config) => {
     const schema = makeExecutableSchema(await generateSchema(config))
