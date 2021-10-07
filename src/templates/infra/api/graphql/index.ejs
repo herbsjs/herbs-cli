@@ -37,7 +37,6 @@ async function generateSchema(config) {
     return { typeDefs, resolvers }
 }
 
-
 module.exports = async (app, config) => {
     const schema = makeExecutableSchema(await generateSchema(config))
     addSchemaLevelResolveFunction(schema, () => {})
