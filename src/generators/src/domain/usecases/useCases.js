@@ -3,7 +3,7 @@ const { objToString } = require('../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
-async function generateRequestScheema (schema) {
+async function generateRequestschema (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
@@ -51,7 +51,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             pascalCase: name,
             camelCase: camelCase(name)
           },
-          request: await generateRequestScheema(schema)
+          request: await generateRequestschema(schema)
         }
       })
     }

@@ -49,16 +49,16 @@ const value4type = {
   Array: []
 }
 
-function generateMockObj (scheema) {
+function generateMockObj (schema) {
   const obj = {}
-  for (const key of Object.keys(scheema)) {
-    obj[key] = value4type[scheema[key].type.name]
+  for (const key of Object.keys(schema)) {
+    obj[key] = value4type[schema[key].type.name]
   }
   return obj
 }
 
-function generateRequestObject (scheema, action, validReq) {
-  const obj = generateMockObj(scheema)
+function generateRequestObject (schema, action, validReq) {
+  const obj = generateMockObj(schema)
   if (validReq) return validUseCaseRequests[action](obj)
   return invalidUseCaseRequests[action](obj)
 }
