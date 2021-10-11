@@ -8,17 +8,17 @@ const renderShelfHTML = require('@herbsjs/herbsshelf')
 const { generateRoutes } = require('@herbsjs/herbs2rest')
 const repositoriesFactory = require('../../../infra/data/repositories')
 
-function cloneUsecases(usecases){
+function cloneUsecases (usecases) {
     return Promise.all(usecases.map(uc => {
-        const clonedUC = { ...uc}
+        const clonedUC = { ...uc }
         clonedUC.usecase = clonedUC.usecase({})()
         return clonedUC
     }))
 }
 
-const newRoute = (usecase, useId) => { 
+const newRoute = (usecase, useId) => {
     const route = { usecase }
-    if(useId) route.id = 'id'
+    if (useId) route.id = 'id'
     return route
 }
 const mapUcToHTTPVerb = {
@@ -40,8 +40,8 @@ const mapUcToHTTPVerb = {
     },
 }
 
-async function prepareRoutes(config){
-    const conn = await db.factory(config) 
+async function prepareRoutes (config) {
+    const conn = await db.factory(config)
     const repositories = await repositoriesFactory(conn)
 
     // groupBy group
@@ -53,24 +53,24 @@ async function prepareRoutes(config){
 
     const routes = Object.keys(ucByGroup).map(group => {
         const route = {
-            name: `'${camelCase(group)}'`
+            name: `${camelCase(group)}`
         }
         for (const obj of ucByGroup[group]) {
             const uc = obj.usecase(repositories)
             const ucDescription = uc().description.toLowerCase()
-            
-            for(const ucType of Object.keys(mapUcToHTTPVerb))
-                if (ucDescription.includes(ucType)) 
+
+            for (const ucType of Object.keys(mapUcToHTTPVerb))
+                if (ucDescription.includes(ucType))
                     route[mapUcToHTTPVerb[ucType].route] = newRoute(uc, mapUcToHTTPVerb[ucType].useId)
         }
         return route
     })
-    
+
     return Promise.all(routes)
 }
 
 module.exports = async (app, config) => {
-    app.use(json({limit: '50mb'}))
+    app.use(json({ limit: '50mb' }))
     app.use(cors())
 
     const router = new express.Router()
