@@ -1,3 +1,18 @@
+## [1.5.3](https://github.com/herbsjs/herbs-cli/compare/v1.5.2...v1.5.3) (2021-10-12)
+
+
+### Bug Fixes
+
+* fix bug [#62](https://github.com/herbsjs/herbs-cli/issues/62) ([0d38396](https://github.com/herbsjs/herbs-cli/commit/0d383968380588c479b291e7a22e99c8dbb49c60))
+* fix bugs [#60](https://github.com/herbsjs/herbs-cli/issues/60) [#62](https://github.com/herbsjs/herbs-cli/issues/62) [#63](https://github.com/herbsjs/herbs-cli/issues/63) ([b65909f](https://github.com/herbsjs/herbs-cli/commit/b65909fb37bf282f4275eb64044e1500a54bf7cf))
+
+## [1.5.2](https://github.com/herbsjs/herbs-cli/compare/v1.5.1...v1.5.2) (2021-10-12)
+
+
+### Bug Fixes
+
+* herbs update - Entity with methods [#65](https://github.com/herbsjs/herbs-cli/issues/65) ([4651455](https://github.com/herbsjs/herbs-cli/commit/465145555a5530c111130e6dde122016c10e0653))
+
 ## [1.5.1](https://github.com/herbsjs/herbs-cli/compare/v1.5.0...v1.5.1) (2021-10-12)
 
 

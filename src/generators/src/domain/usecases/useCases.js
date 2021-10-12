@@ -1,12 +1,14 @@
 const useCases = ['create', 'update', 'delete', 'getById']
 const { objToString } = require('../../../utils')
 const camelCase = require('lodash.camelcase')
+const startCase = require('lodash.startCase')
 const fs = require('fs')
 
 async function generateRequestschema (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
+    if (schema[key] === Function) return obj
     if (name === 'id') return obj
     obj[name] = type.name || type.constructor.name
     return obj
@@ -32,7 +34,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
       const useCaseName = `${action}${name}`
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${useCaseName}.js`
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.js`
 
       let type = 'read'
       for (const t of ['create', 'update', 'delete']) {
@@ -48,7 +50,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
         target: ucPath,
         props: {
           name: {
-            pascalCase: name,
+            raw: name,
+            pascalCase: startCase(camelCase(name)).replace(/ /g, ''),
             camelCase: camelCase(name)
           },
           request: await generateRequestschema(schema)

@@ -1,7 +1,7 @@
 const { usecase, step, Ok } = require('@herbsjs/herbs')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
-  usecase('Delete <%= props.name.pascalCase %>', {
+  usecase('Delete the <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
       id: Number
@@ -11,11 +11,12 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     response: Boolean,
 
     //Authorization with Audit
-    // authorize: user => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(user),
+    // authorize: (user) => (user.canDelete<%= props.name.pascalCase %> ? Ok() : Err()),
+    authorize: () => Ok(),
 
-    'Update the <%= props.name.pascalCase %>': step(async ctx => {
-      await <%= props.name.camelCase %>Repository.deleteByID(parseInt(ctx.req.id))
+    'Delete the <%= props.name.raw %>': step(async ctx => {
+      const <%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON({ id: ctx.req.id })
+      await <%= props.name.camelCase %>Repository.delete(<%= props.name.camelCase %>)
       return Ok()
     })
   })

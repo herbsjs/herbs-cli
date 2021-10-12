@@ -2,6 +2,7 @@ const { objToString } = require('../../utils')
 const { filesystem } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
+const camelCase = require('lodash.camelcase')
 
 function generateEntities (from, to, level = './') {
   let requires = {}
@@ -41,7 +42,7 @@ function updateEntities (entitiesPath, level = './') {
       splittedFileName.pop() === 'js' &&
       splittedFileName[0] !== 'index') {
       const entity = require(`${entitiesPath}/${element}`)
-      requires[entity.name] = `require('${level}${element}')`
+      requires[camelCase(entity.name)] = `require('${level}${element}')`
     }
   })
   return requires

@@ -12,17 +12,18 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     response: <%= props.name.pascalCase %>,
 
     //Authorization with Audit
-    // authorize: user => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(user),
+    // authorize: (user) => (user.canFindOne<%= props.name.pascalCase %> ? Ok() : Err()),
+    authorize: () => Ok(),
 
-    'Find the <%= props.name.pascalCase %>': step(async ctx => {
-      // ctx.ret is the Use Case return
-      const [result] = await <%= props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id)) 
+    'Find the <%= props.name.raw %>': step(async ctx => {
+      const id = ctx.req.id
+      const [result] = await <%= props.name.camelCase %>Repository.findByID(id) 
       if (!result) return Err.notFound({ 
-        message: `<%= props.name.pascalCase %> entity not found by id: ${ctx.req.id}`,
-        payload: { entity: '<%= props.name.pascalCase %>' }
+        message: `<%= props.name.raw %> entity not found by ID: ${id}`,
+        payload: { entity: '<%= props.name.raw %>', id }
       })
       
+      // ctx.ret is the return value of a use case
       return (ctx.ret = <%= props.name.pascalCase %>.fromJSON(result))
     })
   })

@@ -10,12 +10,4 @@ module.exports = class <%= props.name.pascalCase %>Repository extends Repository
             knex: connection
         })
     }
-
-    async deleteByID(id) {
-        const ret = await this.runner
-          .where('id', id)
-          .delete()
-    
-        return ret === 1
-    }
 }

@@ -2,12 +2,14 @@ const delete<%= props.name.pascalCase %> = require('./delete<%= props.name.pasca
 const assert = require('assert')
 
 
-describe('Delete <%= props.name.pascalCase %>', () => {
-  const authorizedUser = { hasAccess: true }
+describe('Delete the <%= props.name.pascalCase %>', () => {
+  function aUser({ hasAccess }) {
+    return { hasAccess }
+  }
 
   describe('Valid <%= props.name.pascalCase %>', () => {
 
-    it('should delete <%= props.name.pascalCase %> if is valid', async () => {
+    it('should delete the <%= props.name.pascalCase %> if is valid', async () => {
       // Given
       const injection = {
         <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
@@ -25,6 +27,26 @@ describe('Delete <%= props.name.pascalCase %>', () => {
       // Then
       assert.ok(ret.isOk)      
 
+    })
+  })
+
+  describe('Invalid <%= props.name.pascalCase %>', () => {
+
+    it('should not delete the invalid <%= props.name.pascalCase %>', async () => {
+      // Given
+      const injection = {}
+      const user = aUser({ hasAccess: true })
+      /*{ <%= props.request %> }*/
+      const req = { id : '5' }
+
+      // When
+      const uc = delete<%= props.name.pascalCase %>(injection)()
+      await uc.authorize(<%= props.name.camelCase %>)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isErr)
+      assert.deepStrictEqual(ret.err, {request :[{id:[{wrongType:"Number"}]}]})
     })
   })
 })

@@ -12,18 +12,18 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     response: <%= props.name.pascalCase %>,
 
     //Authorization with Audit
-    // authorize: user => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(user),
+    // authorize: (user) => (user.canCreate<%= props.name.pascalCase %> ? Ok() : Err()),
+    authorize: () => Ok(),
 
     //Step description and function
-    'Check if the <%= props.name.pascalCase %> is valid': step(ctx => {
+    'Check if the <%= props.name.raw %> is valid': step(ctx => {
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(ctx.req)
       ctx.<%= props.name.camelCase %>.id = Math.floor(Math.random() * 100000)
       
       if (!ctx.<%= props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
-          message: 'The <%= props.name.pascalCase %> entity is invalid', 
-          payload: { entity: '<%= props.name.pascalCase %>' },
+          message: 'The <%= props.name.raw %> entity is invalid', 
+          payload: { entity: '<%= props.name.raw %>' },
           cause: ctx.<%= props.name.camelCase %>.errors 
         })
 
@@ -31,8 +31,8 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
       return Ok() 
     }),
 
-    'Save the <%= props.name.pascalCase %>': step(async ctx => {
-      // ctx.ret is the Use Case return
+    'Save the <%= props.name.raw %>': step(async ctx => {
+      // ctx.ret is the return value of a use case
       return (ctx.ret = await <%= props.name.camelCase %>Repository.insert(ctx.<%= props.name.camelCase %>)) 
     })
   })
