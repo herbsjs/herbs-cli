@@ -1,3 +1,17 @@
+## [1.5.1](https://github.com/herbsjs/herbs-cli/compare/v1.5.0...v1.5.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* remove single quotes from REST endpoints ([acebcd1](https://github.com/herbsjs/herbs-cli/commit/acebcd148ce0101c1542acffc92a7dd7f828c6af))
+
+# [1.5.0](https://github.com/herbsjs/herbs-cli/compare/v1.4.4...v1.5.0) (2021-10-07)
+
+
+### Features
+
+* this change allows a usecase to be available or not on graphql ([38563a7](https://github.com/herbsjs/herbs-cli/commit/38563a7e0cd2fb4dfda9a3b9c066cd8dbcc262cb))
+
 ## [1.4.4](https://github.com/herbsjs/herbs-cli/compare/v1.4.3...v1.4.4) (2021-10-04)
 
 
