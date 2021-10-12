@@ -2,14 +2,14 @@ const delete<%= props.name.pascalCase %> = require('./delete<%= props.name.pasca
 const assert = require('assert')
 
 
-describe('Delete <%= props.name.pascalCase %>', () => {
+describe('Delete the <%= props.name.pascalCase %>', () => {
   function aUser({ hasAccess }) {
     return { hasAccess }
   }
 
   describe('Valid <%= props.name.pascalCase %>', () => {
 
-    it('should delete <%= props.name.pascalCase %> if is valid', async () => {
+    it('should delete the <%= props.name.pascalCase %> if is valid', async () => {
       // Given
       const injection = {
         <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
@@ -33,7 +33,7 @@ describe('Delete <%= props.name.pascalCase %>', () => {
 
   describe('Invalid <%= props.name.pascalCase %>', () => {
 
-    it('should not delete invalid <%= props.name.pascalCase %>', async () => {
+    it('should not delete the invalid <%= props.name.pascalCase %>', async () => {
       // Given
       const injection = {}
       const user = aUser({ hasAccess: true })
