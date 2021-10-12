@@ -1,7 +1,7 @@
 const { usecase, step, Ok } = require('@herbsjs/herbs')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
-  usecase('Delete <%= props.name.pascalCase %>', {
+  usecase('Delete the <%= props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
       id: Number
