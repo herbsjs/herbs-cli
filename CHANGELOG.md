@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/herbsjs/herbs-cli/compare/v1.5.1...v1.5.2) (2021-10-12)
+
+
+### Bug Fixes
+
+* herbs update - Entity with methods [#65](https://github.com/herbsjs/herbs-cli/issues/65) ([4651455](https://github.com/herbsjs/herbs-cli/commit/465145555a5530c111130e6dde122016c10e0653))
+
 ## [1.5.1](https://github.com/herbsjs/herbs-cli/compare/v1.5.0...v1.5.1) (2021-10-12)
 
 
