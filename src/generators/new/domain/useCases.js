@@ -1,7 +1,6 @@
 const useCases = ['create', 'update', 'delete', 'getById']
-const { objToString } = require('../../utils')
+const { objToString, pascalCase } = require('../../utils')
 const camelCase = require('lodash.camelcase')
-const startCase = require('lodash.startCase')
 const fs = require('fs')
 
 async function generateRequest (schema) {
@@ -51,7 +50,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
         props: {
           name: {
             raw: name,
-            pascalCase: startCase(camelCase(name)).replace(/ /g, ''),
+            pascalCase: pascalCase(name),
             camelCase: camelCase(name)
           },
           request: await generateRequest(schema)
