@@ -14,18 +14,18 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     response: <%= props.name.pascalCase %>,
 
     //Authorization with Audit
-    // authorize: user => (user.canUpdate<%= props.name.pascalCase %> ? Ok() : Err()),
-    authorize: user => Ok(user),
+    // authorize: (user) => (user.canUpdate<%= props.name.pascalCase %> ? Ok() : Err()),
+    authorize: () => Ok(),
 
     //Step description and function
-    'Check if the <%= props.name.pascalCase %> is valid': step(async ctx => {
+    'Check if the <%= props.name.raw %> is valid': step(async ctx => {
       const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id))
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req ])
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)
 
       if (!ctx.<%= props.name.camelCase %>.isValid()) return Err.invalidEntity({
         message: 'The <%= props.name.pascalCase %> entity is invalid', 
-        payload: { entity: '<%= props.name.pascalCase %>' },  
+        payload: { entity: '<%= props.name.raw %>' },  
         cause: ctx.<%= props.name.camelCase %>.errors
       })
       
@@ -33,8 +33,8 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
       return Ok() 
     }),
 
-    'Update the <%= props.name.pascalCase %>': step(async ctx => {
-      // ctx.ret is the Use Case return
+    'Update the <%= props.name.raw %>': step(async ctx => {
+      // ctx.ret is the return value of a use case
       return (ctx.ret = await <%= props.name.camelCase %>Repository.update(ctx.<%= props.name.camelCase %>)) 
     })
   })
