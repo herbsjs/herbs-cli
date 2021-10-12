@@ -42,7 +42,7 @@ const invalidUseCaseRequests = {
 
 const useCases = Object.keys(validUseCaseRequests)
 
-const value4type = {
+const valueType = {
   String: "'string'",
   Number: 99,
   Boolean: true,
@@ -52,7 +52,7 @@ const value4type = {
 function generateMockObj (schema) {
   const obj = {}
   for (const key of Object.keys(schema)) {
-    obj[key] = value4type[schema[key].type.name]
+    obj[key] = valueType[schema[key].type.name]
   }
   return obj
 }
