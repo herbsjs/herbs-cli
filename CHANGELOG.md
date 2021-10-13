@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/herbsjs/herbs-cli/compare/v1.5.4...v1.6.0) (2021-10-13)
+
+
+### Features
+
+* getAll route implementation ([357932b](https://github.com/herbsjs/herbs-cli/commit/357932b901dd8273a8cb66dd1d5cfa2c7661fc13))
+
 ## [1.5.4](https://github.com/herbsjs/herbs-cli/compare/v1.5.3...v1.5.4) (2021-10-12)
 
 
