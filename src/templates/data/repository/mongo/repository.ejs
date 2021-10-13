@@ -2,9 +2,18 @@ const Repository = require('./baseRepository')
 
 module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
     constructor(mongoInstance){
-        super({ 
-            collection: '<%= props.name.camelCase %>',  
-            mongo: mongoInstance  
+        super({
+            collection: '<%= props.name.camelCase %>',
+            mongo: mongoInstance
         })
+    }
+
+    async findAll({ offset = 0, limit = 0, sort = {}, query = {} }) {
+        return await this.collection
+            .find(query)
+            .limit(limit)
+            .skip(offset)
+            .sort(sort)
+            .toArray()
     }
 }
