@@ -13,7 +13,7 @@ describe('Delete the <%= props.name.pascalCase %>', () => {
       // Given
       const injection = {
         <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
-          async deleteByID(id) { return true }
+          async delete(user) { return true }
         })
       }
       const user = aUser({ hasAccess: true })
