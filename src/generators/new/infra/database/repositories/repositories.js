@@ -15,7 +15,7 @@ async function generateRepositories(generate, filesystem, db) {
     if (fs.existsSync(repositoryPath)) continue
 
     await generate({
-      template: `data/repository/${db}/repository.ejs`,
+      template: `infra/data/repository/${db}/repository.ejs`,
       target: repositoryPath,
       props: {
         name: {
@@ -51,13 +51,13 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
 
     if (db === 'mongo') {
       await generate({
-        template: 'data/repository/mongo/baseRepository.ejs',
+        template: 'infra/data/repository/mongo/baseRepository.ejs',
         target: 'src/infra/data/repositories/baseRepository.js'
       })
     }
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
     await generate({
-      template: 'data/repository/index.ejs',
+      template: 'infra/data/repository/index.ejs',
       target: 'src/infra/data/repositories/index.js',
       props: { requires: objToString(requires) }
     })
