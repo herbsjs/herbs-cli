@@ -31,9 +31,9 @@ async function generateRepositories(generate, filesystem, db) {
 
 async function updateRepositories(generate, filesystem) {
   const paths = {
-    mongo: '/src/infra/data/repositories/baseRepository.js',
-    sqlserver: '/src/infra/config/sqlserver.js',
-    postgres: '/src/infra/config/postgres.js'
+    mongo: '/src/infra/database/repositories/mongo.js',
+    sqlserver: '/src/infra/database/repositories/sqlserver.js',
+    postgres: '/src/infra/database/repositories/postgres.js'
   }
 
   const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
@@ -49,12 +49,6 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
   for (const db of ['postgres', 'sqlserver', 'mongo']) {
     if (!options[db]) continue
 
-    if (db === 'mongo') {
-      await generate({
-        template: 'infra/data/repository/mongo/baseRepository.ejs',
-        target: 'src/infra/data/repositories/baseRepository.js'
-      })
-    }
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
     await generate({
       template: 'infra/data/repository/index.ejs',
