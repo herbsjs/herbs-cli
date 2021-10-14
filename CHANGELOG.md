@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/herbsjs/herbs-cli/compare/v1.6.0...v1.6.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* implementation a findAll method in mongodb repository template ([ea4c592](https://github.com/herbsjs/herbs-cli/commit/ea4c592f9ae024ebf18775c9d2cc62423b839635)), closes [#73](https://github.com/herbsjs/herbs-cli/issues/73)
+
 # [1.6.0](https://github.com/herbsjs/herbs-cli/compare/v1.5.4...v1.6.0) (2021-10-13)
 
 
