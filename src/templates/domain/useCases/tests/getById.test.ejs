@@ -2,12 +2,12 @@ const getById<%= props.name.pascalCase %> = require('./getById<%= props.name.pas
 const assert = require('assert')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 
-describe('Find one <%= props.name.pascalCase %>', () => {
+describe('Find one <%= props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+  describe('Valid <%= props.name.raw %>', () => {
 
-    it('should return <%= props.name.pascalCase %> if is valid', async () => {
+    it('should return <%= props.name.raw %> if is valid', async () => {
       // Given
       const retInjection = <%= props.name.pascalCase %>.fromJSON(<%= props.mock %>)
 
@@ -31,7 +31,7 @@ describe('Find one <%= props.name.pascalCase %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Invalid <%= props.name.raw %>', () => {
 
     it('should not return if input is invalid', async () => {
       // Given

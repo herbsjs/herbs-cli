@@ -35,9 +35,11 @@ herbs new
     │       ├── index.js
     │       └── user
     │           ├── createUser.js
-    │           ├── deleteUser.js
+    │           ├── deleteUser.js  
+    │           ├── getAllUser.js
     │           ├── getByIdUser.js
     │           ├── updateUser.js
+    │           ├── getAllUser.test.js
     │           ├── createUser.test.js
     │           ├── deleteUser.test.js
     │           ├── getByIdUser.test.js

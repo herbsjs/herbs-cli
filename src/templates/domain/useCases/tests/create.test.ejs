@@ -2,12 +2,12 @@ const create<%= props.name.pascalCase %> = require('./create<%= props.name.pasca
 const assert = require('assert')
 
 
-describe('Create <%= props.name.pascalCase %>', () => {
+describe('Create <%= props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+  describe('Valid <%= props.name.raw %>', () => {
 
-    it('should add <%= props.name.pascalCase %> if is valid', async () => {
+    it('should add <%= props.name.raw %> if is valid', async () => {
       // Given
       const injection = {
         <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
@@ -29,9 +29,9 @@ describe('Create <%= props.name.pascalCase %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Invalid <%= props.name.raw %>', () => {
 
-    it('should not create invalid <%= props.name.pascalCase %>', async () => {
+    it('should not create invalid <%= props.name.raw %>', async () => {
       // Given
       const injection = {}
 

@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/herbsjs/herbs-cli/compare/v1.5.4...v1.6.0) (2021-10-13)
+
+
+### Features
+
+* getAll route implementation ([357932b](https://github.com/herbsjs/herbs-cli/commit/357932b901dd8273a8cb66dd1d5cfa2c7661fc13))
+
+## [1.5.4](https://github.com/herbsjs/herbs-cli/compare/v1.5.3...v1.5.4) (2021-10-12)
+
+
+### Bug Fixes
+
+* bug when deleting a entity ([eef881b](https://github.com/herbsjs/herbs-cli/commit/eef881b90cb17a807bd653d83ba67fbafff76f9c))
+
 ## [1.5.3](https://github.com/herbsjs/herbs-cli/compare/v1.5.2...v1.5.3) (2021-10-12)
 
 

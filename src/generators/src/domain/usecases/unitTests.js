@@ -27,7 +27,8 @@ const validUseCaseRequests = {
   },
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  getById: (obj) => { return { id: obj.id } }
+  getById: (obj) => { return { id: obj.id } },
+  getAll: (obj) => { return [ obj, obj, obj ] }
 }
 const invalidUseCaseRequests = {
   create: (obj) => {
@@ -37,7 +38,8 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  getById: () => { return { id: null } }
+  getById: () => { return { id: null } },
+  getAll: () => { return [] }
 }
 
 const useCases = Object.keys(validUseCaseRequests)
@@ -80,7 +82,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
         props: {
           name: {
             pascalCase: name,
-            camelCase: camelCase(name)
+            camelCase: camelCase(name),
+            raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
             valid: objToString(generateRequestObject(schema, action, true)),

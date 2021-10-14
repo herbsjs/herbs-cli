@@ -3,12 +3,12 @@ const assert = require('assert')
 const { <%= props.name.pascalCase %> } = require('../../entities')
 
 
-describe('Update <%= props.name.pascalCase %>', () => {
+describe('Update <%= props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+  describe('Valid <%= props.name.raw %>', () => {
 
-    it('should update <%= props.name.pascalCase %> if is valid', async () => {
+    it('should update <%= props.name.raw %> if is valid', async () => {
       // Given
       const retInjection = <%= props.name.pascalCase %>.fromJSON(<%= props.mock %>)
       const injection = {
@@ -31,7 +31,7 @@ describe('Update <%= props.name.pascalCase %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Invalid <%= props.name.raw %>', () => {
 
     it('should not update invalid <%= props.name.pascalCase %>', async () => {
       // Given

@@ -1,4 +1,5 @@
 const { usecase, step, Ok } = require('@herbsjs/herbs')
+const { <%= props.name.pascalCase %> } = require('../../entities')
 
 const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
   usecase('Delete the <%= props.name.pascalCase %>', {
