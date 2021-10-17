@@ -27,7 +27,7 @@ async function installPkgs (useYarn, pkgs, print) {
 }
 
 const optionalPackages = {
-  mongo: ['@herbsjs/herbs2mongo'],
+  mongo: ['@herbsjs/herbs2mongo', 'mongodb'],
   postgres: ['@herbsjs/herbs2knex', 'pg'],
   sqlserver: ['@herbsjs/herbs2knex', 'tedious'],
   rest: ['express@4.17.1', 'cors@2.8.5', '@herbsjs/herbs2rest'],

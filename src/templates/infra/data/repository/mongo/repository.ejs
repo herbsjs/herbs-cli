@@ -1,16 +1,18 @@
 const Repository = require('./baseRepository')
 const { <%= props.name.camelCase %> } = require('../domain/entities/<%= props.name.camelCase %>')
 const { Repository } = require('@herbsjs/herbs2mongo')
-const database = 'herbs2mongo_testdb'
+const { MongoClient } = require("mongodb");
 
 module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
-    constructor(mongoInstance){
+    constructor(conStr){
         super({ 
             entity: <%= props.name.camelCase %>,
             collection: '<%= props.name.camelCase %>',
             ids: ['id'],  
-            database,
-            mongo: mongoInstance  
+            mongo: new MongoClient(conStr, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+              })  
         })
     }
 }
