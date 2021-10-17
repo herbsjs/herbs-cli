@@ -1,4 +1,4 @@
-const useCases = ['create', 'update', 'delete', 'getById']
+const useCases = ['create', 'update', 'delete', 'getAll', 'getById']
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
