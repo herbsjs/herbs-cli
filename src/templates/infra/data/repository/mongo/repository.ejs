@@ -4,15 +4,12 @@ const { Repository } = require('@herbsjs/herbs2mongo')
 const { MongoClient } = require("mongodb");
 
 module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
-    constructor(conStr){
+    constructor(connection){
         super({ 
             entity: <%= props.name.camelCase %>,
             collection: '<%= props.name.camelCase %>',
             ids: ['id'],  
-            mongo: new MongoClient(conStr, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-              })  
+            mongo: connection
         })
     }
 }
