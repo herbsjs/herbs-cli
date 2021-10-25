@@ -1,0 +1,13 @@
+const { <%= props.name.pascalCase %> } = require('../../../domain/entities')
+const { Repository } = require('@herbsjs/herbs2mongo')
+
+module.exports = class <%= props.name.pascalCase %>Repository extends Repository {
+    constructor(connection){
+        super({ 
+            entity: <%= props.name.pascalCase %>,
+            collection: '<%= props.name.camelCase %>',
+            ids: ['id'],  
+            mongodb: connection
+        })
+    }
+}
