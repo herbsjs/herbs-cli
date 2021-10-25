@@ -3,7 +3,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
   for (const db of databases) {
     if (!options[db]) continue
     await generate({
-      template: `data/database/${db}/database.ejs`,
+      template: `infra/data/database/${db}/database.ejs`,
       target: 'src/infra/data/database/index.js'
     })
   }

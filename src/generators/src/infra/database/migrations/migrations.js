@@ -37,7 +37,7 @@ module.exports =
             .substring(0, 14)
 
           await generate({
-            template: `data/database/${db.toLowerCase()}/migration.ejs`,
+            template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
             target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
             props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
           })
