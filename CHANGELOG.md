@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/herbsjs/herbs-cli/compare/v1.7.0...v1.7.1) (2021-10-25)
+
+
+### Bug Fixes
+
+* fixed lodash.startCase not found ([d236c23](https://github.com/herbsjs/herbs-cli/commit/d236c23f935e3e79e576a437854c8b5b8e4567ae))
+
 # [1.7.0](https://github.com/herbsjs/herbs-cli/compare/v1.6.1...v1.7.0) (2021-10-25)
 
 
