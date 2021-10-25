@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/herbsjs/herbs-cli/compare/v1.6.1...v1.7.0) (2021-10-25)
+
+
+### Bug Fixes
+
+* use intance connector into repository ([7349854](https://github.com/herbsjs/herbs-cli/commit/7349854b71770236f4a13b72a222cc11ea729345)), closes [#47](https://github.com/herbsjs/herbs-cli/issues/47)
+
+
+### Features
+
+* added herbs2mongo into template ([cfdc1aa](https://github.com/herbsjs/herbs-cli/commit/cfdc1aacc96a958cb82ec08ac8a4b73dc959b9d0)), closes [#47](https://github.com/herbsjs/herbs-cli/issues/47)
+* using herbs2mongo ([3f843ba](https://github.com/herbsjs/herbs-cli/commit/3f843ba0b5e0e19071cd3d97ef5e28cdf72af010)), closes [#47](https://github.com/herbsjs/herbs-cli/issues/47)
+
 ## [1.6.1](https://github.com/herbsjs/herbs-cli/compare/v1.6.0...v1.6.1) (2021-10-14)
 
 
