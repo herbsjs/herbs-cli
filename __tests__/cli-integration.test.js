@@ -2,17 +2,31 @@
 
 const { system, filesystem } = require('gluegun')
 const { expect } = require('chai')
-
-const src = filesystem.path(__dirname, '..')
-
-const cli = async (cmd) =>
-  system.run('node ' + filesystem.path(src, 'bin', 'herbs') + ` ${cmd}`)
+const fs = require('fs')
+const moveFolder = require('../utils/move-folder')
 
 const projectName = 'herbs-lab'
+const projectTmpName = 'project-tmp'
+const src = filesystem.path(__dirname, '..')
+const binPath = filesystem.path(src, 'bin', 'herbs')
+const tmpPath = filesystem.path(src, 'tmp', 'node_modules')
+const nodeModulesProjectTmpPath = filesystem.path(src, projectTmpName, 'node_modules')
+const projectGeneratedPath = filesystem.path(src, projectName)
+
+const cli = async (cmd) => system.run(`node ${binPath} ${cmd}`)
 
 describe('generates package.json', () => {
-  afterEach(() => {
-    filesystem.remove(projectName)
+  before(async () => {
+    await cli(`new --name ${projectTmpName}`)
+    await moveFolder(nodeModulesProjectTmpPath, tmpPath)
+    filesystem.remove(projectTmpName)
+
+    fs.mkdir(`${src}/${projectName}`, () => {})
+    await moveFolder(`${src}/tmp/`, projectGeneratedPath)
+  })
+
+  after(() => {
+    filesystem.remove(`${src}/${projectName}`)
   })
 
   it('must to use all custom options', async () => {
@@ -99,3 +113,4 @@ describe('checking commands output', () => {
     expect(await cli('--help')).to.not.equal(null)
   })
 })
+
