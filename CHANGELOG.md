@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/herbsjs/herbs-cli/compare/v1.7.1...v1.7.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* change updateUsecase to return Err.notFound when the entity doesnt exists ([d6b55d9](https://github.com/herbsjs/herbs-cli/commit/d6b55d9fc98002774c47494a2e04ad5066e94e28))
+
 ## [1.7.1](https://github.com/herbsjs/herbs-cli/compare/v1.7.0...v1.7.1) (2021-10-25)
 
 
