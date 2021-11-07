@@ -6,6 +6,7 @@ function isEmpty (obj) {
   return Object.keys(obj).length === 0
 }
 
+const username = require('git-user-name')
 const questions = [
   {
     type: 'input',
@@ -32,7 +33,7 @@ const questions = [
     filter (val) {
       return val.toLowerCase()
     },
-    default: 'Herbs CLI'
+    default: username ? username() : 'Herbs CLI'
   },
   {
     type: 'list',
@@ -70,6 +71,12 @@ const questions = [
       return val.toLowerCase()
     },
     default: 'optional'
+  },
+  {
+    type: 'confirm',
+    name: 'git',
+    message: 'Do you want to initialize a Git repository?',
+    default: false
   }
 ]
 
@@ -88,10 +95,8 @@ const cmd = {
     }
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`
-
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)
     process.chdir(dir)
-
     toolbox.parameters.options = options
     const generators = (await generator(toolbox)).new
     for (const layer of Object.keys(generators)) { await generators[layer]() }
