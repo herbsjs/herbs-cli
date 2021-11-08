@@ -9,7 +9,7 @@ module.exports = async ({ template: { generate }, system, filesystem }) => async
     console.log(`child process exited with code ${code}`)
   })
   
-  let directory = filesystem.cwd()
+  const directory = filesystem.cwd()
 
   await generate({
     template: 'infra/config/.gitignore.ejs',
