@@ -19,15 +19,16 @@ function invertObjValues (obj) {
   }
   return obj
 }
+const removeID = (obj) => {
+  delete obj.id
+  return obj
+}
 
 const validUseCaseRequests = {
-  create: (obj) => {
-    delete obj.id
-    return obj
-  },
+  create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  getById: (obj) => { return { id: obj.id } },
+  getById: removeID,
   getAll: (obj) => { return [ obj, obj, obj ] }
 }
 const invalidUseCaseRequests = {
@@ -86,8 +87,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
-            valid: objToString(generateRequestObject(schema, action, true, true)),
-            invalid: objToString(generateRequestObject(schema, action, false, true))
+            valid: objToString(generateRequestObject(schema, action, true)),
+            invalid: objToString(generateRequestObject(schema, action, false))
           },
           mock: objToString(generateRequestObject(schema, action))
         }
