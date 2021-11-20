@@ -45,7 +45,7 @@ const invalidUseCaseRequests = {
 const useCases = Object.keys(validUseCaseRequests)
 
 const valueType = {
-  String: "'string'",
+  String: "'a text'",
   Number: 99,
   Boolean: true,
   Array: []
@@ -86,8 +86,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
-            valid: objToString(generateRequestObject(schema, action, true)),
-            invalid: objToString(generateRequestObject(schema, action, false))
+            valid: objToString(generateRequestObject(schema, action, true, true)),
+            invalid: objToString(generateRequestObject(schema, action, false, true))
           },
           mock: objToString(generateRequestObject(schema, action))
         }
