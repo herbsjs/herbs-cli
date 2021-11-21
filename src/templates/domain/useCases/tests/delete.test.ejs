@@ -1,16 +1,16 @@
-const delete<%= props.name.pascalCase %> = require('./delete<%= props.name.pascalCase %>')
+const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
 const assert = require('assert')
 
 
-describe('Delete the <%= props.name.raw %>', () => {
+describe('Delete the <%- props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.raw %>', () => {
+  describe('Valid <%- props.name.raw %>', () => {
 
-    it('should delete the <%= props.name.raw %> if is valid', async () => {
+    it('should delete the <%- props.name.raw %> if is valid', async () => {
       // Given
       const injection = {
-        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
           async delete(entity) { return true }
         })
       }
@@ -18,7 +18,7 @@ describe('Delete the <%= props.name.raw %>', () => {
       const req = <%- props.request.valid %>
 
       // When
-      const uc = delete<%= props.name.pascalCase %>(injection)()
+      const uc = delete<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -28,15 +28,15 @@ describe('Delete the <%= props.name.raw %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.raw %>', () => {
+  describe('Invalid <%- props.name.raw %>', () => {
 
-    it('should not delete the invalid <%= props.name.pascalCase %>', async () => {
+    it('should not delete the invalid <%- props.name.pascalCase %>', async () => {
       // Given
-      /*{ <%= props.request %> }*/
+      /*{ <%- props.request %> }*/
       const req = { id : '5' }
 
       // When
-      const uc = delete<%= props.name.pascalCase %>({})()
+      const uc = delete<%- props.name.pascalCase %>({})()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

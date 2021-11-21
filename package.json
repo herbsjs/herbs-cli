@@ -10,9 +10,6 @@
     "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
     "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
     "test": "mocha __tests__ --timeout 90000",
-    "watch": "jest --watch",
-    "snapupdate": "jest --updateSnapshot",
-    "coverage": "jest --coverage",
     "semantic-release": "semantic-release",
     "commit": "npm run lint && cz"
   },
@@ -27,7 +24,6 @@
   "dependencies": {
     "-": "0.0.1",
     "@herbsjs/herbs": "^1.2.0",
-    "D": "^1.0.0",
     "glob": "^7.1.7",
     "gluegun": "^4.6.1",
     "inquirer": "^8.1.1",

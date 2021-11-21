@@ -28,7 +28,7 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  getById: removeID,
+  getById: (obj) => { return { id: obj.id } },
   getAll: (obj) => { return [ obj, obj, obj ] }
 }
 const invalidUseCaseRequests = {
@@ -60,7 +60,7 @@ function generateMockObj (schema) {
   return obj
 }
 
-function generateRequestObject (schema, action, validReq) {
+function generateRequestObject (schema, action, validReq = true) {
   const obj = generateMockObj(schema)
   if (validReq) return validUseCaseRequests[action](obj)
   return invalidUseCaseRequests[action](obj)
@@ -72,11 +72,9 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
   for (const entity of Object.keys(entities)) {
     const { name, schema } = entities[entity].prototype.meta
     for (const action of useCases) {
-      const useCaseName = `${action}${name}`
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${useCaseName}.test.js`
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}.test.js`
 
       if (fs.existsSync(ucPath)) continue
-
       await generate({
         template: `domain/useCases/tests/${action}.test.ejs`,
         target: ucPath,
@@ -87,10 +85,10 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
-            valid: objToString(generateRequestObject(schema, action, true)),
+            valid: objToString(generateRequestObject(schema, action)),
             invalid: objToString(generateRequestObject(schema, action, false))
           },
-          mock: objToString(generateRequestObject(schema, action))
+          mock: objToString(generateMockObj(schema))
         }
       })
     }
