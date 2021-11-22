@@ -18,18 +18,29 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     authorize: () => Ok(),
 
     //Step description and function
-    'Check if the <%= props.name.raw %> is valid': step(async ctx => {
+    'Check if the <%= props.name.raw %> exists': step(async ctx => {
       const <%= props.name.camelCase %> = await <%= props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id))
+      
+      if (!<%= props.name.camelCase %>) return Err.notFound({
+        message: 'The <%= props.name.pascalCase %> entity is invalid',
+        payload: { entity: '<%= props.name.raw %>' }
+      })
+
       const new<%= props.name.pascalCase %> = merge.all([ <%= props.name.camelCase %>, ctx.req ])
       ctx.<%= props.name.camelCase %> = <%= props.name.pascalCase %>.fromJSON(new<%= props.name.pascalCase %>)
+      
+      // returning Ok continues to the next step. Err stops the use case execution.
+      return Ok() 
+    }),
 
+    //Step description and function
+    'Check if the <%= props.name.raw %> is valid': step(async ctx => {
       if (!ctx.<%= props.name.camelCase %>.isValid()) return Err.invalidEntity({
         message: 'The <%= props.name.pascalCase %> entity is invalid', 
         payload: { entity: '<%= props.name.raw %>' },  
         cause: ctx.<%= props.name.camelCase %>.errors
       })
       
-      // returning Ok continues to the next step. Err stops the use case execution.
       return Ok() 
     }),
 

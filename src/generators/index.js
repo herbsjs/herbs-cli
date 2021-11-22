@@ -19,7 +19,8 @@ module.exports = async (tools) => {
       rest: options.rest ? await require('./new/infra/rest')(tools) : ignore,
       config: infra ? await require('./new/infra/config')(tools) : ignore,
       server: infra ? await require('./new/infra/server')(tools) : ignore,
-      index: await require('./new/index')(tools)
+      index: await require('./new/index')(tools),
+      git: options.git ? await require('./new/infra/git')(tools) : ignore
     },
     update: {
       entities: await require('./new/domain/entities')(tools, true),

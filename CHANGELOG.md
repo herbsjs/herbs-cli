@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/herbsjs/herbs-cli/compare/v1.7.2...v1.8.0) (2021-11-08)
+
+
+### Features
+
+* project generation with Git version control support ([2f79782](https://github.com/herbsjs/herbs-cli/commit/2f797829d68da13acaee367300f1d862bbefbd5c))
+* project generation with Git version control support ([44272be](https://github.com/herbsjs/herbs-cli/commit/44272bedd38bff474d6861477164e6d0f640f8b5))
+
+## [1.7.2](https://github.com/herbsjs/herbs-cli/compare/v1.7.1...v1.7.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* change updateUsecase to return Err.notFound when the entity doesnt exists ([d6b55d9](https://github.com/herbsjs/herbs-cli/commit/d6b55d9fc98002774c47494a2e04ad5066e94e28))
+
 ## [1.7.1](https://github.com/herbsjs/herbs-cli/compare/v1.7.0...v1.7.1) (2021-10-25)
 
 
