@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fs = require('fs-extra')
 
 async function moveFolder(src, destination) {
   try {
@@ -6,6 +6,7 @@ async function moveFolder(src, destination) {
       overwrite: true
     })
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err)
   }
 }
