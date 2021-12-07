@@ -13,17 +13,7 @@ async function generateRequestschema (schema) {
     obj[name] = type.name || type.constructor.name
     return obj
   }, {})
-
-  // convert plain JSON and remove quotation marks(")
-  const str = JSON.stringify(obj, null, 8)
-    .replace(/"/g, '')
-    .split('\n')
-
-  // remove first and last lines
-  str.shift()
-  str.pop()
-
-  return str.join('\n').trim()
+  return objToString(obj, 4, true)
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {

@@ -9,7 +9,9 @@ describe('Find one <%- props.name.raw %>', () => {
 
     it('should return <%- props.name.raw %>', async () => {
       // Given 
-      const mock = <%- props.mock %>
+      const mock = {
+        <%- props.mock %>
+      }
 
       const injection = {
         <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
@@ -17,7 +19,9 @@ describe('Find one <%- props.name.raw %>', () => {
         })
       }
 
-      const req = <%- props.request.valid %>
+      const req = {
+        <%- props.request.valid %>
+      }
 
       // When
       const uc = get<%- props.name.pascalCase %>ById(injection)()
@@ -41,7 +45,9 @@ describe('Find one <%- props.name.raw %>', () => {
         })
       }
 
-      const req = <%- props.request.invalid %>
+      const req = {
+        <%- props.request.invalid %>
+      }
 
       // When
       const uc = get<%- props.name.pascalCase %>ById(injection)()
@@ -50,7 +56,7 @@ describe('Find one <%- props.name.raw %>', () => {
 
       // Then
       assert.ok(ret.isErr)
-      assert.ok(ret.err.isNotFoundError)
+      assert.ok(ret.isNotFoundError)
     })
   })
 })

@@ -69,12 +69,12 @@ function generateRequestObject (schema, action, validReq = true) {
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
-  for (const entity of Object.keys(entities)) {
+  Object.keys(entities).map(async (entity) => {
     const { name, schema } = entities[entity].prototype.meta
-    for (const action of useCases) {
+    useCases.map(async(action) => {
       const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}.test.js`
 
-      if (fs.existsSync(ucPath)) continue
+      if (fs.existsSync(ucPath)) return
       await generate({
         template: `domain/useCases/tests/${action}.test.ejs`,
         target: ucPath,
@@ -85,12 +85,12 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
-            valid: objToString(generateRequestObject(schema, action)),
-            invalid: objToString(generateRequestObject(schema, action, false))
+            valid: objToString(generateRequestObject(schema, action), 4, true),
+            invalid: objToString(generateRequestObject(schema, action, false), 4, true)
           },
-          mock: objToString(generateMockObj(schema))
+          mock: objToString(generateMockObj(schema), 4, true)
         }
       })
-    }
-  }
+    })
+  })
 }

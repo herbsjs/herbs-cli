@@ -31,9 +31,9 @@ async function generateRepositories(generate, filesystem, db) {
 
 async function updateRepositories(generate, filesystem) {
   const paths = {
-    mongo: '/src/infra/database/repositories/mongo.js',
-    sqlserver: '/src/infra/database/repositories/sqlserver.js',
-    postgres: '/src/infra/database/repositories/postgres.js'
+    mongo: '/src/infra/config/mongo.js',
+    sqlserver: '/src/infra/config/sqlserver.js',
+    postgres: '/src/infra/config/postgres.js'
   }
 
   const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
