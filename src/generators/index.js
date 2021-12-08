@@ -15,10 +15,10 @@ module.exports = async (tools) => {
       migrations: (options.postgres || options.sqlserver) ? await require('./src/infra/database/migrations/migrations')(tools) : ignore,
       useCases: await require('./src/domain/useCases/useCases')(tools),
       useCasesTests: await require('./src/domain/usecases/unitTests')(tools),
-      graphql: options.graphql ? await require('./src/infra/graphql')(tools) : ignore,
-      rest: options.rest ? await require('./src/infra/rest')(tools) : ignore,
+      graphql: options.graphql ? await require('./src/infra/api/graphql')(tools) : ignore,
+      rest: options.rest ? await require('./src/infra/api/rest')(tools) : ignore,
       config: infra ? await require('./src/infra/config')(tools) : ignore,
-      server: infra ? await require('./src/infra/server')(tools) : ignore,
+      server: infra ? await require('./src/infra/api/server')(tools) : ignore,
       index: await require('./src/index')(tools),
       git: options.git ? await require('./src/infra/git')(tools) : ignore
     },
