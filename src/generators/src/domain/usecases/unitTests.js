@@ -75,6 +75,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}.test.js`
 
       if (fs.existsSync(ucPath)) return
+
+      const objOptions = { spaces: 4, extraSpaces: 4, removeQuotes: true }
       await generate({
         template: `domain/useCases/tests/${action}.test.ejs`,
         target: ucPath,
@@ -85,10 +87,10 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },
           request: {
-            valid: objToString(generateRequestObject(schema, action), 4, true),
-            invalid: objToString(generateRequestObject(schema, action, false), 4, true)
+            valid: objToString(generateRequestObject(schema, action), objOptions),
+            invalid: objToString(generateRequestObject(schema, action, false), objOptions)
           },
-          mock: objToString(generateMockObj(schema), 4, true)
+          mock: objToString(generateMockObj(schema), objOptions)
         }
       })
     })

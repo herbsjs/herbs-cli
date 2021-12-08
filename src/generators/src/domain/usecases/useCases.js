@@ -13,7 +13,8 @@ async function generateRequestschema (schema) {
     obj[name] = type.name || type.constructor.name
     return obj
   }, {})
-  return objToString(obj, 4, true)
+
+  return objToString(obj, { spaces: 2, removeQuotes: true, extraSpaces: 4 })
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
