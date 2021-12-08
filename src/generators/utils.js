@@ -1,5 +1,5 @@
 const camelCase = require('lodash.camelcase')
-const startCase = require('lodash.startCase')
+const startCase = require('lodash.startcase')
 
 module.exports = {
   objToString: (obj, { spaces = 4, removeQuotes = false, extraSpaces = 0 } = {}) => {

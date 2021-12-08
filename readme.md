@@ -16,7 +16,7 @@ Then run:
 herbs new
 ```
 
-![project-setup](./docs/ex2.png)
+![project-setup](./docs/ex3.png)
 
 ![project-structure](./docs/gif.gif)
 
@@ -88,9 +88,11 @@ Generate a new project based on your entities(or not)
 | Project author's name?                        | This is the author's name that will be used int the package.json.                                                              | herbs CLI                      | Charlie                       |
 | What license do you want to use?              | Use arrow keys to choose your License.                                                                                         | --                             | --                            |
 | Generate graphql layer?                       | This will generate a graphql layer for your domain.                                                                            | Y                              | n                             |
-| Generate rest layer?                          | Description                                                                                                                    | Y                              | n                             |
+| Generate rest layer?                          | This will generate a rest layer for your domain.                                                                                                                    | Y                              | n                             |
 | What database do you want to use?             | Use arrow keys to choose your Database.                                                                                        | --                             | --                            |
-| Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example-entities/ |
+
+| Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example/my-custom-entities/ |
+| Do you want to initialize a Git repository?             | This will initialize a git repository for your project.                                                                                                                    | N                              | y                             |
 
 ### herbs update
 
