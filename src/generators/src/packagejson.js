@@ -1,38 +1,12 @@
-/* eslint-disable no-console */
-const { exec } = require('child_process')
-function childProcess (process, print) {
-  return new Promise((resolve, reject) => {
-    print.info('[INFO] Installing dependencies...')
-    print.info(`> ${process}`)
-    const cp = exec(process)
-
-    cp.stdout.on('data', (data) => {
-      console.log(data.toString())
-    })
-
-    cp.on('exit', () => {
-      resolve()
-    })
-
-    cp.on('error', (error) => {
-      reject(error)
-    })
-  })
-}
-
-async function installPkgs (useYarn, pkgs, print) {
-  useYarn
-    ? await childProcess(`yarn add ${pkgs.join([' '])}`, print)
-    : await childProcess(`npm install ${pkgs.join([' '])}`, print)
-}
+const { objToString } = require('../utils')
 
 const optionalPackages = {
-  mongo: ['@herbsjs/herbs2mongo', 'mongodb'],
-  postgres: ['@herbsjs/herbs2knex', 'pg'],
-  sqlserver: ['@herbsjs/herbs2knex', 'tedious'],
-  rest: ['express@4.17.1', 'cors@2.8.5', '@herbsjs/herbs2rest'],
-  graphql: ['graphql@15.5.1', 'apollo-server@2.25.2',
-    'apollo-server-express@2.25.2', 'graphql-tools@8.1.0']
+  mongo: ['"@herbsjs/herbs2mongo": "^1.0.1"', '"mongodb": "^4.2.1"'],
+  postgres: ['"@herbsjs/herbs2knex": "^1.1.2"', '"pg": "^8.7.1"'],
+  sqlserver: ['"@herbsjs/herbs2knex": "^1.1.2"', '"tedious": "^13.2.0"'],
+  rest: ['"express": "^4.17.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.0"'],
+  graphql: ['"graphql": "^15.8.0"', '"apollo-server": "^3.5.0"',
+    '"apollo-server-express": "^3.5.0"', '"graphql-tools": "^8.2.0"']
 }
 
 const defaultOptions = (options) => {
@@ -55,8 +29,7 @@ module.exports =
     template: { generate },
     parameters: {
       options
-    },
-    print
+    }
   }) => async () => {
     options = defaultOptions(options)
     const migration = (options.postgres || options.sqlserver)
@@ -68,25 +41,15 @@ module.exports =
       "knex:runSeeds": "npx knex --knexfile knexFile.js seed:run"`
       : ''
 
-    await generate({
-      template: 'package.json.ejs',
-      target: 'package.json',
-      props: {
-        ...options,
-        migration
-      }
-    })
-
-    await installPkgs(options.yarn, ['@herbsjs/herbs', 'deepmerge'], print)
 
     let packages = [
-      '@herbsjs/herbs2gql',
-      '@herbsjs/herbsshelf',
-      'sugar-env@1.5.14',
-      'dotenv@10.0.0',
-      'nodemon',
-      'mocha',
-      'lodash.camelcase'
+      '"@herbsjs/herbs2gql": "^2.0.0"',
+      '"@herbsjs/herbsshelf": "^2.0.0"',
+      '"dotenv": "^10.0.0"',
+      '"nodemon": "^2.0.15"',
+      '"mocha": "^9.1.3"',
+      'lodash.camelcase": "^4.3.0"',
+      '"sugar-env": "^1.5.14"'
     ]
 
     for (const key of Object.keys(options)) {
@@ -94,6 +57,17 @@ module.exports =
         packages = packages.concat(optionalPackages[key])
       }
     }
+    packages = packages.filter(item => !!item)
 
-    await installPkgs(options.yarn, packages, print)
+    await generate({
+      template: 'package.json.ejs',
+      target: 'package.json',
+      props: {
+        ...options,
+        migration,
+        packages: objToString(packages, { removeQuotes: false, removeBraces: true, extraSpaces: 2 }) 
+      }
+    })
+
+    process.env['NODE_MODULES'] = `${__dirname}/../../../node_modules`
   }

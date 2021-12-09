@@ -2,13 +2,16 @@ const camelCase = require('lodash.camelcase')
 const startCase = require('lodash.startcase')
 
 module.exports = {
-  objToString: (obj, { spaces = 4, removeQuotes = false, extraSpaces = 0 } = {}) => {
+  objToString: (obj, { spaces = 4, removeBraces = false, extraSpaces = 0, removeQuotes = true } = {}) => {
 
-    let json = JSON.stringify(obj, null, spaces).replace(/"/g, '')
+    let json = JSON.stringify(obj, null, spaces)
+                   .replace(/\\"/g, '"')
+                   .replace(/""/g, '"')
+                   
+    if(removeQuotes) json = json.replace(/"/g, '')
 
     let lines = json.split('\n')
-
-    if(removeQuotes) {
+    if(removeBraces) {
       lines.shift()
       lines.pop()
     }
