@@ -8,7 +8,7 @@ describe('Find <%- props.name.raw %>s', () => {
       // Given
       const req = { limit:0, offset:0}
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async  findAll() { return [] }
         })
       }

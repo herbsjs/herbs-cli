@@ -1,7 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const glob = require('glob')
 
-function type2Str (Type) {
+function type2Str(Type) {
   const _type = new Type()
   if (_type instanceof String) return 'string'
   if (_type instanceof Number) return 'integer'
@@ -12,6 +12,9 @@ function type2Str (Type) {
 module.exports =
   async ({ template: { generate }, filesystem, parameters: { options } }) =>
     async () => {
+
+      process.stdout.write(`Generating Migration: `)
+
       const entities = require(`${filesystem.cwd()}/src/domain/entities`)
       const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`
 
@@ -51,4 +54,7 @@ module.exports =
           })
         }
       }
+
+      // eslint-disable-next-line no-console
+      console.info(`ok`)
     }

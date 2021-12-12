@@ -1,4 +1,7 @@
 module.exports = async ({ template: { generate } }) => async () => {
+
+  process.stdout.write(`Generating GraphQL: `)
+
   await generate({
     template: 'infra/api/graphql/mutations.ejs',
     target: 'src/infra/api/graphql/mutations.js'
@@ -28,4 +31,7 @@ module.exports = async ({ template: { generate } }) => async () => {
     template: 'infra/api/graphql/index.ejs',
     target: 'src/infra/api/graphql/index.js'
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

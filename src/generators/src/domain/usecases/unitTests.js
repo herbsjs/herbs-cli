@@ -3,7 +3,7 @@ const camelCase = require('lodash.camelcase')
 const { objToString } = require('../../../utils')
 const fs = require('fs')
 
-function invertObjValues (obj) {
+function invertObjValues(obj) {
   for (const key of Object.keys(obj)) {
     switch (typeof obj[key]) {
       case 'String':
@@ -29,7 +29,7 @@ const validUseCaseRequests = {
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
   getById: (obj) => { return { id: obj.id } },
-  getAll: (obj) => { return [ obj, obj, obj ] }
+  getAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
   create: (obj) => {
@@ -52,7 +52,7 @@ const valueType = {
   Array: []
 }
 
-function generateMockObj (schema) {
+function generateMockObj(schema) {
   const obj = {}
   for (const key of Object.keys(schema)) {
     obj[key] = valueType[schema[key].type.name]
@@ -60,19 +60,22 @@ function generateMockObj (schema) {
   return obj
 }
 
-function generateRequestObject (schema, action, validReq = true) {
+function generateRequestObject(schema, action, validReq = true) {
   const obj = generateMockObj(schema)
   if (validReq) return validUseCaseRequests[action](obj)
   return invalidUseCaseRequests[action](obj)
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
+
+  process.stdout.write(`Generating Use Cases Tests: `)
+
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
   Object.keys(entities).map(async (entity) => {
     const { name, schema } = entities[entity].prototype.meta
-    useCases.map(async(action) => {
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}.test.js`
+    useCases.map(async (action) => {
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}${entity}.test.js`
 
       if (fs.existsSync(ucPath)) return
 
@@ -95,4 +98,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       })
     })
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`) 
+
 }

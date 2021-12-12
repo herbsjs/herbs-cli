@@ -3,27 +3,7 @@ const { filesystem } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
 
-function generateEntities (from, to, level = './') {
-  let requires = {}
-  fs.mkdirSync(to, { recursive: true })
-  fs.readdirSync(from).forEach(element => {
-    if (fs.lstatSync(path.join(from, element)).isFile()) {
-      fs.copyFileSync(path.join(from, element), path.join(to, element))
-      const splittedElement = element.split('.')
-      const ext = splittedElement.pop()
-      if (ext === 'js') {
-        const entity = require(`${to}/${element}`)
-        requires[entity.name] = `require('${level}${element}')`
-      }
-    } else {
-      const result = generateEntities(path.join(from, element), path.join(to, element), `${level}${element}/`)
-      requires = Object.assign(requires, result)
-    }
-  })
-  return requires
-}
-
-function updateEntities (entitiesPath, level = './') {
+function updateEntities(entitiesPath, level = './') {
   let requires = {}
   fs.readdirSync(entitiesPath).forEach(element => {
     const elementPath = path.join(entitiesPath, element)
@@ -48,12 +28,14 @@ function updateEntities (entitiesPath, level = './') {
 }
 
 module.exports = async ({ template: { generate }, parameters: { options } }, isUpdate) => async () => {
+
+  process.stdout.write(`Generating Entities: `)
+
   let requires = {}
 
-  if (isUpdate) requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
-  else if (options.entities && options.entities !== true) {
-    requires = generateEntities(`../${options.entities}`, `${filesystem.cwd()}/src/domain/entities`)
-  } else {
+  if (isUpdate)
+    requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
+  else {
     await generate({
       template: 'domain/entities/user.ejs',
       target: 'src/domain/entities/user.js'
@@ -66,4 +48,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }, isU
     target: 'src/domain/entities/index.js',
     props: { requires: objToString(requires) }
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

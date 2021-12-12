@@ -4,6 +4,9 @@ const { objToString } = require('../../../utils')
 const requireRoute = (type, entityName, useId = false) => `{ usecase: require('../../../domain/usecases/${camelCase(entityName)}/${type}${entityName}')(repositories)${useId ? ', id: \'id\'' : ''}}`
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
+  
+  process.stdout.write(`Generating REST: `)
+  
   const usecases = require(`${filesystem.cwd()}/src/domain/usecases`)
 
   // groupBy tags
@@ -34,4 +37,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     target: 'src/infra/api/rest/index.js',
     props: { routes: objToString(routes) }
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

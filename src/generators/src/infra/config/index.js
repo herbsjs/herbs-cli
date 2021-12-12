@@ -2,6 +2,9 @@ const { objToString } = require('../../../utils')
 
 module.exports = async ({ template: { generate }, parameters: { options } }) => {
   return async () => {
+    
+    process.stdout.write(`Generating Config: `)
+
     const requires = {
       isProd: 'env.is(\'production\')',
       api: 'require(\'./api\')'
@@ -26,5 +29,8 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       target: 'src/infra/config/index.js',
       props: { requires: objToString(requires) }
     })
+
+    // eslint-disable-next-line no-console
+    console.info(`ok`)
   }
 }

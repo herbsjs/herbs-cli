@@ -42,6 +42,9 @@ async function updateRepositories(generate, filesystem) {
 }
 
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
+  
+  process.stdout.write(`Generating Repositories: `)
+  
   let requires = {}
 
   if (isUpdate) requires = await updateRepositories(generate, filesystem)
@@ -56,4 +59,7 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
       props: { requires: objToString(requires) }
     })
   }
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const { exec } = require('child_process')
-function childProcess (process, print) {
+function childProcess(process, print) {
   return new Promise((resolve, reject) => {
     print.info('[INFO] Installing dependencies...')
     print.info(`> ${process}`)
@@ -20,10 +20,10 @@ function childProcess (process, print) {
   })
 }
 
-async function installPkgs (useYarn, pkgs, print) {
+async function installPkgs(useYarn, pkgs, print) {
   useYarn
     ? await childProcess(`yarn add ${pkgs.join([' '])}`, print)
-    : await childProcess(`npm install ${pkgs.join([' '])}`, print)
+    : await childProcess(`npm install --save ${pkgs.join([' '])}`, print)
 }
 
 const optionalPackages = {
@@ -58,6 +58,9 @@ module.exports =
     },
     print
   }) => async () => {
+
+    process.stdout.write(`Generating package.json and running npm: `)
+
     options = defaultOptions(options)
     const migration = (options.postgres || options.sqlserver)
       ? `,
@@ -96,4 +99,7 @@ module.exports =
     }
 
     await installPkgs(options.yarn, packages, print)
+
+    // eslint-disable-next-line no-console
+    console.info(`ok`)
   }
