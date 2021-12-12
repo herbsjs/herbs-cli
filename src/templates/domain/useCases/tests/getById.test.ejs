@@ -2,7 +2,7 @@ const get<%- props.name.pascalCase %>ById = require('./getById<%- props.name.pas
 const assert = require('assert')
 const { <%- props.name.pascalCase %> } = require('../../entities')
 
-describe('Find one <%- props.name.raw %>', () => {
+describe('Get one <%- props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
   describe('Valid scenarios', () => {
