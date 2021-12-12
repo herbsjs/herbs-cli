@@ -1,4 +1,4 @@
-const useCases = ['create', 'update', 'delete', 'getAll', 'getById']
+const useCases = ['create', 'update', 'delete', 'findAll', 'find']
 const { objToString } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')

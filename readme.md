@@ -29,46 +29,16 @@ herbs new
 └── src
     ├── domain
     │   ├── entities
-    │   │   ├── index.js
-    │   │   └── user.js
     │   └── usecases
-    │       ├── index.js
-    │       └── user
-    │           ├── createUser.js
-    │           ├── deleteUser.js  
-    │           ├── getAllUser.js
-    │           ├── getByIdUser.js
-    │           ├── updateUser.js
-    │           ├── getAllUser.test.js
-    │           ├── createUser.test.js
-    │           ├── deleteUser.test.js
-    │           ├── getByIdUser.test.js
-    │           └── updateUser.test.js
-    ├── index.js
     └── infra
         ├── api
         │   ├── graphql
-        │   │   ├── defaultResolver.js
-        │   │   ├── index.js
-        │   │   ├── inputs.js
-        │   │   ├── mutations.js
-        │   │   ├── queries.js
-        │   │   └── types.js
         │   ├── rest
-        │   │   └── index.js
-        │   └── server.js
         ├── config
-        │   ├── api.js
-        │   ├── index.js
-        │   └── postgres.js
         └── data
             ├── database
-            │   ├── index.js
             │   └── migrations
-            │       └── 20211005010714_users.js
             └── repositories
-                ├── index.js
-                └── userRepository.js
 ```
 
 ## commands

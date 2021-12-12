@@ -1,7 +1,7 @@
-const getAll<%- props.name.pascalCase %> = require('./getAll<%- props.name.pascalCase %>')
+const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
 const assert = require('assert')
 
-describe('Get <%- props.name.raw %>s', () => {
+describe('Find all <%- props.name.raw %>s', () => {
     const authorizedUser = { hasAccess: true }
 
     it('should return all <%- props.name.raw %>s', async () => {
@@ -14,7 +14,7 @@ describe('Get <%- props.name.raw %>s', () => {
       }
 
       // When
-      const uc = getAll<%- props.name.pascalCase %>(injection)()
+      const uc = findAll<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

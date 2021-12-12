@@ -24,8 +24,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       const ucDescription = obj.usecase({})().description
       const entityName = tag.slice(0, -1)
       if (ucDescription.includes('Create')) route.post = requireRoute('create', entityName)
-      if (ucDescription.includes('Find')) route.getById = requireRoute('getById', entityName, true)
-      if (ucDescription.includes('FindAll')) route.getAll = requireRoute('getAll', entityName)
+      if (ucDescription.includes('Find')) route.find = requireRoute('find', entityName, true)
+      if (ucDescription.includes('FindAll')) route.findAll = requireRoute('findAll', entityName)
       if (ucDescription.includes('Update')) route.put = requireRoute('update', entityName)
       if (ucDescription.includes('Delete')) route.delete = requireRoute('delete', entityName)
     }

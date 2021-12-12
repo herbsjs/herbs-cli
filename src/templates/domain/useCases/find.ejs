@@ -2,7 +2,7 @@ const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
 const { <%- props.name.pascalCase %> } = require('../../entities')
 
 const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
-  usecase('Get one <%- props.name.pascalCase %>', {
+  usecase('Find a <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
       id: Number,
@@ -15,7 +15,7 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     // authorize: (user) => (user.canFindOne<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    'Find the <%- props.name.raw %>': step(async ctx => {
+    'Find and return the <%- props.name.raw %>': step(async ctx => {
       const id = ctx.req.id
       const [result] = await <%- props.name.camelCase %>Repository.findByID(id) 
       if (!result) return Err.notFound({ 

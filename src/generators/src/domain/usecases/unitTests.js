@@ -28,8 +28,8 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  getById: (obj) => { return { id: obj.id } },
-  getAll: (obj) => { return [obj, obj, obj] }
+  find: (obj) => { return { id: obj.id } },
+  findAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
   create: (obj) => {
@@ -39,8 +39,8 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  getById: () => { return { id: null } },
-  getAll: () => { return [] }
+  find: () => { return { id: null } },
+  findAll: () => { return [] }
 }
 
 const useCases = Object.keys(validUseCaseRequests)
