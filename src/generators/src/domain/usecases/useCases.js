@@ -1,9 +1,10 @@
 const useCases = ['create', 'update', 'delete', 'getAll', 'getById']
-const { objToString, pascalCase } = require('../../utils')
+const { objToString } = require('../../../utils')
+const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
-async function generateRequest (schema) {
+async function generateRequestschema (schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
@@ -13,16 +14,7 @@ async function generateRequest (schema) {
     return obj
   }, {})
 
-  // convert plain JSON and remove quotation marks(")
-  const str = JSON.stringify(obj, null, 8)
-    .replace(/"/g, '')
-    .split('\n')
-
-  // remove first and last lines
-  str.shift()
-  str.pop()
-
-  return str.join('\n').trim()
+  return objToString(obj, { spaces: 2, removeQuotes: true, extraSpaces: 4 })
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
@@ -53,7 +45,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
             pascalCase: pascalCase(name),
             camelCase: camelCase(name)
           },
-          request: await generateRequest(schema)
+          request: await generateRequestschema(schema)
         }
       })
     }

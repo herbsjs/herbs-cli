@@ -1,30 +1,32 @@
-const update<%= props.name.pascalCase %> = require('./update<%= props.name.pascalCase %>')
+const update<%- props.name.pascalCase %> = require('./update<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { <%= props.name.pascalCase %> } = require('../../entities')
+const { <%- props.name.pascalCase %> } = require('../../entities')
 
-describe('Update <%= props.name.pascalCase %>', () => {
-  function aUser({ hasAccess }) {
-    return { hasAccess }
-  }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+describe('Update <%- props.name.raw %>', () => {
+  const authorizedUser = { hasAccess: true }
 
-    it('should update <%= props.name.pascalCase %> if is valid', async () => {
+  describe('Valid <%- props.name.raw %>', () => {
+
+    it('should update <%- props.name.raw %> if is valid', async () => {
       // Given
-      const retInjection = <%= props.name.pascalCase %>.fromJSON('{ "id": 5, "nickname": "herbsUser", "password": "V&eryStr0ngP@$$"}')
+      const retInjection = <%- props.name.pascalCase %>.fromJSON({ 
+        <%- props.mock %>
+      })
       const injection = {
-        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
           async findByID(id) { return ([retInjection]) }
           async update(id) { return true }
         })
       }
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = { id: 5, nickname: 'herbsUser', password: 'V&eryStr0ngP@$$'}
+
+      const req = {
+        <%- props.request.valid %>
+      }
 
       // When
-      const uc = update<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = update<%- props.name.pascalCase %>(injection)()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
@@ -33,23 +35,22 @@ describe('Update <%= props.name.pascalCase %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Invalid <%- props.name.raw %>', () => {
 
-    it('should not update invalid <%= props.name.pascalCase %>', async () => {
+    it('should not update invalid <%- props.name.pascalCase %>', async () => {
       // Given
       const injection = {}
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = { nickname: 'herbsUser', password: 96587422 }
+      const req = { 
+        <%- props.request.invalid %>
+      }
 
       // When
-      const uc = update<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = update<%- props.name.pascalCase %>(injection)()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
       assert.ok(ret.isErr)
-      assert.deepStrictEqual(ret.err, {request :[{password:[{wrongType:"String"}]}]})
     })
 
     it('should not update non existing <%= props.name.pascalCase %>', async () => {
@@ -61,13 +62,12 @@ describe('Update <%= props.name.pascalCase %>', () => {
           async update(id) { return true }
         })
       }
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
+
       const req = { id: 0, nickname: 'herbsUser', password: 'V&eryStr0ngP@$$' }
 
       // When
       const uc = update<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then

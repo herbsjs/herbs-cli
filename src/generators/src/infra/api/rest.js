@@ -1,5 +1,5 @@
 const camelCase = require('lodash.camelcase')
-const { objToString } = require('../../utils')
+const { objToString } = require('../../../utils')
 
 const requireRoute = (type, entityName, useId = false) => `{ usecase: require('../../../domain/usecases/${camelCase(entityName)}/${type}${entityName}')(repositories)${useId ? ', id: \'id\'' : ''}}`
 

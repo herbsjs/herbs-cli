@@ -1,57 +1,62 @@
-const getById<%= props.name.pascalCase %> = require('./getById<%= props.name.pascalCase %>')
+const get<%- props.name.pascalCase %>ById = require('./getById<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { <%= props.name.pascalCase %> } = require('../../entities')
+const { <%- props.name.pascalCase %> } = require('../../entities')
 
-describe('Find one <%= props.name.pascalCase %>', () => {
-  function aUser({ hasAccess }) {
-    return { hasAccess }
-  }
+describe('Find one <%- props.name.raw %>', () => {
+  const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+  describe('Valid scenarios', () => {
 
-    it('should return <%= props.name.pascalCase %> if is valid', async () => {
-      // Given
-      const retInjection = <%= props.name.pascalCase %>.fromJSON('{ "id": 5, "nickname": "herbsUser", "password": "V&eryStr0ngP@$$"}')
+    it('should return <%- props.name.raw %>', async () => {
+      // Given 
+      const mock = {
+        <%- props.mock %>
+      }
 
       const injection = {
-        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
-          async  findByID(id) { return ([retInjection]) }
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+          async  findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(mock)]) }
         })
       }
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = { id: 5 }
+
+      const req = {
+        <%- props.request.valid %>
+      }
 
       // When
-      const uc = getById<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
       assert.ok(ret.isOk)      
-      assert.strictEqual(ret.ok.nickname, 'herbsUser')
       assert.strictEqual(ret.ok.isValid(), true)
-
+      assert.strictEqual(JSON.stringify(ret.ok), JSON.stringify({id: ret.ok.id,...mock}))
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Error scenarios', () => {
 
-    it('should not return if input is invalid', async () => {
+    it('return notFoundError', async () => {
       // Given
-      const injection = {}
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = { id : '5' }
+      const injection = {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+          async  findByID(id) { return ([]) }
+        })
+      }
+
+      const req = {
+        <%- props.request.invalid %>
+      }
 
       // When
-      const uc = getById<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
       assert.ok(ret.isErr)
-      assert.deepStrictEqual(ret.err, {request :[{id:[{wrongType:"Number"}]}]})
+      assert.ok(ret.isNotFoundError)
     })
   })
 })

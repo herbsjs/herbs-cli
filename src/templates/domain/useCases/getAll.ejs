@@ -1,8 +1,8 @@
 const { usecase, step, Ok } = require('@herbsjs/herbs')
-const { <%= props.name.pascalCase %> } = require('../../entities')
+const { <%- props.name.pascalCase %> } = require('../../entities')
 
-const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
-  usecase('Get all <%= props.name.pascalCase %>s', {
+const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+  usecase('Get all <%- props.name.pascalCase %>s', {
     // Input/Request metadata and validation
     request: {
       limit: Number,
@@ -10,16 +10,16 @@ const useCase = ({ <%= props.name.camelCase %>Repository }) => () =>
     },
 
     // Output/Response metadata
-    response: [<%= props.name.pascalCase %>],
+    response: [<%- props.name.pascalCase %>],
 
     //Authorization with Audit
     authorize: () => Ok(),
 
-    'Return all the <%= props.name.raw %>s': step(async ctx => {
-      const result = await <%= props.name.camelCase %>Repository.findAll(ctx.req)
+    'Return all the <%- props.name.raw %>s': step(async ctx => {
+      const result = await <%- props.name.camelCase %>Repository.findAll(ctx.req)
       
       // ctx.ret is the return value of a use case
-      return (ctx.ret = result.map(<%= props.name.camelCase %> => <%= props.name.pascalCase %>.fromJSON(<%= props.name.camelCase %>)))
+      return (ctx.ret = result.map(<%- props.name.camelCase %> => <%- props.name.pascalCase %>.fromJSON(<%- props.name.camelCase %>)))
     })
   })
 
