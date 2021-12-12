@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/herbsjs/herbs-cli/compare/v1.9.0...v1.9.1) (2021-12-12)
+
+
+### Bug Fixes
+
+* small fixes and small improvements ([37ea12a](https://github.com/herbsjs/herbs-cli/commit/37ea12aa79fc69681bcca2e61ae8b138d97ad608))
+
 # [1.9.0](https://github.com/herbsjs/herbs-cli/compare/v1.8.0...v1.9.0) (2021-12-12)
 
 
