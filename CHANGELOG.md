@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/herbsjs/herbs-cli/compare/v1.9.2...v1.9.3) (2021-12-13)
+
+
+### Bug Fixes
+
+* **tests:** tests are running 1000% faster now ([8dbe43c](https://github.com/herbsjs/herbs-cli/commit/8dbe43c4e71180fd6bd20f62a71f72102dc3a228)), closes [#24](https://github.com/herbsjs/herbs-cli/issues/24)
+
 ## [1.9.2](https://github.com/herbsjs/herbs-cli/compare/v1.9.1...v1.9.2) (2021-12-13)
 
 
