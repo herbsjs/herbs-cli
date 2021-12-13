@@ -1,3 +1,11 @@
+## [1.9.2](https://github.com/herbsjs/herbs-cli/compare/v1.9.1...v1.9.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **rest:** improve step desc and use cases names (Get vs Find) ([9816535](https://github.com/herbsjs/herbs-cli/commit/9816535ae9ea520cdb7983a041d5d912f5c19549))
+* **templates:** improve step desc and use cases names (Get vs Find) ([edad41c](https://github.com/herbsjs/herbs-cli/commit/edad41c573be17ebb7cd8ff1a476fbef13d6aacc))
+
 ## [1.9.1](https://github.com/herbsjs/herbs-cli/compare/v1.9.0...v1.9.1) (2021-12-12)
 
 
