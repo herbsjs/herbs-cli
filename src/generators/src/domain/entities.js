@@ -27,7 +27,7 @@ function updateEntities(entitiesPath, level = './') {
   return requires
 }
 
-module.exports = async ({ template: { generate }, parameters: { options } }, isUpdate) => async () => {
+module.exports = async ({ template: { generate } }, isUpdate) => async () => {
 
   process.stdout.write(`Generating Entities: `)
 

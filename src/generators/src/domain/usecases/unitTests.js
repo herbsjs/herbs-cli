@@ -79,7 +79,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
 
       if (fs.existsSync(ucPath)) return
 
-      const objOptions = { spaces: 4, extraSpaces: 4, removeQuotes: true }
+      const objOptions = { spaces: 4, extraSpaces: 4, removeBraces: true }
       await generate({
         template: `domain/useCases/tests/${action}.test.ejs`,
         target: ucPath,
