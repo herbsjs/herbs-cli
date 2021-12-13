@@ -4,6 +4,9 @@ const { objToString } = require('../../../utils')
 const requireRoute = (type, entityName, useId = false) => `{ usecase: require('../../../domain/usecases/${camelCase(entityName)}/${type}${entityName}')(repositories)${useId ? ', id: \'id\'' : ''}}`
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
+  
+  process.stdout.write(`Generating REST: `)
+  
   const usecases = require(`${filesystem.cwd()}/src/domain/usecases`)
 
   // groupBy tags
@@ -21,8 +24,8 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       const ucDescription = obj.usecase({})().description
       const entityName = tag.slice(0, -1)
       if (ucDescription.includes('Create')) route.post = requireRoute('create', entityName)
-      if (ucDescription.includes('Find')) route.getById = requireRoute('getById', entityName, true)
-      if (ucDescription.includes('FindAll')) route.getAll = requireRoute('getAll', entityName)
+      if (ucDescription.includes('Find')) route.find = requireRoute('find', entityName, true)
+      if (ucDescription.includes('FindAll')) route.findAll = requireRoute('findAll', entityName)
       if (ucDescription.includes('Update')) route.put = requireRoute('update', entityName)
       if (ucDescription.includes('Delete')) route.delete = requireRoute('delete', entityName)
     }
@@ -34,4 +37,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     target: 'src/infra/api/rest/index.js',
     props: { routes: objToString(routes) }
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

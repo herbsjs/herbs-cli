@@ -10,7 +10,7 @@ describe('Create <%- props.name.raw %>', () => {
     it('should add <%- props.name.raw %> if is valid', async () => {
       // Given
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
         })
       }

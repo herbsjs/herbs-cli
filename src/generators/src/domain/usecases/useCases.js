@@ -1,10 +1,10 @@
-const useCases = ['create', 'update', 'delete', 'getAll', 'getById']
+const useCases = ['create', 'update', 'delete', 'findAll', 'find']
 const { objToString } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 
-async function generateRequestschema (schema) {
+async function generateRequestschema(schema) {
   // schema to plain JSON
   const obj = Object.keys(schema).reduce((obj, key) => {
     const { name, type } = schema[key]
@@ -18,6 +18,9 @@ async function generateRequestschema (schema) {
 }
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
+
+  process.stdout.write(`Generating Use Cases: `)
+
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
   const requires = []
 
@@ -56,4 +59,7 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     target: 'src/domain/usecases/index.js',
     props: { requires: objToString(requires) }
   })
+
+  // eslint-disable-next-line no-console
+  console.info(`ok`)
 }

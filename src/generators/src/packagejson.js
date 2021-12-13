@@ -31,6 +31,9 @@ module.exports =
       options
     }
   }) => async () => {
+
+    process.stdout.write(`Generating package.json and running npm: `)
+
     options = defaultOptions(options)
     const migration = (options.postgres || options.sqlserver)
       ? `,

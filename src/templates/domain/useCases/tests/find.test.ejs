@@ -1,8 +1,8 @@
-const get<%- props.name.pascalCase %>ById = require('./getById<%- props.name.pascalCase %>')
+const get<%- props.name.pascalCase %>ById = require('./find<%- props.name.pascalCase %>')
 const assert = require('assert')
 const { <%- props.name.pascalCase %> } = require('../../entities')
 
-describe('Find one <%- props.name.raw %>', () => {
+describe('Find a <%- props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
   describe('Valid scenarios', () => {
@@ -14,7 +14,7 @@ describe('Find one <%- props.name.raw %>', () => {
       }
 
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async  findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(mock)]) }
         })
       }
@@ -40,7 +40,7 @@ describe('Find one <%- props.name.raw %>', () => {
     it('return notFoundError', async () => {
       // Given
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async  findByID(id) { return ([]) }
         })
       }

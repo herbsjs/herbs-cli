@@ -10,7 +10,7 @@ describe('Delete the <%- props.name.raw %>', () => {
     it('should delete the <%- props.name.raw %> if is valid', async () => {
       // Given
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.camelCase %>Repository {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async delete(entity) { return true }
         })
       }
