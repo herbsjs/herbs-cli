@@ -58,7 +58,7 @@ const questions = [
     type: 'list',
     name: 'database',
     message: 'What database do you want to use?',
-    choices: ['Postgres', 'Mongo', 'SQLServer'],
+    choices: ['Postgres', 'Mongo', 'SQLServer', 'MySQL'],
     filter(val) {
       return val.toLowerCase()
     }
@@ -82,6 +82,7 @@ const cmd = {
       options.postgres = options.database === 'postgres'
       options.mongo = options.database === 'mongo'
       options.sqlserver = options.database === 'sqlserver'
+      options.mysql = options.database === 'mysql'
     }
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`

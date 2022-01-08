@@ -15,7 +15,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       target: 'src/infra/config/api.js'
     })
 
-    for (const db of ['postgres', 'mongo', 'sqlserver']) {
+    for (const db of ['postgres', 'mongo', 'sqlserver', 'mysql']) {
       if (!options[db]) continue
       await generate({
         template: `infra/config/${db}.ejs`,

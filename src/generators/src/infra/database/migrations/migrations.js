@@ -31,7 +31,7 @@ module.exports =
           columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
         })
 
-        for (const db of ['postgres', 'sqlserver']) {
+        for (const db of ['postgres', 'sqlserver', 'mysql']) {
           if (!options[db]) continue
 
           const migrationName = new Date()

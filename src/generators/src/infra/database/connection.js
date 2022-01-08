@@ -2,7 +2,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
   
   process.stdout.write(`Generating Connections: `)
   
-  const databases = ['postgres', 'mongo', 'sqlserver']
+  const databases = ['postgres', 'mongo', 'sqlserver', 'mysql']
   for (const db of databases) {
     if (!options[db]) continue
     await generate({
