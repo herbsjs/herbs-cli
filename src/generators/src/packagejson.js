@@ -1,9 +1,26 @@
 const { objToString } = require('../utils')
+const { exec } = require('child_process')
+
+function childProcess(process) {
+  return new Promise((resolve, reject) => {
+    
+    const cp = exec(process)
+
+    cp.on('exit', () => {
+      resolve()
+    })
+
+    cp.on('error', (error) => {
+      reject(error)
+    })
+  })
+}
 
 const optionalPackages = {
   mongo: ['"@herbsjs/herbs2mongo": "^1.0.1"', '"mongodb": "^4.2.1"'],
   postgres: ['"@herbsjs/herbs2knex": "^1.1.2"', '"pg": "^8.7.1"'],
   sqlserver: ['"@herbsjs/herbs2knex": "^1.1.2"', '"tedious": "^13.2.0"'],
+  mysql: ['"@herbsjs/herbs2knex": "^1.1.2"', '"mysql2": "^2.3.3"'],
   rest: ['"express": "^4.17.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.0"'],
   graphql: ['"graphql": "^15.8.0"', '"apollo-server": "^3.5.0"',
     '"apollo-server-express": "^3.5.0"', '"graphql-tools": "^8.2.0"']
@@ -18,9 +35,9 @@ const defaultOptions = (options) => {
     mongo: options.mongo ? options.mongo : false,
     postgres: options.postgres ? options.postgres : false,
     sqlserver: options.sqlserver ? options.sqlserver : false,
-    yarn: options.yarn ? options.yarn : false,
+    mysql: options.mysql ? options.mysql : false,
     graphql: options.graphql ? options.graphql : false,
-    rest: options.rest ? options.rest : false
+    rest: options.rest ? options.rest : false 
   }
 }
 
@@ -29,13 +46,12 @@ module.exports =
     template: { generate },
     parameters: {
       options
-    }
-  }) => async () => {
+    }  }) => async () => {
 
     process.stdout.write(`Generating package.json and running npm: `)
 
     options = defaultOptions(options)
-    const migration = (options.postgres || options.sqlserver)
+    const migration = (options.postgres || options.sqlserver || options.mysql)
       ? `,
       "knex:make": "npx knex --knexfile knexFile.js migrate:make",
       "knex:migrate": "npx knex --knexfile knexFile.js migrate:latest",
@@ -46,12 +62,14 @@ module.exports =
 
 
     let packages = [
+      '"@herbsjs/herbs": "^1.3.1"',
       '"@herbsjs/herbs2gql": "^2.0.0"',
       '"@herbsjs/herbsshelf": "^2.0.0"',
+      '"deepmerge": "^4.2.2"',
       '"dotenv": "^10.0.0"',
       '"nodemon": "^2.0.15"',
       '"mocha": "^9.1.3"',
-      'lodash.camelcase": "^4.3.0"',
+      '"lodash.camelcase": "^4.3.0"',
       '"sugar-env": "^1.5.14"'
     ]
 
@@ -72,5 +90,9 @@ module.exports =
       }
     })
 
+    await childProcess(`npm install`)
+
     process.env['NODE_MODULES'] = `${__dirname}/../../../node_modules`
+    // eslint-disable-next-line no-console
+    console.info(`ok`)
   }
