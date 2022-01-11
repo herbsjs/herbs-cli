@@ -48,7 +48,7 @@ module.exports =
       options
     }  }) => async () => {
 
-    process.stdout.write(`Generating package.json and running npm: `)
+    process.stdout.write(`Generating package.json and running npm\n`)
 
     options = defaultOptions(options)
     const migration = (options.postgres || options.sqlserver || options.mysql)
@@ -93,6 +93,4 @@ module.exports =
     await childProcess(`npm install`)
 
     process.env['NODE_MODULES'] = `${__dirname}/../../../node_modules`
-    // eslint-disable-next-line no-console
-    console.info(`ok`)
   }

@@ -1,6 +1,6 @@
 module.exports = async ({ template: { generate }, parameters: { options } }) => async () => {
   
-  process.stdout.write(`Generating Connections: `)
+  process.stdout.write(`Generating Connections\n`)
   
   const databases = ['postgres', 'mongo', 'sqlserver', 'mysql']
   for (const db of databases) {
@@ -9,7 +9,5 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       template: `infra/data/database/${db}/database.ejs`,
       target: 'src/infra/data/database/index.js'
     })
-    // eslint-disable-next-line no-console
-    console.info(`ok`)
   }
 }
