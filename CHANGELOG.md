@@ -1,3 +1,11 @@
+## [1.10.3](https://github.com/herbsjs/herbs-cli/compare/v1.10.2...v1.10.3) (2022-01-15)
+
+
+### Bug Fixes
+
+* fix package lock ([404bb52](https://github.com/herbsjs/herbs-cli/commit/404bb522458527812162e45d48535b5a4e4ee05c))
+* update knex dependecy ([01e737b](https://github.com/herbsjs/herbs-cli/commit/01e737b15e4559125795a505c8562c6e05cd4407))
+
 ## [1.10.2](https://github.com/herbsjs/herbs-cli/compare/v1.10.1...v1.10.2) (2022-01-15)
 
 
