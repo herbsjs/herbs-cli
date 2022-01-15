@@ -13,3 +13,5 @@ herbs-project
 .idea
 ___test_project
 yarn.lock
+./herbs-lab
+herbs-lab/
