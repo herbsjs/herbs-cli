@@ -3,9 +3,9 @@ const fsPromises = require('fs').promises
 
 const optionalPackages = {
   mongo: ['"@herbsjs/herbs2mongo": "^1.0.2"', '"mongodb": "^4.3.0"'],
-  postgres: ['"@herbsjs/herbs2knex": "^1.4.0"', '"pg": "^8.7.1"'],
-  sqlserver: ['"@herbsjs/herbs2knex": "^1.4.0"', '"tedious": "^14.0.0"'],
-  mysql: ['"@herbsjs/herbs2knex": "^1.4.0"', '"mysql2": "^2.3.3"'],
+  postgres: ['"@herbsjs/herbs2knex": "^1.4.1"', '"pg": "^8.7.1"'],
+  sqlserver: ['"@herbsjs/herbs2knex": "^1.4.1"', '"tedious": "^14.0.0"'],
+  mysql: ['"@herbsjs/herbs2knex": "^1.4.1"', '"mysql2": "^2.3.3"'],
   rest: ['"express": "^4.17.2"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.1"'],
   graphql: ['"graphql": "^15.8.0"', '"apollo-server": "^3.6.1"',
     '"apollo-server-express": "^3.6.1"', '"graphql-tools": "^8.2.0"']
