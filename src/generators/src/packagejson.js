@@ -2,13 +2,13 @@ const { objToString } = require('../utils')
 const fsPromises = require('fs').promises
 
 const optionalPackages = {
-  mongo: ['"@herbsjs/herbs2mongo": "^1.0.1"', '"mongodb": "^4.2.1"'],
-  postgres: ['"@herbsjs/herbs2knex": "^1.1.2"', '"pg": "^8.7.1"'],
-  sqlserver: ['"@herbsjs/herbs2knex": "^1.1.2"', '"tedious": "^13.2.0"'],
-  mysql: ['"@herbsjs/herbs2knex": "^1.1.2"', '"mysql2": "^2.3.3"'],
-  rest: ['"express": "^4.17.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.0"'],
-  graphql: ['"graphql": "^15.8.0"', '"apollo-server": "^3.5.0"',
-    '"apollo-server-express": "^3.5.0"', '"graphql-tools": "^8.2.0"']
+  mongo: ['"@herbsjs/herbs2mongo": "^1.0.2"', '"mongodb": "^4.3.0"'],
+  postgres: ['"@herbsjs/herbs2knex": "^1.3.1"', '"pg": "^8.7.1"'],
+  sqlserver: ['"@herbsjs/herbs2knex": "^1.3.1"', '"tedious": "^14.0.0"'],
+  mysql: ['"@herbsjs/herbs2knex": "^1.3.1"', '"mysql2": "^2.3.3"'],
+  rest: ['"express": "^4.17.2"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.1"'],
+  graphql: ['"graphql": "^15.8.0"', '"apollo-server": "^3.6.1"',
+    '"apollo-server-express": "^3.6.1"', '"graphql-tools": "^8.2.0"']
 }
 
 const defaultOptions = (options) => {
@@ -47,13 +47,13 @@ module.exports =
 
 
     let packages = [
-      '"@herbsjs/herbs": "^1.3.1"',
-      '"@herbsjs/herbs2gql": "^2.0.0"',
-      '"@herbsjs/herbsshelf": "^2.0.0"',
+      '"@herbsjs/herbs": "^1.4.2"',
+      '"@herbsjs/herbs2gql": "^2.0.1"',
+      '"@herbsjs/herbsshelf": "^2.1.2"',
       '"deepmerge": "^4.2.2"',
-      '"dotenv": "^10.0.0"',
+      '"dotenv": "^12.0.3"',
       '"nodemon": "^2.0.15"',
-      '"mocha": "^9.1.3"',
+      '"mocha": "^9.1.4"',
       '"lodash.camelcase": "^4.3.0"',
       '"sugar-env": "^1.5.14"'
     ]

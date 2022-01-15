@@ -13,7 +13,7 @@ describe('When I generate a complete project that uses postgres', () => {
 
   it('must exists a config/postgres.js file', async () => {
     await system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --postgres --git`)
-    await fs.readFileSync(`${__dirname}/../${projectName}/src/infra/config/postgres.js`)
+    fs.readFileSync(`${__dirname}/../${projectName}/src/infra/config/postgres.js`)
   })
 
   it('must contain the correct content', async () => {

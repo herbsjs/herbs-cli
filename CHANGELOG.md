@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/herbsjs/herbs-cli/compare/v1.10.0...v1.10.1) (2022-01-15)
+
+
+### Bug Fixes
+
+* update dependencies ([59a492f](https://github.com/herbsjs/herbs-cli/commit/59a492fc8e073256898ea72d56113771314f2b85))
+
 # [1.10.0](https://github.com/herbsjs/herbs-cli/compare/v1.9.3...v1.10.0) (2022-01-15)
 
 
