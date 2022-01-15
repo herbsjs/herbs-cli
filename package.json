@@ -27,7 +27,7 @@
   "dependencies": {
     "@herbsjs/herbs": "^1.4.2",
     "@herbsjs/herbs2gql": "^2.0.1",
-    "@herbsjs/herbs2knex": "^1.3.1",
+    "@herbsjs/herbs2knex": "^1.4.0",
     "@herbsjs/herbs2mongo": "^1.0.2",
     "@herbsjs/herbs2rest": "^2.0.1",
     "@herbsjs/herbsshelf": "^2.1.2",
