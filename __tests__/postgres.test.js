@@ -1,8 +1,8 @@
 /* globals describe, it, afterEach */
 
 const { system } = require('gluegun')
-fs = require('fs')
 const { expect } = require('chai')
+const fs = require('fs')
 
 const projectName = 'herbs-lab'
 
