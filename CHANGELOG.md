@@ -1,3 +1,11 @@
+## [1.10.2](https://github.com/herbsjs/herbs-cli/compare/v1.10.1...v1.10.2) (2022-01-15)
+
+
+### Bug Fixes
+
+* creatting link for node_modules ([5681884](https://github.com/herbsjs/herbs-cli/commit/5681884ec556343d60526ca3e78afe01e4bb9eab))
+* fix package-lock ([01e17ef](https://github.com/herbsjs/herbs-cli/commit/01e17ef058c5836c750cdb0c86bc67d2f00535ed))
+
 ## [1.10.1](https://github.com/herbsjs/herbs-cli/compare/v1.10.0...v1.10.1) (2022-01-15)
 
 
