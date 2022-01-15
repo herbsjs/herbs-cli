@@ -19,16 +19,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Installing dependencies
-        run: npm i --ignore-scripts
-      - name: Running tests
-        run: |
-              npm test
-              npx nyc --reporter=lcov npm test && npx codecov
-        env:
-          CI: true
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+      # - name: Installing dependencies
+      #   run: npm i --ignore-scripts
+      # - name: Running tests
+      #   run: |
+      #         npm test
+      #         npx nyc --reporter=lcov npm test && npx codecov
+      #   env:
+      #     CI: true
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2
         
       - name: Running Linter - ESLint
         run: npm run lint

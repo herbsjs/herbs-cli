@@ -26,11 +26,6 @@ jobs:
     - name: Installing dependencies
       run: npm i --ignore-scripts
 
-    - name: Build Step
-      env:
-        CI: ""
-      run: npm run build --if-present
-
     - name: Running Linter - ESLint
       run: npm run lint
 
