@@ -1,6 +1,6 @@
 module.exports = async ({ template: { generate }, system, filesystem }) => async () => {
   
-  process.stdout.write(`Generating git: `)
+  process.stdout.write(`Generating git\n`)
 
   const platform = process.platform
   const { spawn } = require('child_process')
@@ -23,7 +23,4 @@ module.exports = async ({ template: { generate }, system, filesystem }) => async
   await system.run('git branch -m main', { cwd: directory })
   await system.run('git add --all', { cwd: directory })
   await system.run('git commit -m "initial commit"', { cwd: directory })
-
-  // eslint-disable-next-line no-console
-  console.info(`ok`)
 }

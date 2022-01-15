@@ -3,7 +3,7 @@ const { objToString } = require('../../../utils')
 module.exports = async ({ template: { generate }, parameters: { options } }) => {
   return async () => {
     
-    process.stdout.write(`Generating Config: `)
+    process.stdout.write(`Generating Config\n`)
 
     const requires = {
       isProd: 'env.is(\'production\')',
@@ -15,7 +15,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       target: 'src/infra/config/api.js'
     })
 
-    for (const db of ['postgres', 'mongo', 'sqlserver']) {
+    for (const db of ['postgres', 'mongo', 'sqlserver', 'mysql']) {
       if (!options[db]) continue
       await generate({
         template: `infra/config/${db}.ejs`,
@@ -29,8 +29,5 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       target: 'src/infra/config/index.js',
       props: { requires: objToString(requires) }
     })
-
-    // eslint-disable-next-line no-console
-    console.info(`ok`)
   }
 }

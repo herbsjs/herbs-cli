@@ -1,0 +1,13 @@
+const { Repository } = require("@herbsjs/herbs2knex")
+const { <%- props.name.pascalCase %> } = require('../../../domain/entities')
+
+module.exports = class <%- props.name.pascalCase %>Repository extends Repository {
+    constructor(connection) {
+        super({
+            entity: <%- props.name.pascalCase %>,
+            table: "<%- props.table %>",
+            ids: ["id"],
+            knex: connection
+        })
+    }
+}

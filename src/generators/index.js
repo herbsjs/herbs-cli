@@ -12,7 +12,7 @@ module.exports = async (tools) => {
       entities: await require('./src/domain/entities')(tools),
       connection: await require('./src/infra/database/connection')(tools),
       repositories: await require('./src/infra/database/repositories/repositories')(tools),
-      migrations: (options.postgres || options.sqlserver) ? await require('./src/infra/database/migrations/migrations')(tools) : ignore,
+      migrations: (options.postgres || options.sqlserver || options.mysql) ? await require('./src/infra/database/migrations/migrations')(tools) : ignore,
       useCases: await require('./src/domain/useCases/useCases')(tools),
       useCasesTests: await require('./src/domain/usecases/unitTests')(tools),
       graphql: options.graphql ? await require('./src/infra/api/graphql')(tools) : ignore,

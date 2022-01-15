@@ -13,7 +13,7 @@ module.exports =
   async ({ template: { generate }, filesystem, parameters: { options } }) =>
     async () => {
 
-      process.stdout.write(`Generating Migration: `)
+      process.stdout.write(`Generating Migration\n`)
 
       const entities = require(`${filesystem.cwd()}/src/domain/entities`)
       const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`
@@ -31,7 +31,7 @@ module.exports =
           columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
         })
 
-        for (const db of ['postgres', 'sqlserver']) {
+        for (const db of ['postgres', 'sqlserver', 'mysql']) {
           if (!options[db]) continue
 
           const migrationName = new Date()
@@ -54,7 +54,4 @@ module.exports =
           })
         }
       }
-
-      // eslint-disable-next-line no-console
-      console.info(`ok`)
     }

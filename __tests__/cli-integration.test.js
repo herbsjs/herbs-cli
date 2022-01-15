@@ -80,6 +80,30 @@ describe('generates package.json', () => {
       '"knex:runSeeds": "npx knex --knexfile knexFile.js seed:run"'
     )
   })
+
+  it('must to have knex scripts to mysql', async () => {
+    await cli(`new --name ${projectName} --mysql`)
+
+    const knex = filesystem.read(`${projectName}/knexFile.js`)
+    expect(knex).contains(`database: '${projectName}'`)
+
+    const pkg = filesystem.read(`${projectName}/package.json`)
+    expect(pkg).contains(
+      '"knex:make": "npx knex --knexfile knexFile.js migrate:make"'
+    )
+    expect(pkg).contains(
+      '"knex:migrate": "npx knex --knexfile knexFile.js migrate:latest"'
+    )
+    expect(pkg).contains(
+      '"knex:rollback": "npx knex --knexfile knexFile.js migrate:rollback"'
+    )
+    expect(pkg).contains(
+      '"knex:makeSeeds": "npx knex --knexfile knexFile.js seed:make"'
+    )
+    expect(pkg).contains(
+      '"knex:runSeeds": "npx knex --knexfile knexFile.js seed:run"'
+    )
+  })
 })
 
 describe('generates knexFile.json', () => {

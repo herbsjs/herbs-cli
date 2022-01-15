@@ -29,7 +29,7 @@ function updateEntities(entitiesPath, level = './') {
 
 module.exports = async ({ template: { generate } }, isUpdate) => async () => {
 
-  process.stdout.write(`Generating Entities: `)
+  process.stdout.write(`Generating Entities\n`)
 
   let requires = {}
 
@@ -48,7 +48,4 @@ module.exports = async ({ template: { generate } }, isUpdate) => async () => {
     target: 'src/domain/entities/index.js',
     props: { requires: objToString(requires) }
   })
-
-  // eslint-disable-next-line no-console
-  console.info(`ok`)
 }
