@@ -5,7 +5,7 @@ const requireRoute = (type, entityName, useId = false) => `{ usecase: require('.
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
   
-  process.stdout.write(`Generating REST: `)
+  process.stdout.write(`Generating REST\n`)
   
   const usecases = require(`${filesystem.cwd()}/src/domain/usecases`)
 
@@ -37,7 +37,4 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     target: 'src/infra/api/rest/index.js',
     props: { routes: objToString(routes) }
   })
-
-  // eslint-disable-next-line no-console
-  console.info(`ok`)
 }

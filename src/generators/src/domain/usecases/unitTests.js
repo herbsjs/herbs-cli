@@ -68,7 +68,7 @@ function generateRequestObject(schema, action, validReq = true) {
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
 
-  process.stdout.write(`Generating Use Cases Tests: `)
+  process.stdout.write(`Generating Use Cases Tests\n`)
 
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
@@ -98,8 +98,4 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       })
     })
   })
-
-  // eslint-disable-next-line no-console
-  console.info(`ok`) 
-
 }

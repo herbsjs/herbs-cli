@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/herbsjs/herbs-cli/compare/v1.9.3...v1.10.0) (2022-01-15)
+
+
+### Bug Fixes
+
+* fix dependencies installation on herbs new command ([673af30](https://github.com/herbsjs/herbs-cli/commit/673af309642c918fd993754be65e047bfb465fa7)), closes [#88](https://github.com/herbsjs/herbs-cli/issues/88)
+
+
+### Features
+
+* support for data layer generation with MySQL database ([6643895](https://github.com/herbsjs/herbs-cli/commit/6643895479b2b697add5672ba4a12a6d5085dd1b)), closes [#86](https://github.com/herbsjs/herbs-cli/issues/86)
+
 ## [1.9.3](https://github.com/herbsjs/herbs-cli/compare/v1.9.2...v1.9.3) (2021-12-13)
 
 

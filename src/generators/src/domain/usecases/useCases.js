@@ -19,7 +19,7 @@ async function generateRequestschema(schema) {
 
 module.exports = async ({ template: { generate }, filesystem }) => async () => {
 
-  process.stdout.write(`Generating Use Cases: `)
+  process.stdout.write(`Generating Use Cases\n`)
 
   const entities = require(`${filesystem.cwd()}/src/domain/entities`)
   const requires = []
@@ -59,7 +59,4 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
     target: 'src/domain/usecases/index.js',
     props: { requires: objToString(requires) }
   })
-
-  // eslint-disable-next-line no-console
-  console.info(`ok`)
 }
