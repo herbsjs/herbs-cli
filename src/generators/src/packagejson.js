@@ -1,20 +1,5 @@
 const { objToString } = require('../utils')
-const { exec } = require('child_process')
-
-function childProcess(process) {
-  return new Promise((resolve, reject) => {
-    
-    const cp = exec(process)
-
-    cp.on('exit', () => {
-      resolve()
-    })
-
-    cp.on('error', (error) => {
-      reject(error)
-    })
-  })
-}
+const fsPromises = require('fs').promises
 
 const optionalPackages = {
   mongo: ['"@herbsjs/herbs2mongo": "^1.0.2"', '"mongodb": "^4.3.0"'],
@@ -90,7 +75,5 @@ module.exports =
       }
     })
 
-    await childProcess(`npm install`)
-
-    process.env['NODE_MODULES'] = `${__dirname}/../../../node_modules`
+    fsPromises.symlink(`${__dirname}/../../../node_modules`, `${process.cwd()}/node_modules`)
   }
