@@ -18,6 +18,7 @@ describe('Postgres layer', () => {
     const knexFile = filesystem.read(`${projectName}/knexFile.js`)
 
     // Then
+    expect(knexFile).contains('client: "postgresql"')
     expect(knexFile).contains(`database: '${projectName}'`)
     expect(knexFile).contains('user: "postgres"')
     expect(knexFile).contains('password: "postgres"')
@@ -30,8 +31,8 @@ describe('Postgres layer', () => {
     await cliCommand(`new --name ${projectName} --postgres`)
 
     // When
-    const package = filesystem.read(`${projectName}/package.json`)
-    const postgresDependencyExists = checkPatternExistsInString(package, '"pg":')
+    const packageFile = filesystem.read(`${projectName}/package.json`)
+    const postgresDependencyExists = checkPatternExistsInString(packageFile, '"pg":')
 
     // Then
     expect(postgresDependencyExists).be.true
