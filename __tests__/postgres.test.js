@@ -1,9 +1,10 @@
 const { filesystem } = require('gluegun')
 const { expect } = require('chai')
 const cliCommand = require('../helpers/cli-command')
-const checkPatternExistsInString = require('../helpers/check-pattern-exists-in-string')
+const checkIfStringExistsInFile = require('../helpers/check-if-string-exists-in-file')
+const generateRandomProjectName = require('../helpers/generate-random-project-name')
 
-const projectName = 'herbs-lab'
+const projectName = generateRandomProjectName()
 
 describe('Postgres layer', () => {
   afterEach(() => {
@@ -32,10 +33,10 @@ describe('Postgres layer', () => {
 
     // When
     const packageFile = filesystem.read(`${projectName}/package.json`)
-    const postgresDependencyExists = checkPatternExistsInString(packageFile, '"pg":')
+    const postgresDependencyExists = checkIfStringExistsInFile(packageFile, '"pg":')
 
     // Then
-    expect(postgresDependencyExists).be.true
+    expect(postgresDependencyExists).to.be.true
   })
 
   it('should create knex scripts when to use postgres', async () => {
