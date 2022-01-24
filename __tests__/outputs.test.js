@@ -1,4 +1,3 @@
-const { filesystem } = require('gluegun')
 const { expect } = require('chai')
 const cliCommand = require('../helpers/cli-command')
 
