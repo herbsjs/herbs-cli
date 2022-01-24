@@ -1,0 +1,31 @@
+const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
+const { <%- props.name.pascalCase %> } = require('../../entities')
+
+const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+  usecase('Find a <%- props.name.pascalCase %>', {
+    // Input/Request metadata and validation 
+    request: {
+      id: Number,
+    },
+
+    // Output/Response metadata
+    response: <%- props.name.pascalCase %>,
+
+    //Authorization with Audit
+    // authorize: (user) => (user.canFindOne<%- props.name.pascalCase %> ? Ok() : Err()),
+    authorize: () => Ok(),
+
+    'Find and return the <%- props.name.raw %>': step(async ctx => {
+      const id = ctx.req.id
+      const [result] = await <%- props.name.camelCase %>Repository.findByID(id) 
+      if (!result) return Err.notFound({ 
+        message: `<%- props.name.raw %> entity not found by ID: ${id}`,
+        payload: { entity: '<%- props.name.raw %>', id }
+      })
+      
+      // ctx.ret is the return value of a use case
+      return (ctx.ret = <%- props.name.pascalCase %>.fromJSON(result))
+    })
+  })
+
+module.exports = useCase

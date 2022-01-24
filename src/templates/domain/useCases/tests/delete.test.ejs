@@ -1,28 +1,27 @@
-const delete<%= props.name.pascalCase %> = require('./delete<%= props.name.pascalCase %>')
+const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
 const assert = require('assert')
 
 
-describe('Delete the <%= props.name.pascalCase %>', () => {
-  function aUser({ hasAccess }) {
-    return { hasAccess }
-  }
+describe('Delete the <%- props.name.raw %>', () => {
+  const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%= props.name.pascalCase %>', () => {
+  describe('Valid <%- props.name.raw %>', () => {
 
-    it('should delete the <%= props.name.pascalCase %> if is valid', async () => {
+    it('should delete the <%- props.name.raw %> if is valid', async () => {
       // Given
       const injection = {
-        <%= props.name.camelCase %>Repository: new ( class <%= props.name.camelCase %>Repository {
-          async delete(user) { return true }
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+          async delete(entity) { return true }
         })
       }
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
-      const req = {  id : 5 }
+      
+      const req = {
+        <%- props.request.valid %>
+      }
 
       // When
-      const uc = delete<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = delete<%- props.name.pascalCase %>(injection)()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
@@ -31,18 +30,15 @@ describe('Delete the <%= props.name.pascalCase %>', () => {
     })
   })
 
-  describe('Invalid <%= props.name.pascalCase %>', () => {
+  describe('Invalid <%- props.name.raw %>', () => {
 
-    it('should not delete the invalid <%= props.name.pascalCase %>', async () => {
+    it('should not delete the invalid <%- props.name.pascalCase %>', async () => {
       // Given
-      const injection = {}
-      const user = aUser({ hasAccess: true })
-      /*{ <%= props.request %> }*/
       const req = { id : '5' }
 
       // When
-      const uc = delete<%= props.name.pascalCase %>(injection)()
-      await uc.authorize(<%= props.name.camelCase %>)
+      const uc = delete<%- props.name.pascalCase %>({})()
+      await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then

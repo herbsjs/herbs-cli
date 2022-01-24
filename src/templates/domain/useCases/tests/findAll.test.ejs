@@ -1,0 +1,24 @@
+const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
+const assert = require('assert')
+
+describe('Find all <%- props.name.raw %>s', () => {
+    const authorizedUser = { hasAccess: true }
+
+    it('should return all <%- props.name.raw %>s', async () => {
+      // Given
+      const req = { limit:0, offset:0}
+      const injection = {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+          async  findAll() { return [] }
+        })
+      }
+
+      // When
+      const uc = findAll<%- props.name.pascalCase %>(injection)()
+      await uc.authorize(authorizedUser)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isOk)
+    })
+})

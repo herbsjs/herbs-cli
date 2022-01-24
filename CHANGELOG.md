@@ -1,3 +1,76 @@
+## [1.10.3](https://github.com/herbsjs/herbs-cli/compare/v1.10.2...v1.10.3) (2022-01-15)
+
+
+### Bug Fixes
+
+* fix package lock ([404bb52](https://github.com/herbsjs/herbs-cli/commit/404bb522458527812162e45d48535b5a4e4ee05c))
+* update knex dependecy ([01e737b](https://github.com/herbsjs/herbs-cli/commit/01e737b15e4559125795a505c8562c6e05cd4407))
+
+## [1.10.2](https://github.com/herbsjs/herbs-cli/compare/v1.10.1...v1.10.2) (2022-01-15)
+
+
+### Bug Fixes
+
+* creatting link for node_modules ([5681884](https://github.com/herbsjs/herbs-cli/commit/5681884ec556343d60526ca3e78afe01e4bb9eab))
+* fix package-lock ([01e17ef](https://github.com/herbsjs/herbs-cli/commit/01e17ef058c5836c750cdb0c86bc67d2f00535ed))
+
+## [1.10.1](https://github.com/herbsjs/herbs-cli/compare/v1.10.0...v1.10.1) (2022-01-15)
+
+
+### Bug Fixes
+
+* update dependencies ([59a492f](https://github.com/herbsjs/herbs-cli/commit/59a492fc8e073256898ea72d56113771314f2b85))
+
+# [1.10.0](https://github.com/herbsjs/herbs-cli/compare/v1.9.3...v1.10.0) (2022-01-15)
+
+
+### Bug Fixes
+
+* fix dependencies installation on herbs new command ([673af30](https://github.com/herbsjs/herbs-cli/commit/673af309642c918fd993754be65e047bfb465fa7)), closes [#88](https://github.com/herbsjs/herbs-cli/issues/88)
+
+
+### Features
+
+* support for data layer generation with MySQL database ([6643895](https://github.com/herbsjs/herbs-cli/commit/6643895479b2b697add5672ba4a12a6d5085dd1b)), closes [#86](https://github.com/herbsjs/herbs-cli/issues/86)
+
+## [1.9.3](https://github.com/herbsjs/herbs-cli/compare/v1.9.2...v1.9.3) (2021-12-13)
+
+
+### Bug Fixes
+
+* **tests:** tests are running 1000% faster now ([8dbe43c](https://github.com/herbsjs/herbs-cli/commit/8dbe43c4e71180fd6bd20f62a71f72102dc3a228)), closes [#24](https://github.com/herbsjs/herbs-cli/issues/24)
+
+## [1.9.2](https://github.com/herbsjs/herbs-cli/compare/v1.9.1...v1.9.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **rest:** improve step desc and use cases names (Get vs Find) ([9816535](https://github.com/herbsjs/herbs-cli/commit/9816535ae9ea520cdb7983a041d5d912f5c19549))
+* **templates:** improve step desc and use cases names (Get vs Find) ([edad41c](https://github.com/herbsjs/herbs-cli/commit/edad41c573be17ebb7cd8ff1a476fbef13d6aacc))
+
+## [1.9.1](https://github.com/herbsjs/herbs-cli/compare/v1.9.0...v1.9.1) (2021-12-12)
+
+
+### Bug Fixes
+
+* small fixes and small improvements ([37ea12a](https://github.com/herbsjs/herbs-cli/commit/37ea12aa79fc69681bcca2e61ae8b138d97ad608))
+
+# [1.9.0](https://github.com/herbsjs/herbs-cli/compare/v1.8.0...v1.9.0) (2021-12-12)
+
+
+### Bug Fixes
+
+* fix unit tests ([2b89c08](https://github.com/herbsjs/herbs-cli/commit/2b89c0886e9a8edf1829813a2d511d2c4d5efdd4))
+* git merge and added getAll test ([ba795f6](https://github.com/herbsjs/herbs-cli/commit/ba795f6757a19d13cb7e91999ad24c2635f60e75)), closes [#52](https://github.com/herbsjs/herbs-cli/issues/52)
+
+
+### Features
+
+* **not found error test:** added not found error test ([66b36ed](https://github.com/herbsjs/herbs-cli/commit/66b36edc1a38d1da00e56fc26908fba42d6a7f32))
+* generating two unit test for all usecases ([ead78ad](https://github.com/herbsjs/herbs-cli/commit/ead78ad1d7576f2ef82c9c562e2bf997d967858f))
+* **🧪 generating test for all entities:** 🧪 Generating test for all entities dynamically ([572aa48](https://github.com/herbsjs/herbs-cli/commit/572aa484702463e92cc940f2ac82c21a8b14b63f))
+* **generating dynamic tests:** generating dynamic tests ([32f56f2](https://github.com/herbsjs/herbs-cli/commit/32f56f28f9525bdf6f5020cd8e2f38f47757de64))
+
 # [1.8.0](https://github.com/herbsjs/herbs-cli/compare/v1.7.2...v1.8.0) (2021-11-08)
 
 

@@ -1,0 +1,62 @@
+const get<%- props.name.pascalCase %>ById = require('./find<%- props.name.pascalCase %>')
+const assert = require('assert')
+const { <%- props.name.pascalCase %> } = require('../../entities')
+
+describe('Find a <%- props.name.raw %>', () => {
+  const authorizedUser = { hasAccess: true }
+
+  describe('Valid scenarios', () => {
+
+    it('should return <%- props.name.raw %>', async () => {
+      // Given 
+      const mock = {
+        <%- props.mock %>
+      }
+
+      const injection = {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+          async  findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(mock)]) }
+        })
+      }
+
+      const req = {
+        <%- props.request.valid %>
+      }
+
+      // When
+      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      await uc.authorize(authorizedUser)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isOk)      
+      assert.strictEqual(ret.ok.isValid(), true)
+      assert.strictEqual(JSON.stringify(ret.ok), JSON.stringify({id: ret.ok.id,...mock}))
+    })
+  })
+
+  describe('Error scenarios', () => {
+
+    it('return notFoundError', async () => {
+      // Given
+      const injection = {
+        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+          async  findByID(id) { return ([]) }
+        })
+      }
+
+      const req = {
+        <%- props.request.invalid %>
+      }
+
+      // When
+      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      await uc.authorize(authorizedUser)
+      const ret = await uc.run(req)
+
+      // Then
+      assert.ok(ret.isErr)
+      assert.ok(ret.isNotFoundError)
+    })
+  })
+})

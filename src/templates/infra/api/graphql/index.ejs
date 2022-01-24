@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express')
+const { gql, ApolloServer } = require('apollo-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
 const types = require('./types')
 const inputs = require('./inputs')
@@ -7,11 +7,8 @@ const mutations = require('./mutations')
 const repositoriesFactory = require('../../../infra/data/repositories')
 const usecases = require('../../../domain/usecases')
 const db = require('../../../infra/data/database')
-const { ApolloServer, addSchemaLevelResolveFunction } = require('apollo-server-express')
-
 
 async function generateSchema(config) {
-    // TODO: rename this "UC"
     const UCqueries = []
     const UCmutations = []
 
@@ -39,11 +36,13 @@ async function generateSchema(config) {
 
 module.exports = async (app, config) => {
     const schema = makeExecutableSchema(await generateSchema(config))
-    addSchemaLevelResolveFunction(schema, () => {})
-    return new ApolloServer({
+    const server = new ApolloServer({
         introspection: !config.isProd,
         playground: !config.isProd,
         debug: !config.isProd,
         schema: schema,
-    }).applyMiddleware({ app, path: config.api.graphql.rootPath })
+    })
+    await server.start()
+    server.applyMiddleware({ app, path: config.api.graphql.rootPath })
+    return server
 }

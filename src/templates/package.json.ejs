@@ -1,7 +1,7 @@
 {
-    "name": "<%= props.name %>",
+    "name": "<%- props.name %>",
     "version": "1.0.0",
-    "description": "<%= props.description %>",
+    "description": "<%- props.description %>",
     "main": "src/index.js",
     "scripts": {
       "start": "node src/index.js",
@@ -11,8 +11,9 @@
       "test": "mocha --timeout 999999 --colors --recursive src/**/*.test.js"
     },
     "keywords": ["herbs"],
-    "author": "<%= props.author %>",
-    "license": "<%= props.license %>",
+    "author": "<%- props.author %>",
+    "license": "<%- props.license %>",
     "dependencies": {
+      <%- props.packages %>
     }
 }

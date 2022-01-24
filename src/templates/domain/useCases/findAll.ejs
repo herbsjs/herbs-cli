@@ -1,0 +1,26 @@
+const { usecase, step, Ok } = require('@herbsjs/herbs')
+const { <%- props.name.pascalCase %> } = require('../../entities')
+
+const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+  usecase('Find all <%- props.name.pascalCase %>s', {
+    // Input/Request metadata and validation
+    request: {
+      limit: Number,
+      offset: Number
+    },
+
+    // Output/Response metadata
+    response: [<%- props.name.pascalCase %>],
+
+    //Authorization with Audit
+    authorize: () => Ok(),
+
+    'Find and return all the <%- props.name.raw %>s': step(async ctx => {
+      const result = await <%- props.name.camelCase %>Repository.findAll(ctx.req)
+      
+      // ctx.ret is the return value of a use case
+      return (ctx.ret = result.map(<%- props.name.camelCase %> => <%- props.name.pascalCase %>.fromJSON(<%- props.name.camelCase %>)))
+    })
+  })
+
+module.exports = useCase

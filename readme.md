@@ -24,51 +24,21 @@ herbs new
 
 ```bash
 .
-├── node_modules
 ├── package-lock.json
 ├── package.json
 └── src
-    ├── config
-    │   ├── api.js
-    │   ├── index.js
-    │   └── mongo.js
     ├── domain
     │   ├── entities
-    │   │   ├── index.js
-    │   │   └── user.js
     │   └── usecases
-    │       ├── index.js
-    │       └── user
-    │           ├── createUser.js
-    │           ├── createUser.test.js
-    │           ├── deleteUser.js
-    │           ├── deleteUser.test.js    
-    │           ├── getAllUser.js
-    │           ├── getAllUser.test.js
-    │           ├── getByIdUser.js
-    │           ├── getByIdUser.test.js    
-    │           └── updateUser.js
-    │           └── updateUser.test.js    
-    ├── index.js
     └── infra
         ├── api
         │   ├── graphql
-        │   │   ├── defaultResolver.js
-        │   │   ├── index.js
-        │   │   ├── inputs.js
-        │   │   ├── mutations.js
-        │   │   ├── queries.js
-        │   │   └── types.js
         │   ├── rest
-        │   │   └── index.js
-        │   └── server.js
+        ├── config
         └── data
             ├── database
-            │   └── index.js
+            │   └── migrations
             └── repositories
-                ├── baseRepository.js
-                ├── index.js
-                └── userRepository.js
 ```
 
 ## commands
@@ -90,6 +60,7 @@ Generate a new project based on your entities(or not)
 | Generate graphql layer?                       | This will generate a graphql layer for your domain.                                                                            | Y                              | n                             |
 | Generate rest layer?                          | This will generate a rest layer for your domain.                                                                                                                    | Y                              | n                             |
 | What database do you want to use?             | Use arrow keys to choose your Database.                                                                                        | --                             | --                            |
+
 | Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example/my-custom-entities/ |
 | Do you want to initialize a Git repository?             | This will initialize a git repository for your project.                                                                                                                    | N                              | y                             |
 
