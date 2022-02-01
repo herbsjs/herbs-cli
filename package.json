@@ -51,13 +51,13 @@
     "tedious": "^14.0.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^8.0.3",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@babel/eslint-parser": "^7.16.5",
     "chai": "^4.3.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.6.0",
