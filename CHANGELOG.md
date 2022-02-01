@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/herbsjs/herbs-cli/compare/v1.10.3...v1.10.4) (2022-02-01)
+
+
+### Bug Fixes
+
+* **hotfix:** fix usecase requirements ([557d1ca](https://github.com/herbsjs/herbs-cli/commit/557d1ca369cf0b75424923ba2e6b0b717d65ec1a))
+
 ## [1.10.3](https://github.com/herbsjs/herbs-cli/compare/v1.10.2...v1.10.3) (2022-01-15)
 
 
