@@ -3,6 +3,8 @@ const { objToString } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
+const { herbarium } = require('@herbsjs/herbarium')
+
 
 async function generateRequestschema(schema) {
   // schema to plain JSON
@@ -21,13 +23,14 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
 
   process.stdout.write(`Generating Use Cases\n`)
 
-  const entities = require(`${filesystem.cwd()}/src/domain/entities`)
+  herbarium.requireAll()
+  const entities = herbarium.entities.all
   const requires = []
 
-  for (const entity of Object.keys(entities)) {
-    const { name, schema } = entities[entity].prototype.meta
+  for (const entity of Array.from(entities.values())) {
+    const { name, schema } = entity.entity.prototype.meta
     for (const action of useCases) {
-      const useCaseName = `${action}${name}`
+      const useCaseName = `${action} ${name}`
       const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.js`
 
       let type = 'read'
@@ -53,10 +56,4 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       })
     }
   }
-
-  await generate({
-    template: 'domain/useCases/index.ejs',
-    target: 'src/domain/usecases/index.js',
-    props: { requires: objToString(requires) }
-  })
 }

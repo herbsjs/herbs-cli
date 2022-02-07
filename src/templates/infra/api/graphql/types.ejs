@@ -1,5 +1,8 @@
 const { entity2type } = require('@herbsjs/herbs2gql')
-const entities = require('../../../domain/entities')
+const { herbarium } = require('@herbsjs/herbarium')
+const { GraphQLDateTime } = require('graphql-scalars')
+
+const entities = Array.from(herbarium.entities.all.values()).map(e => e.entity)
 
 const defaultSchema = [`
   type Query {
@@ -10,8 +13,15 @@ const defaultSchema = [`
     _: Boolean
   }`]
 
-const types = [defaultSchema].concat(Object
-                                .keys(entities)
-                                .map(entity => [entity2type(entities[entity])]))
+let types = [defaultSchema]
+types = types.concat(entities.map(entity => [entity2type(entity)]))
+
+/* Date Types */
+const resolver = { Date: GraphQLDateTime }
+const schema = [`scalar Date`]
+types.push([schema, resolver])
+
+/* Custom Types */
+// types.push(require('./custom/type'))
 
 module.exports = types

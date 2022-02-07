@@ -1,31 +1,32 @@
 const update<%- props.name.pascalCase %> = require('./update<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { <%- props.name.pascalCase %> } = require('../../entities')
-
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.pascalCase %>')
 
 describe('Update <%- props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid <%- props.name.raw %>', () => {
+  describe('When a <%- props.name.raw %> is invalid', () => {
 
-    it('should update <%- props.name.raw %> if is valid', async () => {
-      // Given
-      const retInjection = <%- props.name.pascalCase %>.fromJSON({ 
+    it('should update <%- props.name.raw %>', async () => {
+      // Given 
+      const fake<%- props.name.pascalCase %> = {
         <%- props.mock %>
-      })
-      const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
-          async findByID(id) { return ([retInjection]) }
-          async update(id) { return true }
-        })
       }
+
+      const injection = {
+        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+          async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
+          async update(id) { return true }
+        }
+      }
+
 
       const req = {
         <%- props.request.valid %>
       }
 
       // When
-      const uc = update<%- props.name.pascalCase %>(injection)()
+      const uc = update<%- props.name.pascalCase %>(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -35,25 +36,37 @@ describe('Update <%- props.name.raw %>', () => {
     })
   })
 
-  describe('Invalid <%- props.name.raw %>', () => {
+  describe('When a <%- props.name.raw %> is invalid', () => {
 
-    it('should not update invalid <%- props.name.pascalCase %>', async () => {
-      // Given
-      const injection = {}
+    it('should not update <%- props.name.pascalCase %>', async () => {
+      // Given 
+      const fake<%- props.name.pascalCase %> = {
+        <%- props.mock %>
+      }
+
+      const injection = {
+        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+          async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
+        }
+      }
       const req = { 
         <%- props.request.invalid %>
       }
 
       // When
-      const uc = update<%- props.name.pascalCase %>(injection)()
+      const uc = update<%- props.name.pascalCase %>(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
       assert.ok(ret.isErr)
+      // assert.ok(ret.isInvalidEntityError)
     })
+  })
 
-    it('should not update non existing <%= props.name.pascalCase %>', async () => {
+  describe('When a <%- props.name.raw %> does not exist', () => {
+
+    it('should return a error', async () => {
       // Given
       const retInjection = null
       const injection = {
@@ -66,7 +79,7 @@ describe('Update <%- props.name.raw %>', () => {
       const req = { id: 0, nickname: 'herbsUser', password: 'V&eryStr0ngP@$$' }
 
       // When
-      const uc = update<%= props.name.pascalCase %>(injection)()
+      const uc = update<%= props.name.pascalCase %>(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

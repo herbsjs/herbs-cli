@@ -7,7 +7,7 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
     if (!options[db]) continue
     await generate({
       template: `infra/data/database/${db}/database.ejs`,
-      target: 'src/infra/data/database/index.js'
+      target: 'src/infra/data/database/connection.js'
     })
   }
 }

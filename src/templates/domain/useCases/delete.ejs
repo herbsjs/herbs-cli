@@ -1,7 +1,11 @@
-const { usecase, step, Ok } = require('@herbsjs/herbs')
-const { <%- props.name.pascalCase %> } = require('../../entities')
+const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
+const { herbarium } = require('@herbsjs/herbarium')
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const delete<%- props.name.pascalCase %> = injection =>
   usecase('Delete the <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -15,11 +19,30 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     // authorize: (user) => (user.canDelete<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    'Delete the <%- props.name.raw %>': step(async ctx => {
-      const <%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON({ id: ctx.req.id })
-      await <%- props.name.camelCase %>Repository.delete(<%- props.name.camelCase %>)
-      return Ok()
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+    'Check if the <%- props.name.pascalCase %> exist': step(async ctx => {
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const [<%- props.name.camelCase %>] = await repo.findByID(ctx.req.id)
+      ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
+
+      if (<%- props.name.camelCase %>) return Ok()
+      return Err.notFound({
+          message: `<%- props.name.pascalCase %> ID ${ctx.req.id} does not exist`,
+          payload: { entity: '<%- props.name.raw %>' }
+      })
+    }),
+
+    'Delete the <%- props.name.pascalCase %>': step(async ctx => {
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      ctx.ret = await repo.delete(ctx.<%- props.name.camelCase %>)
+      // ctx.ret is the return value of a use case
+      return Ok(ctx.ret)
     })
   })
 
-module.exports = useCase
+module.exports =
+  herbarium.usecases
+    .add(delete<%- props.name.pascalCase %>, 'Delete<%- props.name.pascalCase %>')
+    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.delete, entity: <%- props.name.pascalCase %> })
+    .usecase

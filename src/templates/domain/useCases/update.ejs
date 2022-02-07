@@ -1,8 +1,12 @@
-const merge = require('deepmerge')
 const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
-const { <%- props.name.pascalCase %> } = require('../../entities')
+const { herbarium } = require('@herbsjs/herbarium')
+const merge = require('deepmerge')
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const update<%- props.name.pascalCase %> = injection =>
   usecase('Update <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -17,26 +21,43 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     // authorize: (user) => (user.canUpdate<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    //Step description and function
-    'Check if the <%- props.name.raw %> is valid': step(async ctx => {
-      const <%- props.name.camelCase %> = await <%- props.name.camelCase %>Repository.findByID(parseInt(ctx.req.id))
-      if(!<%- props.name.camelCase %>) return Err.notFound()
-      const new<%- props.name.pascalCase %> = merge.all([ <%- props.name.camelCase %>, ctx.req ])
-      ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(new<%- props.name.pascalCase %>)
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
-      if (!ctx.<%- props.name.camelCase %>.isValid()) return Err.invalidEntity({
-        message: 'The <%- props.name.pascalCase %> entity is invalid', 
-        payload: { entity: '<%- props.name.raw %>' },  
-        cause: ctx.<%- props.name.camelCase %>.errors
+    'Retrieve the <%- props.name.raw %>': step(async ctx => {
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const [<%- props.name.camelCase %>] = await repo.findByID(ctx.req.id)
+      ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
+      if (<%- props.name.camelCase %> === undefined) return Err.notFound({
+        message: `<%- props.name.pascalCase %> not found - ID: ${ctx.req.id}`,
+        payload: { entity: '<%- props.name.raw %>' }
       })
-      
-      return Ok() 
+
+      return Ok(<%- props.name.camelCase %>)
     }),
 
-    'Update the <%- props.name.raw %>': step(async ctx => {
+    'Check if it is a valid <%- props.name.raw %> before update': step(ctx => {
+      const old<%- props.name.pascalCase %> = ctx.<%- props.name.camelCase %>
+      const new<%- props.name.pascalCase %> = <%- props.name.pascalCase %>.fromJSON(merge.all([ old<%- props.name.pascalCase %>, ctx.req ]))
+      ctx.<%- props.name.camelCase %> = new<%- props.name.pascalCase %>
+
+      return new<%- props.name.pascalCase %>.isValid() ? Ok() : Err.invalidEntity({
+        message: `<%- props.name.pascalCase %> is invalid`,
+        payload: { entity: '<%- props.name.raw %>' },
+        cause: new<%- props.name.pascalCase %>.errors
+      })
+
+    }),
+
+    'Update the <%- props.name.pascalCase %>': step(async ctx => {
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       // ctx.ret is the return value of a use case
-      return (ctx.ret = await <%- props.name.camelCase %>Repository.update(ctx.<%- props.name.camelCase %>)) 
+      return (ctx.ret = await repo.update(ctx.<%- props.name.camelCase %>))
     })
+
   })
 
-module.exports = useCase
+module.exports =
+  herbarium.usecases
+    .add(update<%- props.name.pascalCase %>, 'Update<%- props.name.pascalCase %>')
+    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.update, entity: <%- props.name.pascalCase %> })
+    .usecase

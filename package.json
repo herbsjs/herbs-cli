@@ -48,6 +48,7 @@
     "mongodb": "^4.3.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
+    "sugar-env": "^1.5.14",
     "tedious": "^14.0.0"
   },
   "devDependencies": {
@@ -58,13 +59,13 @@
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^8.0.3",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "chai": "^4.3.4",
+    "chai": "^4.3.6",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
-    "mocha": "^9.1.4",
+    "mocha": "^9.2.0",
     "nyc": "^15.1.0",
     "prettier": "^2.5.1",
     "semantic-release": "^18.0.1"

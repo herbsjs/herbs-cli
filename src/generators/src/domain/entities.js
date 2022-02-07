@@ -42,10 +42,4 @@ module.exports = async ({ template: { generate } }, isUpdate) => async () => {
     })
     requires.User = 'require(\'./user.js\')'
   }
-
-  await generate({
-    template: 'domain/entities/index.ejs',
-    target: 'src/domain/entities/index.js',
-    props: { requires: objToString(requires) }
-  })
 }

@@ -9,6 +9,7 @@ module.exports = async (tools) => {
   return {
     new: {
       packageJson: await require('./src/packagejson')(tools),
+      config: infra ? await require('./src/infra/config')(tools) : ignore,
       entities: await require('./src/domain/entities')(tools),
       connection: await require('./src/infra/database/connection')(tools),
       repositories: await require('./src/infra/database/repositories/repositories')(tools),
@@ -17,7 +18,6 @@ module.exports = async (tools) => {
       useCasesTests: await require('./src/domain/usecases/unitTests')(tools),
       graphql: options.graphql ? await require('./src/infra/api/graphql')(tools) : ignore,
       rest: options.rest ? await require('./src/infra/api/rest')(tools) : ignore,
-      config: infra ? await require('./src/infra/config')(tools) : ignore,
       server: infra ? await require('./src/infra/api/server')(tools) : ignore,
       index: await require('./src/index')(tools),
       git: options.git ? await require('./src/infra/git')(tools) : ignore

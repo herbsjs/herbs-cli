@@ -1,12 +1,16 @@
 const { objToString } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
+const { herbarium } = require('@herbsjs/herbarium')
+
 async function generateRepositories(generate, filesystem, db) {
   const requires = {}
-  const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
-  for (const entity of Object.keys(entities)) {
-    const { name } = entities[entity].prototype.meta
+  herbarium.requireAll()
+  const entities = herbarium.entities.all
+
+  for (const entity of Array.from(entities.values())) {
+    const { name } = entity.entity.prototype.meta
     const lowCCName = camelCase(name)
     const repositoryPath = `${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`
 
@@ -43,9 +47,9 @@ async function updateRepositories(generate, filesystem) {
 }
 
 module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
-  
+
   process.stdout.write(`Generating Repositories\n`)
-  
+
   let requires = {}
 
   if (isUpdate) requires = await updateRepositories(generate, filesystem)
@@ -54,10 +58,5 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
     if (!options[db]) continue
 
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
-    await generate({
-      template: 'infra/data/repository/index.ejs',
-      target: 'src/infra/data/repositories/index.js',
-      props: { requires: objToString(requires) }
-    })
   }
 }

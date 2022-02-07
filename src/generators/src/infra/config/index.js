@@ -19,7 +19,8 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       if (!options[db]) continue
       await generate({
         template: `infra/config/${db}.ejs`,
-        target: `src/infra/config/${db}.js`
+        target: `src/infra/config/${db}.js`,
+        props: { dbName: options.name }
       })
       requires.database = `require('./${db}')`
     }

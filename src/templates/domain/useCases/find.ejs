@@ -1,11 +1,15 @@
 const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
-const { <%- props.name.pascalCase %> } = require('../../entities')
+const { herbarium } = require('@herbsjs/herbarium')
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const find<%- props.name.pascalCase %> = injection =>
   usecase('Find a <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: Number,
+      ids: Number,
     },
 
     // Output/Response metadata
@@ -15,17 +19,23 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     // authorize: (user) => (user.canFindOne<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
     'Find and return the <%- props.name.raw %>': step(async ctx => {
-      const id = ctx.req.id
-      const [result] = await <%- props.name.camelCase %>Repository.findByID(id) 
-      if (!result) return Err.notFound({ 
-        message: `<%- props.name.raw %> entity not found by ID: ${id}`,
-        payload: { entity: '<%- props.name.raw %>', id }
+      const ids = ctx.req.ids
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const [<%- props.name.camelCase %>] = await repo.findByID(ids)
+      if (!<%- props.name.camelCase %>) return Err.notFound({ 
+        message: `<%- props.name.raw %> entity not found by ID: ${ids}`,
+        payload: { entity: '<%- props.name.raw %>', ids }
       })
-      
       // ctx.ret is the return value of a use case
-      return (ctx.ret = <%- props.name.pascalCase %>.fromJSON(result))
+      return Ok(ctx.ret = <%- props.name.camelCase %>)
     })
   })
 
-module.exports = useCase
+module.exports =
+  herbarium.usecases
+    .add(find<%- props.name.pascalCase %>, 'Find<%- props.name.pascalCase %>')
+    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.read, entity: <%- props.name.pascalCase %> })
+    .usecase

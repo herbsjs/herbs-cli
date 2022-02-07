@@ -1,5 +1,6 @@
 const camelCase = require('lodash.camelcase')
 const glob = require('glob')
+const { herbarium } = require('@herbsjs/herbarium')
 
 function type2Str(Type) {
   const _type = new Type()
@@ -15,11 +16,13 @@ module.exports =
 
       process.stdout.write(`Generating Migration\n`)
 
-      const entities = require(`${filesystem.cwd()}/src/domain/entities`)
+      herbarium.requireAll()
+      const entities = herbarium.entities.all
+
       const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`
 
-      for (const entity of Object.keys(entities)) {
-        const { name, schema } = entities[entity].prototype.meta
+      for (const entity of Array.from(entities.values())) {
+        const { name, schema } = entity.entity.prototype.meta
         if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) {
           continue
         }

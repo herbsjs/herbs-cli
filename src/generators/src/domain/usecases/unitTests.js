@@ -1,7 +1,7 @@
-
 const camelCase = require('lodash.camelcase')
 const { objToString } = require('../../../utils')
 const fs = require('fs')
+const { herbarium } = require('@herbsjs/herbarium')
 
 function invertObjValues(obj) {
   for (const key of Object.keys(obj)) {
@@ -28,7 +28,7 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  find: (obj) => { return { id: obj.id } },
+  find: (obj) => { return { ids: obj.id } },
   findAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
@@ -39,7 +39,7 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  find: () => { return { id: null } },
+  find: () => { return { ids: null } },
   findAll: () => { return [] }
 }
 
@@ -70,12 +70,15 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
 
   process.stdout.write(`Generating Use Cases Tests\n`)
 
-  const entities = require(`${filesystem.cwd()}/src/domain/entities`)
+  herbarium.requireAll()
+  const entities = herbarium.entities.all
 
-  Object.keys(entities).map(async (entity) => {
-    const { name, schema } = entities[entity].prototype.meta
+  for (const entity of Array.from(entities.values())) {
+    const { name, schema } = entity.entity.prototype.meta
+
     useCases.map(async (action) => {
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${action}${entity}.test.js`
+      const useCaseName = `${action} ${name}`
+      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.test.js`
 
       if (fs.existsSync(ucPath)) return
 
@@ -97,5 +100,5 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
         }
       })
     })
-  })
+  }
 }

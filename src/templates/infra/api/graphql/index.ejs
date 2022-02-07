@@ -1,29 +1,12 @@
-const { gql, ApolloServer } = require('apollo-server-express')
-const { makeExecutableSchema } = require('graphql-tools')
+const { ApolloServer, gql } = require('apollo-server-express')
 const types = require('./types')
-const inputs = require('./inputs')
 const queries = require('./queries')
 const mutations = require('./mutations')
-const repositoriesFactory = require('../../../infra/data/repositories')
-const usecases = require('../../../domain/usecases')
-const db = require('../../../infra/data/database')
 
-async function generateSchema(config) {
-    const UCqueries = []
-    const UCmutations = []
+async function graphql(app, config) {
 
-    const conn = await db.factory(config) 
-    const repositories = await repositoriesFactory(conn)
-    for(const obj of usecases){
-        if(!obj.tags.type) continue
-        
-        if(obj.tags.type === 'read')
-            UCqueries.push(obj.usecase(repositories))
-        else
-            UCmutations.push(obj.usecase(repositories))
-    }
-
-    const graphQLDef = [].concat(types, inputs, queries.factory(UCqueries), mutations.factory(UCmutations))
+    let graphQLDef = []
+    graphQLDef = graphQLDef.concat(types, queries, mutations)
 
     /* Type Defs (Schemas) */
     const typeDefs = graphQLDef.map(i => gql(i[0]))
@@ -31,18 +14,19 @@ async function generateSchema(config) {
     /* Resolvers */
     const resolvers = graphQLDef.map(i => i[1]).filter(i => i !== undefined)
 
-    return { typeDefs, resolvers }
-}
-
-module.exports = async (app, config) => {
-    const schema = makeExecutableSchema(await generateSchema(config))
+    /* Server */
     const server = new ApolloServer({
-        introspection: !config.isProd,
-        playground: !config.isProd,
-        debug: !config.isProd,
-        schema: schema,
+        introspection: true,
+        playground: true,
+        typeDefs,
+        resolvers,
+        context: ({ req }) => ({ user })
     })
     await server.start()
-    server.applyMiddleware({ app, path: config.api.graphql.rootPath })
-    return server
+    server.applyMiddleware({ app: app, path: '/graphql' })
+
+    // eslint-disable-next-line no-console
+    console.info(`\n🖧 GraphQL endpoint - /graphql`)
 }
+
+module.exports = { graphql }

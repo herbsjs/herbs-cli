@@ -1,8 +1,10 @@
 const { Repository } = require("@herbsjs/herbs2knex")
-const { <%- props.name.pascalCase %> } = require('../../../domain/entities')
+const { herbarium } = require('@herbsjs/herbarium')
+const <%- props.name.pascalCase %> = require('../../../domain/entities/<%- props.name.camelCase %>')
+const connection = require('../database/connection')
 
-module.exports = class <%- props.name.pascalCase %>Repository extends Repository {
-    constructor(connection) {
+class <%- props.name.pascalCase %>Repository extends Repository {
+    constructor(injection) {
         super({
             entity: <%- props.name.pascalCase %>,
             table: "<%- props.table %>",
@@ -11,3 +13,9 @@ module.exports = class <%- props.name.pascalCase %>Repository extends Repository
         })
     }
 }
+
+module.exports =
+    herbarium.repositories
+        .add(<%- props.name.pascalCase %>Repository, '<%- props.name.pascalCase %>Repository')
+        .metadata({ entity: <%- props.name.pascalCase %> })
+        .repository
