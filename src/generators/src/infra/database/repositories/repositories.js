@@ -1,12 +1,11 @@
-const { objToString } = require('../../../../utils')
+const { requireHerbarium } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
-const { herbarium } = require('@herbsjs/herbarium')
 
-async function generateRepositories(generate, filesystem, db) {
+async function generateRepositories(generate, filesystem, db, command) {
   const requires = {}
 
-  herbarium.requireAll()
+  const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
 
   for (const entity of Array.from(entities.values())) {
@@ -33,7 +32,7 @@ async function generateRepositories(generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories(generate, filesystem) {
+async function updateRepositories(generate, filesystem, command) {
   const paths = {
     mongo: '/src/infra/config/mongo.js',
     sqlserver: '/src/infra/config/sqlserver.js',
@@ -43,20 +42,20 @@ async function updateRepositories(generate, filesystem) {
 
   const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
 
-  return generateRepositories(generate, filesystem, db)
+  return generateRepositories(generate, filesystem, db, command)
 }
 
-module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
+module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, command) => async () => {
 
   process.stdout.write(`Generating Repositories\n`)
 
   let requires = {}
 
-  if (isUpdate) requires = await updateRepositories(generate, filesystem)
+  if (command) requires = await updateRepositories(generate, filesystem, command)
 
   for (const db of ['postgres', 'sqlserver', 'mongo', 'mysql']) {
     if (!options[db]) continue
 
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db, command))
   }
 }

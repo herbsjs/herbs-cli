@@ -1,6 +1,6 @@
 const camelCase = require('lodash.camelcase')
 const glob = require('glob')
-const { herbarium } = require('@herbsjs/herbarium')
+const { requireHerbarium } = require('../../../../utils')
 
 function type2Str(Type) {
   const _type = new Type()
@@ -11,12 +11,12 @@ function type2Str(Type) {
 }
 
 module.exports =
-  async ({ template: { generate }, filesystem, parameters: { options } }) =>
+  async ({ template: { generate }, filesystem, parameters: { options } }, command) =>
     async () => {
 
       process.stdout.write(`Generating Migration\n`)
 
-      herbarium.requireAll()
+      const herbarium = requireHerbarium(command, filesystem.cwd())
       const entities = herbarium.entities.all
 
       const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`

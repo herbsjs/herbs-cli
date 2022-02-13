@@ -9,7 +9,7 @@
     "format": "prettier --write **/*.{js,json} && standard --fix",
     "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
     "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
-    "test": "mocha __tests__ --timeout 90000",
+    "test": "mocha tests --timeout 90000",
     "semantic-release": "semantic-release",
     "commit": "npm run lint && cz"
   },
@@ -25,31 +25,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@herbsjs/herbs": "^1.4.2",
-    "@herbsjs/herbs2gql": "^2.0.1",
-    "@herbsjs/herbs2knex": "^1.4.1",
-    "@herbsjs/herbs2mongo": "^1.0.2",
-    "@herbsjs/herbs2rest": "^2.0.1",
-    "@herbsjs/herbsshelf": "^2.1.2",
-    "apollo-server": "^3.6.1",
-    "apollo-server-express": "^3.6.1",
-    "cors": "^2.8.5",
-    "deepmerge": "^4.2.2",
-    "dotenv": "^12.0.3",
-    "express": "^4.17.2",
     "git-user-name": "^2.0.0",
-    "glob": "^7.2.0",
     "gluegun": "^4.7.1",
-    "graphql": "^15.8.0",
-    "graphql-tools": "^8.2.0",
-    "inquirer": "^8.2.0",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.startcase": "^4.4.0",
-    "mongodb": "^4.3.0",
-    "nodemon": "^2.0.15",
-    "pg": "^8.7.1",
-    "sugar-env": "^1.5.14",
-    "tedious": "^14.0.0"
+    "inquirer": "^8.2.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
@@ -76,7 +54,7 @@
   },
   "standard": {
     "ignore": [
-      "__tests__/*"
+      "tests/*"
     ]
   },
   "repository": {

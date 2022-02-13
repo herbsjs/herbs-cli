@@ -1,5 +1,6 @@
 const generator = require('../generators')
 const fs = require('fs')
+const { system } = require('gluegun')
 const inquirer = require('inquirer')
 
 function isEmpty(obj) {
@@ -91,7 +92,40 @@ const cmd = {
     toolbox.parameters.options = options
     const generators = (await generator(toolbox)).new
     for (const layer of Object.keys(generators)) { await generators[layer]() }
-    toolbox.print.success('Project generated! 🤩')
+    const nextstep = `
+The basic bootstrap project was generated! 🤩
+You are ready unlock your domain! 🌿
+
+Next steps:
+
+$ cd ${options.name}
+$ npm install
+$ herbs update
+$ npm start
+    `
+    toolbox.print.success(nextstep)
+    const npmOptions = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'npmInstall',
+        message: 'Run it now?',
+        choices: ['Yeah, please', 'No, let me handle this'],
+        default: 'Yeah, please'
+      }])
+    if (npmOptions.npmInstall === 'Yeah, please') {
+      async function exec(cmd) {
+        toolbox.print.info(`${cmd}: running...`)
+        try {
+          await system.run(cmd)
+          toolbox.print.info(`${cmd}: ok`)
+        } catch (error) {
+          toolbox.print.info(`${cmd} output:`, error.stdout)
+          toolbox.print.info(`Exit code:`, error.code)
+        }
+      }
+      await exec('npm install')
+      await exec('herbs update')
+    }
   }
 }
 

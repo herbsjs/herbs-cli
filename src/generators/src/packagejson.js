@@ -74,6 +74,4 @@ module.exports =
           packages: objToString(packages, { removeQuotes: false, removeBraces: true, extraSpaces: 2 })
         }
       })
-
-      //fsPromises.symlink(`${__dirname}/../../../node_modules`, `${process.cwd()}/node_modules`)
     }

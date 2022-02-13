@@ -1,7 +1,6 @@
 const camelCase = require('lodash.camelcase')
-const { objToString } = require('../../../utils')
+const { objToString, requireHerbarium } = require('../../../utils')
 const fs = require('fs')
-const { herbarium } = require('@herbsjs/herbarium')
 
 function invertObjValues(obj) {
   for (const key of Object.keys(obj)) {
@@ -66,11 +65,11 @@ function generateRequestObject(schema, action, validReq = true) {
   return invalidUseCaseRequests[action](obj)
 }
 
-module.exports = async ({ template: { generate }, filesystem }) => async () => {
+module.exports = async ({ template: { generate }, filesystem }, command) => async () => {
 
   process.stdout.write(`Generating Use Cases Tests\n`)
 
-  herbarium.requireAll()
+  const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
 
   for (const entity of Array.from(entities.values())) {

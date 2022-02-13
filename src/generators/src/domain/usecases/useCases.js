@@ -1,10 +1,8 @@
 const useCases = ['create', 'update', 'delete', 'findAll', 'find']
-const { objToString } = require('../../../utils')
+const { objToString, requireHerbarium } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
-const { herbarium } = require('@herbsjs/herbarium')
-
 
 async function generateRequestschema(schema) {
   // schema to plain JSON
@@ -19,11 +17,11 @@ async function generateRequestschema(schema) {
   return objToString(obj, { spaces: 2, removeBraces: true, extraSpaces: 4 })
 }
 
-module.exports = async ({ template: { generate }, filesystem }) => async () => {
+module.exports = async ({ template: { generate }, filesystem }, command) => async () => {
 
   process.stdout.write(`Generating Use Cases\n`)
 
-  herbarium.requireAll()
+  const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
   const requires = []
 

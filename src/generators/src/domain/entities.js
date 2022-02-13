@@ -27,15 +27,19 @@ function updateEntities(entitiesPath, level = './') {
   return requires
 }
 
-module.exports = async ({ template: { generate } }, isUpdate) => async () => {
+module.exports = async ({ template: { generate } }, command) => async () => {
 
   process.stdout.write(`Generating Entities\n`)
 
   let requires = {}
 
-  if (isUpdate)
+  if (command === "update")
     requires = updateEntities(`${filesystem.cwd()}/src/domain/entities`)
   else {
+    await generate({
+      template: 'domain/herbarium.ejs',
+      target: 'src/domain/herbarium.js'
+    })
     await generate({
       template: 'domain/entities/user.ejs',
       target: 'src/domain/entities/user.js'
