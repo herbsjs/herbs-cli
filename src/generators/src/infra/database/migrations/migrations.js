@@ -1,14 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const glob = require('glob')
 const { requireHerbarium } = require('../../../../utils')
-
-function type2Str(Type) {
-  const _type = new Type()
-  if (_type instanceof String) return 'string'
-  if (_type instanceof Number) return 'integer'
-  if (_type instanceof Boolean) return 'boolean'
-  if (_type instanceof Date) return 'timestamps'
-}
+const path = require('path')
 
 module.exports =
   async ({ template: { generate }, filesystem, parameters: { options } }, command) =>
@@ -23,38 +16,50 @@ module.exports =
 
       for (const entity of Array.from(entities.values())) {
         const { name, schema } = entity.entity.prototype.meta
+
         if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) {
+          // don't override already existing migration files for that entity 
           continue
         }
 
-        const columns = []
-        Object.keys(schema).forEach((prop) => {
-          const { name, type } = schema[prop]
-          if (name === 'id') return
-          columns.push(`table.${type2Str(type)}('${camelCase(name)}')`)
-        })
-
-        for (const db of ['postgres', 'sqlserver', 'mysql']) {
-          if (!options[db]) continue
-
-          const migrationName = new Date()
-            .toISOString()
-            .replace(/\D/g, '')
-            .substring(0, 14)
-
-          await generate({
-            template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
-            target: `${migrationsPath}/${migrationName}_${camelCase(name)}s.js`,
-            props: { table: `${camelCase(name)}s`, columns: columns.join('\n') }
-          })
-
-          if (!glob.sync(migrationsPath).length) return
-
-          await generate({
-            template: `${db.toLowerCase()}.knexFile.ejs`,
-            target: 'knexFile.js',
-            props: { dbName: options.name }
-          })
+        function type2Str(Type) {
+          const _type = new Type()
+          if (_type instanceof String) return 'string'
+          if (_type instanceof Number) return 'integer'
+          if (_type instanceof Boolean) return 'boolean'
+          if (_type instanceof Date) return 'timestamps'
         }
+
+        function getDBType(appDir) {
+          const configDir = path.join(appDir, `/src/infra/config`)
+          const config = require(configDir)
+          return config.database.herbsCLI
+        }
+
+        function createColumns(schema) {
+          const columns = []
+          Object.keys(schema).forEach((prop) => {
+            const { name, type, options } = schema[prop]
+            columns.push(`table.${type2Str(type)}('${camelCase(name)}')${options.isId ? '.primary()' : ''}`)
+          })
+          return columns
+        }
+
+        const db = getDBType(filesystem.cwd())
+        const migrationName = new Date()
+          .toISOString()
+          .replace(/\D/g, '')
+          .substring(0, 14)
+        const migrationFile = `${migrationName}_${camelCase(name)}s.js`
+
+        const columns = createColumns(schema)
+
+        await generate({
+          template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
+          target: `${migrationsPath}/${migrationFile}`,
+          props: { table: `${camelCase(name)}s`, columns: columns }
+        })
+        process.stdout.write(`New: ${migrationFile}\n`)
+
       }
     }

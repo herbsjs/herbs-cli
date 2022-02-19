@@ -3,6 +3,7 @@ require('dotenv').config()
 
 
 module.exports = {
+  herbsCLI: 'mongo',
   dbName: env.get(`$MONGO_DATABASE`, '<%- props.dbName %>'),
   connstr: env.get(`$MONGO_CONN_STR`, 'mongodb://localhost:27017'),
 }

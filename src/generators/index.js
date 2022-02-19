@@ -24,7 +24,7 @@ module.exports = async (tools) => {
       repositories: await require('./src/infra/database/repositories/repositories')(tools, cmd.update),
       useCases: await require('./src/domain/usecases/useCases')(tools, cmd.update),
       useCasesTests: await require('./src/domain/usecases/unitTests')(tools, cmd.update),
-      migrations: updateMigration ? await require('./src/infra/database/migrations/migrations')(tools, cmd.update) : ignore,
+      migrations: await require('./src/infra/database/migrations/migrations')(tools, cmd.update),
     }
   }
 }
