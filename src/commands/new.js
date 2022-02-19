@@ -93,8 +93,8 @@ const cmd = {
     const generators = (await generator(toolbox)).new
     for (const layer of Object.keys(generators)) { await generators[layer]() }
     const nextstep = `
-The basic bootstrap project was generated! 🤩
-You are ready unlock your domain! 🌿
+A inital Herbs project was created! 🤩
+You are ready to unlock your domain! 🌿
 
 Next steps:
 

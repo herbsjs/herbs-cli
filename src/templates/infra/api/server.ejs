@@ -12,6 +12,8 @@ function herbsshelf(app, config) {
     res.write(shelf)
     res.end()
   })
+  // eslint-disable-next-line no-console
+  console.info(`\n🌿 Herbs Shelf endpoint - /herbsshelf \n`)
 }
 
 async function start(config) {
@@ -26,7 +28,7 @@ async function start(config) {
   return app.listen(
     { port: config.api.port },
     // eslint-disable-next-line no-console
-    () => console.log(`🚀 Server UP and 🌪️ Spinning on port ${config.api.port}`))
+    () => console.log(`🚀 Server UP and 🌪️  - http://localhost:${config.api.port}/`))
 }
 
 module.exports = { start }
