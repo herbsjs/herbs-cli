@@ -6,7 +6,7 @@ const mutations = require('./mutations')
 async function graphql(app, config) {
 
     let graphQLDef = []
-    graphQLDef = graphQLDef.concat(types, queries, mutations)
+    graphQLDef = graphQLDef.concat(types(), queries(), mutations())
 
     /* Type Defs (Schemas) */
     const typeDefs = graphQLDef.map(i => gql(i[0]))
@@ -20,7 +20,8 @@ async function graphql(app, config) {
         playground: true,
         typeDefs,
         resolvers,
-        context: ({ req }) => ({ user })
+        // Authorization
+        // context: ({ req }) => ({ user })
     })
     await server.start()
     server.applyMiddleware({ app: app, path: '/graphql' })
