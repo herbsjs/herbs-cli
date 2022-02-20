@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/herbsjs/herbs-cli/compare/v2.0.0...v2.0.1) (2022-02-20)
+
+
+### Bug Fixes
+
+* **graphql:** handle mutation creation for `other` usecase type (not CRUD) ([10328a9](https://github.com/herbsjs/herbs-cli/commit/10328a9287a7d9566918992a2694fd714b7b3f08))
+* **rest:** handle controller creation for `other` usecase type (not CRUD) ([789b199](https://github.com/herbsjs/herbs-cli/commit/789b199d5c93a5b8e363af726811474f90730580))
+
 # [2.0.0](https://github.com/herbsjs/herbs-cli/compare/v1.10.4...v2.0.0) (2022-02-20)
 
 
