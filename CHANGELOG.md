@@ -1,3 +1,25 @@
+# [2.0.0](https://github.com/herbsjs/herbs-cli/compare/v1.10.4...v2.0.0) (2022-02-20)
+
+
+### Bug Fixes
+
+* **graphql:** fix graphql gql generation ([ca4a3f7](https://github.com/herbsjs/herbs-cli/commit/ca4a3f7ca0baee6e3e03c70ca30e303f7f31802e))
+* **herbsshelf:** fix herbarium link with herbsshelf ([757c131](https://github.com/herbsjs/herbs-cli/commit/757c1315ade33bdc39ac2b9ceb147197ef321a59))
+
+
+### Features
+
+* **herbarium:** improve node_module dependencies ([ede6c64](https://github.com/herbsjs/herbs-cli/commit/ede6c6456cbf2219e7d413a14d162272fd71f770))
+* **herbarium:** use Herbarium for use cases, entities and repos ([ca545b6](https://github.com/herbsjs/herbs-cli/commit/ca545b692faac8764f42148ad93c3cc27cbb95f7)), closes [#85](https://github.com/herbsjs/herbs-cli/issues/85)
+* **migration:** create new migrations for entity on `herbs update` ([ec3c907](https://github.com/herbsjs/herbs-cli/commit/ec3c907589517e69008f7872001d80698a67774c))
+* **start info:** improved start info with herbsshelf endpoint ([939cc21](https://github.com/herbsjs/herbs-cli/commit/939cc212f13d89592038c73f56adfdbe397285ce))
+
+
+### BREAKING CHANGES
+
+* **herbarium:** Since there is no more 'index.js' as lists for uc and entities, it will no longer
+work with old projects.
+
 ## [1.10.4](https://github.com/herbsjs/herbs-cli/compare/v1.10.3...v1.10.4) (2022-02-01)
 
 
