@@ -16,26 +16,26 @@ function uc2Controllers() {
 
     function findUsecases(entity) {
         const usecases = herbarium.usecases
-        const getAll = usecases.findBy({ entity: entity, operation: herbarium.crud.readAll })[0].usecase
-        const getById = usecases.findBy({ entity: entity, operation: herbarium.crud.read })[0].usecase
-        const post = usecases.findBy({ entity: entity, operation: herbarium.crud.create })[0].usecase
-        const put = usecases.findBy({ entity: entity, operation: herbarium.crud.update })[0].usecase
-        const del = usecases.findBy({ entity: entity, operation: herbarium.crud.delete })[0].usecase
+        const getAll = usecases.findBy({ entity: entity, operation: herbarium.crud.readAll })[0]?.usecase
+        const getById = usecases.findBy({ entity: entity, operation: herbarium.crud.read })[0]?.usecase
+        const post = usecases.findBy({ entity: entity, operation: herbarium.crud.create })[0]?.usecase
+        const put = usecases.findBy({ entity: entity, operation: herbarium.crud.update })[0]?.usecase
+        const del = usecases.findBy({ entity: entity, operation: herbarium.crud.delete })[0]?.usecase
         return { getAll, getById, post, put, del }
     }
 
     const entities = findEntitiesAndGroups()
 
     const controllers = entities.map(entity => {
-        const ucList = findUsecases(entity.id)
-        return {
-            name: entity.group,
-            getAll: { usecase: ucList.getAll },
-            getById: { usecase: ucList.getById, id: 'ids' },
-            post: { usecase: ucList.post },
-            put: { usecase: ucList.put },
-            delete: { usecase: ucList.del }
-        }
+        const usecases = findUsecases(entity.id)
+        const controllers = { name: entity.group }
+        if (usecases.getAll) controllers.getAll = { usecase: usecases.getAll }
+        if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'ids' }
+        if (usecases.post) controllers.post = { usecase: usecases.post }
+        if (usecases.put) controllers.put = { usecase: usecases.put }
+        if (usecases.del) controllers.delete = { usecase: usecases.del }
+
+        return controllers
     })
 
     return controllers
@@ -64,7 +64,7 @@ async function rest(app, config) {
     const controllers = uc2Controllers(app, config)
 
     /* Add custon controllers
-    controllers.push(...)
+    controllers.push({ name: 'Search', post: herbarium.usecases.get('SearchTask') })
     */
 
     server(controllers, app, config)
