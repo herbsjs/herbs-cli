@@ -1,7 +1,11 @@
 const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
-const { <%- props.name.pascalCase %> } = require('../../entities')
+const { herbarium } = require('@herbsjs/herbarium')
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const create<%- props.name.pascalCase %> = injection =>
   usecase('Create <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -14,6 +18,8 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     //Authorization with Audit
     // authorize: (user) => (user.canCreate<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
+
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
@@ -32,9 +38,15 @@ const useCase = ({ <%- props.name.camelCase %>Repository }) => () =>
     }),
 
     'Save the <%- props.name.raw %>': step(async ctx => {
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const <%- props.name.camelCase %> = ctx.<%- props.name.camelCase %>
       // ctx.ret is the return value of a use case
-      return (ctx.ret = await <%- props.name.camelCase %>Repository.insert(ctx.<%- props.name.camelCase %>)) 
+      return (ctx.ret = await repo.insert(<%- props.name.camelCase %>))
     })
   })
 
-module.exports = useCase
+module.exports =
+  herbarium.usecases
+    .add(create<%- props.name.pascalCase %>, 'Create<%- props.name.pascalCase %>')
+    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.create, entity: <%- props.name.pascalCase %> })
+    .usecase

@@ -1,22 +1,22 @@
-const get<%- props.name.pascalCase %>ById = require('./find<%- props.name.pascalCase %>')
+const find<%- props.name.pascalCase %>ById = require('./find<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { <%- props.name.pascalCase %> } = require('../../entities')
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.pascalCase %>')
 
 describe('Find a <%- props.name.raw %>', () => {
   const authorizedUser = { hasAccess: true }
 
-  describe('Valid scenarios', () => {
+  describe('When a <%- props.name.raw %> exists', () => {
 
-    it('should return <%- props.name.raw %>', async () => {
+    it('should return a <%- props.name.raw %>', async () => {
       // Given 
-      const mock = {
+      const fake<%- props.name.pascalCase %> = {
         <%- props.mock %>
       }
 
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
-          async  findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(mock)]) }
-        })
+        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+          async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
+        }
       }
 
       const req = {
@@ -24,25 +24,25 @@ describe('Find a <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      const uc = find<%- props.name.pascalCase %>ById(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
       // Then
       assert.ok(ret.isOk)      
       assert.strictEqual(ret.ok.isValid(), true)
-      assert.strictEqual(JSON.stringify(ret.ok), JSON.stringify({id: ret.ok.id,...mock}))
+      assert.strictEqual(JSON.stringify(ret.ok), JSON.stringify({id: ret.ok.id,...fakeUser}))
     })
   })
 
-  describe('Error scenarios', () => {
+  describe('When a <%- props.name.raw %> does not exists', () => {
 
-    it('return notFoundError', async () => {
+    it('return not return a <%- props.name.raw %>', async () => {
       // Given
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
-          async  findByID(id) { return ([]) }
-        })
+        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+          async findByID(id) { return ([]) }
+        }
       }
 
       const req = {
@@ -50,7 +50,7 @@ describe('Find a <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = get<%- props.name.pascalCase %>ById(injection)()
+      const uc = find<%- props.name.pascalCase %>ById(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

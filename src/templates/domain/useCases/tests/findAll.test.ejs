@@ -14,7 +14,7 @@ describe('Find all <%- props.name.raw %>s', () => {
       }
 
       // When
-      const uc = findAll<%- props.name.pascalCase %>(injection)()
+      const uc = findAll<%- props.name.pascalCase %>(injection)
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

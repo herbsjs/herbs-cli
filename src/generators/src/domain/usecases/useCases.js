@@ -1,5 +1,5 @@
 const useCases = ['create', 'update', 'delete', 'findAll', 'find']
-const { objToString } = require('../../../utils')
+const { objToString, requireHerbarium } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
@@ -17,17 +17,18 @@ async function generateRequestschema(schema) {
   return objToString(obj, { spaces: 2, removeBraces: true, extraSpaces: 4 })
 }
 
-module.exports = async ({ template: { generate }, filesystem }) => async () => {
+module.exports = async ({ template: { generate }, filesystem }, command) => async () => {
 
   process.stdout.write(`Generating Use Cases\n`)
 
-  const entities = require(`${filesystem.cwd()}/src/domain/entities`)
+  const herbarium = requireHerbarium(command, filesystem.cwd())
+  const entities = herbarium.entities.all
   const requires = []
 
-  for (const entity of Object.keys(entities)) {
-    const { name, schema } = entities[entity].prototype.meta
+  for (const entity of Array.from(entities.values())) {
+    const { name, schema } = entity.entity.prototype.meta
     for (const action of useCases) {
-      const useCaseName = `${action}${name}`
+      const useCaseName = `${action} ${name}`
       const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.js`
 
       let type = 'read'
@@ -53,10 +54,4 @@ module.exports = async ({ template: { generate }, filesystem }) => async () => {
       })
     }
   }
-
-  await generate({
-    template: 'domain/useCases/index.ejs',
-    target: 'src/domain/usecases/index.js',
-    props: { requires: objToString(requires) }
-  })
 }

@@ -1,12 +1,15 @@
-const { objToString } = require('../../../../utils')
+const { requireHerbarium } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
-async function generateRepositories(generate, filesystem, db) {
-  const requires = {}
-  const entities = require(`${filesystem.cwd()}/src/domain/entities`)
 
-  for (const entity of Object.keys(entities)) {
-    const { name } = entities[entity].prototype.meta
+async function generateRepositories(generate, filesystem, db, command) {
+  const requires = {}
+
+  const herbarium = requireHerbarium(command, filesystem.cwd())
+  const entities = herbarium.entities.all
+
+  for (const entity of Array.from(entities.values())) {
+    const { name } = entity.entity.prototype.meta
     const lowCCName = camelCase(name)
     const repositoryPath = `${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`
 
@@ -29,7 +32,7 @@ async function generateRepositories(generate, filesystem, db) {
   return requires
 }
 
-async function updateRepositories(generate, filesystem) {
+async function updateRepositories(generate, filesystem, command) {
   const paths = {
     mongo: '/src/infra/config/mongo.js',
     sqlserver: '/src/infra/config/sqlserver.js',
@@ -39,25 +42,20 @@ async function updateRepositories(generate, filesystem) {
 
   const db = Object.keys(paths).filter(key => fs.existsSync(`${filesystem.cwd()}${paths[key]}`))
 
-  return generateRepositories(generate, filesystem, db)
+  return generateRepositories(generate, filesystem, db, command)
 }
 
-module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, isUpdate) => async () => {
-  
+module.exports = async ({ template: { generate }, parameters: { options }, filesystem }, command) => async () => {
+
   process.stdout.write(`Generating Repositories\n`)
-  
+
   let requires = {}
 
-  if (isUpdate) requires = await updateRepositories(generate, filesystem)
+  if (command) requires = await updateRepositories(generate, filesystem, command)
 
   for (const db of ['postgres', 'sqlserver', 'mongo', 'mysql']) {
     if (!options[db]) continue
 
-    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db))
-    await generate({
-      template: 'infra/data/repository/index.ejs',
-      target: 'src/infra/data/repositories/index.js',
-      props: { requires: objToString(requires) }
-    })
+    requires = Object.assign(requires, await generateRepositories(generate, filesystem, db, command))
   }
 }

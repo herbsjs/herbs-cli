@@ -2,7 +2,7 @@ const { objToString } = require('../../../utils')
 
 module.exports = async ({ template: { generate }, parameters: { options } }) => {
   return async () => {
-    
+
     process.stdout.write(`Generating Config\n`)
 
     const requires = {
@@ -15,19 +15,26 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       target: 'src/infra/config/api.js'
     })
 
-    for (const db of ['postgres', 'mongo', 'sqlserver', 'mysql']) {
-      if (!options[db]) continue
-      await generate({
-        template: `infra/config/${db}.ejs`,
-        target: `src/infra/config/${db}.js`
-      })
-      requires.database = `require('./${db}')`
-    }
+    const db = options.database
+
+    await generate({
+      template: `infra/config/${db}.ejs`,
+      target: `src/infra/config/${db}.js`,
+      props: { dbName: options.name }
+    })
+    requires.database = `require('./${db}')`
+
+    await generate({
+      template: `${db.toLowerCase()}.knexFile.ejs`,
+      target: 'knexFile.js',
+      props: { dbName: options.name }
+    })
 
     await generate({
       template: 'infra/config/index.ejs',
       target: 'src/infra/config/index.js',
       props: { requires: objToString(requires) }
     })
+
   }
 }
