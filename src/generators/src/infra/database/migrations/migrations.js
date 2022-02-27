@@ -50,16 +50,16 @@ module.exports =
           .toISOString()
           .replace(/\D/g, '')
           .substring(0, 14)
-        const migrationFile = `${migrationName}_${camelCase(name)}s.js`
+        const migrationFullPath = path.normalize(`${migrationsPath}/${migrationName}_${camelCase(name)}s.js`)
 
         const columns = createColumns(schema)
 
         await generate({
           template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
-          target: `${migrationsPath}/${migrationFile}`,
+          target: migrationFullPath,
           props: { table: `${camelCase(name)}s`, columns: columns }
         })
-        process.stdout.write(`New: ${migrationFile}\n`)
+        process.stdout.write(`  New: ${migrationFullPath}\n`)
 
       }
     }

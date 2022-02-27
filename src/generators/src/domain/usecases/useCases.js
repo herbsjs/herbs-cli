@@ -3,6 +3,7 @@ const { objToString, requireHerbarium } = require('../../../utils')
 const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
+const path = require('path')
 
 async function generateRequestschema(schema) {
   // schema to plain JSON
@@ -29,7 +30,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
     const { name, schema } = entity.entity.prototype.meta
     for (const action of useCases) {
       const useCaseName = `${action} ${name}`
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.js`
+      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.js`)
 
       let type = 'read'
       for (const t of ['create', 'update', 'delete']) {
@@ -52,6 +53,8 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
           request: await generateRequestschema(schema)
         }
       })
+      process.stdout.write(`  New: ${ucPath}\n`)
+
     }
   }
 }

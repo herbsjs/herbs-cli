@@ -1,6 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const { objToString, requireHerbarium } = require('../../../utils')
 const fs = require('fs')
+const path = require('path')
 
 function invertObjValues(obj) {
   for (const key of Object.keys(obj)) {
@@ -77,7 +78,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
 
     useCases.map(async (action) => {
       const useCaseName = `${action} ${name}`
-      const ucPath = `${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.test.js`
+      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.test.js`)
 
       if (fs.existsSync(ucPath)) return
 
@@ -98,6 +99,8 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
           mock: objToString(generateMockObj(schema), objOptions)
         }
       })
+      process.stdout.write(`  New: ${ucPath}\n`)
+
     })
   }
 }

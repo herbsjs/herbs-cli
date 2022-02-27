@@ -1,6 +1,7 @@
 const { requireHerbarium } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
+const path = require('path')
 
 async function generateRepositories(generate, filesystem, db, command) {
   const requires = {}
@@ -11,7 +12,7 @@ async function generateRepositories(generate, filesystem, db, command) {
   for (const entity of Array.from(entities.values())) {
     const { name } = entity.entity.prototype.meta
     const lowCCName = camelCase(name)
-    const repositoryPath = `${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`
+    const repositoryPath = path.normalize(`${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`)
 
     requires[`${lowCCName}Repository`] = `await new (require('./${lowCCName}Repository.js'))(conn)`
 
@@ -28,6 +29,8 @@ async function generateRepositories(generate, filesystem, db, command) {
         table: `${lowCCName}s`
       }
     })
+    process.stdout.write(`  New: ${repositoryPath}\n`)
+
   }
   return requires
 }
