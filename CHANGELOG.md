@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/herbsjs/herbs-cli/compare/v2.0.2...v2.1.0) (2022-02-27)
+
+
+### Features
+
+* **cli:** improved info output about new generated files on `herbs update` ([1b62c9f](https://github.com/herbsjs/herbs-cli/commit/1b62c9f789542f9babe09b825cc7e4be74f970f9))
+
 ## [2.0.2](https://github.com/herbsjs/herbs-cli/compare/v2.0.1...v2.0.2) (2022-02-23)
 
 
