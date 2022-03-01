@@ -26,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "git-user-name": "^2.0.0",
-    "gluegun": "^4.7.1",
+    "gluegun": "^5.1.0",
     "inquirer": "^8.2.0"
   },
   "devDependencies": {
