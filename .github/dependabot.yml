@@ -18,6 +18,6 @@ updates:
       prefix-development: chore
       include: scope
     ignore:
-      # ignore all GitHub linguist patch updates
+      # ignore all major updates for all dependencies
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
