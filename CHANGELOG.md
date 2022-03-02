@@ -1,3 +1,16 @@
+# [2.2.0](https://github.com/herbsjs/herbs-cli/compare/v2.1.0...v2.2.0) (2022-03-02)
+
+
+### Bug Fixes
+
+* **new:** fix the new command via CLI and the tests files ([2c470af](https://github.com/herbsjs/herbs-cli/commit/2c470af9030f26dbc6d3a891f61753a5bd8f6f13)), closes [#102](https://github.com/herbsjs/herbs-cli/issues/102)
+* update dependencies of projects ([c1603ee](https://github.com/herbsjs/herbs-cli/commit/c1603ee8fc7212b881a610077ff4a0b72e4ef36e))
+
+
+### Features
+
+* add new validation method except ID's ([1e32412](https://github.com/herbsjs/herbs-cli/commit/1e32412c3ef32d190c4fb1c9905803e56e45c40f)), closes [#82](https://github.com/herbsjs/herbs-cli/issues/82)
+
 # [2.1.0](https://github.com/herbsjs/herbs-cli/compare/v2.0.2...v2.1.0) (2022-02-27)
 
 
