@@ -9,7 +9,7 @@
     "format": "prettier --write **/*.{js,json} && standard --fix",
     "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
     "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
-    "test": "mocha tests --timeout 90000",
+    "test": "mocha --timeout 999999 --colors --recursive src/tests/**",
     "semantic-release": "semantic-release",
     "commit": "npm run lint && cz"
   },

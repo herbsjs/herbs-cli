@@ -40,7 +40,7 @@ const update<%- props.name.pascalCase %> = injection =>
       const new<%- props.name.pascalCase %> = <%- props.name.pascalCase %>.fromJSON(merge.all([ old<%- props.name.pascalCase %>, ctx.req ]))
       ctx.<%- props.name.camelCase %> = new<%- props.name.pascalCase %>
 
-      return new<%- props.name.pascalCase %>.isValid() ? Ok() : Err.invalidEntity({
+      return new<%- props.name.pascalCase %>.isValid({exceptIDs: true}) ? Ok() : Err.invalidEntity({
         message: `<%- props.name.pascalCase %> is invalid`,
         payload: { entity: '<%- props.name.raw %>' },
         cause: new<%- props.name.pascalCase %>.errors

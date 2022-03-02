@@ -3,19 +3,20 @@
 const { system, filesystem } = require('gluegun')
 const { expect } = require('chai')
 const fs = require('fs')
+const path = require('path')
 
-const projectName = 'herbs-lab'
+const projectName = 'herbs-test-runner'
 
-const generateProject = (extraCMDs = '') => system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --postgres --git ${extraCMDs}`)
+const generateProject = (extraCMDs = '') => system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres --npmInstall no`)
 
 describe('generates package.json', () => {
   afterEach(() => {
-    fs.rmdirSync(`${__dirname}/../${projectName}`, { recursive: true })
+    fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
   })
 
   it('must to use all custom options', async () => {
     await generateProject()
-    const pkg = JSON.parse(filesystem.read(`${projectName}/package.json`))
+    const pkg = JSON.parse(filesystem.read(path.resolve(process.cwd(), `${projectName}/package.json`)))
 
     expect(pkg.name).contains(projectName)
     expect(pkg.description).contains('testing the herbs CLI')
