@@ -3,30 +3,34 @@
 const { system, filesystem } = require('gluegun')
 const { expect } = require('chai')
 const fs = require('fs')
+const path = require('path')
 
-const projectName = 'herbs-lab'
+const projectName = 'herbs-test-runner'
 
-const generateProject = () => system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --postgres --git`)
+const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres --npmInstall yes`)
 
 describe('When I generate a complete project that uses postgres', () => {
   afterEach(() => {
-    fs.rmdirSync(`${__dirname}/../${projectName}`, { recursive: true })
+   fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
   })
 
   it('must exists a config/postgres.js file', async () => {
     await generateProject()
-    fs.readFileSync(`${__dirname}/../${projectName}/src/infra/config/postgres.js`)
+    fs.readFileSync(path.resolve(process.cwd(), `${projectName}/src/infra/config/postgres.js`))
   })
 
   it('must contain the correct content', async () => {
+
     await generateProject()
-    const postgresConfig = require(`${__dirname}/../${projectName}/src/infra/config/postgres.js`)
+
+    const postgresConfig = require(path.resolve(process.cwd(), `${projectName}/src/infra/config/postgres.js`))
     expect(postgresConfig).to.deep.equal({
+      herbsCLI: 'postgres',
       client: 'pg',
       connection: {
         host: '127.0.0.1',
         user: 'postgres',
-        database: '',
+        database: projectName,
         password: 'postgres'
       }
     })
@@ -40,7 +44,7 @@ describe('When I generate a complete project that uses postgres', () => {
       development: {
         client: 'postgresql',
         connection: {
-          database: 'herbs-lab',
+          database: projectName,
           user: 'postgres',
           password: 'postgres',
           host: '127.0.0.1',
