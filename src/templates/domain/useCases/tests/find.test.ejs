@@ -30,7 +30,7 @@ describe('Find a <%- props.name.raw %>', () => {
 
       // Then
       assert.ok(ret.isOk)      
-      assert.strictEqual(ret.ok.isValid(), true)
+      assert.strictEqual(ret.ok.isValid({exceptIDs: true}), true)
       assert.strictEqual(JSON.stringify(ret.ok), JSON.stringify({id: ret.ok.id,...fakeUser}))
     })
   })

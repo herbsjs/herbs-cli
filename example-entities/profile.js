@@ -1,8 +1,8 @@
-const { entity, field } = require('@herbsjs/herbs')
+const { entity, id,field } = require('@herbsjs/herbs')
 
 const Profile =
         entity('Profile', {
-          id: field(Number),
+          id: id(Number),
           nickname: field(String),
           password: field(String)
         })
