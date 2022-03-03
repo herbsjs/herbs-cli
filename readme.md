@@ -49,9 +49,6 @@ Generate a new project based on your entities(or not)
 
 > herbs new
 
-You also can run the project passing the options though CLI 
-
-> herbs new --name MyAwesomeProjectName --description "my description"  --author "name of the author" --license MIT --graphql --rest --database postgres --npmInstall yes
 
 #### Options
 
@@ -67,6 +64,10 @@ You also can run the project passing the options though CLI
 | Specify your entities folder path? (optional) | If you have [Gotu](https://github.com/herbsjs/gotu) entities, specify the folder path for CLI generate the project around that | empty                          | ./example/my-custom-entities/ |
 | Do you want to initialize a Git repository?             | This will initialize a git repository for your project.                                                                                                                    | N                              | y                             |
 | Do you want to install dependencies?             | This will run npm install and npm start for you                                                                                                                   | no                              | yes                             |
+
+You also can run the project passing the options though CLI 
+
+> herbs new --name MyAwesomeProjectName --description "my description"  --author "name of the author" --license MIT --graphql --rest --database postgres --npmInstall yes
 
 
 ### herbs update
