@@ -26,7 +26,7 @@ const create<%- props.name.pascalCase %> = injection =>
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
       ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000)
       
-      if (!ctx.<%- props.name.camelCase %>.isValid({exceptIDs: true})) 
+      if (!ctx.<%- props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
           message: 'The <%- props.name.raw %> entity is invalid', 
           payload: { entity: '<%- props.name.raw %>' },

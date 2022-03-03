@@ -10,6 +10,7 @@
     "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
     "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
     "test": "mocha --timeout 999999 --colors --recursive src/tests/**",
+    "coverage": "nyc --reporter=html mocha src/**/*.test.js npm test",
     "semantic-release": "semantic-release",
     "commit": "npm run lint && cz"
   },

@@ -26,7 +26,7 @@ describe('Create <%- props.name.raw %>', () => {
 
       // Then
       assert.ok(ret.isOk)      
-      assert.strictEqual(ret.ok.isValid({exceptIDs: true}), true)
+      assert.strictEqual(ret.ok.isValid(), true)
 
     })
   })
