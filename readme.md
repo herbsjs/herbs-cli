@@ -1,3 +1,6 @@
+[![CD Build](https://github.com/herbsjs/herbs-cli/actions/workflows/cd.yml/badge.svg)](https://github.com/herbsjs/herbs-cli/actions/workflows/cd.yml) [![codecov](https://codecov.io/gh/herbsjs/herbs-cli/branch/main/graph/badge.svg)](https://codecov.io/gh/herbsjs/herbs-cli)
+
+
 # herbs CLI
 
 CLI helps speed up your development cycle with HerbsJS by generating use cases and infrastructure layers (REST, GraphQL, Repositories, etc) based on your entities.
