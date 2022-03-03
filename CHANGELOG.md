@@ -1,3 +1,15 @@
+# [2.3.0](https://github.com/herbsjs/herbs-cli/compare/v2.2.0...v2.3.0) (2022-03-03)
+
+
+### Features
+
+* **readme:** first version of readme file ([4351e06](https://github.com/herbsjs/herbs-cli/commit/4351e063941a8def68c8af251dd859c92a65c85b))
+
+
+### Reverts
+
+* revert {exceptIDs: true} from usecases ([807ba02](https://github.com/herbsjs/herbs-cli/commit/807ba02d67076297633762c5680535e150d1ce65))
+
 # [2.2.0](https://github.com/herbsjs/herbs-cli/compare/v2.1.0...v2.2.0) (2022-03-02)
 
 
