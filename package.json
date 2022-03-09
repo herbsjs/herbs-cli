@@ -28,7 +28,7 @@
   "dependencies": {
     "git-user-name": "^2.0.0",
     "gluegun": "^4.7.1",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
