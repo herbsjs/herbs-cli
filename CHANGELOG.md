@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/herbsjs/herbs-cli/compare/v2.3.0...v2.3.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* fix mongo layer generation ([29a8ec6](https://github.com/herbsjs/herbs-cli/commit/29a8ec6c0aec0c185db2ecc1637adb0c05067a61))
+
 # [2.3.0](https://github.com/herbsjs/herbs-cli/compare/v2.2.0...v2.3.0) (2022-03-03)
 
 
