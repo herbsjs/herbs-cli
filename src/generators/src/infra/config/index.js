@@ -23,12 +23,12 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       props: { dbName: options.name }
     })
     requires.database = `require('./${db}')`
-
-    await generate({
-      template: `${db.toLowerCase()}.knexFile.ejs`,
-      target: 'knexFile.js',
-      props: { dbName: options.name }
-    })
+    if(db !== 'mongo')
+      await generate({
+        template: `${db.toLowerCase()}.knexFile.ejs`,
+        target: 'knexFile.js',
+        props: { dbName: options.name }
+      })
 
     await generate({
       template: 'infra/config/index.ejs',
