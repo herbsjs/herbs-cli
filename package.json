@@ -28,26 +28,26 @@
   "dependencies": {
     "git-user-name": "^2.0.0",
     "gluegun": "^5.1.2",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.2"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.16.5",
+    "@babel/eslint-parser": "^7.17.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.2",
-    "@semantic-release/npm": "^8.0.3",
+    "@semantic-release/github": "^8.0.4",
+    "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "chai": "^4.3.6",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.6.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "mocha": "^9.2.0",
+    "mocha": "^9.2.2",
     "nyc": "^15.1.0",
-    "prettier": "^2.5.1",
-    "semantic-release": "^18.0.1"
+    "prettier": "^2.6.2",
+    "semantic-release": "^19.0.2"
   },
   "prettier": {
     "semi": false,
