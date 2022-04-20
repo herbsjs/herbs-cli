@@ -9,6 +9,8 @@ const projectName = 'herbs-test-runner'
 
 const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres --npmInstall yes`)
 
+const npmInstall = () => system.run(`cd ${projectName} && npm install`)
+
 describe('When I generate a complete project that uses postgres', () => {
   afterEach(() => {
    fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
@@ -22,7 +24,8 @@ describe('When I generate a complete project that uses postgres', () => {
   it('must contain the correct content', async () => {
 
     await generateProject()
-
+    await npmInstall()
+    
     const postgresConfig = require(path.resolve(process.cwd(), `${projectName}/src/infra/config/postgres.js`))
     expect(postgresConfig).to.deep.equal({
       herbsCLI: 'postgres',
