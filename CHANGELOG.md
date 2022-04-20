@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/herbsjs/herbs-cli/compare/v2.3.1...v2.3.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* update gluegun and inside dependencies ([93b72c5](https://github.com/herbsjs/herbs-cli/commit/93b72c56d7106cf84ebb0de0b629438d75b850fb))
+
 ## [2.3.1](https://github.com/herbsjs/herbs-cli/compare/v2.3.0...v2.3.1) (2022-03-22)
 
 
