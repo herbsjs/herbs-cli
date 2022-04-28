@@ -1,3 +1,16 @@
+# [2.4.0](https://github.com/herbsjs/herbs-cli/compare/v2.3.2...v2.4.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* update herbs dependencies ([4b2b32b](https://github.com/herbsjs/herbs-cli/commit/4b2b32b1a6c1dc8e96ddbaa848979c40f0854725))
+* update inquire dependency version ([1602997](https://github.com/herbsjs/herbs-cli/commit/1602997688c97dd6f45caab4be99c00e746f912f))
+
+
+### Features
+
+* show update version when new version is available ([0c682c6](https://github.com/herbsjs/herbs-cli/commit/0c682c69c88b065784efb250fa4ef30219f2bc4d))
+
 ## [2.3.2](https://github.com/herbsjs/herbs-cli/compare/v2.3.1...v2.3.2) (2022-04-20)
 
 
