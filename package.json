@@ -28,7 +28,7 @@
   "dependencies": {
     "git-user-name": "^2.0.0",
     "gluegun": "^5.1.2",
-    "inquirer": "^8.2.3",
+    "inquirer": "^8.2.4",
     "update-notifier": "^5.1.0"
   },
   "devDependencies": {
