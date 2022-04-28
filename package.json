@@ -28,7 +28,8 @@
   "dependencies": {
     "git-user-name": "^2.0.0",
     "gluegun": "^5.1.2",
-    "inquirer": "^8.2.2"
+    "inquirer": "^8.2.3",
+    "update-notifier": "^5.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
@@ -40,7 +41,7 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "chai": "^4.3.6",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.13.0",
+    "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",

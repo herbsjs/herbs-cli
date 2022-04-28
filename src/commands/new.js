@@ -2,6 +2,7 @@ const generator = require('../generators')
 const fs = require('fs')
 const { system } = require('gluegun')
 const inquirer = require('inquirer')
+const checkNewVersion = require('../generators/check-version')
 
 function isEmpty(obj) {
   return Object.keys(obj).length === 0
@@ -119,23 +120,25 @@ const cmd = {
           default: 'Yeah, please',
         },
       ])
-    }    
+    }
+
+    async function exec(cmd) {
+      toolbox.print.info(`${cmd}: running...`)
+      try {
+        await system.run(cmd)
+        toolbox.print.info(`${cmd}: ok`)
+      } catch (error) {
+        toolbox.print.info(`${cmd} output:`, error.stdout)
+        toolbox.print.info(`Exit code:`, error.code)
+      }
+    }
 
     if (npmOptions.npmInstall === 'Yeah, please' || npmOptions.npmInstall === 'yes') {
-        async function exec(cmd) {
-          toolbox.print.info(`${cmd}: running...`)
-          try {
-            await system.run(cmd)
-            toolbox.print.info(`${cmd}: ok`)
-          } catch (error) {
-            toolbox.print.info(`${cmd} output:`, error.stdout)
-            toolbox.print.info(`Exit code:`, error.code)
-          }
-        }
-        await exec('npm install')
-        await exec('herbs update')
-      }
-    
+      await exec('npm install')    
+      await exec('herbs update')
+     
+    }
+    await checkNewVersion()
   },
 }
 
