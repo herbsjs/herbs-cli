@@ -102,5 +102,33 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
       process.stdout.write(`  New: ${ucPath}\n`)
 
     })
+
+    // aloe
+    useCases.map(async (action) => {
+      const useCaseName = `${action} ${name}`
+      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.aloe.test.js`)
+
+      if (fs.existsSync(ucPath)) return
+
+      const objOptions = { spaces: 4, extraSpaces: 4, removeBraces: true }
+      await generate({
+        template: `domain/useCases/tests/${action}.aloe.test.ejs`,
+        target: ucPath,
+        props: {
+          name: {
+            pascalCase: name,
+            camelCase: camelCase(name),
+            raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+          },
+          request: {
+            valid: objToString(generateRequestObject(schema, action), objOptions),
+            invalid: objToString(generateRequestObject(schema, action, false), objOptions)
+          },
+          mock: objToString(generateMockObj(schema), objOptions)
+        }
+      })
+      process.stdout.write(`  New: ${ucPath}\n`)
+
+    })
   }
 }

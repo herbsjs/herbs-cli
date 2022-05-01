@@ -1,0 +1,49 @@
+const create<%- props.name.pascalCase %> = require('./create<%- props.name.pascalCase %>')
+const assert = require('assert')
+const { spec, scenario, given, check } = require('@herbsjs/aloe')
+const { herbarium } = require('@herbsjs/herbarium')
+
+const create<%- props.name.pascalCase %>Spec = spec({
+    usecase: create<%- props.name.pascalCase %>,
+    'Create a new <%- props.name.raw %> when it is valid': scenario({
+      'Given a simple <%- props.name.raw %> is valid': given({
+        request: {
+            <%- props.request.valid %>
+        },
+        user: { hasAccess: true },
+        injection: {
+            <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+              async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
+            })
+        },
+      }),
+
+      // when: default when for use case
+
+      'Must return Ok': check((ctx) => {
+        assert.ok(ctx.response.isOk)  
+      }),
+
+      'Must return a valid <%- props.name.raw %>': check((ctx) => {
+        assert.strictEqual(ctx.response.ok.isValid(), true)
+        // TODO: check if it is really a <%- props.name.raw %>
+      })
+
+    }),
+
+    // 'Do not create a new <%- props.name.raw %> when it is invalid': scenario({})
+    // const injection = {}
+    // const req = {
+    //    <%- props.request.invalid %>
+    //  }
+    // assert.ok(ret.isErr)
+    // assert.ok(ret.isInvalidEntityError)
+  })
+  
+module.exports = create<%- props.name.pascalCase %>Spec
+
+//module.exports =
+//  herbarium.specs
+//    .add(create<%- props.name.pascalCase %>Spec, 'Create<%- props.name.pascalCase %>Spec')
+//    .metadata({ usecase: 'Create<%- props.name.pascalCase %>' })
+//    .usecase
