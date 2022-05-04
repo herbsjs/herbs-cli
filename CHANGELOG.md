@@ -1,3 +1,11 @@
+## [2.4.1](https://github.com/herbsjs/herbs-cli/compare/v2.4.0...v2.4.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* **deps:** bump ansi-regex from 3.0.0 to 3.0.1 ([2b4a903](https://github.com/herbsjs/herbs-cli/commit/2b4a9032121189494658afd1f1ce8bd4f1789f3b))
+* **deps:** bump inquirer from 8.2.3 to 8.2.4 ([8b65e4e](https://github.com/herbsjs/herbs-cli/commit/8b65e4ea349b01387ddd7c957b666ed68cabc9fc))
+
 # [2.4.0](https://github.com/herbsjs/herbs-cli/compare/v2.3.2...v2.4.0) (2022-04-28)
 
 
