@@ -1,3 +1,11 @@
+## [2.4.2](https://github.com/herbsjs/herbs-cli/compare/v2.4.1...v2.4.2) (2022-05-05)
+
+
+### Bug Fixes
+
+* herbs graphql layer dont have inputs types ([5f8a4d7](https://github.com/herbsjs/herbs-cli/commit/5f8a4d7ee45a9a31098ce6d7f09d305ac5938c3e))
+* ignore migration for mongo database ([ca8184c](https://github.com/herbsjs/herbs-cli/commit/ca8184c8b9d798bd6a9ee47605797fc2e82ea66c))
+
 ## [2.4.1](https://github.com/herbsjs/herbs-cli/compare/v2.4.0...v2.4.1) (2022-05-04)
 
 
