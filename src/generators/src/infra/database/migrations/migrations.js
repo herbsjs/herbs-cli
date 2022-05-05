@@ -2,11 +2,13 @@ const camelCase = require('lodash.camelcase')
 const glob = require('glob')
 const { requireHerbarium } = require('../../../../utils')
 const path = require('path')
+const fs = require("fs");
 
 module.exports =
-  async ({ template: { generate }, filesystem, parameters: { options } }, command) =>
+  async ({ template: { generate }, filesystem }, command) =>
     async () => {
-
+      if (fs.existsSync(`${filesystem.cwd()}/src//infra/config/mongo.js`)) return
+      
       process.stdout.write(`Generating Migration\n`)
 
       const herbarium = requireHerbarium(command, filesystem.cwd())
