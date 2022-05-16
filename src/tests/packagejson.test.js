@@ -9,7 +9,7 @@ const projectName = 'herbs-test-runner'
 
 const linknpm = () => system.run(`cd bin && npm link --force`)
 
-const generateProject = (extraCMDs = '') => system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres --npmInstall no ${extraCMDs}`)
+const generateProject = (extraCMDs = '') => system.run(`herbs new --name ${projectName}  --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres git no --npmInstall no ${extraCMDs}`)
 
 describe('generates package.json', () => {
   afterEach(() => {
