@@ -6,9 +6,8 @@ module.exports =
       const { spawnSync } = require('child_process')
       const where = platform === 'win32' ? 'where.exe' : 'which'
       const out = spawnSync(where, ['git'])
-
-      if (out.exitCode === 1) {
-        process.stdout.write(`Git not found\n`)
+      if (out.status === 1) {
+        process.stdout.write(`[ERROR] Git not found\n install it via https://git-scm.com/downloads and try again, or skip the git option when generates a new project with Herbs-CLI\n`)
       } else {
         process.stdout.write(`Generating git\n`)
         await generate({
