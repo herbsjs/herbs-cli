@@ -47,13 +47,13 @@ const questions = [
   {
     type: 'confirm',
     name: 'graphql',
-    message: 'Generate graphql layer?',
+    message: 'Add graphql layer?',
     default: true,
   },
   {
     type: 'confirm',
     name: 'rest',
-    message: 'Generate rest layer?',
+    message: 'Add rest layer?',
     default: true,
   },
   {

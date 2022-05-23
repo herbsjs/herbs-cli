@@ -19,10 +19,10 @@ const cmd = {
         for (const spec of specs) {
             const ret = await spec.run()
             const usecase = spec.usecase().description
-            const emoji = (ret) => ret === passed ? green('🗸') : red('•')
-            toolbox.print.info(`${grey(usecase)} ${emoji(ret)}`)
+            const result = (ret) => ret === passed ? green('🗸') : red('•')
+            toolbox.print.info(`${grey(usecase)} ${result(ret)}`)
             for (const scenario of spec.scenarios) {
-                toolbox.print.info(`   ${grey(scenario.description)} ${emoji(scenario.state)}`)
+                toolbox.print.info(`   ${grey(scenario.description)} ${result(scenario.state)}`)
             }
         }
 

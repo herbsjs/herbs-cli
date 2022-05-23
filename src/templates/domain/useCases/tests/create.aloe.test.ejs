@@ -6,7 +6,7 @@ const { herbarium } = require('@herbsjs/herbarium')
 const create<%- props.name.pascalCase %>Spec = spec({
     usecase: create<%- props.name.pascalCase %>,
     'Create a new <%- props.name.raw %> when it is valid': scenario({
-      'Given a simple <%- props.name.raw %> is valid': given({
+      'Given a valid <%- props.name.raw %>': given({
         request: {
             <%- props.request.valid %>
         },
@@ -20,7 +20,7 @@ const create<%- props.name.pascalCase %>Spec = spec({
 
       // when: default when for use case
 
-      'Must return Ok': check((ctx) => {
+      'Must run without errors': check((ctx) => {
         assert.ok(ctx.response.isOk)  
       }),
 
@@ -31,13 +31,27 @@ const create<%- props.name.pascalCase %>Spec = spec({
 
     }),
 
-    // 'Do not create a new <%- props.name.raw %> when it is invalid': scenario({})
-    // const injection = {}
-    // const req = {
-    //    <%- props.request.invalid %>
-    //  }
-    // assert.ok(ret.isErr)
-    // assert.ok(ret.isInvalidEntityError)
+    'Do not create a new <%- props.name.raw %> when it is invalid': scenario({
+      'Given a invalid <%- props.name.raw %>': given({
+        request: {
+          <%- props.request.invalid %>
+        },
+        user: { hasAccess: true },
+        injection: {
+            <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+              async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
+            })
+        },
+      }),
+
+      // when: default when for use case
+
+      'Must return an error': check((ctx) => {
+        assert.ok(ctx.response.isErr)  
+        // assert.ok(ret.isInvalidEntityError)
+      }),
+
+    }),
   })
   
 module.exports = create<%- props.name.pascalCase %>Spec
