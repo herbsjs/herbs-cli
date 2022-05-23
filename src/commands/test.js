@@ -8,13 +8,24 @@ const cmd = {
     run: async toolbox => {
 
         const files = glob.sync('./**/*.aloe.test.js')
+        const specs = []
         for (const file of files) {
             const instance = require(path.resolve(file))
-            if (instance.isSpec) {
-                const ret = await instance.run()
-                console.log(ret, instance)
+            if (instance.isSpec) specs.push(instance)
+        }
+
+        const { grey, green, red } = toolbox.print.colors
+        const passed = 'passed'
+        for (const spec of specs) {
+            const ret = await spec.run()
+            const usecase = spec.usecase().description
+            const emoji = (ret) => ret === passed ? green('🗸') : red('•')
+            toolbox.print.info(`${grey(usecase)} ${emoji(ret)}`)
+            for (const scenario of spec.scenarios) {
+                toolbox.print.info(`   ${grey(scenario.description)} ${emoji(scenario.state)}`)
             }
         }
+
         toolbox.print.success('Test finished! 🤩')
     }
 }
