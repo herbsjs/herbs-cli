@@ -1,6 +1,6 @@
 /* globals describe, it, afterEach */
 
-const { system, filesystem } = require('gluegun')
+const { system } = require('gluegun')
 const { expect } = require('chai')
 const fs = require('fs')
 const path = require('path')

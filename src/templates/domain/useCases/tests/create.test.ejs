@@ -10,7 +10,7 @@ describe('Create <%- props.name.raw %>', () => {
     it('should create <%- props.name.raw %>', async () => {
       // Given
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
           async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
         })
       }
@@ -20,7 +20,7 @@ describe('Create <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = create<%- props.name.pascalCase %>(injection)
+      const uc = create<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -42,7 +42,7 @@ describe('Create <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = create<%- props.name.pascalCase %>(injection)
+      const uc = create<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

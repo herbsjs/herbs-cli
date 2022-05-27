@@ -4,6 +4,7 @@ const pascalCase = require('lodash.startcase')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 const path = require('path')
+const { usingMongo } = require('../../../utils')
 
 async function generateRequestschema(schema) {
   // schema to plain JSON
@@ -50,7 +51,8 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
             pascalCase: pascalCase(name),
             camelCase: camelCase(name)
           },
-          request: await generateRequestschema(schema)
+          request: await generateRequestschema(schema),
+          mongo: usingMongo(filesystem.cwd())
         }
       })
       process.stdout.write(`  New: ${ucPath}\n`)

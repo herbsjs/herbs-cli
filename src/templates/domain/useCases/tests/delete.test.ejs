@@ -9,7 +9,7 @@ describe('Delete the <%- props.name.raw %>', () => {
 
     it('should delete <%- props.name.raw %>', async () => {
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
           async delete(entity) { return true }
           async findByID(id) { return [<%- props.name.pascalCase %>.fromJSON({ id })] }
         }
@@ -20,7 +20,7 @@ describe('Delete the <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = delete<%- props.name.pascalCase %>(injection)
+      const uc = delete<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -35,14 +35,14 @@ describe('Delete the <%- props.name.raw %>', () => {
     it('should not delete <%- props.name.raw %>', async () => {
       // Given
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
           async findByID(id) { return [] }
         }
       }
       const req = { id : '5' }
 
       // When
-      const uc = delete<%- props.name.pascalCase %>(injection)
+      const uc = delete<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

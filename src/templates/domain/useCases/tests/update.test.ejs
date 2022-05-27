@@ -14,7 +14,7 @@ describe('Update <%- props.name.raw %>', () => {
       }
 
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
           async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
           async update(id) { return true }
         }
@@ -26,7 +26,7 @@ describe('Update <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = update<%- props.name.pascalCase %>(injection)
+      const uc = update<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -45,7 +45,7 @@ describe('Update <%- props.name.raw %>', () => {
       }
 
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
           async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
         }
       }
@@ -54,7 +54,7 @@ describe('Update <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = update<%- props.name.pascalCase %>(injection)
+      const uc = update<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -68,18 +68,18 @@ describe('Update <%- props.name.raw %>', () => {
 
     it('should return a error', async () => {
       // Given
-      const retInjection = null
       const injection = {
-        <%= props.name.camelCase %>Repository: new ( class <%= props.name.pascalCase %>Repository {
-          async findByID(id) { return (retInjection) }
+        <%= props.name.pascalCase %>Repository: new class <%= props.name.pascalCase %>Repository {
+          <% if(props.mongo){ %>async findByID(id) { return (null) }
+          <% } else{ %>async findByID(id) { return ([]) }<% } %>
           async update(id) { return true }
-        })
+        }
       }
 
       const req = { id: 0, nickname: 'herbsUser', password: 'V&eryStr0ngP@$$' }
 
       // When
-      const uc = update<%= props.name.pascalCase %>(injection)
+      const uc = update<%= props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

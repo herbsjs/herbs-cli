@@ -1,8 +1,7 @@
 const { objToString } = require('../utils')
-const fsPromises = require('fs').promises
 
 const optionalPackages = {
-  mongo: ['"@herbsjs/herbs2mongo": "^1.0.2"', '"mongodb": "^4.3.0"'],
+  mongo: ['"@herbsjs/herbs2mongo": "^2.0.0"', '"mongodb": "^4.3.0"'],
   postgres: ['"@herbsjs/herbs2knex": "^1.4.6"', '"pg": "^8.7.3"'],
   sqlserver: ['"@herbsjs/herbs2knex": "^1.4.6"', '"tedious": "^14.4.8"', '"mssql": "^8.1.0"'],
   mysql: ['"@herbsjs/herbs2knex": "^1.4.4"', '"mysql2": "^2.3.3"'],

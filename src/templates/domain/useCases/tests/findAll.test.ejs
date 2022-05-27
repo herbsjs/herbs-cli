@@ -8,13 +8,14 @@ describe('Find all <%- props.name.raw %>s', () => {
       // Given
       const req = { limit:0, offset:0}
       const injection = {
-        <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
-          async  findAll() { return [] }
+        <%- props.name.pascalCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+          <% if(props.mongo){ %>async  find() { return [] }
+          <% } else{ %>async  findAll() { return [] }<% } %>
         })
       }
 
       // When
-      const uc = findAll<%- props.name.pascalCase %>(injection)
+      const uc = findAll<%- props.name.pascalCase %>(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 

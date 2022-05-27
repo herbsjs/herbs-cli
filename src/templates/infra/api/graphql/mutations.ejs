@@ -1,11 +1,11 @@
 const { usecase2mutation, defaultResolver } = require('@herbsjs/herbs2gql')
 const { herbarium } = require('@herbsjs/herbarium')
 
-function mutations() {
+function mutations(injection) {
     const crud = herbarium.crud
     const usecases = herbarium.usecases
         .findBy({ operation: [crud.create, crud.update, crud.delete, crud.other] })
-        .map(e => e.usecase)
+        .map(e => e.usecase(injection))
 
     const mutations = usecases.map(usecase => usecase2mutation(usecase(), defaultResolver(usecase)))
 

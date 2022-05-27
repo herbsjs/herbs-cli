@@ -1,11 +1,8 @@
 const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
-const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const dependency = { <%- props.name.pascalCase %>Repository }
-
-const create<%- props.name.pascalCase %> = injection =>
+const create<%- props.name.pascalCase %> = injection => () =>
   usecase('Create <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
@@ -19,12 +16,11 @@ const create<%- props.name.pascalCase %> = injection =>
     // authorize: (user) => (user.canCreate<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+    setup: ctx => (ctx.di = injection),
 
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000)
       
       if (!ctx.<%- props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
@@ -38,10 +34,8 @@ const create<%- props.name.pascalCase %> = injection =>
     }),
 
     'Save the <%- props.name.raw %>': step(async ctx => {
-      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
-      const <%- props.name.camelCase %> = ctx.<%- props.name.camelCase %>
       // ctx.ret is the return value of a use case
-      return (ctx.ret = await repo.insert(<%- props.name.camelCase %>))
+      return (ctx.ret = await ctx.di.<%- props.name.pascalCase %>Repository.insert(ctx.<%- props.name.camelCase %>))
     })
   })
 

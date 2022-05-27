@@ -1,13 +1,14 @@
 const express = require('express')
 const renderShelfHTML = require('@herbsjs/herbsshelf')
 const { herbarium } = require('@herbsjs/herbarium')
+const connection = require('../data/database/connection')
 
 <% if(props.graphql) {%>const { graphql } = require('./graphql')<% }%>
 <% if(props.rest) {%>const { rest } = require('./rest')<% }%>
 
-function herbsshelf(app, config) {
+function herbsshelf(app) {
   const usecases = Array.from(herbarium.usecases.all).map(([_, item]) =>
-            ({ usecase: item.usecase(), id: item.id, tags: { group: item.group } }))
+            ({ usecase: item.usecase()(), id: item.id, tags: { group: item.group } }))
 
   app.get('/herbsshelf', (_, res) => {
     res.setHeader('Content-Type', 'text/html')
@@ -21,12 +22,15 @@ function herbsshelf(app, config) {
 
 async function start(config) {
 
-  herbarium.requireAll()
+  const injection = {}
+  herbarium.requireAll({ repositoriesPath: '/src/infra/data/repositories' })
+  for(const [_,{repository}] of herbarium.repositories.all)
+    injection[repository.name] = new repository(await connection.connect(config))
 
   const app = express()
-  <% if(props.rest) {%>await rest(app, config)<% }%>
-  <% if(props.graphql) {%>await graphql(app, config)<% }%>
-  await herbsshelf(app, config)
+  <% if(props.rest) {%>await rest(app, injection, config)<% }%>
+  <% if(props.graphql) {%>await graphql(app, injection, config)<% }%>
+  await herbsshelf(app)
 
   return app.listen(
     { port: config.api.port },

@@ -14,8 +14,12 @@ describe('Find a <%- props.name.raw %>', () => {
       }
 
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
+          <% if(props.mongo){ %>
+          async findByID(id) { return (<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)) }
+          <% } else{ %>  
           async findByID(id) { return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) }
+          <% } %>
         }
       }
 
@@ -24,7 +28,7 @@ describe('Find a <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = find<%- props.name.pascalCase %>ById(injection)
+      const uc = find<%- props.name.pascalCase %>ById(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
@@ -40,8 +44,12 @@ describe('Find a <%- props.name.raw %>', () => {
     it('return not return a <%- props.name.raw %>', async () => {
       // Given
       const injection = {
-        <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+        <%- props.name.pascalCase %>Repository: new class <%- props.name.pascalCase %>Repository {
+          <% if(props.mongo){ %>
+          async findByID(id) { return (null) }
+          <% } else{ %>  
           async findByID(id) { return ([]) }
+          <% } %>
         }
       }
 
@@ -50,7 +58,7 @@ describe('Find a <%- props.name.raw %>', () => {
       }
 
       // When
-      const uc = find<%- props.name.pascalCase %>ById(injection)
+      const uc = find<%- props.name.pascalCase %>ById(injection)()
       await uc.authorize(authorizedUser)
       const ret = await uc.run(req)
 
