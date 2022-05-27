@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/herbsjs/herbs-cli/compare/v2.4.2...v2.5.0) (2022-05-27)
+
+
+### Features
+
+* removed unecessary variables ([d8fd808](https://github.com/herbsjs/herbs-cli/commit/d8fd80853dde4e64e9253ced027abb34aca04b7f))
+
 ## [2.4.2](https://github.com/herbsjs/herbs-cli/compare/v2.4.1...v2.4.2) (2022-05-05)
 
 
