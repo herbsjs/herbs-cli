@@ -1,3 +1,4 @@
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const find<%- props.name.pascalCase %> = require('./find<%- props.name.pascalCase %>')
 const assert = require('assert')
 const { spec, scenario, given, check } = require('@herbsjs/aloe')
@@ -30,7 +31,7 @@ const find<%- props.name.pascalCase %>Spec = spec({
       }),
 
       'Must return a valid <%- props.name.raw %>': check((ctx) => {
-        assert.strictEqual(ret.ok.isValid(), true)
+        assert.strictEqual(ctx.response.ok.isValid(), true)
       })
 
     }),
@@ -52,7 +53,7 @@ const find<%- props.name.pascalCase %>Spec = spec({
     
           'Must return an error': check((ctx) => {
             assert.ok(ctx.response.isErr)
-            assert.ok(ret.isNotFoundError)  
+            assert.ok(ctx.response.isNotFoundError)  
           }),
     }),
   })
@@ -63,4 +64,4 @@ module.exports = find<%- props.name.pascalCase %>Spec
 //  herbarium.specs
 //    .add(find<%- props.name.pascalCase %>Spec, 'Find<%- props.name.pascalCase %>Spec')
 //    .metadata({ usecase: 'Find<%- props.name.pascalCase %>' })
-//    .usecase
+//    .spec

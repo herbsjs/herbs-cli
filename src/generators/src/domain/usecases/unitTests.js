@@ -106,13 +106,13 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
     // aloe
     useCases.map(async (action) => {
       const useCaseName = `${action} ${name}`
-      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.aloe.test.js`)
+      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
 
       if (fs.existsSync(ucPath)) return
 
       const objOptions = { spaces: 4, extraSpaces: 4, removeBraces: true }
       await generate({
-        template: `domain/useCases/tests/${action}.aloe.test.ejs`,
+        template: `domain/useCases/tests/${action}.spec.ejs`,
         target: ucPath,
         props: {
           name: {

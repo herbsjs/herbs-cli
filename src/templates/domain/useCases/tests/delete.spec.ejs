@@ -1,3 +1,4 @@
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
 const assert = require('assert')
 const { spec, scenario, given, check } = require('@herbsjs/aloe')
@@ -31,7 +32,7 @@ const delete<%- props.name.pascalCase %>Spec = spec({
 
     }),
 
-    'Don\'t delete <%- props.name.raw %> if it does not exist': scenario({
+    'Do not delete <%- props.name.raw %> if it does not exist': scenario({
         'Given an empty <%- props.name.raw %> repository': given({
           request: {
               <%- props.request.valid %>
@@ -59,4 +60,4 @@ module.exports = delete<%- props.name.pascalCase %>Spec
 //  herbarium.specs
 //    .add(delete<%- props.name.pascalCase %>Spec, 'Delete<%- props.name.pascalCase %>Spec')
 //    .metadata({ usecase: 'Delete<%- props.name.pascalCase %>' })
-//    .usecase
+//    .spec

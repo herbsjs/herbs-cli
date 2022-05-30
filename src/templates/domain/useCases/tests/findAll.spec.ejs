@@ -1,3 +1,4 @@
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
 const assert = require('assert')
 const { spec, scenario, given, check } = require('@herbsjs/aloe')
@@ -28,7 +29,7 @@ const findAll<%- props.name.pascalCase %>Spec = spec({
       }),
 
       'Must return a list of <%- props.name.raw %>s': check((ctx) => {
-        assert.strictEqual(ret.ok.length, 1)
+        assert.strictEqual(ctx.response.ok.length, 1)
       })
 
     }),
@@ -41,4 +42,4 @@ module.exports = findAll<%- props.name.pascalCase %>Spec
 //  herbarium.specs
 //    .add(findAll<%- props.name.pascalCase %>Spec, 'FindAll<%- props.name.pascalCase %>Spec')
 //    .metadata({ usecase: 'FindAll<%- props.name.pascalCase %>' })
-//    .usecase
+//    .spec

@@ -12,9 +12,9 @@ const create<%- props.name.pascalCase %>Spec = spec({
         },
         user: { hasAccess: true },
         injection: {
-            <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
+            <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
               async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
-            })
+            }
         },
       }),
 
@@ -60,4 +60,4 @@ module.exports = create<%- props.name.pascalCase %>Spec
 //  herbarium.specs
 //    .add(create<%- props.name.pascalCase %>Spec, 'Create<%- props.name.pascalCase %>Spec')
 //    .metadata({ usecase: 'Create<%- props.name.pascalCase %>' })
-//    .usecase
+//    .spec

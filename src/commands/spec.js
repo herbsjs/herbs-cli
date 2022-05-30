@@ -2,12 +2,12 @@ const glob = require('glob')
 const path = require('path')
 
 const cmd = {
-    name: 'test',
+    name: 'spec',
     description: 'Run Herbs spec tests',
-    alias: ['t'],
+    alias: ['s'],
     run: async toolbox => {
 
-        const files = glob.sync('./**/*.aloe.test.js')
+        const files = glob.sync('./**/*.spec.js')
         const specs = []
         for (const file of files) {
             const instance = require(path.resolve(file))
@@ -16,11 +16,13 @@ const cmd = {
 
         const { grey, green, red, white, blue, italic } = toolbox.print.colors
         const failed = 'failed'
+        let errorCount = 0
         for (const spec of specs) {
             const ret = await spec.run()
             const usecase = spec.usecase().description
             const result = (ret) => ret !== failed ? green('🗸') : red('•')
-            toolbox.print.info(`${white(usecase)} ${result(ret)} ${grey(italic('(spec)'))}`)
+            const color = ret !== failed ? grey : red
+            toolbox.print.info(`${color(usecase)} ${grey(italic('(spec)'))}`)
             for (const scenario of spec.scenarios) {
                 toolbox.print.info(`   ${result(scenario.state)} ${white(scenario.description)} ${grey(italic('(scenario)'))}`)
                 if (scenario.state !== failed) continue
@@ -29,8 +31,10 @@ const cmd = {
                     const color = e.state !== failed ? grey : red
                     const type = `(${e.type})`
                     toolbox.print.info(`      ${result(e.state)} ${color(description)} ${grey(italic(type))}`)
-                    if (e.error)
+                    if (e.error) {
                         toolbox.print.info(`\n          ${blue(e.error)} \n`)
+                        errorCount++
+                    }
                 })
                 steps(scenario.givens)
                 if (scenario.stage === 'given') continue
@@ -40,7 +44,10 @@ const cmd = {
             }
         }
 
-        toolbox.print.success('Test finished! 🤩')
+        if (errorCount !== 0)
+            toolbox.print.info(`\n ${red('Specs finished with some errors:')} ${(errorCount)}  😢 \n`)
+        else
+            toolbox.print.success('\n  Specs finished with no errors! 🤩 \n')
     }
 }
 
