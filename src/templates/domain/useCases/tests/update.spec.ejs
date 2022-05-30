@@ -77,10 +77,8 @@ const update<%- props.name.pascalCase %>Spec = spec({
       }),
   })
   
-module.exports = update<%- props.name.pascalCase %>Spec
-
-//module.exports =
-//  herbarium.specs
-//    .add(update<%- props.name.pascalCase %>Spec, 'Update<%- props.name.pascalCase %>Spec')
-//    .metadata({ usecase: 'Update<%- props.name.pascalCase %>' })
-//    .spec
+module.exports =
+  herbarium.specs
+    .add(update<%- props.name.pascalCase %>Spec, 'Update<%- props.name.pascalCase %>Spec')
+    .metadata({ usecase: 'Update<%- props.name.pascalCase %>' })
+    .spec

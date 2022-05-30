@@ -1,5 +1,6 @@
 const glob = require('glob')
 const path = require('path')
+const { requireHerbarium } = require('../generators/utils')
 
 const cmd = {
     name: 'spec',
@@ -7,21 +8,19 @@ const cmd = {
     alias: ['s'],
     run: async toolbox => {
 
-        const files = glob.sync('./**/*.spec.js')
-        const specs = []
-        for (const file of files) {
-            const instance = require(path.resolve(file))
-            if (instance.isSpec) specs.push(instance)
-        }
+        const herbarium = requireHerbarium("spec", toolbox.filesystem.cwd())
+        const specs = herbarium.specs.all
 
         const { grey, green, red, white, blue, italic } = toolbox.print.colors
         const failed = 'failed'
         let errorCount = 0
-        for (const spec of specs) {
+        
+        for (const specInfo of Array.from(specs.values())) {
+            const spec = specInfo.spec
             const ret = await spec.run()
             const usecase = spec.usecase().description
             const result = (ret) => ret !== failed ? green('🗸') : red('•')
-            const color = ret !== failed ? grey : red
+            const color = ret !== failed ? white : red
             toolbox.print.info(`${color(usecase)} ${grey(italic('(spec)'))}`)
             for (const scenario of spec.scenarios) {
                 toolbox.print.info(`   ${result(scenario.state)} ${white(scenario.description)} ${grey(italic('(scenario)'))}`)

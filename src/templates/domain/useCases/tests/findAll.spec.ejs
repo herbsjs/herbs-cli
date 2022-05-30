@@ -36,10 +36,8 @@ const findAll<%- props.name.pascalCase %>Spec = spec({
 
   })
   
-module.exports = findAll<%- props.name.pascalCase %>Spec
-
-//module.exports =
-//  herbarium.specs
-//    .add(findAll<%- props.name.pascalCase %>Spec, 'FindAll<%- props.name.pascalCase %>Spec')
-//    .metadata({ usecase: 'FindAll<%- props.name.pascalCase %>' })
-//    .spec
+module.exports =
+  herbarium.specs
+    .add(findAll<%- props.name.pascalCase %>Spec, 'FindAll<%- props.name.pascalCase %>Spec')
+    .metadata({ usecase: 'FindAll<%- props.name.pascalCase %>' })
+    .spec

@@ -58,10 +58,8 @@ const find<%- props.name.pascalCase %>Spec = spec({
     }),
   })
   
-module.exports = find<%- props.name.pascalCase %>Spec
-
-//module.exports =
-//  herbarium.specs
-//    .add(find<%- props.name.pascalCase %>Spec, 'Find<%- props.name.pascalCase %>Spec')
-//    .metadata({ usecase: 'Find<%- props.name.pascalCase %>' })
-//    .spec
+module.exports =
+  herbarium.specs
+    .add(find<%- props.name.pascalCase %>Spec, 'Find<%- props.name.pascalCase %>Spec')
+    .metadata({ usecase: 'Find<%- props.name.pascalCase %>' })
+    .usecase

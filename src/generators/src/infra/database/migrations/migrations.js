@@ -1,4 +1,5 @@
 const camelCase = require('lodash.camelcase')
+const snakeCase = require('lodash.snakeCase')
 const glob = require('glob')
 const { requireHerbarium } = require('../../../../utils')
 const path = require('path')
@@ -27,7 +28,7 @@ module.exports =
           if (_type instanceof String) return 'string'
           if (_type instanceof Number) return 'integer'
           if (_type instanceof Boolean) return 'boolean'
-          if (_type instanceof Date) return 'timestamps'
+          if (_type instanceof Date) return 'timestamp'
         }
 
         function getDBType(appDir) {
@@ -40,7 +41,7 @@ module.exports =
           const columns = []
           Object.keys(schema).forEach((prop) => {
             const { name, type, options } = schema[prop]
-            columns.push(`table.${type2Str(type)}('${camelCase(name)}')${options.isId ? '.primary()' : ''}`)
+            columns.push(`table.${type2Str(type)}('${snakeCase(name)}')${options.isId ? '.primary()' : ''}`)
           })
           return columns
         }

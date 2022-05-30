@@ -54,10 +54,8 @@ const create<%- props.name.pascalCase %>Spec = spec({
     }),
   })
   
-module.exports = create<%- props.name.pascalCase %>Spec
-
-//module.exports =
-//  herbarium.specs
-//    .add(create<%- props.name.pascalCase %>Spec, 'Create<%- props.name.pascalCase %>Spec')
-//    .metadata({ usecase: 'Create<%- props.name.pascalCase %>' })
-//    .spec
+module.exports =
+  herbarium.specs
+    .add(create<%- props.name.pascalCase %>Spec, 'Create<%- props.name.pascalCase %>Spec')
+    .metadata({ usecase: 'Create<%- props.name.pascalCase %>' })
+    .spec
