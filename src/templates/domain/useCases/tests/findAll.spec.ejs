@@ -1,11 +1,13 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { spec, scenario, given, check } = require('@herbsjs/aloe')
+const { spec, scenario, given, check, samples } = require('@herbsjs/aloe')
 const { herbarium } = require('@herbsjs/herbarium')
 
 const findAll<%- props.name.pascalCase %>Spec = spec({
+
     usecase: findAll<%- props.name.pascalCase %>,
+  
     'Find all <%- props.name.raw %>s': scenario({
       'Given an existing <%- props.name.raw %>': given({
         request: { limit: 0, offset: 0 },

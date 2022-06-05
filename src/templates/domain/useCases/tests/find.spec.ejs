@@ -1,11 +1,13 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const find<%- props.name.pascalCase %> = require('./find<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { spec, scenario, given, check } = require('@herbsjs/aloe')
+const { spec, scenario, given, check, samples } = require('@herbsjs/aloe')
 const { herbarium } = require('@herbsjs/herbarium')
 
 const find<%- props.name.pascalCase %>Spec = spec({
+
     usecase: find<%- props.name.pascalCase %>,
+  
     'Find a <%- props.name.raw %> when it exists': scenario({
       'Given an existing <%- props.name.raw %>': given({
         request: {

@@ -1,11 +1,13 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { spec, scenario, given, check } = require('@herbsjs/aloe')
+const { spec, scenario, given, check, samples } = require('@herbsjs/aloe')
 const { herbarium } = require('@herbsjs/herbarium')
 
 const delete<%- props.name.pascalCase %>Spec = spec({
+
     usecase: delete<%- props.name.pascalCase %>,
+  
     'Delete <%- props.name.raw %> if exists': scenario({
       'Given an existing <%- props.name.raw %>': given({
         request: {

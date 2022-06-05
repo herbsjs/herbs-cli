@@ -1,10 +1,12 @@
 const create<%- props.name.pascalCase %> = require('./create<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { spec, scenario, given, check } = require('@herbsjs/aloe')
+const { spec, scenario, given, check, samples } = require('@herbsjs/aloe')
 const { herbarium } = require('@herbsjs/herbarium')
 
 const create<%- props.name.pascalCase %>Spec = spec({
+
     usecase: create<%- props.name.pascalCase %>,
+  
     'Create a new <%- props.name.raw %> when it is valid': scenario({
       'Given a valid <%- props.name.raw %>': given({
         request: {
