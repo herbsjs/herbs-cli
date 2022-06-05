@@ -13,11 +13,12 @@ module.exports =
       const herbarium = requireHerbarium(command, filesystem.cwd())
       const entities = herbarium.entities.all
 
-      const migrationsPath = `${filesystem.cwd()}/src/infra/data/database/migrations`
+      const cwd = filesystem.cwd().replace(new RegExp('\\\\', 'g'), '/')
+      const migrationsPath = `${cwd}/src/infra/data/database/migrations`
 
       for (const entity of Array.from(entities.values())) {
         const { name, schema } = entity.entity.prototype.meta
-
+        
         if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) {
           // don't override already existing migration files for that entity 
           continue
