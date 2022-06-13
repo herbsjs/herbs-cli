@@ -1,7 +1,7 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
 const assert = require('assert')
-const { spec, scenario, given, check, samples } = require('@herbsjs/aloe')
+const { spec, scenario, given, check, samples } = require('@herbsjs/herbs').specs
 const { herbarium } = require('@herbsjs/herbarium')
 
 const findAll<%- props.name.pascalCase %>Spec = spec({

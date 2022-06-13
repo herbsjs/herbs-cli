@@ -76,7 +76,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
   for (const entity of Array.from(entities.values())) {
     const { name, schema } = entity.entity.prototype.meta
 
-    // aloe
+    // herbs specs
     useCases.map(async (action) => {
       const useCaseName = `${action} ${name}`
       const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
