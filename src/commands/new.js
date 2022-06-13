@@ -97,7 +97,7 @@ const cmd = {
       await generators[layer]()
     }
     const nextstep = `
-    A inital Herbs project was created! 🤩
+    A initial Herbs project was created! 🤩
     You are ready to unlock your domain! 🌿
 
     Next steps:

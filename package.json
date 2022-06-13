@@ -26,6 +26,8 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@herbsjs/herbarium": "^1.4.0",
+    "@herbsjs/herbs": "^1.5.0",
     "git-user-name": "^2.0.0",
     "gluegun": "^5.1.2",
     "inquirer": "^8.2.4",

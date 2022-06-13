@@ -10,6 +10,7 @@ module.exports = async (tools) => {
       packageJson: await require('./src/packagejson')(tools, cmd.new),
       config: infra ? await require('./src/infra/config')(tools, cmd.new) : ignore,
       entities: await require('./src/domain/entities')(tools, cmd.new),
+      useCases: await require('./src/domain/usecases/useCases')(tools, cmd.new),
       connection: await require('./src/infra/database/connection')(tools, cmd.new),
       graphql: options.graphql ? await require('./src/infra/api/graphql')(tools, cmd.new) : ignore,
       rest: options.rest ? await require('./src/infra/api/rest')(tools, cmd.new) : ignore,
