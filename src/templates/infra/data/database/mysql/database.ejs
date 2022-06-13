@@ -1,4 +1,3 @@
 const knex = require('knex')
-const config = require('../../config')
 
-module.exports = knex(config.database)
+module.exports = { connect: (config) => knex(config.database) }

@@ -3,7 +3,7 @@ const { herbarium } = require('@herbsjs/herbarium')
 
 const User =
         entity('User', {
-          id: id(Number),
+          <% if(props.mongo) {%>id: id(String),<% }%><% if(!props.mongo) {%>id: id(Number),<% }%>
           nickname: field(String),
           password: field(String)
         })

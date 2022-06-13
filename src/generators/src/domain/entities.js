@@ -1,7 +1,8 @@
-const { objToString, pascalCase } = require('../../utils')
+const { pascalCase } = require('../../utils')
 const { filesystem } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
+const { usingMongo } = require('../../utils')
 
 function updateEntities(entitiesPath, level = './') {
   let requires = {}
@@ -42,7 +43,8 @@ module.exports = async ({ template: { generate } }, command) => async () => {
     })
     await generate({
       template: 'domain/entities/user.ejs',
-      target: 'src/domain/entities/user.js'
+      target: 'src/domain/entities/user.js',
+      props: { mongo: usingMongo(filesystem.cwd())}
     })
     requires.User = 'require(\'./user.js\')'
   }

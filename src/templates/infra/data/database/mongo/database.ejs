@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb')
 let dbInstance = null;
 
 module.exports = {
-    factory: async (config) => {
+    connect: async (config) => {
         if (dbInstance) {
             return new Promise((resolve) => resolve(dbInstance))
         }
