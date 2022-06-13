@@ -1,8 +1,11 @@
 const { usecase, step, Ok } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const findAll<%- props.name.pascalCase %> = injection => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const findAll<%- props.name.pascalCase %> = injection =>
   usecase('Find all <%- props.name.pascalCase %>s', {
     // Input/Request metadata and validation
     request: {
@@ -16,11 +19,11 @@ const findAll<%- props.name.pascalCase %> = injection => () =>
     //Authorization with Audit
     authorize: () => Ok(),
 
-    setup: ctx => (ctx.di = injection),
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     'Find and return all the <%- props.name.raw %>s': step(async ctx => {
-      <% if(props.mongo){ %>const <%- props.name.camelCase %>s = await ctx.di.<%- props.name.pascalCase %>Repository.find(ctx.req)
-      <% } else{ %>const <%- props.name.camelCase %>s = await ctx.di.<%- props.name.pascalCase %>Repository.findAll(ctx.req)<% } %>
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const <%- props.name.camelCase %>s = await repo.findAll(ctx.req)
       // ctx.ret is the return value of a use case
       return Ok(ctx.ret = <%- props.name.camelCase %>s)
     })

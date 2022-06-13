@@ -1,9 +1,10 @@
 const <%- props.name.pascalCase %> = require('../../../domain/entities/<%- props.name.camelCase %>')
 const { herbarium } = require('@herbsjs/herbarium')
 const { Repository } = require('@herbsjs/herbs2mongo')
+const connection = require('../database/connection')
 
 class <%- props.name.pascalCase %>Repository extends Repository {
-    constructor(connection){
+    constructor(injection){
         super({ 
             entity: <%- props.name.pascalCase %>,
             collection: '<%- props.name.camelCase %>',
