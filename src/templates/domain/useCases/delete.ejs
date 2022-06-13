@@ -6,7 +6,7 @@ const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repo
 const dependency = { <%- props.name.pascalCase %>Repository }
 
 const delete<%- props.name.pascalCase %> = injection =>
-  usecase('Delete the <%- props.name.pascalCase %>', {
+  usecase('Delete <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
       id: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>

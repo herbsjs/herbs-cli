@@ -22,10 +22,7 @@ function herbsshelf(app, config) {
 
 async function start(config) {
 
-  const injection = {}
   herbarium.requireAll()
-  for(const [_,{repository}] of herbarium.repositories.all)
-    injection[repository.name] = new repository(await connection.connect(config))
 
   const app = express()
   <% if(props.rest) {%>await rest(app, config)<% }%>

@@ -29,7 +29,7 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  find: (obj) => { return { id: obj.id } },
+  find: (obj) => { return { ids: obj.id } },
   findAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
@@ -40,7 +40,7 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  find: () => { return { id: null } },
+  find: () => { return { ids: null } },
   findAll: () => { return [] }
 }
 
@@ -78,7 +78,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
     const { name, schema } = entity.entity.prototype.meta
 
     // herbs specs
-    useCases.map(async (action) => {
+    for (const action of useCases) {
       const useCaseName = `${action} ${name}`
       const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
 
@@ -104,6 +104,6 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
       })
       process.stdout.write(`  New: ${ucPath}\n`)
 
-    })
+    }
   }
 }

@@ -5,7 +5,7 @@ function mutations() {
     const crud = herbarium.crud
     const usecases = herbarium.usecases
         .findBy({ operation: [crud.create, crud.update, crud.delete, crud.other] })
-        .map(e => e.usecase())
+        .map(e => e.usecase)
 
     const mutations = usecases.map(usecase => usecase2mutation(usecase(), defaultResolver(usecase)))
 

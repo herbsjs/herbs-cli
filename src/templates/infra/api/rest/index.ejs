@@ -59,7 +59,7 @@ function server(controllers, app, config) {
     app.use(routes)
 }
 
-async function rest(app, injection, config) {
+async function rest(app, config) {
 
     const controllers = uc2Controllers(app, config)
 

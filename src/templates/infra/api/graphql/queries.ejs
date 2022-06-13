@@ -4,7 +4,7 @@ const { herbarium } = require('@herbsjs/herbarium')
 function queries() {
     const usecases = herbarium.usecases
         .findBy({ operation: [herbarium.crud.read, herbarium.crud.readAll] })
-        .map(e => e.usecase())
+        .map(e => e.usecase)
 
     const queries = usecases.map(usecase => usecase2query(usecase(), defaultResolver(usecase)))
 
