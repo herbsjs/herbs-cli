@@ -47,13 +47,13 @@ const questions = [
   {
     type: 'confirm',
     name: 'graphql',
-    message: 'Generate graphql layer?',
+    message: 'Add graphql layer?',
     default: true,
   },
   {
     type: 'confirm',
     name: 'rest',
-    message: 'Generate rest layer?',
+    message: 'Add rest layer?',
     default: true,
   },
   {
@@ -76,7 +76,7 @@ const questions = [
 
 const cmd = {
   name: 'new',
-  description: 'Create a new back-end structure based on pre defined entities',
+  description: 'Creates new Herbs project',
   alias: ['n'],
   run: async (toolbox) => {
     let { options } = toolbox.parameters
@@ -97,8 +97,8 @@ const cmd = {
       await generators[layer]()
     }
     const nextstep = `
-    A inital Herbs project was created! 🤩
-    You are ready to unlock your domain! 🌿
+    Your Herbs project has been created! 🌿
+    Are you ready to unlock your domain? 
 
     Next steps:
 

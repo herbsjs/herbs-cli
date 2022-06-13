@@ -3,10 +3,10 @@ const types = require('./types')
 const queries = require('./queries')
 const mutations = require('./mutations')
 
-async function graphql(app, injection, config) {
+async function graphql(app, config) {
 
     let graphQLDef = []
-    graphQLDef = graphQLDef.concat(types(), queries(injection), mutations(injection))
+    graphQLDef = graphQLDef.concat(types(), queries(), mutations())
 
     /* Type Defs (Schemas) */
     const typeDefs = graphQLDef.map(i => gql(i[0]))
@@ -27,7 +27,7 @@ async function graphql(app, injection, config) {
     server.applyMiddleware({ app: app, path: config.rootPath })
 
     // eslint-disable-next-line no-console
-    console.info(`\n🔗 GraphQL endpoint - /graphql`)
+    console.info(`\n🔗 GraphQL endpoint - ${config.rootPath}`)
 }
 
 module.exports = { graphql }
