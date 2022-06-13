@@ -38,7 +38,7 @@ module.exports = {
   requireHerbarium: (command, appPath) => {
     const herbariumPath = `${appPath}/src/domain/herbarium.js`
     let herbarium
-    if (command === "update") {
+    if (command === "update" || command === "spec") {
       herbarium = require(herbariumPath)
     }
     else

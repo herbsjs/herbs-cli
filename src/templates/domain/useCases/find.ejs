@@ -1,12 +1,15 @@
 const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const find<%- props.name.pascalCase %> = injection => () =>
+const dependency = { <%- props.name.pascalCase %>Repository }
+
+const find<%- props.name.pascalCase %> = injection =>
   usecase('Find a <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>
+      ids: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>,
     },
 
     // Output/Response metadata
@@ -16,17 +19,15 @@ const find<%- props.name.pascalCase %> = injection => () =>
     // authorize: (user) => (user.canFindOne<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    setup: ctx => (ctx.di = injection),
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     'Find and return the <%- props.name.raw %>': step(async ctx => {
-      const { id } = ctx.req<% if(props.mongo){ %>
-      const <%- props.name.camelCase %> = await ctx.di.<%- props.name.pascalCase %>Repository.findByID(id)
-      <% } else{ %>  
-      const [<%- props.name.camelCase %>] = await ctx.di.<%- props.name.pascalCase %>Repository.findByID(id)
-      <% } %>
+      const ids = ctx.req.ids
+      const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
+      const [<%- props.name.camelCase %>] = await repo.findByID(ids)
       if (!<%- props.name.camelCase %>) return Err.notFound({ 
-        message: `<%- props.name.raw %> entity not found by ID: ${id}`,
-        payload: { entity: '<%- props.name.raw %>', id }
+        message: `<%- props.name.raw %> entity not found by ID: ${ids}`,
+        payload: { entity: '<%- props.name.raw %>', ids }
       })
       // ctx.ret is the return value of a use case
       return Ok(ctx.ret = <%- props.name.camelCase %>)

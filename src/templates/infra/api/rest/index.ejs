@@ -16,11 +16,11 @@ function uc2Controllers(injection) {
 
     function findUsecases(entity) {
         const usecases = herbarium.usecases
-        const getAll = usecases.findBy({ entity: entity, operation: herbarium.crud.readAll })[0]?.usecase(injection)
-        const getById = usecases.findBy({ entity: entity, operation: herbarium.crud.read })[0]?.usecase(injection)
-        const post = usecases.findBy({ entity: entity, operation: herbarium.crud.create })[0]?.usecase(injection)
-        const put = usecases.findBy({ entity: entity, operation: herbarium.crud.update })[0]?.usecase(injection)
-        const del = usecases.findBy({ entity: entity, operation: herbarium.crud.delete })[0]?.usecase(injection)
+        const getAll = usecases.findBy({ entity: entity, operation: herbarium.crud.readAll })[0]?.usecase
+        const getById = usecases.findBy({ entity: entity, operation: herbarium.crud.read })[0]?.usecase
+        const post = usecases.findBy({ entity: entity, operation: herbarium.crud.create })[0]?.usecase
+        const put = usecases.findBy({ entity: entity, operation: herbarium.crud.update })[0]?.usecase
+        const del = usecases.findBy({ entity: entity, operation: herbarium.crud.delete })[0]?.usecase
         return { getAll, getById, post, put, del }
     }
 
@@ -30,7 +30,7 @@ function uc2Controllers(injection) {
         const usecases = findUsecases(entity.id)
         const controllers = { name: entity.group }
         if (usecases.getAll) controllers.getAll = { usecase: usecases.getAll }
-        if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'id' }
+        if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'ids' }
         if (usecases.post) controllers.post = { usecase: usecases.post }
         if (usecases.put) controllers.put = { usecase: usecases.put }
         if (usecases.del) controllers.delete = { usecase: usecases.del }
@@ -59,9 +59,9 @@ function server(controllers, app, config) {
     app.use(routes)
 }
 
-async function rest(app, injection, config) {
+async function rest(app, config) {
 
-    const controllers = uc2Controllers(injection)
+    const controllers = uc2Controllers(app, config)
 
     /* Add custon controllers
     controllers.push({ name: 'Search', post: herbarium.usecases.get('SearchTask') })

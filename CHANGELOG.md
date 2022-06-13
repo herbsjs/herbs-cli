@@ -1,3 +1,20 @@
+# [2.6.0](https://github.com/herbsjs/herbs-cli/compare/v2.5.0...v2.6.0) (2022-06-13)
+
+
+### Bug Fixes
+
+* **migration:** creating unecessary migration files on windows ([560ca3a](https://github.com/herbsjs/herbs-cli/commit/560ca3a624a91f7464c4d4271f6128898aa13ff4))
+* **specs:** change test->spec and fix specs for use cases. All running fine ([fdcbbe9](https://github.com/herbsjs/herbs-cli/commit/fdcbbe9f3b26a66e2671529a4893091d570fe5f1))
+* **test:** resolve lodash dependency ([74e248b](https://github.com/herbsjs/herbs-cli/commit/74e248bd429b61bdd8714287c91ab7cc776187a7))
+
+
+### Features
+
+* **spec:** new Sample features - be able to add sample data on your scenario ([2821864](https://github.com/herbsjs/herbs-cli/commit/2821864f123da101aa6ae43a762c023bbe4ca286))
+* **spec:** new specs for create, delete, find, findAll and update use cases ([ed285c1](https://github.com/herbsjs/herbs-cli/commit/ed285c1aa2605296e5921110354c604bbda52fa0))
+* **test:** improve test CLI output ([b2da950](https://github.com/herbsjs/herbs-cli/commit/b2da950582ae3366f660fcc1320d08105ae7dee5))
+* **test:** test command: now it is possible to run herbs tests and specs (aloe) ([771ca35](https://github.com/herbsjs/herbs-cli/commit/771ca3514462924c1debe2ae9c46888e175781ed))
+
 # [2.5.0](https://github.com/herbsjs/herbs-cli/compare/v2.4.2...v2.5.0) (2022-05-27)
 
 
