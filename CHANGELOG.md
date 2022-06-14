@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/herbsjs/herbs-cli/compare/v2.6.0...v2.6.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **spec:** move samples to the right structure ([ef625f2](https://github.com/herbsjs/herbs-cli/commit/ef625f20254bcf7890519ad6283723c52d5e7c01))
+
 # [2.6.0](https://github.com/herbsjs/herbs-cli/compare/v2.5.0...v2.6.0) (2022-06-13)
 
 
