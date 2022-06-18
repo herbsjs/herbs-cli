@@ -13,7 +13,7 @@
       "knex:rollback": "npx knex --knexfile knexFile.js migrate:rollback",
       "knex:makeSeeds": "npx knex --knexfile knexFile.js seed:make",
       "knex:runSeeds": "npx knex --knexfile knexFile.js seed:run",
-      "test": "mocha --timeout 999999 --colors --recursive src/**/*.test.js",
+      "test": "npm run spec",
       "spec": "herbs spec"
     },
     "keywords": ["herbs"],
