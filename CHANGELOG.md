@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/herbsjs/herbs-cli/compare/v2.6.1...v2.7.0) (2022-06-19)
+
+
+### Features
+
+* **shelf:** shelf now uses Herbarium as the primary metadata source ([1b6618b](https://github.com/herbsjs/herbs-cli/commit/1b6618bdb490aa70c02e7edc5fad20b2f814be2d)), closes [#126](https://github.com/herbsjs/herbs-cli/issues/126)
+
 ## [2.6.1](https://github.com/herbsjs/herbs-cli/compare/v2.6.0...v2.6.1) (2022-06-14)
 
 

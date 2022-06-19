@@ -1,21 +1,21 @@
 const express = require('express')
-const { renderShelfHTML } = require('@herbsjs/herbsshelf')
+const { herbsshelf } = require('@herbsjs/herbsshelf')
 const { herbarium } = require('@herbsjs/herbarium')
-const connection = require('../data/database/connection')
 
 <% if(props.graphql) {%>const { graphql } = require('./graphql')<% }%>
 <% if(props.rest) {%>const { rest } = require('./rest')<% }%>
 
-function herbsshelf(app, config) {
-  const usecases = Array.from(herbarium.usecases.all).map(([_, item]) =>
-    ({ usecase: item.usecase(), id: item.id, tags: { group: item.group } }))
+function shelf(app, config) {
 
   app.get('/herbsshelf', (_, res) => {
     res.setHeader('Content-Type', 'text/html')
-    const shelf = renderShelfHTML('<%- props.name %>', usecases)
+    const shelf = herbsshelf({ project: '<%- props.name %>', herbarium })
     res.write(shelf)
     res.end()
   })
+
+  app.get("/", (req, res) => res.status(301).redirect("/herbsshelf"))
+
   // eslint-disable-next-line no-console
   console.info(`\n🌿 Herbs Shelf endpoint - /herbsshelf \n`)
 }
@@ -27,7 +27,7 @@ async function start(config) {
   const app = express()
   <% if(props.rest) {%>await rest(app, config)<% }%>
   <% if(props.graphql) {%>await graphql(app, config)<% }%>
-  await herbsshelf(app, config)
+  await shelf(app, config)
 
   return app.listen(
     { port: config.api.port },
