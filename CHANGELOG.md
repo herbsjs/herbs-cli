@@ -1,3 +1,16 @@
+## [2.7.1](https://github.com/herbsjs/herbs-cli/compare/v2.7.0...v2.7.1) (2022-06-19)
+
+
+### Bug Fixes
+
+* fix config graphql route ([ec1e806](https://github.com/herbsjs/herbs-cli/commit/ec1e806c962bf873353c6e4046f7490db168c833))
+* fix herbs shelf import for v 3.0 ([b0b85ed](https://github.com/herbsjs/herbs-cli/commit/b0b85ed572cab13ae45aaa83df31a82026b1167f))
+* fix mongodb generator ([8894555](https://github.com/herbsjs/herbs-cli/commit/8894555f53060c75f64bf8b7c02ca01044ae2ba0)), closes [#127](https://github.com/herbsjs/herbs-cli/issues/127)
+* fix mongodb generator ([765b92c](https://github.com/herbsjs/herbs-cli/commit/765b92cf95a9efc8d861bf40c116ee8c1c9d01fe)), closes [#127](https://github.com/herbsjs/herbs-cli/issues/127)
+* fix mongodb test file ([e0e506f](https://github.com/herbsjs/herbs-cli/commit/e0e506fef84495ec15db36ee947f52d858e7967d))
+* update dependencies from cli ([5d4cf6b](https://github.com/herbsjs/herbs-cli/commit/5d4cf6b68435cf7ebc1618eaea65da89352c1cf6))
+* update dependencies from generated projects ([dbd8b6b](https://github.com/herbsjs/herbs-cli/commit/dbd8b6bd074bd11f1a82f694fd66b154746c419e))
+
 # [2.7.0](https://github.com/herbsjs/herbs-cli/compare/v2.6.1...v2.7.0) (2022-06-19)
 
 
