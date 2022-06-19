@@ -49,7 +49,7 @@ module.exports =
         '"@herbsjs/herbsshelf": "^3.0.0"',
         '"dotenv": "^16.0.1"',
         '"deepmerge": "^4.2.2"',
-        '"nodemon": "^2.0.16"',
+        '"nodemon": "^2.0.15"',
         '"mocha": "^10.0.0"',
         '"lodash.camelcase": "^4.3.0"',
         '"sugar-env": "^1.5.14"'

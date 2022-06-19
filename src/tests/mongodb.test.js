@@ -7,13 +7,21 @@ const path = require('path')
 
 const projectName = 'herbs-test-runner'
 
+const linknpm = () => system.run(`cd bin && npm link --force`)
+
 const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database mongo --npmInstall yes`)
+const callHerbsCli = () => system.run(`herbs -v`)
 
 const npmInstall = () => system.run(`cd ${projectName} && npm install`)
 
 describe('When I generate a complete project that uses mongodb', () => {
   afterEach(() => {
    fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
+  })
+
+  it('must link npm herbs', async () => {
+      await linknpm()
+      await callHerbsCli()
   })
 
   it('must exists a config/mongodb.js file', async () => {
