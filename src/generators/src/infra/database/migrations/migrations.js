@@ -1,5 +1,4 @@
-const camelCase = require('lodash.camelcase')
-const snakeCase = require('lodash.snakeCase')
+const { snakeCase, camelCase } = require('lodash')
 const fs = require("fs")
 const glob = require('glob')
 const path = require('path')

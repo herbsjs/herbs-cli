@@ -29,7 +29,7 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  find: (obj) => { return { ids: obj.id } },
+  find: (obj) => { return { id: obj.id } },
   findAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
@@ -40,7 +40,7 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  find: () => { return { ids: null } },
+  find: () => { return { id: null } },
   findAll: () => { return [] }
 }
 
