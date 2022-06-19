@@ -20,7 +20,7 @@ const find<%- props.name.pascalCase %>Spec = spec({
                   const fake<%- props.name.pascalCase %> = {
                     <%- props.mock %>
                   }
-                  return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) 
+                  return (<% if(props.mongo){ %><%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)<% } else{ %>[<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]<% } %>) 
               }
             }
           },
@@ -46,7 +46,7 @@ const find<%- props.name.pascalCase %>Spec = spec({
             user: { hasAccess: true },
             injection:{
               <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
-                async findByID(id) { return [] }
+                async findByID(id) { return <% if(props.mongo){ } else{ %>[]<% } %> }
               }
             },
           }),
