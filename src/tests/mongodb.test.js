@@ -15,9 +15,6 @@ const callHerbsCli = () => system.run(`herbs -v`)
 const npmInstall = () => system.run(`cd ${projectName} && npm install`)
 
 describe('When I generate a complete project that uses mongodb', () => {
-  afterEach(() => {
-   fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
-  })
 
   it('must link npm herbs', async () => {
       await linknpm()
