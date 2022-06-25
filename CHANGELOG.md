@@ -1,3 +1,11 @@
+## [2.7.4](https://github.com/herbsjs/herbs-cli/compare/v2.7.3...v2.7.4) (2022-06-25)
+
+
+### Bug Fixes
+
+* fix regex ([b64331f](https://github.com/herbsjs/herbs-cli/commit/b64331ffb3cd04fdc11f23c2df538fce29d1157c)), closes [#135](https://github.com/herbsjs/herbs-cli/issues/135)
+* **package json:** replace author and project name ([67d5e8c](https://github.com/herbsjs/herbs-cli/commit/67d5e8c592f12cd86dd26fda9d5e7f56d21f1bf9)), closes [#135](https://github.com/herbsjs/herbs-cli/issues/135)
+
 ## [2.7.3](https://github.com/herbsjs/herbs-cli/compare/v2.7.2...v2.7.3) (2022-06-25)
 
 
