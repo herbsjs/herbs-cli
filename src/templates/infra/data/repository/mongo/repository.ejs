@@ -12,6 +12,10 @@ class <%- props.name.pascalCase %>Repository extends Repository {
             mongodb: connection
         })
     }
+
+    async findAll(options = { filter, project, skip, limit, sort }) {
+        return await this.find(options)            
+    }
 }
 
 module.exports =

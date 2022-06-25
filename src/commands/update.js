@@ -2,7 +2,7 @@ const generator = require('../generators')
 
 const cmd = {
   name: 'update',
-  description: 'Create a all layers for new entity(ies) added into project',
+  description: 'Updates and create files based on the entities and use cases',
   alias: ['u'],
   run: async toolbox => {
     const generators = (await generator(toolbox)).update

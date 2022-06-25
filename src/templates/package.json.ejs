@@ -8,7 +8,8 @@
       "start:dev": "nodemon src/index.js",
       "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
       "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix"<%- props.migration %>,
-      "test": "mocha --timeout 999999 --colors --recursive src/**/*.test.js"
+      "test": "npm run spec",
+      "spec": "herbs spec"
     },
     "keywords": ["herbs"],
     "author": "<%- props.author %>",

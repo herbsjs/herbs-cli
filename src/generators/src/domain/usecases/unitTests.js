@@ -2,6 +2,7 @@ const camelCase = require('lodash.camelcase')
 const { objToString, requireHerbarium } = require('../../../utils')
 const fs = require('fs')
 const path = require('path')
+const { usingMongo } = require('../../../utils')
 
 function invertObjValues(obj) {
   for (const key of Object.keys(obj)) {
@@ -28,7 +29,7 @@ const validUseCaseRequests = {
   create: removeID,
   update: (obj) => obj,
   delete: (obj) => { return { id: obj.id } },
-  find: (obj) => { return { ids: obj.id } },
+  find: (obj) => { return { id: obj.id } },
   findAll: (obj) => { return [obj, obj, obj] }
 }
 const invalidUseCaseRequests = {
@@ -39,7 +40,7 @@ const invalidUseCaseRequests = {
   },
   update: (obj) => invertObjValues(obj),
   delete: () => { return { id: null } },
-  find: () => { return { ids: null } },
+  find: () => { return { id: null } },
   findAll: () => { return [] }
 }
 
@@ -76,15 +77,16 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
   for (const entity of Array.from(entities.values())) {
     const { name, schema } = entity.entity.prototype.meta
 
-    useCases.map(async (action) => {
+    // herbs specs
+    for (const action of useCases) {
       const useCaseName = `${action} ${name}`
-      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.test.js`)
+      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
 
       if (fs.existsSync(ucPath)) return
 
       const objOptions = { spaces: 4, extraSpaces: 4, removeBraces: true }
       await generate({
-        template: `domain/useCases/tests/${action}.test.ejs`,
+        template: `domain/useCases/tests/${action}.spec.ejs`,
         target: ucPath,
         props: {
           name: {
@@ -96,11 +98,12 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
             valid: objToString(generateRequestObject(schema, action), objOptions),
             invalid: objToString(generateRequestObject(schema, action, false), objOptions)
           },
-          mock: objToString(generateMockObj(schema), objOptions)
+          mock: objToString(generateMockObj(schema), objOptions),
+          mongo: usingMongo(filesystem.cwd())
         }
       })
       process.stdout.write(`  New: ${ucPath}\n`)
 
-    })
+    }
   }
 }
