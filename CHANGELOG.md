@@ -1,3 +1,10 @@
+## [2.7.2](https://github.com/herbsjs/herbs-cli/compare/v2.7.1...v2.7.2) (2022-06-25)
+
+
+### Bug Fixes
+
+* now cli uses the same return in find methods ([b4318bf](https://github.com/herbsjs/herbs-cli/commit/b4318bfd970f02c6a93f10eb5d4507fc9ec571b9))
+
 ## [2.7.1](https://github.com/herbsjs/herbs-cli/compare/v2.7.0...v2.7.1) (2022-06-19)
 
 
