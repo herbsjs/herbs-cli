@@ -1,0 +1,67 @@
+const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
+const find<%- props.name.pascalCase %> = require('./find<%- props.name.pascalCase %>')
+const assert = require('assert')
+const { spec, scenario, given, check, samples } = require('@herbsjs/herbs').specs
+const { herbarium } = require('@herbsjs/herbarium')
+
+const find<%- props.name.pascalCase %>Spec = spec({
+
+    usecase: find<%- props.name.pascalCase %>,
+  
+    'Find a <%- props.name.raw %> when it exists': scenario({
+      'Given an existing <%- props.name.raw %>': given({
+        request: {
+            <%- props.request.valid %>
+        },
+        user: { hasAccess: true },
+        injection: {
+            <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+              async findByID(id) { 
+                  const fake<%- props.name.pascalCase %> = {
+                    <%- props.mock %>
+                  }
+                  return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)])
+              }
+            }
+          },
+      }),
+
+      // when: default when for use case
+
+      'Must run without errors': check((ctx) => {
+        assert.ok(ctx.response.isOk)  
+      }),
+
+      'Must return a valid <%- props.name.raw %>': check((ctx) => {
+        assert.strictEqual(ctx.response.ok.isValid(), true)
+      })
+
+    }),
+
+    'Do not find a <%- props.name.raw %> when it does not exist': scenario({
+        'Given an empty <%- props.name.raw %> repository': given({
+            request: {
+                <%- props.request.valid %>
+            },
+            user: { hasAccess: true },
+            injection:{
+              <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
+                async findByID(id) { return [] }
+              }
+            },
+          }),
+    
+          // when: default when for use case
+    
+          'Must return an error': check((ctx) => {
+            assert.ok(ctx.response.isErr)
+            assert.ok(ctx.response.isNotFoundError)  
+          }),
+    }),
+  })
+  
+module.exports =
+  herbarium.specs
+    .add(find<%- props.name.pascalCase %>Spec, 'Find<%- props.name.pascalCase %>Spec')
+    .metadata({ usecase: 'Find<%- props.name.pascalCase %>' })
+    .usecase

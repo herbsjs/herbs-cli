@@ -10,7 +10,7 @@ const update<%- props.name.pascalCase %> = injection =>
   usecase('Update <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: Number,
+      id: String,
       <%- props.request %>
     },
 
@@ -24,11 +24,12 @@ const update<%- props.name.pascalCase %> = injection =>
     setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     'Retrieve the <%- props.name.raw %>': step(async ctx => {
+      const id = ctx.req.id
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
-      const [<%- props.name.camelCase %>] = await repo.findByID(ctx.req.id)
+      const [<%- props.name.camelCase %>] = await repo.findByID(id)
       ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
       if (<%- props.name.camelCase %> === undefined) return Err.notFound({
-        message: `<%- props.name.pascalCase %> not found - ID: ${ctx.req.id}`,
+        message: `<%- props.name.pascalCase %> not found - ID: ${id}`,
         payload: { entity: '<%- props.name.raw %>' }
       })
 

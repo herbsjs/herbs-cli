@@ -1,5 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const startCase = require('lodash.startcase')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = {
   objToString: (obj, { spaces = 4, removeBraces = false, extraSpaces = 0, removeQuotes = true } = {}) => {
@@ -36,12 +38,13 @@ module.exports = {
   requireHerbarium: (command, appPath) => {
     const herbariumPath = `${appPath}/src/domain/herbarium.js`
     let herbarium
-    if (command === "update") {
+    if (command === "update" || command === "spec") {
       herbarium = require(herbariumPath)
     }
     else
       herbarium = require('@herbsjs/herbarium').herbarium
     herbarium.requireAll()
     return herbarium
-  }
+  },
+  usingMongo: (base) => fs.existsSync(path.normalize(`${base}/src/infra/config/mongo.js`))
 }

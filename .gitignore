@@ -17,3 +17,5 @@ yarn.lock
 herbs-project/
 ./herbs-test-runner
 herbs-test-runner/
+./bin/test
+./bin/teste

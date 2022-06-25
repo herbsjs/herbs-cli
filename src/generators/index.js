@@ -1,10 +1,8 @@
-const fs = require('fs')
 const ignore = () => { }
 
 module.exports = async (tools) => {
   const options = tools.parameters.options
   const infra = options.graphql || options.rest
-  const updateMigration = fs.existsSync(`${tools.filesystem.cwd()}/src/infra/data/database/migrations`)
   const cmd = { new: "new", update: "update" }
 
   return {
