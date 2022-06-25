@@ -1,3 +1,13 @@
+## [2.7.3](https://github.com/herbsjs/herbs-cli/compare/v2.7.2...v2.7.3) (2022-06-25)
+
+
+### Bug Fixes
+
+* adding command for herbs-CLI execution in the units tests ([bc73930](https://github.com/herbsjs/herbs-cli/commit/bc73930766d859efadc5c5b9fbf44dfbea440513))
+* check if git is installed in the operating system ([127b1c8](https://github.com/herbsjs/herbs-cli/commit/127b1c85f500bf4505ae76c1975d2497c4817c0f)), closes [#110](https://github.com/herbsjs/herbs-cli/issues/110)
+* error message change if git command fails to execute ([9772757](https://github.com/herbsjs/herbs-cli/commit/977275760dfcaeb1b1cfcd3da706f609425c21de))
+* **git.js:** broken when herbs new with git ([1348133](https://github.com/herbsjs/herbs-cli/commit/134813307a38209cb764f8c57a8bd614cf55cb6d)), closes [#110](https://github.com/herbsjs/herbs-cli/issues/110)
+
 ## [2.7.2](https://github.com/herbsjs/herbs-cli/compare/v2.7.1...v2.7.2) (2022-06-25)
 
 
