@@ -3,7 +3,6 @@
 const { system } = require('gluegun')
 const fs = require('fs')
 const path = require('path')
-
 const projectName = 'herbs-test-runner'
 
 const linknpm = () => system.run(`cd bin && npm link --force`)
