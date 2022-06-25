@@ -1,3 +1,10 @@
+## [2.7.5](https://github.com/herbsjs/herbs-cli/compare/v2.7.4...v2.7.5) (2022-06-25)
+
+
+### Bug Fixes
+
+* fix a bug when the entity has another entity as field ([0690899](https://github.com/herbsjs/herbs-cli/commit/0690899c83297b55d5b5394a4e392392554c7cb4)), closes [#64](https://github.com/herbsjs/herbs-cli/issues/64)
+
 ## [2.7.4](https://github.com/herbsjs/herbs-cli/compare/v2.7.3...v2.7.4) (2022-06-25)
 
 
