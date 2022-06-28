@@ -28,7 +28,7 @@ function uc2Controllers(injection) {
 
     const controllers = entities.map(entity => {
         const usecases = findUsecases(entity.id)
-        const controllers = { name: entity.group }
+        const controllers = { name: entity.group, entity: entity.id }
         if (usecases.getAll) controllers.getAll = { usecase: usecases.getAll }
         if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'id' }
         if (usecases.post) controllers.post = { usecase: usecases.post }
