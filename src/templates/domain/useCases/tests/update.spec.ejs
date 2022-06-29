@@ -7,18 +7,18 @@ const { herbarium } = require('@herbsjs/herbarium')
 const update<%- props.name.pascalCase %>Spec = spec({
 
     usecase: update<%- props.name.pascalCase %>,
-    
-    'Valid <%- props.name.raw %>s': samples([
-      {
-        <%- props.request.valid %>
-      },
-      {
-        <%- props.request.valid %>
-      }
-    ]),
 
     'Update a existing <%- props.name.raw %> when it is valid': scenario({
       
+      'Valid <%- props.name.raw %>s': samples([
+        {
+          <%- props.request.valid %>
+        },
+        {
+          <%- props.request.valid %>
+        }
+      ]),
+
       'Given a valid <%- props.name.raw %>': given((ctx) => ({
         request: ctx.sample,
         user: { hasAccess: true }
