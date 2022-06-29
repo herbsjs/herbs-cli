@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/herbsjs/herbs-cli/compare/v2.7.5...v2.8.0) (2022-06-29)
+
+
+### Features
+
+* **index.ejs:** include entity property in controllers list ([ca88f0f](https://github.com/herbsjs/herbs-cli/commit/ca88f0fd4f89e0e9c61c27a2d9c712bb45ab9e39))
+
 ## [2.7.5](https://github.com/herbsjs/herbs-cli/compare/v2.7.4...v2.7.5) (2022-06-25)
 
 
