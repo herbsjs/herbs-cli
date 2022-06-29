@@ -10,7 +10,7 @@ const update<%- props.name.pascalCase %> = injection =>
   usecase('Update <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>,
+      id: String,
       <%- props.request %>
     },
 

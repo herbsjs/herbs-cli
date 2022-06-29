@@ -1,5 +1,4 @@
-const camelCase = require('lodash.camelcase')
-const snakeCase = require('lodash.snakeCase')
+const { snakeCase, camelCase } = require('lodash')
 const fs = require("fs")
 const glob = require('glob')
 const path = require('path')
@@ -20,18 +19,22 @@ module.exports =
 
       for (const entity of Array.from(entities.values())) {
         const { name, schema } = entity.entity.prototype.meta
-        
+
         if (glob.sync(`${migrationsPath}/*_${camelCase(name)}s.js`).length) {
           // don't override already existing migration files for that entity 
           continue
         }
 
         function type2Str(Type) {
-          const _type = new Type()
-          if (_type instanceof String) return 'string'
-          if (_type instanceof Number) return 'integer'
-          if (_type instanceof Boolean) return 'boolean'
-          if (_type instanceof Date) return 'timestamp'
+          const nativeTypes = [Boolean, Number, String, Array, Object, Date, Function]
+
+          if (nativeTypes.includes(Type)) {
+            const _type = new Type()
+            if (_type instanceof String) return 'string'
+            if (_type instanceof Number) return 'integer'
+            if (_type instanceof Boolean) return 'boolean'
+            if (_type instanceof Date) return 'timestamp'
+          }
         }
 
         function getDBType(appDir) {

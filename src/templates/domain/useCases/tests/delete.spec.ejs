@@ -17,8 +17,7 @@ const delete<%- props.name.pascalCase %>Spec = spec({
         injection:{
             <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
                 async delete(entity) { return true }
-                async findByID(id) { return [<%- props.name.pascalCase %>.fromJSON({ id })] }
-            }
+                async findByID(id) { return [<%- props.name.pascalCase %>.fromJSON({ id })] }            }
         },
       }),
 

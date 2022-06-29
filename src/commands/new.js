@@ -81,12 +81,13 @@ const cmd = {
   run: async (toolbox) => {
     let { options } = toolbox.parameters
     if (isEmpty(options)) {
-      options = await inquirer.prompt(questions)
-      options.postgres = options.database === 'postgres'
-      options.mongo = options.database === 'mongo'
-      options.sqlserver = options.database === 'sqlserver'
-      options.mysql = options.database === 'mysql'
+      options = await inquirer.prompt(questions)    
     }
+
+    options.postgres = options.database === 'postgres'
+    options.mongo = options.database === 'mongo'
+    options.sqlserver = options.database === 'sqlserver'
+    options.mysql = options.database === 'mysql'
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)
@@ -136,7 +137,6 @@ const cmd = {
     if (npmOptions.npmInstall === 'Yeah, please' || npmOptions.npmInstall === 'yes') {
       await exec('npm install')    
       await exec('herbs update')
-     
     }
     await checkNewVersion()
   },

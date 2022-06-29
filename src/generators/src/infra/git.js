@@ -1,26 +1,30 @@
-module.exports = async ({ template: { generate }, system, filesystem }) => async () => {
-  
-  process.stdout.write(`Generating git\n`)
 
-  const platform = process.platform
-  const { spawn } = require('child_process')
-  const where = platform === 'win32' ? 'where' : 'which'
-  const out = spawn(where, ['git'])
+module.exports =
+  async ({ template: { generate }, system, filesystem }) =>
+    async () => {
+      const directory = filesystem.cwd()
+      const platform = process.platform
+      const { spawnSync, exec } = require('child_process')
+      const where = platform === 'win32' ? 'where.exe' : 'which'
+      const out = spawnSync(where, ['git'])
 
-  out.on('close', (code) => {
-    // eslint-disable-next-line no-console
-    console.log(`child process exited with code ${code}`)
-  })
-
-  const directory = filesystem.cwd()
-
-  await generate({
-    template: 'infra/config/.gitignore.ejs',
-    target: '.gitignore'
-  })
-
-  await system.run('git init', { cwd: directory })
-  await system.run('git branch -m main', { cwd: directory })
-  await system.run('git add --all', { cwd: directory })
-  await system.run('git commit -m "initial commit"', { cwd: directory })
-}
+      if (out.status === 1) {
+        process.stdout.write(`[ERROR] Git not found\n install it via https://git-scm.com/downloads and try again, or skip the git option when generates a new project with Herbs-CLI\n`)
+      } else {
+        process.stdout.write(`Generating git\n`)
+        exec('git config --list', (error) => {
+            if (error) {
+              process.stdout.write(`exec error: ${error}`)
+              return
+            }
+          })
+        await generate({
+          template: 'infra/config/.gitignore.ejs',
+          target: '.gitignore',
+        })
+        await system.run('git init', { cwd: directory })
+        await system.run('git branch -m main', { cwd: directory })
+        await system.run('git add --all', { cwd: directory })
+        await system.run('git commit -m "initial commit"', { cwd: directory })
+      }
+    }

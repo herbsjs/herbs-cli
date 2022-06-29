@@ -7,8 +7,16 @@ const { herbarium } = require('@herbsjs/herbarium')
 const update<%- props.name.pascalCase %>Spec = spec({
 
     usecase: update<%- props.name.pascalCase %>,
-
     'Update a existing <%- props.name.raw %> when it is valid': scenario({
+
+      'Valid <%- props.name.raw %>s': samples([
+        {
+          <%- props.request.valid %>
+        },
+        {
+          <%- props.request.valid %>
+        }
+      ]),
       
       'Valid <%- props.name.raw %>s': samples([
         {
@@ -31,8 +39,7 @@ const update<%- props.name.pascalCase %>Spec = spec({
                 const fake<%- props.name.pascalCase %> = {
                     <%- props.mock %>
                 }
-                return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]) 
-              }
+                return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)])              }
               async update(id) { return true }
             }
           },

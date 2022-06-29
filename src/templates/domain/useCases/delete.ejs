@@ -9,7 +9,7 @@ const delete<%- props.name.pascalCase %> = injection =>
   usecase('Delete <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>
+      id: String
     },
 
     // Output/Response metadata

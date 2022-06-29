@@ -30,7 +30,7 @@ function uc2Controllers(injection) {
         const usecases = findUsecases(entity.id)
         const controllers = { name: entity.group }
         if (usecases.getAll) controllers.getAll = { usecase: usecases.getAll }
-        if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'ids' }
+        if (usecases.getById) controllers.getById = { usecase: usecases.getById, id: 'id' }
         if (usecases.post) controllers.post = { usecase: usecases.post }
         if (usecases.put) controllers.put = { usecase: usecases.put }
         if (usecases.del) controllers.delete = { usecase: usecases.del }
