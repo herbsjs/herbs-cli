@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/herbsjs/herbs-cli/compare/v2.8.0...v2.9.0) (2022-06-29)
+
+
+### Features
+
+* **package.json:** bump version for herbs and glues ([85a14b6](https://github.com/herbsjs/herbs-cli/commit/85a14b6f0a4f03c7a4775357c37124b95fa33cbe))
+
 # [2.8.0](https://github.com/herbsjs/herbs-cli/compare/v2.7.5...v2.8.0) (2022-06-29)
 
 
