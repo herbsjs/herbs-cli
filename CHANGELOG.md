@@ -1,3 +1,10 @@
+## [2.9.1](https://github.com/herbsjs/herbs-cli/compare/v2.9.0...v2.9.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **package.json:** fix herbs2rest version ([b445afb](https://github.com/herbsjs/herbs-cli/commit/b445afb78fa085a2184e88109c9f9cb7a4eb6d6e))
+
 # [2.9.0](https://github.com/herbsjs/herbs-cli/compare/v2.8.0...v2.9.0) (2022-06-29)
 
 
