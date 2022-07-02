@@ -1,12 +1,11 @@
 const { ApolloServer, gql } = require('apollo-server-express')
-const types = require('./types')
-const queries = require('./queries')
-const mutations = require('./mutations')
+const { herbs2gql } = require('@herbsjs/herbs2gql')
+const { herbarium } = require('@herbsjs/herbarium')
 
 async function graphql(app, config) {
-
-    let graphQLDef = []
-    graphQLDef = graphQLDef.concat(types(), queries(), mutations())
+    const { types, queries, mutations } = herbs2gql(herbarium)
+    const graphQLDef = []
+    graphQLDef = graphQLDef.concat(types, queries, mutations)
 
     /* Type Defs (Schemas) */
     const typeDefs = graphQLDef.map(i => gql(i[0]))
