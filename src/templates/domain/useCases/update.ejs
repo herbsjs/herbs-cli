@@ -10,7 +10,7 @@ const update<%- props.name.pascalCase %> = injection =>
   usecase('Update <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
     request: {
-      id: <% if(props.mongo){ %>String<% } else{ %>Number<% } %>,
+      id: String,
       <%- props.request %>
     },
 
@@ -26,7 +26,7 @@ const update<%- props.name.pascalCase %> = injection =>
     'Retrieve the <%- props.name.raw %>': step(async ctx => {
       const id = ctx.req.id
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
-      const <% if(props.mongo){ %><%- props.name.camelCase %><% } else{ %>[<%- props.name.camelCase %>]<% } %> = await repo.findByID(id)
+      const [<%- props.name.camelCase %>] = await repo.findByID(id)
       ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
       if (<%- props.name.camelCase %> === undefined) return Err.notFound({
         message: `<%- props.name.pascalCase %> not found - ID: ${id}`,

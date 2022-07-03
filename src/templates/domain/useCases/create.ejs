@@ -24,7 +24,7 @@ const create<%- props.name.pascalCase %> = injection =>
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000)<% } %>
+      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
       
       if (!ctx.<%- props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
