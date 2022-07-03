@@ -1,5 +1,5 @@
 const { requireHerbarium } = require('../generators/utils')
-const repl = require('C:/dev/herbs/herbs2repl')
+const repl = require('@herbsjs/herbs2repl')
 
 const cmd = {
   name: 'shell',
