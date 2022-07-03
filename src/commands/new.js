@@ -137,7 +137,6 @@ const cmd = {
     if (npmOptions.npmInstall === 'Yeah, please' || npmOptions.npmInstall === 'yes') {
       await exec('npm install')    
       await exec('herbs update')
-     
     }
     await checkNewVersion()
   },
