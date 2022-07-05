@@ -4,7 +4,7 @@ const { herbarium } = require('@herbsjs/herbarium')
 
 async function graphql(app, config) {
     const { types, queries, mutations } = herbs2gql(herbarium)
-    const graphQLDef = []
+    let graphQLDef = []
     graphQLDef = graphQLDef.concat(types, queries, mutations)
 
     /* Type Defs (Schemas) */
