@@ -20,7 +20,7 @@ describe('generates readme file', () => {
         await unlinkNpm()
       })
 
-    it.only('must to use custom user data', async () => {
+    it('must to use custom user data', async () => {
 
         await linkNpm()
         await generateProject()
