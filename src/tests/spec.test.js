@@ -17,7 +17,7 @@ describe('When I use Herbs Spec', () => {
         fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
     })
 
-    it('Should return not found message if there is no use case', async () => {
+    it('Should return success message if no errors found', async () => {
       await linknpm()
       await setGitUser()
       await setGitEmail()
