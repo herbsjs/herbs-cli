@@ -41,12 +41,12 @@ describe('When I use Herbs Shell', () => {
       expect(result).to.deep.contains('• Exit with error: Herbarium not found 😢')
     })
 
-    it('Should return not found message if there is no use case', async () => {
+    it('Should exit if Herbs Shell runs without errors.', async () => {
       await linknpm()
       await setGitUser()
       await setGitEmail()
       await generateProject()
-      const pid = exec(`cd ${path.resolve(process.cwd(), `${projectName}`)} && herbs shell --canCreateItem --canCreateList --canGetLists --canDeteleList N --canUpdateItem --canUpdateList`).pid
+      const pid = exec(`cd ${path.resolve(process.cwd(), `${projectName}`)} && herbs shell`).pid
       exec(`taskkill /F /PID ${pid}`)
     })
 })
