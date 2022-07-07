@@ -2,7 +2,6 @@ const { snakeCase, camelCase } = require('lodash')
 const fs = require("fs")
 const glob = require('glob')
 const path = require('path')
-const { entity } = require('@herbsjs/gotu')
 const { requireHerbarium, requireHerbs } = require('../../../../utils')
 
 module.exports =
