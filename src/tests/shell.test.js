@@ -6,6 +6,7 @@ const path = require('path')
 const fs = require('fs')
 const { expect } = require('chai')
 const projectName = 'herbs-test-runner'
+const { exec } = require('node:child_process')
 
 const linknpm = () => system.run(`cd bin && npm link --force`)
 const setGitUser = () => system.run(`git config --global user.email "you@example.com"`)
@@ -38,6 +39,15 @@ describe('When I use Herbs Shell', () => {
       fs.writeFileSync(dir, "const { herbarium } = require('@herbsjs/herbarium')")
       const result = await herbsShell()
       expect(result).to.deep.contains('• Exit with error: Herbarium not found 😢')
-  })
+    })
+
+    it('Should return not found message if there is no use case', async () => {
+      await linknpm()
+      await setGitUser()
+      await setGitEmail()
+      await generateProject()
+      const pid = exec(`cd ${path.resolve(process.cwd(), `${projectName}`)} && herbs shell --canCreateItem --canCreateList --canGetLists --canDeteleList N --canUpdateItem --canUpdateList`).pid
+      exec(`taskkill /F /PID ${pid}`)
+    })
 })
 
