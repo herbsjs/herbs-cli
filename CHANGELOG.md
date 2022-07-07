@@ -1,3 +1,11 @@
+# [2.10.0](https://github.com/herbsjs/herbs-cli/compare/v2.9.1...v2.10.0) (2022-07-07)
+
+
+### Features
+
+* **new dynamic readme:** new dynamic readme for herbs cli projects ([bdfa1e0](https://github.com/herbsjs/herbs-cli/commit/bdfa1e02355dacdbb69cac33989fbc5399994236))
+* **readme:** applying requested changes ([a726db0](https://github.com/herbsjs/herbs-cli/commit/a726db03ba619839fafb84da9a02f431f4c1137e)), closes [#87](https://github.com/herbsjs/herbs-cli/issues/87)
+
 ## [2.9.1](https://github.com/herbsjs/herbs-cli/compare/v2.9.0...v2.9.1) (2022-06-29)
 
 
