@@ -46,7 +46,7 @@ module.exports =
       let packages = [
         '"@herbsjs/herbs": "^1.6.1"',
         '"@herbsjs/herbarium": "^1.4.0"',
-        '"@herbsjs/herbsshelf": "^3.1.1"',
+        '"@herbsjs/herbsshelf": "^3.2.0"',
         '"dotenv": "^16.0.1"',
         '"deepmerge": "^4.2.2"',
         '"nodemon": "^2.0.15"',

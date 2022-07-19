@@ -1,3 +1,23 @@
+# [2.11.0](https://github.com/herbsjs/herbs-cli/compare/v2.10.0...v2.11.0) (2022-07-10)
+
+
+### Bug Fixes
+
+* **package.json:** bump herbsshelf for generated project ([63e21c7](https://github.com/herbsjs/herbs-cli/commit/63e21c7977abe324af286c92397822acc7866175))
+
+
+### Features
+
+* **readme:** improve generated readme.md ([9d14e5a](https://github.com/herbsjs/herbs-cli/commit/9d14e5a794a75a5bd765229f66358c7f054704f9))
+
+# [2.10.0](https://github.com/herbsjs/herbs-cli/compare/v2.9.1...v2.10.0) (2022-07-07)
+
+
+### Features
+
+* **new dynamic readme:** new dynamic readme for herbs cli projects ([bdfa1e0](https://github.com/herbsjs/herbs-cli/commit/bdfa1e02355dacdbb69cac33989fbc5399994236))
+* **readme:** applying requested changes ([a726db0](https://github.com/herbsjs/herbs-cli/commit/a726db03ba619839fafb84da9a02f431f4c1137e)), closes [#87](https://github.com/herbsjs/herbs-cli/issues/87)
+
 ## [2.9.1](https://github.com/herbsjs/herbs-cli/compare/v2.9.0...v2.9.1) (2022-06-29)
 
 
