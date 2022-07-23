@@ -1,48 +1,24 @@
-const { requireHerbarium } = require('../generators/utils')
 const inquirer = require('inquirer')
+inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'))
+const { requireHerbarium } = require('../generators/utils')
 const repl = require('@herbsjs/herbs2repl')
+const path = require('path')
 
 function isEmpty(obj) {
   return Object.keys(obj).length === 0
 }
 
+let user = ''
+
 const permissions = [
   {
-    type: 'confirm',
-    name: 'canCreateItem',
-    message: 'Can you create a item?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'canCreateList',
-    message: 'Can you create a list?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'canGetLists',
-    message: 'Can you get a lists?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'canDeteleList',
-    message: 'Can you delete a list?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'canUpdateItem',
-    message: 'Can you update a item?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'canUpdateList',
-    message: 'Can you update a list?',
-    default: true,
-  },
+    type: 'fuzzypath',
+    name: 'path',
+    excludePath: nodePath => nodePath.startsWith('node_modules'),
+    itemType: 'file',
+    rootPath: './',
+    message: 'Select a target file for your user permissions:',
+  }
 ]
 
 const cmd = {
@@ -50,7 +26,7 @@ const cmd = {
   description: 'Run herbs shell to interact with your project easily',
   alias: ['sh'],
   run: async toolbox => {
-    let { options } = toolbox.parameters
+    const { options } = toolbox.parameters
     const { red } = toolbox.print.colors
     const herbarium = requireHerbarium("shell", toolbox.filesystem.cwd())
 
@@ -69,11 +45,14 @@ const cmd = {
       return
     }
 
-    if (isEmpty(options)) {
-      options = await inquirer.prompt(permissions)    
+    if (isEmpty(options.user)) {
+      const filePath = await inquirer.prompt(permissions)
+      user = require(path.normalize(`${toolbox.filesystem.cwd()}/${filePath.path}`))
+    } else {
+      user = JSON.parse(options.user)
     }
 
-    repl(usecases, options, { groupBy: "group" })
+    repl(usecases, user, { groupBy: "group" })
   }
 }
 
