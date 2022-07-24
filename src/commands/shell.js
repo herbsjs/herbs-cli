@@ -1,25 +1,17 @@
-const inquirer = require('inquirer')
-inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'))
 const { requireHerbarium } = require('../generators/utils')
 const repl = require('@herbsjs/herbs2repl')
 const path = require('path')
+const fs = require('fs')
 
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0
+function getPermissionsDefault(appPath, options) {
+  const file = options?.permissions || 'src/infra/shell/permissions.js'
+  const filePath = path.normalize(`${appPath}/${file}`)
+  if (fs.existsSync(filePath)) return require(filePath)
+
+  return {}
 }
 
-let user = ''
-
-const permissions = [
-  {
-    type: 'fuzzypath',
-    name: 'path',
-    excludePath: nodePath => nodePath.startsWith('node_modules'),
-    itemType: 'file',
-    rootPath: './',
-    message: 'Select a target file for your user permissions:',
-  }
-]
+let user
 
 const cmd = {
   name: 'shell',
@@ -38,19 +30,14 @@ const cmd = {
     herbarium.requireAll()
 
     const usecases = Array.from(herbarium.usecases.all).map(([_, item]) =>
-        ({ usecase: item.usecase(), id: item.id, tags: { group: item.group || "Others" } }))
+        ({ usecase: item.usecase, id: item.id, tags: { group: item.group || "Others" } }))
 
     if (!usecases.length) {
       toolbox.print.info(`\n ${red('• Exit with error: useCases not found 😢')}`)
       return
     }
-
-    if (isEmpty(options.user)) {
-      const filePath = await inquirer.prompt(permissions)
-      user = require(path.normalize(`${toolbox.filesystem.cwd()}/${filePath.path}`))
-    } else {
-      user = JSON.parse(options.user)
-    }
+    
+    user = getPermissionsDefault(toolbox.filesystem.cwd(), options)
 
     repl(usecases, user, { groupBy: "group" })
   }

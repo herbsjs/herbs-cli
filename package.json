@@ -31,7 +31,6 @@
     "glob": "^8.0.3",
     "gluegun": "^5.1.2",
     "inquirer": "^8.2.4",
-    "inquirer-fuzzy-path": "^2.3.0",
     "lodash": "^4.17.21",
     "update-notifier": "^5.1.0"
   },
