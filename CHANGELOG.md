@@ -1,3 +1,10 @@
+# [2.12.0](https://github.com/herbsjs/herbs-cli/compare/v2.11.1...v2.12.0) (2022-07-24)
+
+
+### Features
+
+* **shelf:** herbsshelf verion bump ([718844b](https://github.com/herbsjs/herbs-cli/commit/718844bfac9728a08361799d35c0a13ed9558fc0))
+
 ## [2.11.1](https://github.com/herbsjs/herbs-cli/compare/v2.11.0...v2.11.1) (2022-07-24)
 
 
