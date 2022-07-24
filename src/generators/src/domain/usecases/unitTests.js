@@ -69,7 +69,7 @@ function generateRequestObject(schema, action, validReq = true) {
 
 module.exports = async ({ template: { generate }, filesystem }, command) => async () => {
 
-  process.stdout.write(`Generating Use Cases Tests\n`)
+  process.stdout.write(`Generating Use Cases Specs\n`)
 
   const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
@@ -82,7 +82,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
       const useCaseName = `${action} ${name}`
       const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
 
-      if (fs.existsSync(ucPath)) return
+      if (fs.existsSync(ucPath)) continue
 
       const objOptions = { spaces: 4, extraSpaces: 4, removeBraces: true }
       await generate({

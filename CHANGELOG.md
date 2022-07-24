@@ -1,3 +1,17 @@
+# [2.12.0](https://github.com/herbsjs/herbs-cli/compare/v2.11.1...v2.12.0) (2022-07-24)
+
+
+### Features
+
+* **shelf:** herbsshelf verion bump ([718844b](https://github.com/herbsjs/herbs-cli/commit/718844bfac9728a08361799d35c0a13ed9558fc0))
+
+## [2.11.1](https://github.com/herbsjs/herbs-cli/compare/v2.11.0...v2.11.1) (2022-07-24)
+
+
+### Bug Fixes
+
+* **specs:** herbs update now does not skip spec files ([9af7e48](https://github.com/herbsjs/herbs-cli/commit/9af7e48639ec2f4e09d4ee319411f7083f789a81))
+
 # [2.11.0](https://github.com/herbsjs/herbs-cli/compare/v2.10.0...v2.11.0) (2022-07-10)
 
 
