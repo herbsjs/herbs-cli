@@ -1,6 +1,5 @@
 exports.up = async function (knex) {
-    return Promise.all([
-        knex.schema.hasTable('<%- props.table %>')
+    return knex.schema.hasTable('<%- props.table %>')
             .then(function (exists) {
                 if (exists) return
                 return knex.schema
@@ -10,35 +9,31 @@ exports.up = async function (knex) {
                         <%if (props.ref) { 
                             props.ref.forEach(function(link){ 
                                 if (link.relationship === 'One-to-One') { %>
-                        // table.integer('<%-link.columnName %>').unsigned().nullable()
-                        // table.foreign('<%-link.columnName %>').references('<%- link.id %>').inTable('<%- link.table %>')
+                        // table.integer('<%-link.columnName %>').references('<%- link.id %>').inTable('<%- link.table %>')
                                 <% }                       
                             })                      
                         } %>
                         table.timestamps()
                     })
-            }),
-        <%if (props.ref) { 
-            props.ref.forEach(function(link){ 
-                if (link.relationship === 'One-to-Many') { %>
-            // knex.schema.table('<%- link.table %>', function (table) {
-            //     table.integer('<%-props.externalColumnName %>').unsigned().index().references('<%- props.idColumn %>').inTable('<%- props.table %>')
-            // })
-                <% } 
+                    <%if (props.ref) { 
+                        props.ref.forEach(function(link){ 
+                            if (link.relationship === 'One-to-Many') { %>
+                        // .table('<%- link.table %>', function (table) {
+                        //     table.integer('<%-props.externalColumnName %>').references('<%- props.idColumn %>').inTable('<%- props.table %>')
+                        // })
+                            <% } 
+                        })
+                    } %>
             })
-        } %>
-    ])
 }
 
 exports.down = function (knex) {
-    return Promise.all([
-        knex.schema
-            .dropTableIfExists('<%- props.table %>'),
-        <%if (props.ref) { 
-            props.ref.forEach(function(link){ 
-                if (link.relationship === 'One-to-Many') { %>
-        // knex.schema.table('<%- link.table %>', function (table) {
-        //     table.dropColumn('<%-props.externalColumnName %>')})
-        <% }})} %>
-    ])
+    return knex.schema
+    <%if (props.ref) { 
+        props.ref.forEach(function(link){ 
+            if (link.relationship === 'One-to-Many') { %>
+                // .table('<%- link.table %>', function (table) {
+                //     table.dropColumn('<%-props.externalColumnName %>')})
+            <% }})} %>
+            .dropTableIfExists('<%- props.table %>')
 }

@@ -64,11 +64,11 @@ module.exports =
             if (herbs.entity.isEntity(type)) {
               const typeSchema = type.prototype.meta.schema
               const idRef = Object.values(typeSchema).find(column => column.options.isId)?.name
-              refs.push({ id: idRef, columnName: `${camelCase(name)}Id`, table: `${camelCase(type.name)}s`, relationship: 'One-to-One' })
+              refs.push({ id: idRef, columnName: `${snakeCase(name)}_id`, table: `${snakeCase(type.name)}s`, relationship: 'One-to-One' })
             }
 
             if (isArrayWithType(type) && herbs.entity.isEntity(type[0]))
-              refs.push({ table: `${camelCase(type[0].name)}s`, relationship: 'One-to-Many' })
+              refs.push({ table: `${snakeCase(type[0].name)}s`, relationship: 'One-to-Many' })
           })
           return refs
         }
@@ -88,7 +88,7 @@ module.exports =
         await generate({
           template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
           target: migrationFullPath,
-          props: { table: `${camelCase(name)}s`, externalColumnName: `${camelCase(name)}Id`, columns, ref, idColumn }
+          props: { table: `${snakeCase(name)}s`, externalColumnName: `${snakeCase(name)}_id`, columns, ref, idColumn }
         })
         process.stdout.write(`  New: ${migrationFullPath}\n`)
 
