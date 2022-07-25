@@ -25,16 +25,6 @@ describe('When I use Herbs Shell', () => {
       expect(result).to.deep.contains('• Exit with error: useCases not found 😢')
     })
 
-    it('Should return not found message if there is no Herbarium', async () => {
-      await linknpm()
-      await generateProject()
-      fs.rmSync(path.resolve(process.cwd(), `${projectName}/src/domain/herbarium.js`))
-      const dir = `${path.resolve(process.cwd(), `${projectName}/src/domain/herbarium.js`)}`
-      fs.writeFileSync(dir, "const { herbarium } = require('@herbsjs/herbarium')")
-      const result = await herbsShell()
-      expect(result).to.deep.contains('• Exit with error: Herbarium not found 😢')
-    })
-
     it('Should exit if Herbs Shell runs without errors.', async () => {
       await linknpm()
       await generateProject()

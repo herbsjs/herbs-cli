@@ -9,7 +9,6 @@ const cmd = {
     run: async toolbox => {
 
         const herbarium = requireHerbarium("spec", toolbox.filesystem.cwd())
-        herbarium.requireAll()
         const specs = herbarium.specs.all
 
         const { grey, green, red, white, blue, italic } = toolbox.print.colors

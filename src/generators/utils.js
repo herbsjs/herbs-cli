@@ -43,6 +43,8 @@ module.exports = {
     }
     else
       herbarium = require('@herbsjs/herbarium').herbarium
+    
+    herbarium.requireAll()
     return herbarium
   },
   usingMongo: (base) => fs.existsSync(path.normalize(`${base}/src/infra/config/mongo.js`))
