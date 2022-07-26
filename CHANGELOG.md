@@ -1,3 +1,90 @@
+# [2.12.0](https://github.com/herbsjs/herbs-cli/compare/v2.11.1...v2.12.0) (2022-07-24)
+
+
+### Features
+
+* **shelf:** herbsshelf verion bump ([718844b](https://github.com/herbsjs/herbs-cli/commit/718844bfac9728a08361799d35c0a13ed9558fc0))
+
+## [2.11.1](https://github.com/herbsjs/herbs-cli/compare/v2.11.0...v2.11.1) (2022-07-24)
+
+
+### Bug Fixes
+
+* **specs:** herbs update now does not skip spec files ([9af7e48](https://github.com/herbsjs/herbs-cli/commit/9af7e48639ec2f4e09d4ee319411f7083f789a81))
+
+# [2.11.0](https://github.com/herbsjs/herbs-cli/compare/v2.10.0...v2.11.0) (2022-07-10)
+
+
+### Bug Fixes
+
+* **package.json:** bump herbsshelf for generated project ([63e21c7](https://github.com/herbsjs/herbs-cli/commit/63e21c7977abe324af286c92397822acc7866175))
+
+
+### Features
+
+* **readme:** improve generated readme.md ([9d14e5a](https://github.com/herbsjs/herbs-cli/commit/9d14e5a794a75a5bd765229f66358c7f054704f9))
+
+# [2.10.0](https://github.com/herbsjs/herbs-cli/compare/v2.9.1...v2.10.0) (2022-07-07)
+
+
+### Features
+
+* **new dynamic readme:** new dynamic readme for herbs cli projects ([bdfa1e0](https://github.com/herbsjs/herbs-cli/commit/bdfa1e02355dacdbb69cac33989fbc5399994236))
+* **readme:** applying requested changes ([a726db0](https://github.com/herbsjs/herbs-cli/commit/a726db03ba619839fafb84da9a02f431f4c1137e)), closes [#87](https://github.com/herbsjs/herbs-cli/issues/87)
+
+## [2.9.1](https://github.com/herbsjs/herbs-cli/compare/v2.9.0...v2.9.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **package.json:** fix herbs2rest version ([b445afb](https://github.com/herbsjs/herbs-cli/commit/b445afb78fa085a2184e88109c9f9cb7a4eb6d6e))
+
+# [2.9.0](https://github.com/herbsjs/herbs-cli/compare/v2.8.0...v2.9.0) (2022-06-29)
+
+
+### Features
+
+* **package.json:** bump version for herbs and glues ([85a14b6](https://github.com/herbsjs/herbs-cli/commit/85a14b6f0a4f03c7a4775357c37124b95fa33cbe))
+
+# [2.8.0](https://github.com/herbsjs/herbs-cli/compare/v2.7.5...v2.8.0) (2022-06-29)
+
+
+### Features
+
+* **index.ejs:** include entity property in controllers list ([ca88f0f](https://github.com/herbsjs/herbs-cli/commit/ca88f0fd4f89e0e9c61c27a2d9c712bb45ab9e39))
+
+## [2.7.5](https://github.com/herbsjs/herbs-cli/compare/v2.7.4...v2.7.5) (2022-06-25)
+
+
+### Bug Fixes
+
+* fix a bug when the entity has another entity as field ([0690899](https://github.com/herbsjs/herbs-cli/commit/0690899c83297b55d5b5394a4e392392554c7cb4)), closes [#64](https://github.com/herbsjs/herbs-cli/issues/64)
+
+## [2.7.4](https://github.com/herbsjs/herbs-cli/compare/v2.7.3...v2.7.4) (2022-06-25)
+
+
+### Bug Fixes
+
+* fix regex ([b64331f](https://github.com/herbsjs/herbs-cli/commit/b64331ffb3cd04fdc11f23c2df538fce29d1157c)), closes [#135](https://github.com/herbsjs/herbs-cli/issues/135)
+* **package json:** replace author and project name ([67d5e8c](https://github.com/herbsjs/herbs-cli/commit/67d5e8c592f12cd86dd26fda9d5e7f56d21f1bf9)), closes [#135](https://github.com/herbsjs/herbs-cli/issues/135)
+
+## [2.7.3](https://github.com/herbsjs/herbs-cli/compare/v2.7.2...v2.7.3) (2022-06-25)
+
+
+### Bug Fixes
+
+* adding command for herbs-CLI execution in the units tests ([bc73930](https://github.com/herbsjs/herbs-cli/commit/bc73930766d859efadc5c5b9fbf44dfbea440513))
+* check if git is installed in the operating system ([127b1c8](https://github.com/herbsjs/herbs-cli/commit/127b1c85f500bf4505ae76c1975d2497c4817c0f)), closes [#110](https://github.com/herbsjs/herbs-cli/issues/110)
+* error message change if git command fails to execute ([9772757](https://github.com/herbsjs/herbs-cli/commit/977275760dfcaeb1b1cfcd3da706f609425c21de))
+* **git.js:** broken when herbs new with git ([1348133](https://github.com/herbsjs/herbs-cli/commit/134813307a38209cb764f8c57a8bd614cf55cb6d)), closes [#110](https://github.com/herbsjs/herbs-cli/issues/110)
+
+## [2.7.2](https://github.com/herbsjs/herbs-cli/compare/v2.7.1...v2.7.2) (2022-06-25)
+
+
+### Bug Fixes
+
+* now cli uses the same return in find methods ([b4318bf](https://github.com/herbsjs/herbs-cli/commit/b4318bfd970f02c6a93f10eb5d4507fc9ec571b9))
+
 ## [2.7.1](https://github.com/herbsjs/herbs-cli/compare/v2.7.0...v2.7.1) (2022-06-19)
 
 
