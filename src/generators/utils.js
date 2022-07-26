@@ -36,13 +36,14 @@ module.exports = {
   },
   pascalCase: (str) => startCase(camelCase(str)).replace(/ /g, ''),
   requireHerbarium: (command, appPath) => {
-    const herbariumPath = `${appPath}/src/domain/herbarium.js`
+    const herbariumPath = path.normalize(`${appPath}/src/domain/herbarium.js`)
     let herbarium
-    if (command === "update" || command === "spec") {
+    if (command !== "new") {
       herbarium = require(herbariumPath)
     }
     else
       herbarium = require('@herbsjs/herbarium').herbarium
+    
     herbarium.requireAll()
     return herbarium
   },
