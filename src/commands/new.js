@@ -68,6 +68,12 @@ const questions = [
   },
   {
     type: 'confirm',
+    name: 'ESlint',
+    message: 'Do you want to initialize a ESlint on this project',
+    default: true,
+  },
+  {
+    type: 'confirm',
     name: 'git',
     message: 'Do you want to initialize a Git repository?',
     default: false,
@@ -136,6 +142,7 @@ const cmd = {
 
     if (npmOptions.npmInstall === 'Yeah, please' || npmOptions.npmInstall === 'yes') {
       await exec('npm install')    
+      await exec('npx eslint \"**/*.{js,jsx}\" --fix')
       await exec('herbs update')
      
     }

@@ -6,7 +6,8 @@ const optionalPackages = {
   sqlserver: ['"@herbsjs/herbs2knex": "^1.5.2"', '"tedious": "^14.4.8"', '"mssql": "^8.1.0"'],
   mysql: ['"@herbsjs/herbs2knex": "^1.5.2"', '"mysql2": "^2.3.3"'],
   rest: ['"express": "^4.18.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^2.0.2"'],
-  graphql: ['"graphql": "^16.5.0"', '"@herbsjs/herbs2gql": "^2.1.7"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
+  graphql: ['"graphql": "^16.5.0"', '"@herbsjs/herbs2gql": "^2.1.7"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',],
+  eslint: ['"eslint": "^8.20.0"', '"eslint-config-standard": "^17.0.0"', '"eslint-plugin-import": "^2.26.0","eslint-plugin-n": "^15.2.4"','"eslint-plugin-promise": "^6.0.0"']
 }
 
 const defaultOptions = (options) => {
