@@ -144,7 +144,6 @@ const cmd = {
       await exec('npm install')    
       await exec('npx eslint \"**/*.{js,jsx}\" --fix')
       await exec('herbs update')
-     
     }
     await checkNewVersion()
   },

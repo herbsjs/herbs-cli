@@ -7,7 +7,6 @@ const { herbarium } = require('@herbsjs/herbarium')
 const update<%- props.name.pascalCase %>Spec = spec({
 
     usecase: update<%- props.name.pascalCase %>,
-    
     'Update a existing <%- props.name.raw %> when it is valid': scenario({
 
       'Valid <%- props.name.raw %>s': samples([
@@ -19,6 +18,15 @@ const update<%- props.name.pascalCase %>Spec = spec({
         }
       ]),
       
+      'Valid <%- props.name.raw %>s': samples([
+        {
+          <%- props.request.valid %>
+        },
+        {
+          <%- props.request.valid %>
+        }
+      ]),
+
       'Given a valid <%- props.name.raw %>': given((ctx) => ({
         request: ctx.sample,
         user: { hasAccess: true }
@@ -31,8 +39,7 @@ const update<%- props.name.pascalCase %>Spec = spec({
                 const fake<%- props.name.pascalCase %> = {
                     <%- props.mock %>
                 }
-                return (<% if(props.mongo){ %><%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)<% } else{ %>[<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)]<% } %>) 
-              }
+                return ([<%- props.name.pascalCase %>.fromJSON(fake<%- props.name.pascalCase %>)])              }
               async update(id) { return true }
             }
           },
@@ -76,7 +83,7 @@ const update<%- props.name.pascalCase %>Spec = spec({
           user: { hasAccess: true },
           injection:{
             <%- props.name.pascalCase %>Repository: class <%- props.name.pascalCase %>Repository {
-              async findByID(id) { return <% if(props.mongo){ } else{ %>[]<% } %> }
+              async findByID(id) { return [] }
             }
           },
         }),

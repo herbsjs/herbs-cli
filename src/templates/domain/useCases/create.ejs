@@ -1,4 +1,4 @@
-const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
+const { usecase, step, Ok, Err, request } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
@@ -8,9 +8,7 @@ const dependency = { <%- props.name.pascalCase %>Repository }
 const create<%- props.name.pascalCase %> = injection =>
   usecase('Create <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
-    request: {
-      <%- props.request %>
-    },
+    request: request.from(<%- props.name.pascalCase %>, { ignoreIDs: true }),
 
     // Output/Response metadata
     response: <%- props.name.pascalCase %>,
@@ -24,7 +22,7 @@ const create<%- props.name.pascalCase %> = injection =>
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000)<% } %>
+      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
       
       if (!ctx.<%- props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({

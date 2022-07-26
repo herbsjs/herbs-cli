@@ -3,9 +3,10 @@ const { herbarium } = require('@herbsjs/herbarium')
 
 const User =
         entity('User', {
-          id: id(<% if(props.mongo){ %>String<% } else{ %>Number<% } %>),
+          id: id(String),
           nickname: field(String),
-          password: field(String)
+          registrationNumber: field(Number),
+          password: field(String, { validation: { presence: true, length: { minimum: 4 } } })
         })
 
 module.exports =
