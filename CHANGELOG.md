@@ -1,3 +1,11 @@
+# [2.13.0](https://github.com/herbsjs/herbs-cli/compare/v2.12.0...v2.13.0) (2022-07-26)
+
+
+### Features
+
+* **component:** get permission through parameters ([1618bf0](https://github.com/herbsjs/herbs-cli/commit/1618bf04edbe0284c7d90d3a80821e4fed971db6))
+* **component:** new command called shell ([e034e34](https://github.com/herbsjs/herbs-cli/commit/e034e343bd464c9b8e66fe1e889ce35061cd115c)), closes [#84](https://github.com/herbsjs/herbs-cli/issues/84)
+
 # [2.12.0](https://github.com/herbsjs/herbs-cli/compare/v2.11.1...v2.12.0) (2022-07-24)
 
 
