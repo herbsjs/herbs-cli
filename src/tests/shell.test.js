@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* globals describe, it, afterEach */
 
-const { system } = require('gluegun')
+const { system, print } = require('gluegun')
 const path = require('path')
 const fs = require('fs')
 const { expect } = require('chai')
@@ -25,17 +25,17 @@ describe('When I use Herbs Shell', () => {
       expect(result).to.deep.contains('• Exit with error: useCases not found 😢')
     })
 
-    it('Should exit if Herbs Shell runs without errors.', async () => {
-      await linknpm()
-      await generateProject()
-      const pid = exec(`cd ${path.resolve(process.cwd(), `${projectName}`)} && herbs shell`).pid
-      exec(`taskkill /F /PID ${pid}`)
-    })
-
     it('Hope there is a default permission file when user doesnt tell', async () => {
       await linknpm()
       await generateProject()
       expect(fs.existsSync(path.resolve(process.cwd(), `${projectName}/src/infra/shell/permissions.js`))).to.be.true
+    })
+
+    it('I must have a user without permission when passed a file not found', async () => {
+      await linknpm()
+      await generateProject()
+      require('../commands/shell').run({print, parameters: { options: { permissions: 'notFoundFile.js'}}, filesystem: { cwd: () => path.resolve(process.cwd(), `${projectName}`)}})
+      expect(fs.existsSync(path.resolve(process.cwd(), `${projectName}/notFoundFile.js`))).to.be.false
     })
 })
 

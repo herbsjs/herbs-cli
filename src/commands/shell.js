@@ -22,6 +22,8 @@ const cmd = {
     const { red } = toolbox.print.colors
     const herbarium = requireHerbarium("shell", toolbox.filesystem.cwd())
 
+    user = getPermissionsDefault(toolbox.filesystem.cwd(), options)
+
     const usecases = Array.from(herbarium.usecases.all).map(([_, item]) =>
         ({ usecase: item.usecase, id: item.id, tags: { group: item.group || "Others" } }))
 
@@ -29,8 +31,6 @@ const cmd = {
       toolbox.print.info(`\n ${red('• Exit with error: useCases not found 😢')}`)
       return
     }
-    
-    user = getPermissionsDefault(toolbox.filesystem.cwd(), options)
 
     repl(usecases, user, { groupBy: "group" })
   }
