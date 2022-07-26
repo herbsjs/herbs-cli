@@ -1,4 +1,4 @@
-const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
+const { usecase, step, Ok, Err, request } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
 const merge = require('deepmerge')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
@@ -9,10 +9,7 @@ const dependency = { <%- props.name.pascalCase %>Repository }
 const update<%- props.name.pascalCase %> = injection =>
   usecase('Update <%- props.name.pascalCase %>', {
     // Input/Request metadata and validation 
-    request: {
-      id: String,
-      <%- props.request %>
-    },
+    request: request.from(<%- props.name.pascalCase %>),
 
     // Output/Response metadata
     response: <%- props.name.pascalCase %>,
