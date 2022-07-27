@@ -1,6 +1,6 @@
 {
   "name": "@herbsjs/herbs-cli",
-  "version": "2.12.0",
+  "version": "2.13.0",
   "description": "herbs CLI",
   "bin": {
     "herbs": "bin/herbs"
@@ -26,6 +26,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@herbsjs/herbs2repl": "^1.0.5",
     "git-user-name": "^2.0.0",
     "glob": "^8.0.3",
     "gluegun": "^5.1.2",
