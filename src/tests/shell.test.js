@@ -6,7 +6,6 @@ const path = require('path')
 const fs = require('fs')
 const { expect } = require('chai')
 const projectName = 'herbs-test-runner'
-const { exec } = require('node:child_process')
 
 const linknpm = () => system.run(`cd bin && npm link --force`)
 const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database mongo --npmInstall yes`)
