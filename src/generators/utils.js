@@ -38,14 +38,20 @@ module.exports = {
   requireHerbarium: (command, appPath) => {
     const herbariumPath = path.normalize(`${appPath}/src/domain/herbarium.js`)
     let herbarium
-    if (command !== "new") {
-      herbarium = require(herbariumPath)
+
+    if (command === "update" || command === "spec") {
+      herbarium = require(herbariumPath).herbarium
     }
     else
       herbarium = require('@herbsjs/herbarium').herbarium
     
     herbarium.requireAll()
     return herbarium
+  },
+  requireHerbs: (appPath) => {
+    const herbariumPath = `${appPath}/src/domain/herbarium.js`
+    const herbs = require(herbariumPath).herbs
+    return herbs
   },
   usingMongo: (base) => fs.existsSync(path.normalize(`${base}/src/infra/config/mongo.js`))
 }
