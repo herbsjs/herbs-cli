@@ -1,17 +1,39 @@
-
 exports.up = async function (knex) {
-    knex.schema.hasTable('<%- props.table %>')
-        .then(function (exists) {
-            if (exists) return
-            return knex.schema
-                .createTable('<%- props.table %>', function (table) {<% for(colum of props.columns) { %>
-                    <%- colum %><% } %>
-                    table.timestamps()
-                })
-        })
+    return knex.schema.hasTable('<%- props.table %>')
+            .then(function (exists) {
+                if (exists) return
+                return knex.schema
+                    .createTable('<%- props.table %>', function (table) {
+                        <% for(colum of props.columns) {%> 
+                        <%- colum %>  <%}%>
+                        <%if (props.ref) { 
+                            props.ref.forEach(function(link){ 
+                                if (link.relationship === 'One-to-One') { %>
+                        // table.integer('<%-link.columnName %>').references('<%- link.id %>').inTable('<%- link.table %>')
+                                <% }                       
+                            })                      
+                        } %>
+                        table.timestamps()
+                    })
+                    <%if (props.ref) { 
+                        props.ref.forEach(function(link){ 
+                            if (link.relationship === 'One-to-Many') { %>
+                        // .table('<%- link.table %>', function (table) {
+                        //     table.integer('<%-props.externalColumnName %>').references('<%- props.idColumn %>').inTable('<%- props.table %>')
+                        // })
+                            <% } 
+                        })
+                    } %>
+            })
 }
 
 exports.down = function (knex) {
     return knex.schema
-    .dropTableIfExists('<%- props.table %>')
+    <%if (props.ref) { 
+        props.ref.forEach(function(link){ 
+            if (link.relationship === 'One-to-Many') { %>
+                // .table('<%- link.table %>', function (table) {
+                //     table.dropColumn('<%-props.externalColumnName %>')})
+            <% }})} %>
+            .dropTableIfExists('<%- props.table %>')
 }

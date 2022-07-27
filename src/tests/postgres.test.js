@@ -11,6 +11,8 @@ const generateProject = () => system.run(`herbs new --name ${projectName} --desc
 
 const npmInstall = () => system.run(`cd ${projectName} && npm install`)
 
+const updateHerbs = () => system.run(`cd ${projectName} && herbs update`)
+
 describe('When I generate a complete project that uses postgres', () => {
   afterEach(() => {
     fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
@@ -61,6 +63,17 @@ describe('When I generate a complete project that uses postgres', () => {
       staging: {},
       production: {}
     })
+  })
+
+  
+  it('must to have a configured migration file', async () => {
+    await generateProject()
+    await updateHerbs()
+
+    const folder = path.resolve(process.cwd(), `${projectName}/src/infra/data/database/migrations`)
+    const files = fs.readdirSync(folder)
+
+    expect(files).to.have.lengthOf(1)
   })
 })
 
