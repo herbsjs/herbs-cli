@@ -1,9 +1,16 @@
 const { expect } = require('chai')
-const { arrayToStringList, pascalCase } = require('../generators/utils')
+const { arrayToStringList } = require('../generators/utils')
 
-describe('When I use utils', () => {
-  it('Test arrayToStringList', () => {
-    const result = arrayToStringList(['ASDSAd', 'ASDSAd', 'ASDSAd', 'ASDSAd'])
-    expect(result).contains(' ASDSAd,\n ASDSAd,\n ASDSAd,\n ASDSAd')
+describe('When I use Utils methods they should work as expected', () => {
+  it('Test arrayToStringList method', () => {
+    const result = arrayToStringList([
+      'testString',
+      'testString',
+      'testString',
+      'testString',
+    ])
+    expect(result).contains(
+      ' testString,\n testString,\n testString,\n testString'
+    )
   })
 })
