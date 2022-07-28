@@ -9,6 +9,7 @@ describe('When I use Utils methods they should work as expected', () => {
       'testString',
       'testString',
     ])
+
     expect(result).contains(
       ' testString,\n testString,\n testString,\n testString'
     )
