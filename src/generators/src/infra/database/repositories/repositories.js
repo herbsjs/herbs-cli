@@ -22,8 +22,6 @@ function generateForeignKeysField(schema) {
 
 async function generateRepositories(generate, filesystem, db, command) {
   const requires = {}
-  let foreignKeysFields
-
   const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
 
@@ -31,7 +29,12 @@ async function generateRepositories(generate, filesystem, db, command) {
     const { name, schema } = entity.entity.prototype.meta
     const lowCCName = camelCase(name)
     const repositoryPath = path.normalize(`${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`)
-    const idField = Object.values(schema).find(({ options }) => options.isId)
+    let foreignKeysFields
+    const primaryKeyFields = []
+    Object.values(schema).filter(idFields => {
+      if(idFields.options.isId)
+        primaryKeyFields.push(idFields.name)
+    })
 
     requires[`${lowCCName}Repository`] = `await new (require('./${lowCCName}Repository.js'))(conn)`
 
@@ -47,7 +50,7 @@ async function generateRepositories(generate, filesystem, db, command) {
           pascalCase: name,
           camelCase: lowCCName,
         },
-        primaryKeyField: idField.name,
+        primaryKeyFields,
         foreignKeysFields,
         table: `${lowCCName}s`
       }
