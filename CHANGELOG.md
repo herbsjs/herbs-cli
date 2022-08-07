@@ -1,3 +1,10 @@
+## [2.14.1](https://github.com/herbsjs/herbs-cli/compare/v2.14.0...v2.14.1) (2022-08-07)
+
+
+### Bug Fixes
+
+* **herbs2knex:** repository now working correctly with IDs ([928b4f8](https://github.com/herbsjs/herbs-cli/commit/928b4f83e2c8edf7a209d9b12c410a6a498a42f9))
+
 # [2.14.0](https://github.com/herbsjs/herbs-cli/compare/v2.13.0...v2.14.0) (2022-08-07)
 
 
