@@ -1,3 +1,19 @@
+# [2.14.0](https://github.com/herbsjs/herbs-cli/compare/v2.13.0...v2.14.0) (2022-08-07)
+
+
+### Bug Fixes
+
+* better description and more friendly strings ([f4bbe24](https://github.com/herbsjs/herbs-cli/commit/f4bbe2487173370b26431193ffd0b8549de1a62e))
+* conflicts ([7f42439](https://github.com/herbsjs/herbs-cli/commit/7f42439a0ed87c40376204cfd141f5ee876f867d))
+* format ([fd893df](https://github.com/herbsjs/herbs-cli/commit/fd893df0deaf94346e52f1542d48330c2661d7d7))
+
+
+### Features
+
+* added date type from GraphQLDateTime ([0b3cc07](https://github.com/herbsjs/herbs-cli/commit/0b3cc07d7a0b3681b6a48f57634e6b8ca17a15cb))
+* comments indicating where the dev can inform custom types, queries and mutations ([6e4bd60](https://github.com/herbsjs/herbs-cli/commit/6e4bd6059cfb138c7f2aa734f027e53bfdc60773))
+* gql default schemas ([41ae52c](https://github.com/herbsjs/herbs-cli/commit/41ae52c3f98325097250a4c9fe9f2cd8daafc443))
+
 # [2.13.0](https://github.com/herbsjs/herbs-cli/compare/v2.12.0...v2.13.0) (2022-07-26)
 
 
