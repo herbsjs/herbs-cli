@@ -23,8 +23,8 @@ module.exports =
           target: '.gitignore',
         })
         await system.run('git init', { cwd: directory })
-        await system.run('git branch -m main', { cwd: directory })
         await system.run('git add --all', { cwd: directory })
         await system.run('git commit -m "initial commit"', { cwd: directory })
+        await system.run('git branch -m main', { cwd: directory })
       }
     }
