@@ -60,7 +60,7 @@ const questions = [
     type: 'list',
     name: 'database',
     message: 'What database do you want to use?',
-    choices: ['Postgres', 'Mongo', 'SQLServer', 'MySQL'],
+    choices: ['Postgres', 'Mongo', 'SQLServer', 'MySQL', 'SQLite'],
     default: 'Postgres',
     filter(val) {
       return val.toLowerCase()
@@ -88,6 +88,7 @@ const cmd = {
     options.mongo = options.database === 'mongo'
     options.sqlserver = options.database === 'sqlserver'
     options.mysql = options.database === 'mysql'
+    options.sqlite = options.database === 'sqlite'
 
     const dir = `${toolbox.filesystem.cwd()}/${options.name}`
     if (!fs.existsSync(dir)) fs.mkdirSync(dir)

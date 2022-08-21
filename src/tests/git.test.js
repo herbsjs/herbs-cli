@@ -8,7 +8,7 @@ const projectName = 'herbs-test-runner'
 const linknpm = () => system.run(`cd bin && npm link --force`)
 const setGitUser = () => system.run(`git config --global user.email "you@example.com"`)
 const setGitEmail = () => system.run(`git config --global user.name "Your Name"`)
-const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database postgres --git yes --npmInstall no`)
+const generateProject = () => system.run(`herbs new --name ${projectName} --description "testing the herbs CLI"  --author herbs --license MIT --graphql --rest --database sqlite --git yes --npmInstall no`)
 
 describe('When I generate a complete project that uses git support', () => {
     afterEach(() => {

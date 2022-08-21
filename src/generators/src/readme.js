@@ -11,6 +11,7 @@ module.exports =
     'postgres': 'Postgres', 
     'sqlserver': 'SQL Server', 
     'mysql': 'MySQL', 
+    'sqlite': 'SQLite', 
     'mongo': 'Mongo Db'
   }
   const migration = migrationObj[options.database]
