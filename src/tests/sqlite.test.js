@@ -11,7 +11,7 @@ const generateProject = () => system.run(`herbs new --name ${projectName} --desc
 
 const npmInstall = () => system.run(`cd ${projectName} && npm install`)
 
-describe.only('When I generate a complete project that uses sqlite', () => {
+describe('When I generate a complete project that uses sqlite', () => {
   afterEach(() => {
     fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
   })
