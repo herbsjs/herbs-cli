@@ -1,3 +1,15 @@
+# [2.15.0](https://github.com/herbsjs/herbs-cli/compare/v2.14.1...v2.15.0) (2022-08-22)
+
+
+### Bug Fixes
+
+* **herbs:** update herbs dependencies ([6d8d9fc](https://github.com/herbsjs/herbs-cli/commit/6d8d9fcf52dc0dcfdc976b42057579b19a4a9d4c))
+
+
+### Features
+
+* **sqlite:** add sqlite support ([0f03f57](https://github.com/herbsjs/herbs-cli/commit/0f03f57a89dd4e93a9f255530c8092a71a5396fd)), closes [#156](https://github.com/herbsjs/herbs-cli/issues/156)
+
 ## [2.14.1](https://github.com/herbsjs/herbs-cli/compare/v2.14.0...v2.14.1) (2022-08-07)
 
 
