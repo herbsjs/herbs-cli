@@ -1,4 +1,4 @@
-/* globals describe, it, afterEach */
+/* globals describe, it, after */
 
 const { system } = require('gluegun')
 const path = require('path')
@@ -13,7 +13,7 @@ const generateProject = () => system.run(`herbs new --name ${projectName} --desc
 const herbsSpec = () => system.run(`cd ${path.resolve(process.cwd(), `${projectName}`)} && herbs spec`)
 
 describe('When I use Herbs Spec', () => {
-    afterEach(() => {
+    after(() => {
         fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
     })
 

@@ -40,6 +40,7 @@ async function updateRepositories(generate, filesystem, command) {
     mongo: '/src/infra/config/mongo.js',
     sqlserver: '/src/infra/config/sqlserver.js',
     postgres: '/src/infra/config/postgres.js',
+    sqlite: '/src/infra/config/sqlite.js',
     mysql: '/src/infra/config/mysql.js',
   }
 
@@ -56,7 +57,7 @@ module.exports = async ({ template: { generate }, parameters: { options }, files
 
   if (command) requires = await updateRepositories(generate, filesystem, command)
 
-  for (const db of ['postgres', 'sqlserver', 'mongo', 'mysql']) {
+  for (const db of ['postgres', 'sqlserver', 'mongo', 'mysql','sqlite']) {
     if (!options[db]) continue
 
     requires = Object.assign(requires, await generateRepositories(generate, filesystem, db, command))

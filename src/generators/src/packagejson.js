@@ -1,12 +1,13 @@
 const { objToString } = require('../utils')
 
 const optionalPackages = {
-  mongo: ['"@herbsjs/herbs2mongo": "^3.0.0"', '"mongodb": "^4.7.0"'],
-  postgres: ['"@herbsjs/herbs2knex": "^1.5.6"', '"pg": "^8.7.3"'],
-  sqlserver: ['"@herbsjs/herbs2knex": "^1.5.6"', '"tedious": "^14.4.8"', '"mssql": "^8.1.0"'],
-  mysql: ['"@herbsjs/herbs2knex": "^1.5.6"', '"mysql2": "^2.3.3"'],
-  rest: ['"express": "^4.18.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^3.0.1"'],
-  graphql: ['"graphql": "^16.5.0"', '"@herbsjs/herbs2gql": "^2.2.0"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
+  mongo: ['"@herbsjs/herbs2mongo": "^3.0.3"', '"mongodb": "^4.8.1"'],
+  postgres: ['"@herbsjs/herbs2knex": "^1.5.7"', '"pg": "^8.7.3"'],
+  sqlite: ['"@herbsjs/herbs2knex": "^1.5.7"', '"sqlite3": "^5.0.11"'],
+  sqlserver: ['"@herbsjs/herbs2knex": "^1.5.7"', '"tedious": "^14.6.0"', '"mssql": "^8.1.2"'],
+  mysql: ['"@herbsjs/herbs2knex": "^1.5.7"', '"mysql2": "^2.3.3"'],
+  rest: ['"express": "^4.18.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^3.1.1"'],
+  graphql: ['"graphql": "^16.5.0"', '"@herbsjs/herbs2gql": "^2.2.1"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
 }
 
 const defaultOptions = (options) => {
@@ -16,6 +17,7 @@ const defaultOptions = (options) => {
     author: options.author ? options.author.replace(/\s/g, '').replace(/[`~!@#$%^&*()|+\=?;:'",.<>\{\}\[\]\\\/]/gi, '') : 'herbs CLI',
     license: options.license ? options.license : 'MIT',
     mongo: options.mongo ? options.mongo : false,
+    sqlite: options.sqlite ? options.sqlite : false,
     postgres: options.postgres ? options.postgres : false,
     sqlserver: options.sqlserver ? options.sqlserver : false,
     mysql: options.mysql ? options.mysql : false,
@@ -34,7 +36,7 @@ module.exports =
       process.stdout.write(`Generating package.json and running npm\n`)
 
       options = defaultOptions(options)
-      const migration = (options.postgres || options.sqlserver || options.mysql)
+      const migration = (options.postgres || options.sqlserver || options.mysql || options.sqlite)
         ? `,
       "knex:make": "npx knex --knexfile knexFile.js migrate:make",
       "knex:migrate": "npx knex --knexfile knexFile.js migrate:latest",
@@ -44,12 +46,12 @@ module.exports =
         : ''
 
       let packages = [
-        '"@herbsjs/herbs": "^1.6.1"',
+        '"@herbsjs/herbs": "^1.6.2"',
         '"@herbsjs/herbarium": "^1.4.0"',
-        '"@herbsjs/herbsshelf": "^4.0.0"',
+        '"@herbsjs/herbsshelf": "^4.0.1"',
         '"dotenv": "^16.0.1"',
         '"deepmerge": "^4.2.2"',
-        '"nodemon": "^2.0.15"',
+        '"nodemon": "^2.0.19"',
         '"mocha": "^10.0.0"',
         '"lodash.camelcase": "^4.3.0"',
         '"sugar-env": "^1.5.14"'

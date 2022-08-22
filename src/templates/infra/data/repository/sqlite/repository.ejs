@@ -1,0 +1,20 @@
+const { Repository } = require("@herbsjs/herbs2knex")
+const { herbarium } = require('@herbsjs/herbarium')
+const <%- props.name.pascalCase %> = require('../../../domain/entities/<%- props.name.camelCase %>')
+const connection = require('../database/connection')
+
+class <%- props.name.pascalCase %>Repository extends Repository {
+    constructor(injection) {
+        super({
+            entity: <%- props.name.pascalCase %>,
+            table: "<%- props.table %>",
+            knex: connection
+        })
+    }
+}
+
+module.exports =
+    herbarium.repositories
+        .add(<%- props.name.pascalCase %>Repository, '<%- props.name.pascalCase %>Repository')
+        .metadata({ entity: <%- props.name.pascalCase %> })
+        .repository
