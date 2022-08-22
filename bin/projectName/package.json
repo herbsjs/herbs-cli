@@ -1,0 +1,46 @@
+{
+  "name": "projectName",
+  "version": "1.0.0",
+  "description": "testing the herbs CLI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "lint": "npx eslint \"**/*.{js,jsx}\" --quiet",
+    "lint:fix": "npx eslint \"**/*.{js,jsx}\" --fix",
+    "knex:make": "npx knex --knexfile knexFile.js migrate:make",
+    "knex:migrate": "npx knex --knexfile knexFile.js migrate:latest",
+    "knex:rollback": "npx knex --knexfile knexFile.js migrate:rollback",
+    "knex:makeSeeds": "npx knex --knexfile knexFile.js seed:make",
+    "knex:runSeeds": "npx knex --knexfile knexFile.js seed:run",
+    "test": "npm run spec",
+    "spec": "herbs spec"
+  },
+  "keywords": [
+    "herbs"
+  ],
+  "author": "herbs",
+  "license": "MIT",
+  "dependencies": {
+    "@herbsjs/herbs": "^1.6.2",
+    "@herbsjs/herbarium": "^1.4.0",
+    "@herbsjs/herbsshelf": "^4.0.1",
+    "dotenv": "^16.0.1",
+    "deepmerge": "^4.2.2",
+    "nodemon": "^2.0.19",
+    "mocha": "^10.0.0",
+    "lodash.camelcase": "^4.3.0",
+    "sugar-env": "^1.5.14",
+    "@herbsjs/herbs2knex": "^1.5.7",
+    "sqlite3": "^5.0.11",
+    "graphql": "^16.5.0",
+    "@herbsjs/herbs2gql": "^2.2.1",
+    "apollo-server": "^3.8.2",
+    "apollo-server-express": "^3.8.2",
+    "graphql-tools": "^8.2.12",
+    "graphql-scalars": "^1.17.0",
+    "express": "^4.18.1",
+    "cors": "^2.8.5",
+    "@herbsjs/herbs2rest": "^3.1.1"
+  }
+}

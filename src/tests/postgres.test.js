@@ -1,4 +1,4 @@
-/* globals describe, it, afterEach */
+/* globals describe, it, after */
 
 const { system } = require('gluegun')
 const { expect } = require('chai')
@@ -12,20 +12,19 @@ const generateProject = () => system.run(`herbs new --name ${projectName} --desc
 const npmInstall = () => system.run(`cd ${projectName} && npm install`)
 
 describe('When I generate a complete project that uses postgres', () => {
-  afterEach(() => {
+  after(() => {
     fs.rmSync(path.resolve(process.cwd(), `${projectName}`), { recursive: true })
   })
 
   it('must exists a config/postgres.js file', async () => {
     await generateProject()
+    await npmInstall()
+
     fs.readFileSync(path.resolve(process.cwd(), `${projectName}/src/infra/config/postgres.js`))
   })
 
   it('must contain the correct content', async () => {
-
-    await generateProject()
-    await npmInstall()
-
+ 
     const postgresConfig = require(path.resolve(process.cwd(), `${projectName}/src/infra/config/postgres.js`))
     expect(postgresConfig).to.deep.equal({
       herbsCLI: 'postgres',
@@ -40,7 +39,6 @@ describe('When I generate a complete project that uses postgres', () => {
   })
 
   it('must to have configured knex file', async () => {
-    await generateProject()
     const knex = require(`${projectName}/knexFile.js`)
 
     expect(knex).to.deep.equal({
