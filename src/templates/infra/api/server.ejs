@@ -2,6 +2,7 @@ const express = require('express')
 const { herbsshelf } = require('@herbsjs/herbsshelf')
 const { herbarium } = require('@herbsjs/herbarium')
 
+const { auth } = require('./auth')
 <% if(props.graphql) {%>const { graphql } = require('./graphql')<% }%>
 <% if(props.rest) {%>const { rest } = require('./rest')<% }%>
 
@@ -25,6 +26,7 @@ async function start(config) {
   herbarium.requireAll()
 
   const app = express()
+  await auth(app, config)
   <% if(props.rest) {%>await rest(app, config)<% }%>
   <% if(props.graphql) {%>await graphql(app, config)<% }%>
   await shelf(app, config)

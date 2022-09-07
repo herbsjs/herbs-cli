@@ -7,4 +7,9 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
     target: 'src/infra/api/server.js',
     props: { ...options }
   })
+
+  await generate({
+    template: 'infra/api/auth.ejs',
+    target: 'src/infra/api/auth.js',
+  })
 }

@@ -8,6 +8,11 @@ module.exports = async ({ template: { generate } }) => async () => {
   })
 
   await generate({
+    template: 'infra/api/graphql/resolver.ejs',
+    target: 'src/infra/api/graphql/resolver.js'
+  })
+
+  await generate({
     template: 'infra/api/graphql/custom/date.ejs',
     target: 'src/infra/api/graphql/custom/date.js'
   })
