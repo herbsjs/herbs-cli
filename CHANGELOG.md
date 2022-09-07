@@ -1,3 +1,10 @@
+# [2.16.0](https://github.com/herbsjs/herbs-cli/compare/v2.15.0...v2.16.0) (2022-09-07)
+
+
+### Features
+
+* **rest and graphql:** better rest and graphql developer expirence, also a new auth file ([cef9181](https://github.com/herbsjs/herbs-cli/commit/cef918164bf89f069cbd23ba2d1c1cff954069e9))
+
 # [2.15.0](https://github.com/herbsjs/herbs-cli/compare/v2.14.1...v2.15.0) (2022-08-22)
 
 
