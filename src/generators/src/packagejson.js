@@ -4,7 +4,7 @@ const optionalPackages = {
   mongo: ['"@herbsjs/herbs2mongo": "^3.0.3"', '"mongodb": "^4.8.1"'],
   postgres: ['"@herbsjs/herbs2knex": "^1.5.7"', '"pg": "^8.7.3"'],
   sqlite: ['"@herbsjs/herbs2knex": "^1.5.7"', '"sqlite3": "^5.0.11"'],
-  sqlserver: ['"@herbsjs/herbs2knex": "^1.5.7"', '"tedious": "^14.6.0"', '"mssql": "^8.1.2"'],
+  sqlserver: ['"@herbsjs/herbs2knex": "^1.5.7"', '"tedious": "^15.1.0"', '"mssql": "^9.0.1"'],
   mysql: ['"@herbsjs/herbs2knex": "^1.5.7"', '"mysql2": "^2.3.3"'],
   rest: ['"express": "^4.18.1"', '"cors": "^2.8.5"', '"@herbsjs/herbs2rest": "^3.2.1"'],
   graphql: ['"graphql": "^16.5.0"', '"@herbsjs/herbs2gql": "^2.3.0"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
