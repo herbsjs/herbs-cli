@@ -26,6 +26,7 @@ const updateUserSpec = spec({
 
     usecase: updateUser,
 
+    // Scenario: A user should be updated only if the user is valid
     'Update a existing User when it is valid': scenario({
 
         'Valid Users': samples([
@@ -77,6 +78,7 @@ const updateUserSpec = spec({
 
     }),
 
+    // Scenario: A user should not be updated if the user is not valid
     'Do not update a User when it is invalid': scenario({
         'Given a invalid User': given({
             request: {
@@ -98,6 +100,7 @@ const updateUserSpec = spec({
 
     }),
 
+    // Scenario: A user should not be updated if the user does not exists
     'Do not update User if it does not exist': scenario({
         'Given an empty User repository': given({
             request: {
