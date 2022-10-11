@@ -9,38 +9,46 @@ const command = {
     description: 'Assist you to create specs and use cases using AI',
     run: async toolbox => {
 
-        const colors = toolbox.print.colors
-        toolbox.print.info(`\n${colors.bold('Welcome to Herbs 🌿 Assist 🤖')} (${colors.trap('alpha')} version)\n`)
+        await main()
 
-        toolbox.print.info(`We will guide you to generate a new spec and use case based on your domain.\n`)
-        toolbox.print.info(`The magic is about to begin...`)
+        async function main() {
+            const colors = toolbox.print.colors
+            toolbox.print.info(`\n${colors.bold('Welcome to Herbs 🌿 Assist 🤖')} (${colors.trap('alpha')} version)\n`)
 
-        const usecaseName = await getUsecaseName()
-        const usecaseGroup = await getUsecaseGroup()
+            const hasAPIKeys = hasOpenAIKeys()
+            if (hasAPIKeys instanceof Error) return hasAPIKeys
 
-        const { code } = await generateSpecFile({ usecaseGroup, usecaseName })
+            toolbox.print.info(`We will guide you to generate a new spec and use case based on your domain.\n`)
+            toolbox.print.info(`The magic is about to begin...`)
 
-        toolbox.print.info(`Now you can review the generated spec and make any changes you want.`)
-        toolbox.print.info(`Based on the spec, we will generate a use case for you.`)
-        const { confirm } = await toolbox.prompt.ask({
-            type: 'confirm',
-            name: 'confirm',
-            message: 'Can we continue?',
-            initial: true,
-        })
+            const usecaseName = await getUsecaseName()
+            const usecaseGroup = await getUsecaseGroup()
 
-        if (!confirm) {
-            toolbox.print.info('\nOk, bye!\n')
-            return
+            const { code } = await generateSpecFile({ usecaseGroup, usecaseName })
+
+            toolbox.print.info(`Now you can review the generated spec and make any changes you want.`)
+            toolbox.print.info(`Based on the spec, we will generate a use case for you.`)
+            const { confirm } = await toolbox.prompt.ask({
+                type: 'confirm',
+                name: 'confirm',
+                message: 'Can we continue?',
+                initial: true,
+            })
+
+            if (!confirm) {
+                toolbox.print.info('\nOk, bye!\n')
+                return
+            }
+
+            await generateUsecaseFile({ usecaseGroup, usecaseName, specCode: code })
+
+            toolbox.print.info('Your spec and use case are ready to use!')
+            toolbox.print.info('Thank you for using Herbs Assist 🤖\n')
         }
-
-        await generateUsecaseFile({ usecaseGroup, usecaseName, specCode: code })
-
-        toolbox.print.info('Your spec and use case are ready to use!')
-        toolbox.print.info('Thank you for using Herbs Assist 🤖\n')
 
         async function generateSpecFile({ usecaseName, usecaseGroup }) {
 
+            const colors = toolbox.print.colors
             toolbox.print.info(`\n${colors.bold('🔶 Scenarios Definition')}\n`)
 
             //create file if not exists
@@ -50,6 +58,7 @@ const command = {
                 toolbox.template.generate({
                     template: 'assist/spec.md.ejs',
                     target: specDefPath,
+                    props: { usecaseName }
                 })
                 toolbox.print.info(`${colors.bold('First time here, right?')}`)
                 toolbox.print.info(`We created a file where you can define your scenarios. Please, review it and come back here.`)
@@ -88,7 +97,7 @@ const command = {
 
             toolbox.print.info(`\n${colors.bold('🔶 Herbs Spec - Generation and Review')}`)
             toolbox.print.info('\n⏰ Generating spec file... (this may take a while)')
-            const response = await generateOpenAIFile({tmpFileName: specPromptReturn, prompt})
+            const response = await generateOpenAIFile({ tmpFileName: specPromptReturn, prompt })
             // const response = fs.readFileSync(specPromptReturn, 'utf8') // fake generated file
             if (response instanceof Error) return response
 
@@ -110,17 +119,18 @@ const command = {
         async function generateUsecaseFile({ usecaseName, usecaseGroup, specCode }) {
             const usecasePrompt = `tmp/usecase.codex`
             const usecasePromptReturn = `tmp/usecase.codex.return`
-
+            
             toolbox.template.generate({
                 template: 'assist/usecase.codex.ejs',
                 target: usecasePrompt,
                 props: { usecaseName, specCode },
             })
-
+            
+            const colors = toolbox.print.colors
             const prompt = fs.readFileSync(usecasePrompt, 'utf8')
             toolbox.print.info(`\n${colors.bold('🔶 Herbs Use Case')}`)
             toolbox.print.info('\n⏰ Generating use case file... (this may take a while)')
-            const response = await generateOpenAIFile({tmpFileName: usecasePromptReturn, prompt})
+            const response = await generateOpenAIFile({ tmpFileName: usecasePromptReturn, prompt })
             // const response = fs.readFileSync(usecasePromptReturn, 'utf8') // fake generated file
             if (response instanceof Error) return response
 
@@ -159,6 +169,7 @@ const command = {
             temperature = 0.3,
             max_tokens = 2000,
             top_p = 1,
+            best_of = 3,
             frequency_penalty = 0.04,
             presence_penalty = 0.01,
             stop = ["END"],
@@ -167,7 +178,9 @@ const command = {
             const openai = getOpenAI()
 
             const response = await openai.createCompletion({
-                model, prompt, suffix: "", temperature, max_tokens, top_p,
+                model, prompt, suffix: "",
+                temperature, max_tokens,
+                top_p, best_of,
                 frequency_penalty, presence_penalty, stop,
             })
 
@@ -191,7 +204,7 @@ const command = {
             return choices[0].text
         }
 
-        function getOpenAI() {
+        function hasOpenAIKeys() {
             // verify is organization and api key are set
             const { HERBS_OPENAI_ORG_ID, HERBS_OPENAI_API_KEY } = process.env
             if (!HERBS_OPENAI_ORG_ID || !HERBS_OPENAI_API_KEY) {
@@ -204,19 +217,26 @@ const command = {
                 toolbox.print.info('$env:HERBS_OPENAI_ORG_ID="org-xxxxxxxx"')
                 toolbox.print.info('$env:HERBS_OPENAI_API_KEY="sk-xxxxxxxx"')
                 toolbox.print.info('\nIn other to get your API key, access https://openai.com/blog/openai-codex/ \n')
-                return
+                return Error('OpenAI keys not set')
             }
+        }
+
+        function getOpenAI() {
+
+            const { HERBS_OPENAI_ORG_ID, HERBS_OPENAI_API_KEY } = process.env
 
             const configuration = new Configuration({
                 organization: HERBS_OPENAI_ORG_ID,
                 apiKey: HERBS_OPENAI_API_KEY
             })
+
             const openai = new OpenAIApi(configuration)
             return openai
         }
 
         async function getUsecaseName() {
 
+            const colors = toolbox.print.colors
             toolbox.print.info(`\n${colors.bold('🔶 Use Case Definition')}\n`)
             toolbox.print.info(`First, we need to know what is your use case name`)
             toolbox.print.info(`For example: ${colors.bold('Change Customer Address')}, ${colors.bold('Create Reservation')}, ${colors.bold('Get Customer Balance')}, etc.\n`)

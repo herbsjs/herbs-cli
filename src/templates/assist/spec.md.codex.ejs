@@ -1,0 +1,58 @@
+Usecase: Create Project
+
+Scenario: A project should be created if the project is valid
+Given a valid project
+When the project is created
+Then the project is created on the repository
+
+Scenario: A project should not be created if the project is not valid
+Given an invalid project
+When the project is created
+Then the project is not created on the repository
+~~~~
+END
+
+Usecase: Update Reservation
+
+Scenario: A reservation should be updated if the reservation is valid
+Given a valid reservation
+When the reservation is updated
+Then the reservation is updated on the repository
+
+Scenario: A reservation should not be updated if the reservation is not valid
+Given an invalid reservation
+When the reservation is updated
+Then the reservation is not updated on the repository
+
+Scenario: A reservation should not be updated if the reservation does not exists
+Given a reservation does not exists
+When the reservation is updated
+Then the reservation should not exists on the repository
+
+Scenario: A reservation should not be updated if customer is inactive
+Given a customer is inactive and reservation is valid
+When the reservation is updated
+Then the reservation is not updated on the repository
+~~~~
+END
+
+Usecase: Change Payment Status
+
+Scenario: Payment status can be changed if payment is not paid
+Given a payment with status not paid
+When the payment status is changed
+Then the payment status is changed on the repository
+
+Scenario: Payment status can not be changed if payment is paid
+Given a payment with status paid
+When the payment status is changed
+Then the payment status is not changed on the repository
+
+Scenario: Payment status can not be changed if payment is more than 30 days old
+Given a payment with status not paid and more than 30 days old
+When the payment status is changed
+Then the payment status is not changed on the repository
+~~~~
+END
+
+Usecase: <%- props.usecaseName %>

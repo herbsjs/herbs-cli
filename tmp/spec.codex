@@ -1,18 +1,7 @@
 Usecase: Update User
-Scenario: A user should be updated only if the user is valid
-Given a valid user
-When the user is updated
-Then the user is updated
-
-Scenario: A user should not be updated if the user is not valid
-Given an invalid user
-When the user is updated
-Then the user is not updated
-
-Scenario: A user should not be updated if the user does not exists
-Given a user does not exists
-When the user is updated
-Then the user is not updated
+Scenario 1: A user should be updated only if the user is valid
+Scenario 2: A user should not be updated if the user is not valid
+Scenario 3: A user should not be updated if the user does not exists
 
 Output:
 ~~~~
@@ -26,9 +15,9 @@ const updateUserSpec = spec({
 
     usecase: updateUser,
 
-    'Update a existing User when it is valid': scenario({
+    'Update a existing user when it is valid': scenario({
 
-        'Valid Users': samples([
+        'Valid users': samples([
             {
                 id: 'a text',
                 nickname: 'a text',
@@ -43,12 +32,12 @@ const updateUserSpec = spec({
             }
         ]),
 
-        'Given a valid User': given((ctx) => ({
+        'Given a valid user': given((ctx) => ({
             request: ctx.sample,
             user: { hasAccess: true }
         })),
 
-        'Given a repository with a existing User': given((ctx) => ({
+        'Given a repository with a existing user': given((ctx) => ({
             injection: {
                 UserRepository: class UserRepository {
                     async findByID(id) {
@@ -77,8 +66,8 @@ const updateUserSpec = spec({
 
     }),
 
-    'Do not update a User when it is invalid': scenario({
-        'Given a invalid User': given({
+    'Do not update a user when it is invalid': scenario({
+        'Given a invalid user': given({
             request: {
                 id: true,
                 nickname: true,
@@ -98,8 +87,8 @@ const updateUserSpec = spec({
 
     }),
 
-    'Do not update User if it does not exist': scenario({
-        'Given an empty User repository': given({
+    'Do not update user if it does not exist': scenario({
+        'Given an empty user repository': given({
             request: {
                 id: 'a text',
                 nickname: 'a text',
@@ -131,7 +120,8 @@ module.exports =
 ~~~~
 END
 
-Usecase: <%- props.usecaseName %>
-<%- props.scenarios %>
+Usecase: ex: Withdraw Money
+Scenario 1: A project should be created if the project is valid
+Scenario 2: A project should not be created if the project is not valid
 
 Output:
