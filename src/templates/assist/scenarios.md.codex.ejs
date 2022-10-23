@@ -1,5 +1,6 @@
+Group: Project
 Usecase: Create Project
-
+~~~~
 Scenario: A project should be created if the project is valid
 Given a valid project
 When the project is created
@@ -12,8 +13,9 @@ Then the project is not created on the repository
 ~~~~
 END
 
+Group: Reservation
 Usecase: Update Reservation
-
+~~~~
 Scenario: A reservation should be updated if the reservation is valid
 Given a valid reservation
 When the reservation is updated
@@ -36,8 +38,9 @@ Then the reservation is not updated on the repository
 ~~~~
 END
 
+Group: Payment
 Usecase: Change Payment Status
-
+~~~~
 Scenario: Payment status can be changed if payment is not paid
 Given a payment with status not paid
 When the payment status is changed
@@ -55,4 +58,5 @@ Then the payment status is not changed on the repository
 ~~~~
 END
 
+Group: <%- props.usecaseGroup %>
 Usecase: <%- props.usecaseName %>

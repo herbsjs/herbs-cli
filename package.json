@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@herbsjs/herbs2repl": "^1.0.5",
+    "ansi-256-colors": "^1.1.0",
     "git-user-name": "^2.0.0",
     "glob": "^8.0.3",
     "gluegun": "^5.1.2",
