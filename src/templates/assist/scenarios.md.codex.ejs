@@ -10,7 +10,6 @@ Scenario: A project should not be created if the project is not valid
 Given an invalid project
 When the project is created
 Then the project is not created on the repository
-~~~~
 END
 
 Group: Reservation
@@ -35,7 +34,6 @@ Scenario: A reservation should not be updated if customer is inactive
 Given a customer is inactive and reservation is valid
 When the reservation is updated
 Then the reservation is not updated on the repository
-~~~~
 END
 
 Group: Payment
@@ -55,7 +53,6 @@ Scenario: Payment status can not be changed if payment is more than 30 days old
 Given a payment with status not paid and more than 30 days old
 When the payment status is changed
 Then the payment status is not changed on the repository
-~~~~
 END
 
 Group: <%- props.usecaseGroup %>

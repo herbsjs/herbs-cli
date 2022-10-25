@@ -329,9 +329,9 @@ const command = {
             model = "code-davinci-002",
             codexPrompt,
             temperature = 0.3,
-            max_tokens = 2000,
+            max_tokens = 3000,
             top_p = 1,
-            best_of = 3,
+            best_of = 1,
             frequency_penalty = 0.04,
             presence_penalty = 0.01,
             stop = ["END"],
@@ -362,12 +362,13 @@ const command = {
             return choices[0].text
         }
 
+
         function parseResponse(codexResponse) {
-            const regex = /~~~~([\s\S]*?)~~~~/gm
+            const regex = /~~~~([\s\S]*)/gm
             const ret = regex.exec(codexResponse)
 
             // check if processed spec if valid
-            if (ret === null || ret[1].length < 1) throw Error(`Spec not generated duo to parsing error`)
+            if (ret === null || ret[1].length < 1) throw Error(`It was not possible to parse the response from OpenAI`)
 
             const response = ret[1]
             return response.trim()
