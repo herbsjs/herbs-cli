@@ -177,7 +177,6 @@ module.exports =
         .add(updateUser, 'UpdateUser')
         .metadata({ group: 'User', operation: herbarium.crud.update, entity: User })
         .usecase
-~~~~
 END
 
 Example: `Find User`
@@ -298,7 +297,6 @@ module.exports =
         .add(findUser, 'FindUser')
         .metadata({ group: 'User', operation: herbarium.crud.read, entity: User })
         .usecase
-~~~~
 END
 
 Example: `<%- props.usecaseName %>`
