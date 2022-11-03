@@ -7,7 +7,7 @@ function getToolbox(toolbox) {
     const prompt = toolbox.prompt
     const template = toolbox.template
     const filesystem = toolbox.filesystem
-    print.cls = () => { process.stdout.write('\033c') }
+    print.cls = () => { process.stdout.write('\x1Bc') }
     prompt.pressAnyKey = async (message = `Press any ${theme.source('<enter>')} to continue...`) => {
         const prompt = new Input({ name: 'anykey', message })
         prompt.on('keypress', (s, key) => {
