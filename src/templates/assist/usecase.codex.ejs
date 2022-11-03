@@ -1,0 +1,308 @@
+Example: `Update User`
+Input:
+~~~~
+const User = require('../../entities/user')
+const updateUser = require('./updateUser')
+const assert = require('assert')
+const { spec, scenario, given, check, samples } = require('@herbsjs/herbs').specs
+const { herbarium } = require('@herbsjs/herbarium')
+
+const updateUserSpec = spec({
+
+    usecase: updateUser,
+    'Update a existing user when it is valid': scenario({
+
+        'Valid users': samples([
+            {
+                id: 'a text',
+                nickname: 'a text',
+                registrationNumber: 99,
+                password: 'a text'
+            },
+            {
+                id: 'a text',
+                nickname: 'a text',
+                registrationNumber: 99,
+                password: 'a text'
+            }
+        ]),
+
+        'Given a valid user': given((ctx) => ({
+            request: ctx.sample,
+            user: { hasAccess: true }
+        })),
+
+        'Given a repository with a existing user': given((ctx) => ({
+            injection: {
+                UserRepository: class UserRepository {
+                    async findByID(id) {
+                        const fakeUser = {
+                            id: 'a text',
+                            nickname: 'a text',
+                            registrationNumber: 99,
+                            password: 'a text'
+                        }
+                        return ([User.fromJSON(fakeUser)])
+                    }
+                    async update(id) { return true }
+                }
+            },
+        })),
+
+        // when: default when for use case
+
+        'Must run without errors': check((ctx) => {
+            assert.ok(ctx.response.isOk)
+        }),
+
+        'Must confirm update': check((ctx) => {
+            assert.ok(ctx.response.ok === true)
+        })
+
+    }),
+
+    'Do not update a user when it is invalid': scenario({
+        'Given a invalid user': given({
+            request: {
+                id: true,
+                nickname: true,
+                registrationNumber: true,
+                password: true
+            },
+            user: { hasAccess: true },
+            injection: {},
+        }),
+
+        // when: default when for use case
+
+        'Must return an error': check((ctx) => {
+            assert.ok(ctx.response.isErr)
+            // assert.ok(ctx.response.isInvalidEntityError)
+        }),
+
+    }),
+
+    'Do not update user if it does not exist': scenario({
+        'Given an empty user repository': given({
+            request: {
+                id: 'a text',
+                nickname: 'a text',
+                registrationNumber: 99,
+                password: 'a text'
+            },
+            user: { hasAccess: true },
+            injection: {
+                UserRepository: class UserRepository {
+                    async findByID(id) { return [] }
+                }
+            },
+        }),
+
+        // when: default when for use case
+
+        'Must return an error': check((ctx) => {
+            assert.ok(ctx.response.isErr)
+            assert.ok(ctx.response.isNotFoundError)
+        }),
+    }),
+})
+
+module.exports =
+    herbarium.specs
+        .add(updateUserSpec, 'UpdateUserSpec')
+        .metadata({ usecase: 'UpdateUser' })
+        .spec
+~~~~
+
+Output:
+~~~~
+const { usecase, step, Ok, Err, request } = require('@herbsjs/herbs')
+const { herbarium } = require('@herbsjs/herbarium')
+const merge = require('deepmerge')
+const User = require('../../entities/user')
+const UserRepository = require('../../../infra/data/repositories/userRepository')
+
+const dependency = { UserRepository }
+
+const updateUser = injection =>
+    usecase('Update User', {
+        // Input/Request metadata and validation 
+        request: request.from(User),
+
+        // Output/Response metadata
+        response: User,
+
+        //Authorization with Audit
+        // authorize: (user) => (user.canUpdateUser ? Ok() : Err()),
+        authorize: () => Ok(),
+
+        setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+        'Retrieve the User': step(async ctx => {
+            const id = ctx.req.id
+            const repo = new ctx.di.UserRepository(injection)
+            const [user] = await repo.findByID(id)
+            ctx.user = user
+            if (user === undefined) return Err.notFound({
+                message: `User not found - ID: ${id}`,
+                payload: { entity: 'User' }
+            })
+
+            return Ok(user)
+        }),
+
+        'Check if it is a valid User before update': step(ctx => {
+            const oldUser = ctx.user
+            const newUser = User.fromJSON(merge.all([oldUser, ctx.req]))
+            ctx.user = newUser
+
+            return newUser.isValid() ? Ok() : Err.invalidEntity({
+                message: `User is invalid`,
+                payload: { entity: 'User' },
+                cause: newUser.errors
+            })
+
+        }),
+
+        'Update the User': step(async ctx => {
+            const repo = new ctx.di.UserRepository(injection)
+            // ctx.ret is the return value of a use case
+            return (ctx.ret = await repo.update(ctx.user))
+        })
+
+    })
+
+module.exports =
+    herbarium.usecases
+        .add(updateUser, 'UpdateUser')
+        .metadata({ group: 'User', operation: herbarium.crud.update, entity: User })
+        .usecase
+END
+
+Example: `Find User`
+Input:
+~~~~
+const User = require('../../entities/user')
+const findUser = require('./findUser')
+const assert = require('assert')
+const { spec, scenario, given, check, samples } = require('@herbsjs/herbs').specs
+const { herbarium } = require('@herbsjs/herbarium')
+
+const findUserSpec = spec({
+
+    usecase: findUser,
+
+    'Find a user when it exists': scenario({
+        'Given an existing user': given({
+            request: {
+                id: 'a text'
+            },
+            user: { hasAccess: true },
+            injection: {
+                UserRepository: class UserRepository {
+                    async findByID(id) {
+                        const fakeUser = {
+                            id: 'a text',
+                            nickname: 'a text',
+                            registrationNumber: 99,
+                            password: 'a text'
+                        }
+                        return ([User.fromJSON(fakeUser)])
+                    }
+                }
+            },
+        }),
+
+        // when: default when for use case
+
+        'Must run without errors': check((ctx) => {
+            assert.ok(ctx.response.isOk)
+        }),
+
+        'Must return a valid user': check((ctx) => {
+            assert.strictEqual(ctx.response.ok.isValid(), true)
+        })
+
+    }),
+
+    'Do not find a user when it does not exist': scenario({
+        'Given an empty user repository': given({
+            request: {
+                id: 'a text'
+            },
+            user: { hasAccess: true },
+            injection: {
+                UserRepository: class UserRepository {
+                    async findByID(id) { return [] }
+                }
+            },
+        }),
+
+        // when: default when for use case
+
+        'Must return an error': check((ctx) => {
+            assert.ok(ctx.response.isErr)
+            assert.ok(ctx.response.isNotFoundError)
+        }),
+    }),
+})
+
+module.exports =
+    herbarium.specs
+        .add(findUserSpec, 'FindUserSpec')
+        .metadata({ usecase: 'FindUser' })
+        .usecase
+~~~~
+
+Output:
+~~~~
+const { usecase, step, Ok, Err } = require('@herbsjs/herbs')
+const { herbarium } = require('@herbsjs/herbarium')
+const User = require('../../entities/user')
+const UserRepository = require('../../../infra/data/repositories/userRepository')
+
+const dependency = { UserRepository }
+
+const findUser = injection =>
+    usecase('Find a User', {
+        // Input/Request metadata and validation 
+        request: {
+            id: String
+        },
+
+        // Output/Response metadata
+        response: User,
+
+        //Authorization with Audit
+        // authorize: (user) => (user.canFindOneUser ? Ok() : Err()),
+        authorize: () => Ok(),
+
+        setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+
+        'Find and return the User': step(async ctx => {
+            const id = ctx.req.id
+            const repo = new ctx.di.UserRepository(injection)
+            const [user] = await repo.findByID(id)
+            if (!user) return Err.notFound({
+                message: `User entity not found by ID: ${id}`,
+                payload: { entity: 'User', id }
+            })
+            // ctx.ret is the return value of a use case
+            return Ok(ctx.ret = user)
+        })
+    })
+
+module.exports =
+    herbarium.usecases
+        .add(findUser, 'FindUser')
+        .metadata({ group: 'User', operation: herbarium.crud.read, entity: User })
+        .usecase
+END
+
+Example: `<%- props.usecaseName %>`
+Input:
+~~~~
+<%- props.spec %>
+~~~~
+
+Output:

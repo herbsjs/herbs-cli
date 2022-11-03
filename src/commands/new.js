@@ -9,6 +9,7 @@ function isEmpty(obj) {
 }
 
 const username = require('git-user-name')
+const getToolbox = require('../helpers/toolbox')
 const questions = [
   {
     type: 'input',
@@ -79,9 +80,17 @@ const cmd = {
   description: 'Creates new Herbs project',
   alias: ['n'],
   run: async (toolbox) => {
+
+    const { colors, print, prompt, template, filesystem, theme } = getToolbox(toolbox)
+
+    print.cls()
+    print.info(`\n${theme.intro('Welcome to Herbs 🌿')}\n`)
+
+    print.info(`We will guide you to generate a new Herbs project.\n`)
+
     let { options } = toolbox.parameters
     if (isEmpty(options)) {
-      options = await inquirer.prompt(questions)    
+      options = await inquirer.prompt(questions)
     }
 
     options.postgres = options.database === 'postgres'
@@ -136,7 +145,7 @@ const cmd = {
     }
 
     if (npmOptions.npmInstall === 'Yeah, please' || npmOptions.npmInstall === 'yes') {
-      await exec('npm install')    
+      await exec('npm install')
       await exec('herbs update')
     }
     await checkNewVersion()
