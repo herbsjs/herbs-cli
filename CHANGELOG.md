@@ -1,3 +1,16 @@
+# [2.17.0](https://github.com/herbsjs/herbs-cli/compare/v2.16.0...v2.17.0) (2022-11-03)
+
+
+### Bug Fixes
+
+* parse error ([60de48c](https://github.com/herbsjs/herbs-cli/commit/60de48caf845cbbf746f792b6146db398a8b9bf7))
+* **toolbox:** fix lint problem with \0 char ([67a8f89](https://github.com/herbsjs/herbs-cli/commit/67a8f896a01232502644ae3e3a9bf8d07f2599d7))
+
+
+### Features
+
+* **assist:** help developers generate specs and use cases using domain knowledge with AI ([29a8adf](https://github.com/herbsjs/herbs-cli/commit/29a8adfb87634c536e957affb1cf4082041514fc))
+
 # [2.16.0](https://github.com/herbsjs/herbs-cli/compare/v2.15.0...v2.16.0) (2022-09-07)
 
 
