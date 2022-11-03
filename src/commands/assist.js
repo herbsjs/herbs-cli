@@ -2,8 +2,7 @@ const { Configuration, OpenAIApi } = require("openai")
 const fs = require("fs")
 const path = require("path")
 const { snakeCase, camelCase, startCase } = require("lodash")
-const { Input } = require('enquirer')
-const ansiColor = require('ansi-256-colors')
+const getToolbox = require("../helpers/toolbox")
 
 const command = {
     name: 'assist',
@@ -11,23 +10,7 @@ const command = {
     description: 'Assist you to create specs and use cases using AI code generation',
     run: async toolbox => {
 
-        const print = toolbox.print
-        const colors = print.colors
-        const prompt = toolbox.prompt
-        const template = toolbox.template
-        const filesystem = toolbox.filesystem
-        print.cls = () => { process.stdout.write('\033c') }
-        prompt.pressAnyKey = async (message = `Press any ${theme.source('<enter>')} to continue...`) => {
-            const prompt = new Input({ name: 'anykey', message })
-            prompt.on('keypress', (s, key) => { if (key.name === 'return') prompt.submit() })
-            await prompt.run()
-        }
-        const theme = {
-            herbsColor: ansiColor.fg.getRgb(5, 4, 0),
-            title: (input) => (theme.herbsColor + input + ansiColor.reset),
-            intro: (input) => (theme.herbsColor + colors.bold(input) + ansiColor.reset),
-            source: (input) => (colors.italic.gray(input) + ansiColor.reset),
-        }
+        const { colors, print, prompt, template, filesystem, theme } = getToolbox(toolbox)
 
         const connectedMode = true // if true, it will use the OpenAI API
 
