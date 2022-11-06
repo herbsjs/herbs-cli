@@ -1,7 +1,7 @@
 const env = require('sugar-env')
 require('dotenv').config()
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 module.exports = {
 port: env.get(['GRAPHQL_PORT', 'API_PORT'],port ),
