@@ -1,3 +1,10 @@
+# [2.18.0](https://github.com/herbsjs/herbs-cli/compare/v2.17.0...v2.18.0) (2022-11-11)
+
+
+### Features
+
+* **spec:** spec runs with or without use case info or metadata ([81cb29e](https://github.com/herbsjs/herbs-cli/commit/81cb29e505888e101b2f5dd2b228988d48dca5e7)), closes [#169](https://github.com/herbsjs/herbs-cli/issues/169)
+
 # [2.17.0](https://github.com/herbsjs/herbs-cli/compare/v2.16.0...v2.17.0) (2022-11-03)
 
 
