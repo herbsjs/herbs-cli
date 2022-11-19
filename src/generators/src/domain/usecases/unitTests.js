@@ -80,7 +80,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
     // herbs specs
     for (const action of useCases) {
       const useCaseName = `${action} ${name}`
-      const ucPath = path.normalize(`${filesystem.cwd()}/src/domain/usecases/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
+      const ucPath = path.normalize(`${filesystem.cwd()}/test/${camelCase(name)}/${camelCase(useCaseName)}.spec.js`)
 
       if (fs.existsSync(ucPath)) continue
 

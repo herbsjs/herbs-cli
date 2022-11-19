@@ -1,5 +1,5 @@
-const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
-const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
+const <%- props.name.pascalCase %> = require('../../src/domain/entities/<%- props.name.camelCase %>')
+const delete<%- props.name.pascalCase %> = require('../../src/domain/usecases/<%- props.name.camelCase %>/delete<%- props.name.pascalCase %>')
 const assert = require('assert')
 const { spec, scenario, given, check, samples } = require('@herbsjs/herbs').specs
 const { herbarium } = require('@herbsjs/herbarium')
