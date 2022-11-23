@@ -7,6 +7,10 @@ const cmd = {
     description: 'Run Herbs spec tests',
     alias: ['s'],
     run: async toolbox => {
+        
+        const options = {
+            specPath: toolbox.parameters.first
+        }
 
         const undefinedGroup = "(default)"
 
@@ -27,7 +31,7 @@ const cmd = {
             return orderedGroup
         }
 
-        const herbarium = requireHerbarium("spec", toolbox.filesystem.cwd())
+        const herbarium = requireHerbarium("spec", toolbox.filesystem.cwd(), options)
         const specs = herbarium.specs.all
 
         const { grey, green, red, white, blue, italic } = toolbox.print.colors

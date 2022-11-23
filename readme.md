@@ -80,6 +80,12 @@ After had created a new entity into entities folder, type in your terminal:
 
 > herbs update
 
+### herbs spec
+
+Run aloe herbs specs
+
+> herbs spec path/to/test
+
 ### Contribute
 
 Come with us to make an awesome _herbs-cli_.
