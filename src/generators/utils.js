@@ -35,7 +35,7 @@ module.exports = {
     return list.join('\n')
   },
   pascalCase: (str) => startCase(camelCase(str)).replace(/ /g, ''),
-  requireHerbarium: (command, appPath) => {
+  requireHerbarium: (command, appPath, options = {}) => {
     const herbariumPath = path.normalize(`${appPath}/src/domain/herbarium.js`)
     let herbarium
     if (command !== "new") {
@@ -44,7 +44,7 @@ module.exports = {
     else
       herbarium = require('@herbsjs/herbarium').herbarium
     
-    herbarium.requireAll()
+    herbarium.requireAll(options)
     return herbarium
   },
   usingMongo: (base) => fs.existsSync(path.normalize(`${base}/src/infra/config/mongo.js`))
