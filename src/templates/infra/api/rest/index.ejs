@@ -11,21 +11,40 @@ async function rest(app, config) {
     app.use(json({ limit: '50mb' }))
     app.use(cors())
 
+    const routes = new express.Router()
+
+    herbs2rest({ routes, config })
+
+    app.use(routes)
+}
+
+function herbs2rest({ routes, config }) {
+
+    // Herbs to REST will populate the Express routes and controllers 
+    // based on your entities and use cases.
+
+    // 1. Prepare Routes and Controllers
+    // Firts, it will pre-generate all routes for your use cases 
+    // using the default controller implementation. 
+    // Later, you will have the opportunity to customize it.
     const controllers = generateControllers({ herbarium, controller })
 
-    // Add custom controllers
+    // 2. Add Custom Route and Controller
     // controllers.push({
     //     name: 'Search',
     //     post: {
-    //         usecase: herbarium.usecases.get('SearchTask').usecase,
+    //         usecase: herbarium.usecases.get('SearchUsers').usecase,
     //         controller: searchController
     //     }
     // })
 
-    const routes = new express.Router()
+    // 3. Or Edit Default Controllers 
+    // const userControllers = controllers.find((ctrl) => ctrl.name === 'User')
+    // userControllers.delete.controller = async (uc, req, user, res, next) => res.status(200).end()
+
+    // 4. Apply Routes and Controllers to Express
     const showEndpoints = !config.isProd
     generateRoutes(controllers, routes, showEndpoints)
-    app.use(routes)
 }
 
 module.exports = { rest }
