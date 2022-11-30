@@ -38,9 +38,13 @@ const cmd = {
 
         for (const groupName in usecasesGroup) {
             let previousGroup = null
-            for (const specInfo of usecasesGroup[groupName]) {
+
+            for (const specInfo in usecasesGroup[groupName]) {
 
                 const spec = specInfo.spec
+                if (spec == undefined)
+                    continue;
+
                 const ret = await spec.run()
                 const result = (ret) => ret !== failed ? green('🗸') : red('•')
                 const color = ret !== failed ? white : red
