@@ -43,7 +43,7 @@ const cmd = {
 
                 const spec = specInfo.spec
                 if (spec == undefined)
-                    continue;
+                    continue
 
                 const ret = await spec.run()
                 const result = (ret) => ret !== failed ? green('🗸') : red('•')
