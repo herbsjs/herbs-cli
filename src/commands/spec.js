@@ -21,7 +21,7 @@ const cmd = {
             // put undefinedGroup at the beginning
             const orderedGroup = {}
             orderedGroup[undefinedGroup] = group[undefinedGroup]
-            delete group[undefinedGroup]
+            delete orderedGroup[undefinedGroup]
             Object.assign(orderedGroup, group)
 
             return orderedGroup
@@ -37,13 +37,12 @@ const cmd = {
         const usecasesGroup = groupSteps(specs)
 
         for (const groupName in usecasesGroup) {
+        
             let previousGroup = null
-
-            for (const specInfo in usecasesGroup[groupName]) {
+            
+            for (const specInfo of usecasesGroup[groupName]) {
 
                 const spec = specInfo.spec
-                if (spec == undefined)
-                    continue
 
                 const ret = await spec.run()
                 const result = (ret) => ret !== failed ? green('🗸') : red('•')
