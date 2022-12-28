@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+        token: ${{ secrets.GH_TOKEN }}
 
     - name: Install Packages
       run: npm ci
