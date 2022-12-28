@@ -315,7 +315,7 @@ const command = {
             model = "code-davinci-002",
             codexPrompt,
             temperature = 0.3,
-            max_tokens = 3000,
+            max_tokens = 1500,
             top_p = 1,
             best_of = 1,
             frequency_penalty = 0.04,
