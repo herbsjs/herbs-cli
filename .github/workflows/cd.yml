@@ -14,12 +14,15 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        persist-credentials: false
 
     - name: Install Packages
       run: npm ci
@@ -33,5 +36,5 @@ jobs:
     - name: Run Semantic Release
       run: npx semantic-release
       env:
-        GH_TOKEN: ${{ secrets.SR_TEST }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
