@@ -1,3 +1,10 @@
+## [2.18.1](https://github.com/herbsjs/herbs-cli/compare/v2.18.0...v2.18.1) (2022-12-29)
+
+
+### Bug Fixes
+
+* **assit:** fix assist Open AI rate limit ([6ba7ca9](https://github.com/herbsjs/herbs-cli/commit/6ba7ca9950394bea6c5044f2d2e4f98b4610feed))
+
 # [2.18.0](https://github.com/herbsjs/herbs-cli/compare/v2.17.0...v2.18.0) (2022-11-11)
 
 
