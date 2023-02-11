@@ -34,7 +34,7 @@
     "inquirer": "^8.2.4",
     "lodash": "^4.17.21",
     "openai": "^3.0.0",
-    "update-notifier": "^5.1.0"
+    "update-notifier": "^6.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.0",
