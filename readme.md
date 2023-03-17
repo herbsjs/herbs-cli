@@ -80,6 +80,14 @@ After had created a new entity into entities folder, type in your terminal:
 
 > herbs update
 
+### Debugging
+
+If you want to debug and/or run the CLI locally, you can do it by following the steps below:
+
+> npm link   # On the CLI project folder
+
+> herbs      # On the folder where you want to use the CLI
+
 ### Contribute
 
 Come with us to make an awesome _herbs-cli_.
