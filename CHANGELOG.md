@@ -1,3 +1,10 @@
+## [2.18.2](https://github.com/herbsjs/herbs-cli/compare/v2.18.1...v2.18.2) (2023-03-20)
+
+
+### Bug Fixes
+
+* **templates and spec:** bug fix on templates and refactoring spec to use Aloe runner ([ca913e1](https://github.com/herbsjs/herbs-cli/commit/ca913e1c18042091615636b5e5b9389c7a5c450e))
+
 ## [2.18.1](https://github.com/herbsjs/herbs-cli/compare/v2.18.0...v2.18.1) (2022-12-29)
 
 

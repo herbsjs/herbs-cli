@@ -1,6 +1,6 @@
 {
   "name": "@herbsjs/herbs-cli",
-  "version": "2.18.1",
+  "version": "2.18.2",
   "description": "herbs CLI",
   "bin": {
     "herbs": "bin/herbs"
