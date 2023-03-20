@@ -26,6 +26,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@herbsjs/aloe": "^2.2.1",
     "@herbsjs/herbs2repl": "^1.0.5",
     "ansi-256-colors": "^1.1.0",
     "git-user-name": "^2.0.0",
