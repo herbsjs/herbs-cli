@@ -30,7 +30,7 @@
     "@herbsjs/herbs2repl": "^1.0.5",
     "ansi-256-colors": "^1.1.0",
     "git-user-name": "^2.0.0",
-    "glob": "^8.0.3",
+    "glob": "^8.1.0",
     "gluegun": "^5.1.2",
     "inquirer": "^8.2.4",
     "lodash": "^4.17.21",
