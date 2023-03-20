@@ -32,7 +32,7 @@
     "git-user-name": "^2.0.0",
     "glob": "^8.0.3",
     "gluegun": "^5.1.2",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.5",
     "lodash": "^4.17.21",
     "openai": "^3.0.0",
     "update-notifier": "^5.1.0"
