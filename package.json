@@ -15,7 +15,7 @@
     "commit": "npm run lint && cz"
   },
   "engines": {
-    "node": ">= 14.x"
+    "node": ">= 16.x"
   },
   "files": [
     "src",
