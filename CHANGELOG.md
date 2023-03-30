@@ -1,3 +1,10 @@
+# [2.19.0-beta.1](https://github.com/herbsjs/herbs-cli/compare/v2.18.2...v2.19.0-beta.1) (2023-03-30)
+
+
+### Features
+
+* **herbs:** bump herbs and glues version to latest beta ([8c7e39a](https://github.com/herbsjs/herbs-cli/commit/8c7e39a531a9741761c0f45c5eb3fdd9bf0bd55e))
+
 ## [2.18.2](https://github.com/herbsjs/herbs-cli/compare/v2.18.1...v2.18.2) (2023-03-20)
 
 
