@@ -1,3 +1,10 @@
+# [2.19.0-beta.2](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.1...v2.19.0-beta.2) (2023-04-14)
+
+
+### Features
+
+* **herbs2rest:** herbs2REST new version with lots of improvements ([1a8c262](https://github.com/herbsjs/herbs-cli/commit/1a8c262cb454adf0914448e72d04ab61428ab2bb))
+
 # [2.19.0-beta.1](https://github.com/herbsjs/herbs-cli/compare/v2.18.2...v2.19.0-beta.1) (2023-03-30)
 
 
