@@ -1,25 +1,20 @@
-/* eslint-disable no-unused-vars */
-const { req2request } = require('@herbsjs/herbs2rest')
-
-const controller = async (uc, req, user, res, next) => {
+const controller = async ({ usecase, request, authorizationInfo, res, next }) => {
     try {
-        const usecase = uc()
+        const uc = usecase()
 
         /* Authorization */
-        const hasAccess = await usecase.authorize(user)
+        const hasAccess = await uc.authorize(authorizationInfo)
         if (hasAccess === false) {
             // eslint-disable-next-line no-console
-            console.info(usecase.auditTrail)
+            console.info(uc.auditTrail)
             return res.status(403).json({ message: 'User is not authorized' })
         }
 
         /* Execution */
-        const request = req2request(req, usecase)
-        const response = await usecase.run(request)
+        const response = await uc.run(request)
 
         /* Audit */
-        // eslint-disable-next-line no-console
-        console.info(usecase.auditTrail)
+        // console.info(uc.auditTrail)
 
         /* Response */
         if (response.isOk) {

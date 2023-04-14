@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const { json } = require('body-parser')
-const { generateRoutes, generateControllers } = require('@herbsjs/herbs2rest')
+const { populateMetadata, generateEndpoints } = require('@herbsjs/herbs2rest')
 const { herbarium } = require('@herbsjs/herbarium')
 const controller = require('./controller')
 
@@ -11,40 +11,29 @@ async function rest(app, config) {
     app.use(json({ limit: '50mb' }))
     app.use(cors())
 
-    const routes = new express.Router()
+    const server = new express.Router()
 
-    herbs2rest({ routes, config })
+    herbs2rest({ server, config })
 
-    app.use(routes)
+    app.use(server)
 }
 
-function herbs2rest({ routes, config }) {
+async function herbs2rest({ server, config }) {
 
-    // Herbs to REST will populate the Express routes and controllers 
-    // based on your entities and use cases.
+    // Herbs2REST will populate the Express endpoints 
+    // based on your use cases and entities.
 
-    // 1. Prepare Routes and Controllers
-    // Firts, it will pre-generate all routes for your use cases 
-    // using the default controller implementation. 
-    // Later, you will have the opportunity to customize it.
-    const controllers = generateControllers({ herbarium, controller })
+    // 1. Prepare your use cases metadata if needed
+    // Ex: herbarium.usecases.get('SearchUser').metadata({ REST: [{ method: 'GET' }] })
 
-    // 2. Add Custom Route and Controller
-    // controllers.push({
-    //     name: 'Search',
-    //     post: {
-    //         usecase: herbarium.usecases.get('SearchUsers').usecase,
-    //         controller: searchController
-    //     }
-    // })
+    // 2. Populate the metadata
+    // Each use case will be populated with the metadata:
+    // version, resource, method, path, parameters, parametersHandler, controller
+    populateMetadata({ herbarium, controller, version: 'v1' })
 
-    // 3. Or Edit Default Controllers 
-    // const userControllers = controllers.find((ctrl) => ctrl.name === 'User')
-    // userControllers.delete.controller = async (uc, req, user, res, next) => res.status(200).end()
+    // 3. Generate the endpoints based on the metadata
+    generateEndpoints({ herbarium, server })
 
-    // 4. Apply Routes and Controllers to Express
-    const showEndpoints = !config.isProd
-    generateRoutes(controllers, routes, showEndpoints)
 }
 
 module.exports = { rest }
