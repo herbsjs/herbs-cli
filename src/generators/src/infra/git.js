@@ -18,10 +18,6 @@ module.exports =
               return
             }
           })
-        await generate({
-          template: 'infra/config/.gitignore.ejs',
-          target: '.gitignore',
-        })
         await system.run('git init', { cwd: directory })
         await system.run('git add --all', { cwd: directory })
         await system.run('git commit -m "initial commit"', { cwd: directory })
