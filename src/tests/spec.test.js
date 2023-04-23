@@ -23,7 +23,8 @@ describe('When I use Herbs Spec', () => {
       await setGitEmail()
       await generateProject()
       const result = await herbsSpec()
-      expect(result).to.deep.contains('Specs finished with no errors! 🤩')
+      // 13 is the number of tests in the sample project
+      expect(result).to.deep.contains('Passing:  13') 
     })
 })
 
