@@ -1,3 +1,10 @@
+# [2.19.0-beta.3](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.2...v2.19.0-beta.3) (2023-04-26)
+
+
+### Features
+
+* **shelf:** using new Herbsshelf with Endpoint section ([5674a75](https://github.com/herbsjs/herbs-cli/commit/5674a754df475219840804d50c53dd1431d32ea2))
+
 # [2.19.0-beta.2](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.1...v2.19.0-beta.2) (2023-04-14)
 
 
