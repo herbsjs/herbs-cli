@@ -17,18 +17,21 @@ const create<%- props.name.pascalCase %> = injection =>
     // authorize: (user) => (user.canCreate<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
+    setup: ctx => {
+      ctx.di = Object.assign({}, dependency, injection)
+      ctx.data = {}
+    },
 
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
-      ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
+      ctx.data.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
+      <% if(!props.mongo){ %>ctx.data.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
       
-      if (!ctx.<%- props.name.camelCase %>.isValid()) 
+      if (!ctx.data.<%- props.name.camelCase %>.isValid()) 
         return Err.invalidEntity({
           message: 'The <%- props.name.raw %> entity is invalid', 
           payload: { entity: '<%- props.name.raw %>' },
-          cause: ctx.<%- props.name.camelCase %>.errors 
+          cause: ctx.data.<%- props.name.camelCase %>.errors 
         })
 
       // returning Ok continues to the next step. Err stops the use case execution.
@@ -37,7 +40,7 @@ const create<%- props.name.pascalCase %> = injection =>
 
     'Save the <%- props.name.raw %>': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
-      const <%- props.name.camelCase %> = ctx.<%- props.name.camelCase %>
+      const <%- props.name.camelCase %> = ctx.data.<%- props.name.camelCase %>
       // ctx.ret is the return value of a use case
       return (ctx.ret = await repo.insert(<%- props.name.camelCase %>))
     })
