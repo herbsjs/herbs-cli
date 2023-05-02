@@ -18,16 +18,13 @@ const update<%- props.name.pascalCase %> = injection =>
     // authorize: (user) => (user.canUpdate<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    setup: ctx => {
-      ctx.di = Object.assign({}, dependency, injection)
-      ctx.data = {}
-    },
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     'Retrieve the <%- props.name.raw %>': step(async ctx => {
       const id = ctx.req.id
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       const [<%- props.name.camelCase %>] = await repo.findByID(id)
-      ctx.data.<%- props.name.camelCase %> = <%- props.name.camelCase %>
+      ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
       if (<%- props.name.camelCase %> === undefined) return Err.notFound({
         message: `<%- props.name.pascalCase %> not found - ID: ${id}`,
         payload: { entity: '<%- props.name.raw %>' }
@@ -37,9 +34,9 @@ const update<%- props.name.pascalCase %> = injection =>
     }),
 
     'Check if it is a valid <%- props.name.raw %> before update': step(ctx => {
-      const old<%- props.name.pascalCase %> = ctx.data.<%- props.name.camelCase %>
+      const old<%- props.name.pascalCase %> = ctx.<%- props.name.camelCase %>
       const new<%- props.name.pascalCase %> = <%- props.name.pascalCase %>.fromJSON(merge.all([ old<%- props.name.pascalCase %>, ctx.req ]))
-      ctx.data.<%- props.name.camelCase %> = new<%- props.name.pascalCase %>
+      ctx.<%- props.name.camelCase %> = new<%- props.name.pascalCase %>
 
       return new<%- props.name.pascalCase %>.isValid() ? Ok() : Err.invalidEntity({
         message: `<%- props.name.pascalCase %> is invalid`,
@@ -52,7 +49,7 @@ const update<%- props.name.pascalCase %> = injection =>
     'Update the <%- props.name.pascalCase %>': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       // ctx.ret is the return value of a use case
-      return (ctx.ret = await repo.update(ctx.data.<%- props.name.camelCase %>))
+      return (ctx.ret = await repo.update(ctx.<%- props.name.camelCase %>))
     })
 
   })
