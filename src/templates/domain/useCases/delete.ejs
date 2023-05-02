@@ -19,15 +19,12 @@ const delete<%- props.name.pascalCase %> = injection =>
     // authorize: (user) => (user.canDelete<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
-    setup: ctx => {
-      ctx.di = Object.assign({}, dependency, injection)
-      ctx.data = {}
-    },
+    setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
     'Check if the <%- props.name.pascalCase %> exist': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       const [<%- props.name.camelCase %>] = await repo.findByID(ctx.req.id)
-      ctx.data.<%- props.name.camelCase %> = <%- props.name.camelCase %>
+      ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
 
       if (<%- props.name.camelCase %>) return Ok()
       return Err.notFound({
@@ -38,7 +35,7 @@ const delete<%- props.name.pascalCase %> = injection =>
 
     'Delete the <%- props.name.pascalCase %>': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
-      ctx.ret = await repo.delete(ctx.data.<%- props.name.camelCase %>)
+      ctx.ret = await repo.delete(ctx.<%- props.name.camelCase %>)
       // ctx.ret is the return value of a use case
       return Ok(ctx.ret)
     })
