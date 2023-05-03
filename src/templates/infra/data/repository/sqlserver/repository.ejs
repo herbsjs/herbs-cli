@@ -8,7 +8,9 @@ class <%- props.name.pascalCase %>Repository extends Repository {
         super({
             entity: <%- props.name.pascalCase %>,
             table: "<%- props.table %>",
-            knex: connection
+            ids: [<% for (const [index, value] of Object.entries(props.primaryKeyFields)) { %><%if(index != 0) { %>, <% } %>'<%= value %>'<% } %>],
+            knex: connection<%if(Object.values(props.foreignKeysFields).length) {%>,
+            foreignKeys: [{ <% Object.entries(props.foreignKeysFields).forEach(([key, value], index) => {%><%if(index != 0) { %>, <% } %><%= key %>: <%= value %><% }) %> }]<% }%>
         })
     }
 }

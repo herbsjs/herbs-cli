@@ -3,20 +3,44 @@ const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 const path = require('path')
 
+const types = {String , Boolean, Number, undefined, Symbol, Object, Null: null}
+
+function generateForeignKeysField(schema) {
+  const idFieldsNames = {}
+  Object.values(schema).map(field => {
+    if (types[field.type.name]) return
+
+    const { schema, name } = field.type.prototype.meta
+
+    Object.values(schema).map(idFields => {
+      if(idFields.options.isId)
+        idFieldsNames[`${camelCase(name)}_${idFields.name}`] = idFields.type.name
+    })
+  })
+  return idFieldsNames
+}
+
 async function generateRepositories(generate, filesystem, db, command) {
   const requires = {}
-
   const herbarium = requireHerbarium(command, filesystem.cwd())
   const entities = herbarium.entities.all
 
   for (const entity of Array.from(entities.values())) {
-    const { name } = entity.entity.prototype.meta
+    const { name, schema } = entity.entity.prototype.meta
     const lowCCName = camelCase(name)
     const repositoryPath = path.normalize(`${filesystem.cwd()}/src/infra/data/repositories/${lowCCName}Repository.js`)
+    let foreignKeysFields
+    const primaryKeyFields = []
+    Object.values(schema).filter(idFields => {
+      if(idFields.options.isId)
+        primaryKeyFields.push(idFields.name)
+    })
 
     requires[`${lowCCName}Repository`] = `await new (require('./${lowCCName}Repository.js'))(conn)`
 
     if (fs.existsSync(repositoryPath)) continue
+
+    if (db !== 'mongo') foreignKeysFields = generateForeignKeysField(schema) 
 
     await generate({
       template: `infra/data/repository/${db}/repository.ejs`,
@@ -24,8 +48,10 @@ async function generateRepositories(generate, filesystem, db, command) {
       props: {
         name: {
           pascalCase: name,
-          camelCase: lowCCName
+          camelCase: lowCCName,
         },
+        primaryKeyFields,
+        foreignKeysFields,
         table: `${lowCCName}s`
       }
     })
