@@ -1,3 +1,10 @@
+# [2.19.0-beta.4](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.3...v2.19.0-beta.4) (2023-05-11)
+
+
+### Bug Fixes
+
+* **templates:** fix small bugs (cases, refs, etc) on templates ([1193e27](https://github.com/herbsjs/herbs-cli/commit/1193e27e00ff11472f5c2daac4101354c6e77e4e))
+
 # [2.19.0-beta.3](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.2...v2.19.0-beta.3) (2023-04-26)
 
 
