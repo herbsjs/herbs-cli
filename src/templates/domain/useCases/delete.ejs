@@ -6,7 +6,7 @@ const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repo
 const dependency = { <%- props.name.pascalCase %>Repository }
 
 const delete<%- props.name.pascalCase %> = injection =>
-  usecase('Delete <%- props.name.pascalCase %>', {
+  usecase('Delete <%- props.name.raw %>', {
     // Input/Request metadata and validation 
     request: {
       id: String

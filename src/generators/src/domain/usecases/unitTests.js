@@ -1,4 +1,5 @@
 const camelCase = require('lodash.camelcase')
+const upperFirst = require('lodash.upperfirst')
 const { objToString, requireHerbarium } = require('../../../utils')
 const fs = require('fs')
 const path = require('path')
@@ -90,7 +91,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
         target: ucPath,
         props: {
           name: {
-            pascalCase: name,
+            pascalCase: upperFirst(camelCase(name)),
             camelCase: camelCase(name),
             raw: camelCase(name).replace(/([a-z0-9])([A-Z])/g, '$1 $2')
           },

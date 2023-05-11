@@ -6,7 +6,7 @@ const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repo
 const dependency = { <%- props.name.pascalCase %>Repository }
 
 const findAll<%- props.name.pascalCase %> = injection =>
-  usecase('Find all <%- props.name.pascalCase %>s', {
+  usecase('Find all <%- props.name.raw %>s', {
     // Input/Request metadata and validation
     request: {
       limit: Number,

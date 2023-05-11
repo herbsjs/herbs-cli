@@ -1,5 +1,6 @@
 const { requireHerbarium } = require('../../../../utils')
 const camelCase = require('lodash.camelcase')
+const upperFirst = require('lodash.upperfirst')
 const fs = require('fs')
 const path = require('path')
 
@@ -23,7 +24,7 @@ async function generateRepositories(generate, filesystem, db, command) {
       target: repositoryPath,
       props: {
         name: {
-          pascalCase: name,
+          pascalCase: upperFirst(camelCase(name)),
           camelCase: lowCCName
         },
         table: `${lowCCName}s`

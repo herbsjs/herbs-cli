@@ -7,7 +7,7 @@ const optionalPackages = {
   sqlite: ['"@herbsjs/herbs2knex": "2.1.1-beta.1"', '"sqlite3": "^5.0.11"'],
   sqlserver: ['"@herbsjs/herbs2knex": "2.1.1-beta.1"', '"tedious": "^15.1.0"', '"mssql": "^9.0.1"'],
   mysql: ['"@herbsjs/herbs2knex": "2.1.1-beta.1"', '"mysql2": "^2.3.3"'],
-  rest: ['"@herbsjs/herbs2rest": "4.1.0-beta.4"', '"express": "^4.18.1"', '"cors": "^2.8.5"'],
+  rest: ['"@herbsjs/herbs2rest": "4.1.0-beta.8"', '"express": "^4.18.1"', '"cors": "^2.8.5"'],
   graphql: ['"@herbsjs/herbs2gql": "^3.1.0-beta.1"', '"graphql": "^16.5.0"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
 }
 
@@ -47,9 +47,9 @@ module.exports =
         : ''
 
       let packages = [
-        '"@herbsjs/herbs": "^2.1.0-beta.4"',
+        '"@herbsjs/herbs": "^2.1.0-beta.5"',
         '"@herbsjs/herbarium": "^1.5.0"',
-        '"@herbsjs/herbsshelf": "^5.1.0-beta.2"',
+        '"@herbsjs/herbsshelf": "^5.1.0-beta.5"',
         '"dotenv": "^16.0.1"',
         '"deepmerge": "^4.2.2"',
         '"nodemon": "^2.0.19"',

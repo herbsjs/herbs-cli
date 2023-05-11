@@ -1,6 +1,6 @@
 const useCases = ['create', 'update', 'delete', 'findAll', 'find']
 const { objToString, requireHerbarium } = require('../../../utils')
-const pascalCase = require('lodash.startcase')
+const upperFirst = require('lodash.upperfirst')
 const camelCase = require('lodash.camelcase')
 const fs = require('fs')
 const path = require('path')
@@ -48,7 +48,7 @@ module.exports = async ({ template: { generate }, filesystem }, command) => asyn
         props: {
           name: {
             raw: name,
-            pascalCase: pascalCase(name),
+            pascalCase: upperFirst(camelCase(name)),
             camelCase: camelCase(name)
           },
           request: await generateRequestschema(schema),
