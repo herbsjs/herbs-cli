@@ -47,6 +47,7 @@ module.exports =
           const columns = []
           Object.keys(schema).forEach((prop) => {
             const { name, type, options } = schema[prop]
+            if (typeof schema[prop] === 'function') return
             columns.push(`table.${type2Str(type)}('${snakeCase(name)}')${options.isId ? '.primary()' : ''}`)
           })
           return columns

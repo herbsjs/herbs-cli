@@ -57,6 +57,7 @@ const valueType = {
 function generateMockObj(schema) {
   const obj = {}
   for (const key of Object.keys(schema)) {
+    if (typeof schema[key] === 'function') continue
     obj[key] = valueType[schema[key].type.name]
   }
   return obj
