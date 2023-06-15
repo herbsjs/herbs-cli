@@ -1,6 +1,6 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const findAll<%- props.name.pascalCase %> = require('./findAll<%- props.name.pascalCase %>')
-const assert = require('assert')
+const assert = require('assert').strict
 const { spec, scenario, given, check } = require('@herbsjs/herbs').specs
 const { herbarium } = require('@herbsjs/herbarium')
 
@@ -31,7 +31,7 @@ const findAll<%- props.name.pascalCase %>Spec = spec({
       }),
 
       'Must return a list of <%- props.name.raw %>s': check((ctx) => {
-        assert.strictEqual(ctx.response.ok.length, 1)
+        assert.equal(ctx.response.ok.length, 1)
       })
 
     }),

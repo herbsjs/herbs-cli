@@ -1,6 +1,6 @@
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const delete<%- props.name.pascalCase %> = require('./delete<%- props.name.pascalCase %>')
-const assert = require('assert')
+const assert = require('assert').strict
 const { spec, scenario, given, check } = require('@herbsjs/herbs').specs
 const { herbarium } = require('@herbsjs/herbarium')
 

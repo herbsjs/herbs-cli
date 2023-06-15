@@ -1,5 +1,5 @@
 const create<%- props.name.pascalCase %> = require('./create<%- props.name.pascalCase %>')
-const assert = require('assert')
+const assert = require('assert').strict
 const { spec, scenario, given, check } = require('@herbsjs/herbs').specs
 const { herbarium } = require('@herbsjs/herbarium')
 
@@ -27,7 +27,7 @@ const create<%- props.name.pascalCase %>Spec = spec({
       }),
 
       'Must return a valid <%- props.name.raw %>': check((ctx) => {
-        assert.strictEqual(ctx.response.ok.isValid(), true)
+        assert.equal(ctx.response.ok.isValid(), true)
         // TODO: check if it is really a <%- props.name.raw %>
       })
 
@@ -39,18 +39,14 @@ const create<%- props.name.pascalCase %>Spec = spec({
           <%- props.request.invalid %>
         },
         user: { hasAccess: true },
-        injection: {
-            <%- props.name.camelCase %>Repository: new ( class <%- props.name.pascalCase %>Repository {
-              async insert(<%- props.name.camelCase %>) { return (<%- props.name.camelCase %>) }
-            })
-        },
+        injection: {},
       }),
 
       // when: default when for use case
 
       'Must return an error': check((ctx) => {
         assert.ok(ctx.response.isErr)  
-        // assert.ok(ret.isInvalidEntityError)
+        // assert.ok(ctx.response.isInvalidEntityError)
       }),
 
     }),
