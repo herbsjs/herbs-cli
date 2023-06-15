@@ -1,3 +1,14 @@
+# [2.19.0-beta.5](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.4...v2.19.0-beta.5) (2023-06-15)
+
+
+### Bug Fixes
+
+* **assist:** fix model and token limit ([97eff79](https://github.com/herbsjs/herbs-cli/commit/97eff79cadca582ec26be64e05c809185e67318d))
+* **assist:** token limit ([662603f](https://github.com/herbsjs/herbs-cli/commit/662603f92abbc9838c2446a851745231d2835b02))
+* **entity:** entities with functions / methods ([c8038c7](https://github.com/herbsjs/herbs-cli/commit/c8038c7f7a7c963b7de418b2e13739b89015b073))
+* **rest:** add console error ([67f302e](https://github.com/herbsjs/herbs-cli/commit/67f302ebcd6a8e2ada01ecd64f36426e3dfaa081))
+* **usecases:** fix use cases templates ([a3c58fb](https://github.com/herbsjs/herbs-cli/commit/a3c58fba94602d1b8c0acb4854c25cb09a99fa86))
+
 # [2.19.0-beta.4](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.3...v2.19.0-beta.4) (2023-05-11)
 
 
