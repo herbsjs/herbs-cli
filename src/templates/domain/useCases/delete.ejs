@@ -21,19 +21,19 @@ const delete<%- props.name.pascalCase %> = injection =>
 
     setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
 
-    'Check if the <%- props.name.pascalCase %> exist': step(async ctx => {
+    'Check if the <%- props.name.raw %> exist': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       const [<%- props.name.camelCase %>] = await repo.findByID(ctx.req.id)
       ctx.<%- props.name.camelCase %> = <%- props.name.camelCase %>
 
       if (<%- props.name.camelCase %>) return Ok()
       return Err.notFound({
-          message: `<%- props.name.pascalCase %> ID ${ctx.req.id} does not exist`,
+          message: `<%- props.name.raw %> ID ${ctx.req.id} does not exist`,
           payload: { entity: '<%- props.name.raw %>' }
       })
     }),
 
-    'Delete the <%- props.name.pascalCase %>': step(async ctx => {
+    'Delete the <%- props.name.raw %>': step(async ctx => {
       const repo = new ctx.di.<%- props.name.pascalCase %>Repository(injection)
       ctx.ret = await repo.delete(ctx.<%- props.name.camelCase %>)
       // ctx.ret is the return value of a use case

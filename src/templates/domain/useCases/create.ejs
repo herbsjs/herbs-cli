@@ -24,7 +24,7 @@ const create<%- props.name.pascalCase %> = injection =>
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
       <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
       
-      if (!ctx.<%- props.name.camelCase %>.isValid()) 
+      if (!ctx.<%- props.name.camelCase %>.isValid({ exceptIDs: true, references: { onlyIDs: true } })) 
         return Err.invalidEntity({
           message: 'The <%- props.name.raw %> entity is invalid', 
           payload: { entity: '<%- props.name.raw %>' },
