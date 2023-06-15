@@ -35,6 +35,7 @@ const controller = async ({ usecase, request, authorizationInfo, res, next }) =>
         res.end()
 
     } catch (error) {
+        console.error(error)
         res.status(500).json({ error: error.name, message: error.message })
         next()
     }
