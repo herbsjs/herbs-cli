@@ -265,13 +265,16 @@ const command = {
             template.generate({
                 template: 'assist/usecase.codex.ejs',
                 target: usecasePrompt,
-                props: { spec },
+                props: { usecaseName, spec },
             })
 
-            // generate the use case
             const codexPrompt = fs.readFileSync(usecasePrompt, 'utf8')
+            const prompt = codexPrompt.substring(0, 2046 * 4) // one token ~= 4 characters
+            fs.writeFileSync(usecasePrompt, prompt)
+
+            // generate the use case
             const response = connectedMode ?
-                await generateOpenAIFile({ tmpFileName: usecasePromptReturn, codexPrompt }) :
+                await generateOpenAIFile({ tmpFileName: usecasePromptReturn, codexPrompt: prompt }) :
                 fs.readFileSync(usecasePromptReturn, 'utf8') // fake generated file
             let usecase = parseResponse(response)
 
@@ -312,10 +315,10 @@ const command = {
         }
 
         async function generateOpenAIFile({
-            model = "code-davinci-002",
+            model = "text-davinci-003",
             codexPrompt,
             temperature = 0.3,
-            max_tokens = 1500,
+            max_tokens = 1800,
             top_p = 1,
             best_of = 1,
             frequency_penalty = 0.04,
