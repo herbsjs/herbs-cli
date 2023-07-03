@@ -1,3 +1,11 @@
+# [2.19.0-beta.6](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.5...v2.19.0-beta.6) (2023-07-03)
+
+
+### Features
+
+* **api:** improve API DX: REST and GraphQL ([0c0bebf](https://github.com/herbsjs/herbs-cli/commit/0c0bebf0896cb72b2f3b2c96ceb85962a9e5374e))
+* **graphql:** bump herbs2gql version ([7b5faba](https://github.com/herbsjs/herbs-cli/commit/7b5faba26aef3f0156717c314bdb8964ad555b89))
+
 # [2.19.0-beta.5](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.4...v2.19.0-beta.5) (2023-06-15)
 
 
