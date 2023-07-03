@@ -9,16 +9,22 @@ async function graphql(app, config) {
   // based on your entities and use cases.
 
   // 1. Prepare Schema and Resolvers
-  // Firts, it will pre-generate all schema for your use cases and entities
+  // Firts, it will extract a gql schema from your entities and use cases
   // using the default resolver implementation.
-  // Later, you will have the opportunity to customize it.
   const { types, queries, mutations } = herbs2gql({ herbarium, resolver })
 
   // 2. Add Custom Schema and Resolver
-  // Types, Queries, Mutations can receive custom items
-  // queries.push(require('./custom/getItem'))
-  // mutations.push(require('./custom/createItem'))
-  // types.push(require('./custom/Item'))
+  // Types, Queries, Mutations can receive custom items.
+  // types.push([`input CreateUserInput { name: String }`])
+  // mutations.push([
+  //     'extend type Mutation { CreateUser (input: CreateUserInput): Boolean }',
+  //     { Mutation: { CreateUser: resolver(CreateUser) } }
+  // ])
+  // 
+  // queries.push([
+  //     'extend type Query { findUser (id: String) : CustomerSubscription }',
+  //     { Query: { findUser: resolver(FindUser) } }
+  // ])
   types.push(require('./custom/date'))
 
   /* Default Schemas */

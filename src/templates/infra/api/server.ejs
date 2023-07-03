@@ -34,7 +34,7 @@ async function start(config) {
   return app.listen(
     { port: config.api.port },
     // eslint-disable-next-line no-console
-    () => console.log(`🚀 Server UP and 🌪️  - http://localhost:${config.api.port}/`))
+    () => console.log(`🚀 Server UP and 🌪️  - http://localhost:${config.api.port}/\n`))
 }
 
 module.exports = { start }

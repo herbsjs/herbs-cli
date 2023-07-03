@@ -24,7 +24,15 @@ async function herbs2rest({ server, config }) {
     // based on your use cases and entities.
 
     // 1. Prepare your use cases metadata if needed
-    // Ex: herbarium.usecases.get('SearchUser').metadata({ REST: [{ method: 'GET' }] })
+    // Ex:     
+    // herbarium.usecases.get('SearchUser').metadata({    
+    //     REST: [{    
+    //         version: 'v1',    
+    //         method: 'GET',    
+    //         path: '/v1/search/',    
+    //         parameters: { query: { id: String } },
+    //     }]    
+    // })
 
     // 2. Populate the metadata
     // Each use case will be populated with the metadata:

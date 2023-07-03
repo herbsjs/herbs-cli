@@ -17,6 +17,7 @@ module.exports = async (tools) => {
       index: await require('./src/index')(tools, cmd.new),
       readme: await require('./src/readme')(tools, cmd.new),
       permissions: await require('./src/infra/shell/permissions')(tools, cmd.new),
+      log: await require('./src/infra/log/log')(tools, cmd.new),
       git: options.git ? await require('./src/infra/git')(tools, cmd.new) : ignore
     },
     update: {
