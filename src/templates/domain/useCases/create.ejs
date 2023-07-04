@@ -3,11 +3,12 @@ const { herbarium } = require('@herbsjs/herbarium')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
+const uuid = require('uuid')
 const dependency = { <%- props.name.pascalCase %>Repository }
 
 const create<%- props.name.pascalCase %> = injection =>
   usecase('Create <%- props.name.pascalCase %>', {
-    // Input/Request metadata and validation 
+    // Input/Request metadata and validation
     request: request.from(<%- props.name.pascalCase %>, { ignoreIDs: true }),
 
     // Output/Response metadata
@@ -22,17 +23,16 @@ const create<%- props.name.pascalCase %> = injection =>
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      <% if(!props.mongo){ %>ctx.<%- props.name.camelCase %>.id = Math.floor(Math.random() * 100000).toString()<% } %>
-      
-      if (!ctx.<%- props.name.camelCase %>.isValid()) 
+      ctx.<%- props.name.camelCase %>.id = uuid.v4()
+      if (!ctx.<%- props.name.camelCase %>.isValid())
         return Err.invalidEntity({
-          message: 'The <%- props.name.raw %> entity is invalid', 
+          message: 'The <%- props.name.raw %> entity is invalid',
           payload: { entity: '<%- props.name.raw %>' },
-          cause: ctx.<%- props.name.camelCase %>.errors 
+          cause: ctx.<%- props.name.camelCase %>.errors
         })
 
       // returning Ok continues to the next step. Err stops the use case execution.
-      return Ok() 
+      return Ok()
     }),
 
     'Save the <%- props.name.raw %>': step(async ctx => {
