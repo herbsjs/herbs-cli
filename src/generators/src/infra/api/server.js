@@ -12,4 +12,14 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
     template: 'infra/api/auth.ejs',
     target: 'src/infra/api/auth.js',
   })
+
+  await generate({
+    template: 'infra/api/sec.ejs',
+    target: 'src/infra/api/sec.js',
+  })
+
+  await generate({
+    template: 'infra/api/shelf.ejs',
+    target: 'src/infra/api/shelf.js',
+  })
 }

@@ -1,15 +1,9 @@
 const express = require('express')
-const cors = require('cors')
-const { json } = require('body-parser')
 const { populateMetadata, generateEndpoints } = require('@herbsjs/herbs2rest')
 const { herbarium } = require('@herbsjs/herbarium')
 const controller = require('./controller')
 
 async function rest(app, config) {
-
-    // Request security
-    app.use(json({ limit: '50mb' }))
-    app.use(cors())
 
     const server = new express.Router()
 

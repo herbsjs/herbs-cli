@@ -10,9 +10,13 @@ module.exports = async ({ template: { generate }, parameters: { options } }) => 
       api: 'require(\'./api\')'
     }
 
+    const uuid = require('uuid')
+    const jwtSecret = `${uuid.v4()}${uuid.v4()}`
+
     await generate({
       template: 'infra/config/api.ejs',
-      target: 'src/infra/config/api.js'
+      target: 'src/infra/config/api.js',
+      props: { jwtSecret, ...options }
     })
 
     const db = options.database

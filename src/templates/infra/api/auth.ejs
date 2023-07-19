@@ -1,11 +1,59 @@
+const passport = require('passport')
+const passportJwt = require('passport-jwt')
+const { logException } = require('../log/api')
+
+// Setup authentication
+// 1. Set the JWT_SECRET environment variable on .env file
+// 2. Create a JWT token with the userId (ex: { userId: '123' })
+//   - You can use https://jwt.io/ to create the token
+//   - Be careful to not expose production secrets on public websites
+// 3. Set the Authorization header on the request with the token
+//   - Use "Bearer" as the type of the token
+// 4. Change the findUserPermissions func to find the permissions 
+//    of the user on your repository (db, auth service, etc)
+// 5. Change use case 'authorize' step to validate the permissions
+//    - authorize: (user) => (user.canCreateProduct ? Ok() : Err()),
+
 async function auth(app, config) {
 
-    app.use((req, res, next) => {
-        // Auth - Add user info on req object
-        // req.user = { id: 1 }
-        next()
-    })
+    async function findUserPermissions({ userId }, done) {
+        let error = null
+        try {
+            const user = { id: userId, permissions: [] }
+            return done(null, user)
+            // const uc = findUser()
+            // await uc.authorize()
+            // const response = await uc.run({ id: userId })
+            // if (response.isOk) return done(null, response.ok)
+        } catch (err) {
+            error = err
+        }
+        logException({ error, endpoint: 'auth', transport: 'HTTP', user: { id: userId } })
+        return done(error, false)
+    }
 
+    function authRequestHandler(req, res, next) {
+        passport.authenticate('jwt', { session: false }, (err, user) => {
+            if (!err) {
+                req.user = user ? user : { id: 'anonymous', permissions: [] }
+                return next()
+            }
+            logException({ error: err, endpoint: req.originalUrl, transport: 'HTTP' })
+            return res.status(401).json({ error: err })
+        })(req, res, next)
+    }
+
+    const { Strategy, ExtractJwt } = passportJwt
+    const strategy = new Strategy({
+        secretOrKey: config.api.auth.jwtSecret,
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    }, findUserPermissions)
+
+    passport.use(strategy)
+
+    app.use(passport.initialize())
+
+    app.use(authRequestHandler)
 }
 
 module.exports = { auth }

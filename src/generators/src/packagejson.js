@@ -7,7 +7,7 @@ const optionalPackages = {
   sqlite: ['"@herbsjs/herbs2knex": "2.1.1-beta.3"', '"sqlite3": "^5.0.11"'],
   sqlserver: ['"@herbsjs/herbs2knex": "2.1.1-beta.3"', '"tedious": "^15.1.0"', '"mssql": "^9.0.1"'],
   mysql: ['"@herbsjs/herbs2knex": "2.1.1-beta.3"', '"mysql2": "^2.3.3"'],
-  rest: ['"@herbsjs/herbs2rest": "4.1.0-beta.10"', '"express": "^4.18.1"', '"cors": "^2.8.5"'],
+  rest: ['"@herbsjs/herbs2rest": "4.1.0-beta.12"', '"express": "^4.18.1"'],
   graphql: ['"@herbsjs/herbs2gql": "^4.0.0-beta.2"', '"graphql": "^16.5.0"', '"apollo-server": "^3.8.2"','"apollo-server-express": "^3.8.2"', '"graphql-tools": "^8.2.12"', '"graphql-scalars": "^1.17.0"',]
 }
 
@@ -49,13 +49,16 @@ module.exports =
       let packages = [
         '"@herbsjs/herbs": "^2.1.0-beta.6"',
         '"@herbsjs/herbarium": "^1.5.0"',
-        '"@herbsjs/herbsshelf": "^5.1.0-beta.5"',
+        '"@herbsjs/herbsshelf": "^5.1.0-beta.6"',
         '"dotenv": "^16.0.1"',
         '"deepmerge": "^4.2.2"',
         '"nodemon": "^2.0.19"',
         '"mocha": "^10.0.0"',
-        '"lodash.camelcase": "^4.3.0"',
-        '"sugar-env": "^1.5.14"'
+        '"sugar-env": "^1.5.14"',
+        '"cors": "^2.8.5"',
+        '"helmet": "^7.0.0"',
+        '"passport": "^0.6.0"',
+        '"passport-jwt": "^4.0.1"',
       ]
 
       for (const key of Object.keys(options)) {

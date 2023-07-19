@@ -1,15 +1,17 @@
 const { logOK, logException } = require('../../log/api')
 
 const controller = async ({ usecase, request, authorizationInfo, req, res, next, path, method }) => {
+    const user = authorizationInfo
+
     try {
         const uc = usecase()
 
         /* Authorization */
-        const hasAccess = await uc.authorize(authorizationInfo)
+        const hasAccess = await uc.authorize(user)
         if (hasAccess === false) {
-            // eslint-disable-next-line no-console
-            console.info(uc.auditTrail)
-            return res.status(403).json({ message: 'User is not authorized' })
+            const errorMsg = `User is not authorized.`
+            logException({ uc, user, error: errorMsg, transport: 'REST', endpoint: `${method} ${path}` })
+            return res.status(403).json({ message: errorMsg, userId: user?.id, usecase: uc?.description })
         }
 
         /* Execution */
@@ -20,7 +22,7 @@ const controller = async ({ usecase, request, authorizationInfo, req, res, next,
         // console.info(uc.auditTrail)
 
         /* Log */
-        logOK({ uc, response, transport: 'REST', endpoint: `${method} ${path}` })
+        logOK({ uc, user, response, transport: 'REST', endpoint: `${method} ${path}` })
 
         /* Response */
         if (response.isOk) {
@@ -39,7 +41,7 @@ const controller = async ({ usecase, request, authorizationInfo, req, res, next,
         }
         res.end()
     } catch (error) {
-        logException({ error, transport: 'REST', endpoint: `${method} ${path}` })
+        logException({ error, user, transport: 'REST', endpoint: `${method} ${path}` })
         res.status(500).json({ error: error.name, message: error.message })
         next()
     }

@@ -49,7 +49,7 @@ async function graphql(app, config) {
     typeDefs,
     resolvers,
     // Authorization
-    // context: ({ req }) => ({ user })
+    context: ({ req }) => ({ user: req.user })
   })
   await server.start()
   server.applyMiddleware({ app: app, path: config.api.graphql.rootPath })

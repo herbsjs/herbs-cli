@@ -5,15 +5,14 @@ const { logOK, logException } = require('../../log/api')
 function resolver(usecase) {
     return async function resolver(_parent, args, context, _info) {
         let exception
+        const user = context?.user
         try {
             const uc = usecase()
 
             /* Authorization */
-            const hasAccess = await uc.authorize(context.user)
+            const hasAccess = await uc.authorize(user)
             if (hasAccess === false) {
-                // eslint-disable-next-line no-console
-                console.info(uc.auditTrail)
-                throw new ForbiddenError()
+                throw new ForbiddenError(`User is not authorized.`, { userId: user?.id, usecase: uc?.description })
             }
 
             /* Execution */
@@ -25,7 +24,7 @@ function resolver(usecase) {
             // console.info(uc.auditTrail)
 
             /* Log */
-            logOK({ uc, response, transport: 'GraphQL', endpoint: _info.fieldName })
+            logOK({ uc, user, response, transport: 'GraphQL', endpoint: _info.fieldName })
 
             /* Response */
             if (response.isOk)
@@ -43,7 +42,7 @@ function resolver(usecase) {
             else
                 exception = new UserInputError(null, { cause: response.err })
         } catch (error) {
-            logException({ error, transport: 'GraphQL', endpoint: _info.fieldName })
+            logException({ error, user, transport: 'GraphQL', endpoint: _info.fieldName })
             exception = error
         }
         if (exception) throw exception

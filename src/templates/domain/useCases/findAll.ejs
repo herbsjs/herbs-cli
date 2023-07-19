@@ -17,6 +17,7 @@ const findAll<%- props.name.pascalCase %> = injection =>
     response: [<%- props.name.pascalCase %>],
 
     //Authorization with Audit
+    // authorize: (user) => (user.canFindAll<%- props.name.pascalCase %> ? Ok() : Err()),
     authorize: () => Ok(),
 
     setup: ctx => (ctx.di = Object.assign({}, dependency, injection)),
