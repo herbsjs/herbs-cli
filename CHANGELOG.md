@@ -1,3 +1,10 @@
+# [2.19.0-beta.7](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.6...v2.19.0-beta.7) (2023-07-19)
+
+
+### Features
+
+* **auth and sec:** generate new projects with jwt auth by default and turn on helmet lib for sec ([c806103](https://github.com/herbsjs/herbs-cli/commit/c8061033c7257dbd2389ff69baa7c67479d222e7))
+
 # [2.19.0-beta.6](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.5...v2.19.0-beta.6) (2023-07-03)
 
 
