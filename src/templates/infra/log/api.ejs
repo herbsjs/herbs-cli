@@ -10,6 +10,7 @@ function logOK({ uc, user, response, transport, endpoint, }) {
         `\n  🔌`, endpoint, `(${transport})`,
         errorMessages ? `\n  💡 ${errorMessages}` : ``,
         `\x1b[0m`)
+    breakLine()
 }
 
 function logException({ uc, user, error, endpoint, transport }) {
@@ -20,6 +21,13 @@ function logException({ uc, user, error, endpoint, transport }) {
         `\n  🔌\x1b[90m`, endpoint, `(${transport})`, `\x1b[0m`, `\n`,
         ` ❌`,
         error)
+    breakLine()
+}
+
+function breakLine() {
+    const columns = process.stdout.columns || 80
+    const line = `─`.repeat(columns - 2)
+    console.log(`\x1b[90m${line}\x1b[0m`)
 }
 
 module.exports = { logException, logOK }
