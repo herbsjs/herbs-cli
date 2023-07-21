@@ -1,3 +1,10 @@
+# [2.19.0-beta.8](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.7...v2.19.0-beta.8) (2023-07-21)
+
+
+### Features
+
+* **log api:** better log api ([8d0bd98](https://github.com/herbsjs/herbs-cli/commit/8d0bd980d01efb6fb2ebb4d1d14de0d0364e502f))
+
 # [2.19.0-beta.7](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.6...v2.19.0-beta.7) (2023-07-19)
 
 
