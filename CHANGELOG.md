@@ -1,3 +1,10 @@
+# [2.19.0-beta.9](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.8...v2.19.0-beta.9) (2023-08-01)
+
+
+### Features
+
+* **shelf:** bump shelf version ([d7cd0b1](https://github.com/herbsjs/herbs-cli/commit/d7cd0b18afa9326584e7d087a8f522ae32ecd8e5))
+
 # [2.19.0-beta.8](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.7...v2.19.0-beta.8) (2023-07-21)
 
 
