@@ -44,7 +44,8 @@ const create<%- props.name.pascalCase %> = injection =>
   })
 
 module.exports =
-  herbarium.usecases
-    .add(create<%- props.name.pascalCase %>, 'Create<%- props.name.pascalCase %>')
-    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.create, entity: <%- props.name.pascalCase %> })
-    .usecase
+  herbarium.nodes
+    .add('Create<%- props.name.pascalCase %>', create<%- props.name.pascalCase %>, herbarium.node.usecase)
+    .link('<%- props.name.pascalCase %>')
+    .metadata({ operation: herbarium.crud.create })
+    .value

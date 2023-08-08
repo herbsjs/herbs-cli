@@ -31,7 +31,8 @@ const findAll<%- props.name.pascalCase %> = injection =>
   })
 
 module.exports =
-  herbarium.usecases
-    .add(findAll<%- props.name.pascalCase %>, 'FindAll<%- props.name.pascalCase %>')
-    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.readAll, entity: <%- props.name.pascalCase %> })
-    .usecase
+  herbarium.nodes
+    .add('FindAll<%- props.name.pascalCase %>', findAll<%- props.name.pascalCase %>, herbarium.node.usecase)
+    .link('<%- props.name.pascalCase %>')
+    .metadata({ operation: herbarium.crud.readAll })
+    .value

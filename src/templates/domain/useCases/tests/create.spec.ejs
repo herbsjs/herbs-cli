@@ -53,7 +53,7 @@ const create<%- props.name.pascalCase %>Spec = spec({
   })
   
 module.exports =
-  herbarium.specs
-    .add(create<%- props.name.pascalCase %>Spec, 'Create<%- props.name.pascalCase %>Spec')
-    .metadata({ usecase: 'Create<%- props.name.pascalCase %>' })
-    .spec
+  herbarium.nodes
+    .add('Create<%- props.name.pascalCase %>Spec', create<%- props.name.pascalCase %>Spec, herbarium.node.spec)
+    .link('Create<%- props.name.pascalCase %>')
+    .value

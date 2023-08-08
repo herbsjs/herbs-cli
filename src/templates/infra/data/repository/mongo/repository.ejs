@@ -19,7 +19,7 @@ class <%- props.name.pascalCase %>Repository extends Repository {
 }
 
 module.exports =
-    herbarium.repositories
-        .add(<%- props.name.pascalCase %>Repository, '<%- props.name.pascalCase %>Repository')
-        .metadata({ entity: <%- props.name.pascalCase %> })
-        .repository
+    herbarium.nodes
+        .add('<%- props.name.pascalCase %>Repository', <%- props.name.pascalCase %>Repository, herbarium.node.repository)
+        .link('<%- props.name.pascalCase %>')
+        .value

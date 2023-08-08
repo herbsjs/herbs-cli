@@ -61,7 +61,7 @@ const find<%- props.name.pascalCase %>Spec = spec({
   })
   
 module.exports =
-  herbarium.specs
-    .add(find<%- props.name.pascalCase %>Spec, 'Find<%- props.name.pascalCase %>Spec')
-    .metadata({ usecase: 'Find<%- props.name.pascalCase %>' })
-    .spec
+  herbarium.nodes
+    .add('Find<%- props.name.pascalCase %>Spec', find<%- props.name.pascalCase %>Spec, herbarium.node.spec)
+    .link('Find<%- props.name.pascalCase %>')
+    .value    

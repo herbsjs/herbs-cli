@@ -98,7 +98,7 @@ const update<%- props.name.pascalCase %>Spec = spec({
   })
   
 module.exports =
-  herbarium.specs
-    .add(update<%- props.name.pascalCase %>Spec, 'Update<%- props.name.pascalCase %>Spec')
-    .metadata({ usecase: 'Update<%- props.name.pascalCase %>' })
-    .spec
+  herbarium.nodes
+    .add('Update<%- props.name.pascalCase %>Spec', update<%- props.name.pascalCase %>Spec, herbarium.node.spec)
+    .link('Update<%- props.name.pascalCase %>')
+    .value

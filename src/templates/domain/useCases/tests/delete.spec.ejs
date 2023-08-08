@@ -56,7 +56,7 @@ const delete<%- props.name.pascalCase %>Spec = spec({
   })
   
 module.exports =
-  herbarium.specs
-    .add(delete<%- props.name.pascalCase %>Spec, 'Delete<%- props.name.pascalCase %>Spec')
-    .metadata({ usecase: 'Delete<%- props.name.pascalCase %>' })
-    .spec
+  herbarium.nodes
+    .add('Delete<%- props.name.pascalCase %>Spec', delete<%- props.name.pascalCase %>Spec, herbarium.node.spec)
+    .link('Delete<%- props.name.pascalCase %>')
+    .value

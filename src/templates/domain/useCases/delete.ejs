@@ -42,7 +42,8 @@ const delete<%- props.name.pascalCase %> = injection =>
   })
 
 module.exports =
-  herbarium.usecases
-    .add(delete<%- props.name.pascalCase %>, 'Delete<%- props.name.pascalCase %>')
-    .metadata({ group: '<%- props.name.pascalCase %>', operation: herbarium.crud.delete, entity: <%- props.name.pascalCase %> })
-    .usecase
+  herbarium.nodes
+    .add('Delete<%- props.name.pascalCase %>', delete<%- props.name.pascalCase %>, herbarium.node.usecase)
+    .link('<%- props.name.pascalCase %>')
+    .metadata({ operation: herbarium.crud.delete })
+    .value

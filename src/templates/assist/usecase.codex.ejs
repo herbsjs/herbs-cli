@@ -108,10 +108,10 @@ const updateUserSpec = spec({
 })
 
 module.exports =
-    herbarium.specs
-        .add(updateUserSpec, 'UpdateUserSpec')
-        .metadata({ usecase: 'UpdateUser' })
-        .spec
+    herbarium.nodes
+        .add('UpdateUserSpec', updateUserSpec, herbarium.node.spec)
+        .link('UpdateUser')
+        .value
 ~~~~
 
 Output:
@@ -173,10 +173,11 @@ const updateUser = injection =>
     })
 
 module.exports =
-    herbarium.usecases
-        .add(updateUser, 'UpdateUser')
-        .metadata({ group: 'User', operation: herbarium.crud.update, entity: User })
-        .usecase
+    herbarium.nodes
+        .add('UpdateUser', updateUser, herbarium.node.usecase)
+        .link('User')
+        .metadata({ operation: herbarium.crud.update })
+        .value        
 END
 
 Example: `<%- props.usecaseName %>`
