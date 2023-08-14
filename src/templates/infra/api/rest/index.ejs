@@ -1,5 +1,5 @@
 const express = require('express')
-const { populateMetadata, generateEndpoints } = require('@herbsjs/herbs2rest')
+const { endpoints, routes } = require('@herbsjs/herbs2rest')
 const { herbarium } = require('@herbsjs/herbarium')
 const controller = require('./controller')
 
@@ -14,27 +14,29 @@ async function rest(app, config) {
 
 async function herbs2rest({ server, config }) {
 
-    // Herbs2REST will populate the Express endpoints 
+    // Herbs2REST will create Express endpoints
     // based on your use cases and entities.
 
-    // 1. Prepare your use cases metadata if needed
-    // Ex:     
-    // herbarium.usecases.get('SearchUser').metadata({    
-    //     REST: [{    
-    //         version: 'v1',    
-    //         method: 'GET',    
-    //         path: '/v1/search/',    
-    //         parameters: { query: { id: String } },
-    //     }]    
-    // })
+    // 1. Create endpoints
+    endpoints({ herbarium, controller }, {
+        'v1': (endpoints) => {
+            // endpoints.ignore('FindUser')
 
-    // 2. Populate the metadata
-    // Each use case will be populated with the metadata:
-    // version, resource, method, path, parameters, parametersHandler, controller
-    populateMetadata({ herbarium, controller, version: 'v1' })
+            // endpoints.for('SearchUser').use({
+            //     method: 'GET',
+            //     path: '/v1/search/',
+            //     parameters: { query: { id: String } },
+            // })
 
-    // 3. Generate the endpoints based on the metadata
-    generateEndpoints({ herbarium, server })
+            endpoints.build()
+        },
+        // 'v2': (endpoints) => {
+        //     endpoints.build()
+        // }
+    })
+
+    // 2. Attach the endpoints to Express
+    routes({ herbarium, server }).attach()
 
 }
 
