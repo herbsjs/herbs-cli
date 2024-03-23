@@ -1,3 +1,11 @@
+# [2.19.0-beta.10](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.9...v2.19.0-beta.10) (2024-03-23)
+
+
+### Features
+
+* **herbarium:** run on the new Herbarium interface ([608ec24](https://github.com/herbsjs/herbs-cli/commit/608ec243e518ea5d70ed0a83c7d729fc309cb8f7))
+* **rest:** new Herbs2REST interface ([da24813](https://github.com/herbsjs/herbs-cli/commit/da248134ed98f8bb3dbaa95cbebb37a4cf0cc788))
+
 # [2.19.0-beta.9](https://github.com/herbsjs/herbs-cli/compare/v2.19.0-beta.8...v2.19.0-beta.9) (2023-08-01)
 
 
