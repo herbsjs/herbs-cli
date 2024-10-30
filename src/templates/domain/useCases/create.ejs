@@ -8,7 +8,7 @@ const dependency = { <%- props.name.pascalCase %>Repository }
 
 const create<%- props.name.pascalCase %> = injection =>
   usecase('Create <%- props.name.pascalCase %>', {
-    // Input/Request metadata and validation
+    // Input/Request metadata and validation 
     request: request.from(<%- props.name.pascalCase %>, { ignoreIDs: true }),
 
     // Output/Response metadata
