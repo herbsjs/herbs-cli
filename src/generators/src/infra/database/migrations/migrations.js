@@ -35,6 +35,8 @@ module.exports =
             if (_type instanceof Boolean) return 'boolean'
             if (_type instanceof Date) return 'timestamp'
           }
+
+          if (Type === 'UUID') return 'uuid'
         }
 
         function getDBType(appDir) {
@@ -43,14 +45,23 @@ module.exports =
           return config.database.herbsCLI
         }
 
-        function createColumns(schema) {
+        function createColumns(schema, db) {
           const columns = []
           Object.keys(schema).forEach((prop) => {
             const { name, type, options } = schema[prop]
-            columns.push(`table.${type2Str(type)}('${snakeCase(name)}')${options.isId ? '.primary()' : ''}`)
+            if (options.isId) {
+              if (type2Str(type) === 'uuid' && db.toLowerCase() === 'postgres') {
+                columns.push(`table.uuid('${snakeCase(name)}').primary().defaultTo(knex.raw('uuid_generate_v4()'))`)
+              } else {
+                columns.push(`table.${type2Str(type)}('${snakeCase(name)}').primary()`)
+              }
+            } else {
+              columns.push(`table.${type2Str(type)}('${snakeCase(name)}')`)
+            }
           })
           return columns
         }
+        
 
         const db = getDBType(filesystem.cwd())
         const migrationName = new Date()
@@ -59,7 +70,7 @@ module.exports =
           .substring(0, 14)
         const migrationFullPath = path.normalize(`${migrationsPath}/${migrationName}_${camelCase(name)}s.js`)
 
-        const columns = createColumns(schema)
+        const columns = createColumns(schema, db)
 
         await generate({
           template: `infra/data/database/${db.toLowerCase()}/migration.ejs`,
