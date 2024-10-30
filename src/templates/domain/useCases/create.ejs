@@ -1,9 +1,9 @@
 const { usecase, step, Ok, Err, request } = require('@herbsjs/herbs')
 const { herbarium } = require('@herbsjs/herbarium')
+const { randomUUID } = require('crypto')
 const <%- props.name.pascalCase %> = require('../../entities/<%- props.name.camelCase %>')
 const <%- props.name.pascalCase %>Repository = require('../../../infra/data/repositories/<%- props.name.camelCase %>Repository')
 
-const uuid = require('uuid')
 const dependency = { <%- props.name.pascalCase %>Repository }
 
 const create<%- props.name.pascalCase %> = injection =>
@@ -23,7 +23,7 @@ const create<%- props.name.pascalCase %> = injection =>
     //Step description and function
     'Check if the <%- props.name.raw %> is valid': step(ctx => {
       ctx.<%- props.name.camelCase %> = <%- props.name.pascalCase %>.fromJSON(ctx.req)
-      ctx.<%- props.name.camelCase %>.id = uuid.v4()
+      ctx.<%- props.name.camelCase %>.id = randomUUID()
       if (!ctx.<%- props.name.camelCase %>.isValid())
         return Err.invalidEntity({
           message: 'The <%- props.name.raw %> entity is invalid',

@@ -54,8 +54,7 @@ module.exports =
         '"nodemon": "^2.0.19"',
         '"mocha": "^10.0.0"',
         '"lodash.camelcase": "^4.3.0"',
-        '"sugar-env": "^1.5.14"',
-        '"uuid": "^9.0.0"'
+        '"sugar-env": "^1.5.14"'
       ]
 
       for (const key of Object.keys(options)) {
